@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="WorkSans-Medium.otf">
+            <string>WorkSans-Medium</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="RwN-fm-qQk" customClass="HeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haN-aT-XEw">
+                    <rect key="frame" x="12" y="26" width="541" height="19"/>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="250" constant="32" id="MFI-DV-vx2"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="16"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" tag="15" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-collapsed.png" translatesAutoresizingMaskIntoConstraints="NO" id="ny3-EP-a0N">
+                    <rect key="frame" x="564" y="22" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="MjL-Cq-WrU"/>
+                        <constraint firstAttribute="width" constant="25" id="gKZ-lx-dgC"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ny3-EP-a0N" firstAttribute="leading" secondItem="haN-aT-XEw" secondAttribute="trailing" constant="11" id="0LX-XD-i6i"/>
+                <constraint firstItem="ny3-EP-a0N" firstAttribute="top" secondItem="RwN-fm-qQk" secondAttribute="top" constant="9" id="Hm0-Hc-n32"/>
+                <constraint firstItem="haN-aT-XEw" firstAttribute="top" secondItem="RwN-fm-qQk" secondAttribute="top" constant="9" id="Icp-1k-Qc6"/>
+                <constraint firstItem="haN-aT-XEw" firstAttribute="leading" secondItem="RwN-fm-qQk" secondAttribute="leading" constant="12" id="KzP-3w-Yoq"/>
+                <constraint firstAttribute="bottom" secondItem="haN-aT-XEw" secondAttribute="bottom" constant="5" id="T4t-2G-cbG"/>
+                <constraint firstAttribute="trailing" secondItem="ny3-EP-a0N" secondAttribute="trailing" constant="11" id="Xb9-is-5sa"/>
+                <constraint firstItem="ny3-EP-a0N" firstAttribute="leading" secondItem="haN-aT-XEw" secondAttribute="trailing" constant="11" id="iG8-4V-D3o"/>
+                <constraint firstAttribute="bottom" secondItem="ny3-EP-a0N" secondAttribute="bottom" constant="3" id="oQP-JG-K5i"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="Icp-1k-Qc6"/>
+                    <exclude reference="Hm0-Hc-n32"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="imgCheckbox" destination="ny3-EP-a0N" id="ZYh-LX-246"/>
+                <outlet property="lblTitle" destination="haN-aT-XEw" id="Adp-K2-ecv"/>
+            </connections>
+            <point key="canvasLocation" x="236" y="-320"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon-collapsed.png" width="32" height="32"/>
+    </resources>
+</document>
