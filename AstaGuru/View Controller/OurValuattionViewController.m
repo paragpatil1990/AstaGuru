@@ -12,7 +12,9 @@
 #import "SectionHeaderReusableView.h"
 #import "SWRevealViewController.h"
 #import "AppDelegate.h"
-@interface OurValuattionViewController ()
+#import <MessageUI/MessageUI.h>
+#import "TTTAttributedLabel.h"
+@interface OurValuattionViewController ()<MFMailComposeViewControllerDelegate, TTTAttributedLabelDelegate>
 {
     NSMutableArray *arrFirst;
     NSMutableArray *arrSecond;
@@ -59,7 +61,7 @@
 -(void)CreateArray
 {
     clsAboutUs *objclsAboutus1=[[clsAboutUs alloc]init];
-    objclsAboutus1.strName=@"\nNumerous criteria such as the historical significance of the work, the rarity of the work, and its physical condition, have to be assessed before a true value can be assigned to the piece. Upon a thorough analysis of these numerous criteria, AstaGuru will provide the client with an estimated value of the work.\n";
+    objclsAboutus1.strName=@"\nNumerous criteria such as the historical significance of the work, the rarity of the work, and its physical condition, have to be assessed before a true value can be assigned to the piece. Upon a thorough analysis of these numerous criteria, AstaGuru will provide the client with an estimated value of the work.";
     objclsAboutus1.strType=@"1";
     [arrFirst addObject:objclsAboutus1];
     
@@ -79,7 +81,7 @@
     [arrSecond addObject:objclsAboutus4];
     
     clsAboutUs *objclsAboutus5=[[clsAboutUs alloc]init];
-    objclsAboutus5.strName=@"Research on historical significance of the work";
+    objclsAboutus5.strName=@"Research on historical significance of the work.";
     objclsAboutus5.strType=@"2";
     [arrSecond addObject:objclsAboutus5];
     
@@ -175,26 +177,32 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell3;
+    //    UICollectionViewCell *cell3;
     OurValutionCollectionViewCell *OurValutioncell;
     
-        //static NSString *identifier = @"Cell";
+    //static NSString *identifier = @"Cell";
     
     if (indexPath.section==3)
     {
+        UICollectionViewCell  *cell2 = [collectionView dequeueReusableCellWithReuseIdentifier:@"contactcell" forIndexPath:indexPath];
         
-            // static NSString *identifier = @"cellone";
-            
-            UICollectionViewCell  *cell2 = [collectionView dequeueReusableCellWithReuseIdentifier:@"contactcell" forIndexPath:indexPath];
-            //UILabel *lblTitle = (UILabel *)[cell1 viewWithTag:12];
-            
+        TTTAttributedLabel *lblemail = (TTTAttributedLabel *)[cell2 viewWithTag:12];
+        lblemail.userInteractionEnabled = YES;
+        lblemail.extendsLinkTouchArea = YES;
+        lblemail.enabledTextCheckingTypes = NSTextCheckingAllSystemTypes; // Automatically detect links when the label text is subsequently changed
+        lblemail.delegate = self; // Delegate methods are called when the user taps on a link (see `TTTAttributedLabelDelegate` protocol)
+        lblemail.text = @"siddanth@theartstrust.com";
+        TTTAttributedLabel *lblphone = (TTTAttributedLabel *)[cell2 viewWithTag:11];
+        lblphone.userInteractionEnabled = YES;
+        lblphone.extendsLinkTouchArea = YES;
+        lblphone.enabledTextCheckingTypes = NSTextCheckingAllSystemTypes; // Automatically detect links when the label text is subsequently changed
+        lblphone.delegate = self; // Delegate methods are called when the user taps on a link (see `TTTAttributedLabelDelegate` protocol)
+        lblphone.text = @"+91 22 2204 8138 / 39 , +91 22 2204 8140";
         return cell2;
-            
-        
     }
     else
     {
-      OurValutioncell= [collectionView dequeueReusableCellWithReuseIdentifier:@"valuation" forIndexPath:indexPath];
+        OurValutioncell= [collectionView dequeueReusableCellWithReuseIdentifier:@"valuation" forIndexPath:indexPath];
         
         clsAboutUs *objAboutUs=[[clsAboutUs alloc]init];
         
@@ -206,26 +214,37 @@
         {
             objAboutUs=[arrSecond objectAtIndex:indexPath.row];
         }
-    else if(indexPath.section==2)
-    {
-        objAboutUs=[arrThired objectAtIndex:indexPath.row];
-    }
+        else if(indexPath.section==2)
+        {
+            objAboutUs=[arrThired objectAtIndex:indexPath.row];
+        }
         
-    if ([objAboutUs.strType intValue]==1)
-    {
-        OurValutioncell.wtImageConstant.constant=-8;
-    }
-    else
-    {
-    OurValutioncell.wtImageConstant.constant=15;
-    }
+        if ([objAboutUs.strType intValue]==1)
+        {
+            OurValutioncell.wtImageConstant.constant=-8;
+        }
+        else
+        {
+            OurValutioncell.wtImageConstant.constant=15;
+        }
         
-       OurValutioncell.lblTitle.text=objAboutUs.strName;
-    
-    
-    
-    
-    return OurValutioncell;
+        //OurValutioncell.lblTitle.text=objAboutUs.strName;
+        
+        NSMutableParagraphStyle *paragraphStyles = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyles.alignment                = NSTextAlignmentJustified;    // To justified text
+        paragraphStyles.firstLineHeadIndent      = 0.05;    // IMP: must have a value to make it work
+        
+        NSString *stringTojustify                = objAboutUs.strName;
+        NSDictionary *attributes                 = @{NSParagraphStyleAttributeName: paragraphStyles};
+        NSAttributedString *attributedString     = [[NSAttributedString alloc] initWithString:stringTojustify attributes:attributes];
+        
+        OurValutioncell.lblTitle.attributedText             = attributedString;
+        OurValutioncell.lblTitle.numberOfLines              = 0;
+        [OurValutioncell.lblTitle sizeToFit];
+        
+        
+        
+        return OurValutioncell;
     }
     
 }
@@ -262,7 +281,7 @@
                             boundingRectWithSize:maximumLabelSize
                             options:NSStringDrawingUsesLineFragmentOrigin
                             attributes:@{
-                                         NSFontAttributeName : [UIFont systemFontOfSize:15]
+                                         NSFontAttributeName : [UIFont fontWithName:@"WorkSans-Regular" size:16]
                                          }
                             context:nil];
         float height11= labelRect.size.height;
@@ -275,7 +294,7 @@
                             boundingRectWithSize:maximumLabelSize
                             options:NSStringDrawingUsesLineFragmentOrigin
                             attributes:@{
-                                         NSFontAttributeName : [UIFont systemFontOfSize:15]
+                                         NSFontAttributeName : [UIFont fontWithName:@"WorkSans-Regular" size:16]
                                          }
                             context:nil];
         
@@ -347,6 +366,34 @@
     }
 }
 
+#pragma mark - TTTAttributedLabelDelegate
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithPhoneNumber:(NSString *)phoneNumber
+{
+    //    NSString *numberString = self.product_Dic[@"contactNo"]; //@"7875512881";
+    //        NSURL *phoneNumber = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", numberString]];
+    
+    //        // Whilst this version will return you to your app once the phone call is over.
+    NSURL *phoneNumber_Url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", phoneNumber]];
+    
+    // Now that we have our `phoneNumber` as a URL. We need to check that the device we are using can open the URL.
+    // Whilst iPads, iPhone, iPod touchs can all open URLs in safari mobile they can't all
+    // open URLs that are numbers this is why we have `tel://` or `telprompt://`
+    if([[UIApplication sharedApplication] canOpenURL:phoneNumber_Url]) {
+        // So if we can open it we can now actually open it with
+        [[UIApplication sharedApplication] openURL:phoneNumber_Url];
+    }
+    
+}
+
+- (void)attributedLabel:(__unused TTTAttributedLabel *)label
+   didSelectLinkWithURL:(NSURL *)url
+{
+    [[UIApplication sharedApplication] openURL:url];
+    
+    //    [[[UIActionSheet alloc] initWithTitle:[url absoluteString] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Open Link in Safari", nil), nil] showInView:self.view];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -366,5 +413,51 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)btnEmail:(id)sender
+{
+    
+    MFMailComposeViewController *composer=[[MFMailComposeViewController alloc]init];
+    [composer setMailComposeDelegate:self];
+    
+    if ([MFMailComposeViewController canSendMail]) {
+        [composer setToRecipients:[NSArray arrayWithObjects:@"siddanth@theartstrust.com", nil]];
+        [composer setSubject:[NSString stringWithFormat:@""]];
+        
+        //    [composer.setSubject.placeholder = [NSLocalizedString(@"This is a placeholder",)];
+        NSString *message=@"";
+        
+        [composer setMessageBody:message isHTML:NO];
+        [composer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        [self presentViewController:composer animated:YES completion:nil];
+    }
+    else {
+    }
+}
+
+-(void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    if (error) {
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"error" message:[NSString stringWithFormat:@"error %@",[error description]] delegate:nil cancelButtonTitle:@"dismiss" otherButtonTitles:nil, nil];
+        [alert show];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (IBAction)btnPhone:(id)sender
+{
+    NSString *phNo = @"+912222048138";
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phNo]];
+    [[UIApplication sharedApplication] openURL:phoneUrl];
+    /*if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
+        [[UIApplication sharedApplication] openURL:phoneUrl];
+    } else
+    {
+       UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [calert show];
+    }*/
+}
 
 @end

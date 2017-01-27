@@ -628,7 +628,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
             }
             
             CGFloat x = (clampedOffset * 0.5f * tilt + offset * spacing) * _itemWidth;
-            CGFloat z = fabsf(clampedOffset) * -_itemWidth * 0.5f;
+            CGFloat z = fabsf((float)clampedOffset) * -_itemWidth * 0.5f;
             
             if (_vertical)
             {
@@ -691,14 +691,14 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
             CGFloat y1 = t1.m12 + t1.m22 + t1.m32 + t1.m42;
             CGFloat y2 = t2.m12 + t2.m22 + t2.m32 + t2.m42;
             CGFloat y3 = t3.m12 + t3.m22 + t3.m32 + t3.m42;
-            difference = fabsf(y2 - y3) - fabsf(y1 - y3);
+            difference = fabsf((float)(y2 - y3)) - fabsf((float)(y1 - y3));
         }
         else
         {
             CGFloat x1 = t1.m11 + t1.m21 + t1.m31 + t1.m41;
             CGFloat x2 = t2.m11 + t2.m21 + t2.m31 + t2.m41;
             CGFloat x3 = t3.m11 + t3.m21 + t3.m31 + t3.m41;
-            difference = fabsf(x2 - x3) - fabsf(x1 - x3);
+            difference = fabsf((float)(x2 - x3)) - fabsf((float)(x1 - x3));
         }
     }
     return (difference < 0.0f)? NSOrderedAscending: NSOrderedDescending;
@@ -1371,7 +1371,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
         {
             wrappedDistance = -wrappedDistance;
         }
-        return (fabsf(directDistance) <= fabsf(wrappedDistance))? directDistance: wrappedDistance;
+        return (fabsf((float)directDistance) <= fabsf((float)wrappedDistance))? directDistance: wrappedDistance;
     }
     return directDistance;
 }
@@ -1651,14 +1651,14 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
 
 - (BOOL)shouldDecelerate
 {
-    return (fabsf(_startVelocity) > SCROLL_SPEED_THRESHOLD) &&
-    (fabsf([self decelerationDistance]) > DECELERATE_THRESHOLD);
+    return (fabsf((float)_startVelocity) > SCROLL_SPEED_THRESHOLD) &&
+    (fabsf((float)[self decelerationDistance]) > DECELERATE_THRESHOLD);
 }
 
 - (BOOL)shouldScroll
 {
-    return (fabsf(_startVelocity) > SCROLL_SPEED_THRESHOLD) &&
-    (fabsf(_scrollOffset - self.currentItemIndex) > SCROLL_DISTANCE_THRESHOLD);
+    return (fabsf((float)_startVelocity) > SCROLL_SPEED_THRESHOLD) &&
+    (fabsf((float)(_scrollOffset - self.currentItemIndex)) > SCROLL_DISTANCE_THRESHOLD);
 }
 
 - (void)startDecelerating
@@ -1702,7 +1702,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     distance = _endOffset - _startOffset;
     
     _startTime = CACurrentMediaTime();
-    _scrollDuration = fabsf(distance) / fabsf(0.5f * _startVelocity);   
+    _scrollDuration = fabsf((float)distance) / fabsf((float)(0.5f * _startVelocity));
     
     if (distance != 0.0f)
     {
@@ -1725,7 +1725,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
     
     if (_toggle != 0.0f)
     {
-        NSTimeInterval toggleDuration = _startVelocity? fminf(1.0, fmaxf(0.0, 1.0 / fabsf(_startVelocity))): 1.0;
+        NSTimeInterval toggleDuration = _startVelocity? fminf(1.0, fmaxf(0.0, 1.0 / fabsf((float)_startVelocity))): 1.0;
         toggleDuration = MIN_TOGGLE_DURATION + (MAX_TOGGLE_DURATION - MIN_TOGGLE_DURATION) * toggleDuration;
         NSTimeInterval time = fminf(1.0f, (currentTime - _toggleTime) / toggleDuration);
         CGFloat delta = [self easeInOut:time];
@@ -1764,7 +1764,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
             [self popAnimationState];
             if (_scrollToItemBoundary || (_scrollOffset - [self clampedOffset:_scrollOffset]) != 0.0f)
             {
-                if (fabsf(_scrollOffset - self.currentItemIndex) < 0.01f)
+                if (fabsf((float)(_scrollOffset - self.currentItemIndex)) < 0.01f)
                 {
                     //call scroll to trigger events for legacy support reasons
                     //even though technically we don't need to scroll at all
@@ -1786,7 +1786,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
                 {
                     difference = 1.0 + difference;
                 }
-                _toggleTime = currentTime - MAX_TOGGLE_DURATION * fabsf(difference);
+                _toggleTime = currentTime - MAX_TOGGLE_DURATION * fabsf((float)difference);
                 _toggle = fmaxf(-1.0f, fminf(1.0f, -difference));
             }
         }
@@ -2012,11 +2012,11 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
         {
             if (_vertical)
             {
-                return fabsf(translation.x) <= fabsf(translation.y);
+                return fabsf((float)translation.x) <= fabsf((float)translation.y);
             }
             else
             {
-                return fabsf(translation.x) >= fabsf(translation.y);
+                return fabsf((float)translation.x) >= fabsf((float)translation.y);
             }
         }
     }
@@ -2079,7 +2079,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
                 {
                     if (_scrollToItemBoundary || (_scrollOffset - [self clampedOffset:_scrollOffset]) != 0.0f)
                     {
-                        if (fabsf(_scrollOffset - self.currentItemIndex) < 0.01f)
+                        if (fabsf((float)(_scrollOffset - self.currentItemIndex)) < 0.01f)
                         {
                             //call scroll to trigger events for legacy support reasons
                             //even though technically we don't need to scroll at all
@@ -2087,7 +2087,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
                         }
                         else if ([self shouldScroll])
                         {
-                            NSInteger direction = (int)(_startVelocity / fabsf(_startVelocity));
+                            NSInteger direction = (int)(_startVelocity / fabsf((float)_startVelocity));
                             [self scrollToItemAtIndex:self.currentItemIndex + direction animated:YES];
                         }
                         else
@@ -2114,7 +2114,7 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
                 CGFloat factor = 1.0f;
                 if (!_wrapEnabled && _bounces)
                 {
-                    factor = 1.0f - fminf(fabsf(_scrollOffset - [self clampedOffset:_scrollOffset]), _bounceDistance) / _bounceDistance;
+                    factor = 1.0f - fminf(fabsf((float)(_scrollOffset - [self clampedOffset:_scrollOffset])), _bounceDistance) / _bounceDistance;
                 }
                 
                 _previousTranslation = _vertical? [panGesture translationInView:self].y: [panGesture translationInView:self].x;

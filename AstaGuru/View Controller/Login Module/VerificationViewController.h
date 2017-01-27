@@ -7,21 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CustomTextfied.h"
+//#import "CustomTextfied.h"
 @interface VerificationViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
-@property (weak, nonatomic) IBOutlet CustomTextfied *txtMobile;
-@property (weak, nonatomic) IBOutlet CustomTextfied *smsOne;
-@property (weak, nonatomic) IBOutlet CustomTextfied *smsTwo;
-@property (weak, nonatomic) IBOutlet CustomTextfied *smsThree;
-@property (weak, nonatomic) IBOutlet CustomTextfied *smsFour;
+@property (weak, nonatomic) IBOutlet UITextField *txtMobile;
+@property (weak, nonatomic) IBOutlet UITextField *smsOne;
+@property (weak, nonatomic) IBOutlet UITextField *smsTwo;
+@property (weak, nonatomic) IBOutlet UITextField *smsThree;
+@property (weak, nonatomic) IBOutlet UITextField *smsFour;
+@property (weak, nonatomic) IBOutlet UITextField *EmailOne;
+@property (weak, nonatomic) IBOutlet UITextField *EmailTwo;
+@property (weak, nonatomic) IBOutlet UITextField *EmailThree;
+@property (weak, nonatomic) IBOutlet UITextField *EmailFour;
+@property (weak, nonatomic) IBOutlet UITextField *txtEmail;
+@property (strong, nonatomic) IBOutlet UIButton *btnMobileVerify;
+@property (strong, nonatomic) IBOutlet UIButton *btnEmailVerify;
+@property(nonatomic)int IsCommingFromLoging;
 
-@property (weak, nonatomic) IBOutlet CustomTextfied *EmailOne;
-@property (weak, nonatomic) IBOutlet CustomTextfied *EmailTwo;
-@property (weak, nonatomic) IBOutlet CustomTextfied *EmailThree;
-@property (weak, nonatomic) IBOutlet CustomTextfied *EmailFour;
-@property (weak, nonatomic) IBOutlet CustomTextfied *txtEmail;
 @property(nonatomic,retain)NSString *strMobile,*strEmail,*strEmialCode,*strSMSCode;
 @property(nonatomic,retain)NSDictionary *dictPostParameter;
+@property(nonatomic,retain)NSMutableDictionary *dict;
 @property(nonatomic,retain)NSString *strname;
+@property BOOL isRegistration;
 @end

@@ -16,7 +16,7 @@
 #import "AppDelegate.h"
 #import <MessageUI/MFMailComposeViewController.h>
 #import <MessageUI/MessageUI.h>
-@interface AboutUsViewController ()<MFMailComposeViewControllerDelegate>
+@interface AboutUsViewController ()<MFMailComposeViewControllerDelegate,AboutUs>
 {
     NSMutableArray *arrManagement;
     NSMutableArray *arrSpecialities;
@@ -48,20 +48,20 @@
     int NoOfCol, NoOfCol2;
     if (arrManagement.count/3==0)
     {
-        NoOfCol=arrManagement.count/3;
+        NoOfCol=(int)arrManagement.count/3;
     }
     else
     {
-        NoOfCol=(arrManagement.count/3)+1;
+        NoOfCol=(int)(arrManagement.count/3)+1;
     }
     
     if (arrSpecialities.count/2==0)
     {
-        NoOfCol2 = arrSpecialities.count/2;
+        NoOfCol2 = (int)arrSpecialities.count/2;
     }
     else
     {
-        NoOfCol2 = (arrSpecialities.count/2)+1;
+        NoOfCol2 = (int)(arrSpecialities.count/2)+1;
     }
     
     
@@ -86,28 +86,61 @@
     objApp.window.rootViewController = viewController;
     
 }
--(float) getHeightForText:(NSString*) text withFont:(UIFont*) font andWidth:(float) width{
+-(float) getHeightForText:(NSString*) text withFont:(UIFont*) font andWidth:(float)width{
     CGSize constraint = CGSizeMake(width , 20000.0f);
     CGSize title_size;
     float totalHeight;
     
     SEL selector = @selector(boundingRectWithSize:options:attributes:context:);
-    if ([text respondsToSelector:selector]) {
+    if ([text respondsToSelector:selector])
+    {
         title_size = [text boundingRectWithSize:constraint
                                         options:NSStringDrawingUsesLineFragmentOrigin
-                                     attributes:@{ NSFontAttributeName : font }
+                                     attributes:@{ NSFontAttributeName : [UIFont fontWithName:@"WorkSans-Medium" size:17] }
                                         context:nil].size;
         
         totalHeight = ceil(title_size.height);
-    } else {
+    }
+    else
+    {
+//        title_size = [text sizeWithFont:font
+//                      constrainedToSize:constraint
+//                          lineBreakMode:NSLineBreakByWordWrapping];
+        
+#ifdef __IPHONE_7_0
+        
+        title_size = [self frameForText:text sizeWithFont:font constrainedToSize:CGSizeMake(width,font.lineHeight) lineBreakMode:NSLineBreakByWordWrapping];
+        
+#else
         title_size = [text sizeWithFont:font
                       constrainedToSize:constraint
                           lineBreakMode:NSLineBreakByWordWrapping];
+
+#endif
         totalHeight = title_size.height ;
     }
+    CGFloat height1 = MAX(totalHeight, 40.0f);
+    return height1;
+}
+
+-(CGSize)frameForText:(NSString*)text sizeWithFont:(UIFont*)font constrainedToSize:(CGSize)size lineBreakMode:(NSLineBreakMode)lineBreakMode
+{
     
-    CGFloat height = MAX(totalHeight, 40.0f);
-    return height;
+    NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
+    paragraphStyle.lineBreakMode = lineBreakMode;
+    
+    NSDictionary * attributes = @{NSFontAttributeName:[UIFont fontWithName:@"WorkSans-Medium" size:17],
+                                  NSParagraphStyleAttributeName:paragraphStyle
+                                  };
+    
+    
+    CGRect textRect = [text boundingRectWithSize:size
+                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                      attributes:attributes
+                                         context:nil];
+    
+    //Contains both width & height ... Needed: The height
+    return textRect.size;
 }
 
 -(void)CreateArray
@@ -136,7 +169,7 @@
     clsAboutUs *objclsAboutus4=[[clsAboutUs alloc]init];
     objclsAboutus4.strimage=@"img-sunny";
     objclsAboutus4.strName=@"Sunny Chandiramani";
-    objclsAboutus4.strPost=@"Client Relattions";
+    objclsAboutus4.strPost=@"Client Relations";
     objclsAboutus4.strType=@"2";
     objclsAboutus4.strEmail=@"sunny@theartstrust.com";
     
@@ -145,7 +178,7 @@
     clsAboutUs *objclsAboutus9=[[clsAboutUs alloc]init];
     objclsAboutus9.strimage=@"img-sonal";
     objclsAboutus9.strName=@"Sonal Patel";
-    objclsAboutus9.strPost=@"Client Relattions";
+    objclsAboutus9.strPost=@"Client Relations";
     objclsAboutus9.strType=@"2";
     objclsAboutus9.strEmail=@"sonal@theartstrust.com";
     [arrSpecialities addObject:objclsAboutus9];
@@ -153,7 +186,7 @@
     clsAboutUs *objclsAboutus5=[[clsAboutUs alloc]init];
     objclsAboutus5.strimage=@"img-sneha";
     objclsAboutus5.strName=@"Sneha Gautam";
-    objclsAboutus5.strPost=@"Client Relattions";
+    objclsAboutus5.strPost=@"Client Relations";
     objclsAboutus5.strType=@"2";
     objclsAboutus5.strEmail=@"sneha@theartstrust.com";
     [arrSpecialities addObject:objclsAboutus5];
@@ -161,15 +194,15 @@
     clsAboutUs *objclsAboutus6=[[clsAboutUs alloc]init];
     objclsAboutus6.strimage=@"img-mamta";
     objclsAboutus6.strName=@"Mamta Rahate";
-    objclsAboutus6.strPost=@"Client Relattions";
+    objclsAboutus6.strPost=@"Client Relations";
     objclsAboutus6.strType=@"2";
     objclsAboutus6.strEmail=@"mamta@theartstrust.com";
     [arrSpecialities addObject:objclsAboutus6];
     
     clsAboutUs *objclsAboutus7=[[clsAboutUs alloc]init];
     objclsAboutus7.strimage=@"img-siddanth";
-    objclsAboutus7.strName=@"Siddanta Shetty";
-    objclsAboutus7.strPost=@"Market Analysts";
+    objclsAboutus7.strName=@"Siddanth Shetty";
+    objclsAboutus7.strPost=@"V.P. Business Strategy & Operations";
     objclsAboutus7.strType=@"2";
     objclsAboutus7.strEmail=@"siddanth@theartstrust.com";
     [arrSpecialities addObject:objclsAboutus7];
@@ -185,7 +218,7 @@
     clsAboutUs *objclsAboutus10=[[clsAboutUs alloc]init];
     objclsAboutus10.strimage=@"img-anandita";
     objclsAboutus10.strName=@"Anandita De";
-    objclsAboutus10.strPost=@"Marketing PR & Business Development";
+    objclsAboutus10.strPost=@"Marketing PR & Business Developement";
     objclsAboutus10.strType=@"2";
     objclsAboutus10.strEmail=@"anandita@theartstrust.com";
     [arrSpecialities addObject:objclsAboutus10];
@@ -193,13 +226,18 @@
     clsAboutUs *objclsAboutus11=[[clsAboutUs alloc]init];
     objclsAboutus11.strimage=@"img-tushar";
     objclsAboutus11.strName=@"Tushar Dalvi";
-    objclsAboutus11.strPost=@"Marketing PR & Business Development";
+    objclsAboutus11.strPost=@"Marketing PR & Business Developement";
     objclsAboutus11.strType=@"2";
     objclsAboutus11.strEmail=@"tushar.dalvi@theartstrust.com";
     [arrSpecialities addObject:objclsAboutus11];
     
-    
-    
+    clsAboutUs *objclsAboutus12=[[clsAboutUs alloc]init];
+    objclsAboutus12.strimage=@"nayangara.png";
+    objclsAboutus12.strName=@"Sidhant Nayangara";
+    objclsAboutus12.strPost=@"Content Editor";
+    objclsAboutus12.strType=@"2";
+    objclsAboutus12.strEmail=@"s.nayangara@theartstrust.com";
+    [arrSpecialities addObject:objclsAboutus12];
     
 }
 
@@ -243,6 +281,7 @@
        cell1 = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellone" forIndexPath:indexPath];
       //  UILabel *lblTitle = (UILabel *)[cell1 viewWithTag:12];
         cell1.lblTitle.text=strintro;
+        cell1.lblTitle.textAlignment = NSTextAlignmentJustified;
         cell3=cell1;
         
     }
@@ -258,9 +297,9 @@
     }
     else
     {
-    static NSString *identifier = @"Cell";
-   
-   UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    //static NSString *identifier = @"Cell";
+    AboutUsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    //AboutUsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     
     clsAboutUs *objAboutUs=[[clsAboutUs alloc]init];
     
@@ -273,40 +312,41 @@
     objAboutUs=[arrSpecialities objectAtIndex:indexPath.row];
     }
     
-    EGOImageView *imgServices = (EGOImageView *)[cell viewWithTag:11];
+    //EGOImageView *imgServices = (EGOImageView *)[cell viewWithTag:11];
     //imgServices.imageURL=[NSURL URLWithString:[dict valueForKey:@"homebannerImg"]];
-    imgServices.image=[UIImage imageNamed:objAboutUs.strimage];
+   cell.img.image=[UIImage imageNamed:objAboutUs.strimage];
     
-    UILabel *lblTitle = (UILabel *)[cell viewWithTag:12];
-        UIButton *btnEmail = (UIButton *)[cell viewWithTag:101];
-        [btnEmail addTarget:self
+    //UILabel *lblTitle = (UILabel *)[cell viewWithTag:12];
+        //UIButton *btnEmail = (UIButton *)[cell viewWithTag:101];
+        //btnEmail.tag=indexPath.row;
+        /*[btnEmail addTarget:self
                    action:@selector(btnEmailClicked:)
          forControlEvents:UIControlEventTouchUpInside];
-        btnEmail.tag=indexPath.row;
+        */
         
-    lblTitle.text=objAboutUs.strName;
+   cell.lblTitle.text=objAboutUs.strName;
     //lblPrice.text=[]
-    UILabel *lblDesignamtion = (UILabel *)[cell viewWithTag:13];
-    lblDesignamtion.text=objAboutUs.strPost;
+//    UILabel *lblDesignamtion = (UILabel *)[cell viewWithTag:13];
+    cell.lblDesignation.text=objAboutUs.strPost;
         
-        UIImageView *imgemail = (EGOImageView *)[cell viewWithTag:14];
+//        UIImageView *imgemail = (EGOImageView *)[cell viewWithTag:14];
         if (indexPath.section==1)
         {
-            imgemail.hidden=YES;
+            cell.imgEmail.hidden=YES;
+            cell.btnEmail.enabled = NO;
         }
         else
         {
-        imgemail.hidden=NO;
+            cell.imgEmail.hidden=NO;
+            cell.btnEmail.enabled = YES;
         }
-        
-       cell3=cell;
+        cell.objAboutUs=objAboutUs;
+        cell.AboutUsdelegate=self;
+        cell3=cell;
     }
-    
-    
-   
     return cell3;
-    
 }
+
 - (CGSize)collectionView:(UICollectionView *)collectionView1 layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     // 2
@@ -420,15 +460,14 @@
 */
 - (IBAction)btnEmailClicked:(UIButton*)sender
 {
-    clsAboutUs *objAboutUs=[arrSpecialities objectAtIndex:sender.tag];
-    
-    
+    clsAboutUs *objAboutUs=[[clsAboutUs alloc]init];
+    objAboutUs=[arrSpecialities objectAtIndex:sender.tag];
     
     MFMailComposeViewController *composer=[[MFMailComposeViewController alloc]init];
     [composer setMailComposeDelegate:self];
     if ([MFMailComposeViewController canSendMail]) {
         [composer setToRecipients:[NSArray arrayWithObjects:objAboutUs.strEmail, nil]];
-        [composer setSubject:[NSString stringWithFormat:@"Astaguru:%@",objAboutUs.strName]];
+        [composer setSubject:[NSString stringWithFormat:@"Inquiry from Astaguru app"]];//@"Astaguru: %@",objAboutUs.strName]];
         
         //    [composer.setSubject.placeholder = [NSLocalizedString(@"This is a placeholder",)];
         NSString *message=[NSString stringWithFormat:@"Hello %@,\n",objAboutUs.strName];
@@ -451,5 +490,23 @@
     else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+}
+-(void)btnEmail:(clsAboutUs *)objAboutUS
+{
+    MFMailComposeViewController *composer=[[MFMailComposeViewController alloc]init];
+    [composer setMailComposeDelegate:self];
+    if ([MFMailComposeViewController canSendMail]) {
+        [composer setToRecipients:[NSArray arrayWithObjects:objAboutUS.strEmail, nil]];
+        [composer setSubject:[NSString stringWithFormat:@"Inquiry from Astaguru app"]];//@"Astaguru: %@",objAboutUS.strName]];
+        
+        //    [composer.setSubject.placeholder = [NSLocalizedString(@"This is a placeholder",)];
+        NSString *message=[NSString stringWithFormat:@"Hello %@,\n",objAboutUS.strName];
+        [composer setMessageBody:message isHTML:NO];
+        [composer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+        [self presentViewController:composer animated:YES completion:nil];
+    }
+    else {
+    }
+
 }
 @end

@@ -11,7 +11,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-
+@property (nonatomic)int isfilterStart;
+@property (nonatomic)int isRefreshstart;
+@property (nonatomic)int iSelectedSortInCurrentAuction;
 @end
 

@@ -325,12 +325,20 @@ NSString *kSKPSMTPPartContentTransferEncodingKey = @"kSKPSMTPPartContentTransfer
 {
     switch(eventCode) 
     {
+        case NSStreamEventNone:
+            break;
+        case NSStreamEventOpenCompleted:
+            break;
+        case NSStreamEventHasSpaceAvailable:
+            break;
+        case NSStreamEventErrorOccurred:
+            break;
         case NSStreamEventHasBytesAvailable:
         {
             uint8_t buf[1024];
             memset(buf, 0, sizeof(uint8_t) * 1024);
             unsigned int len = 0;
-            len = [(NSInputStream *)stream read:buf maxLength:1024];
+            len = (int)[(NSInputStream *)stream read:buf maxLength:1024];
             if(len) 
             {
                 NSString *tmpStr = [[NSString alloc] initWithBytes:buf length:len encoding:NSUTF8StringEncoding];
@@ -578,9 +586,9 @@ NSString *kSKPSMTPPartContentTransferEncodingKey = @"kSKPSMTPPartContentTransfer
                             NSLog(@"WARNING: Will not validate SSL chain!!!");
                             
                             CFDictionarySetValue(sslOptions, kCFStreamSSLValidatesCertificateChain, kCFBooleanFalse);
-                            CFDictionarySetValue(sslOptions, kCFStreamSSLAllowsExpiredCertificates, kCFBooleanTrue);
-                            CFDictionarySetValue(sslOptions, kCFStreamSSLAllowsExpiredRoots, kCFBooleanTrue);
-                            CFDictionarySetValue(sslOptions, kCFStreamSSLAllowsAnyRoot, kCFBooleanTrue);
+//                            CFDictionarySetValue(sslOptions, kCFStreamSSLAllowsExpiredCertificates, kCFBooleanTrue);
+//                            CFDictionarySetValue(sslOptions, kCFStreamSSLAllowsExpiredRoots, kCFBooleanTrue);
+//                            CFDictionarySetValue(sslOptions, kCFStreamSSLAllowsAnyRoot, kCFBooleanTrue);
                         }
                         
                         NSLog(@"Beginning TLSv1...");

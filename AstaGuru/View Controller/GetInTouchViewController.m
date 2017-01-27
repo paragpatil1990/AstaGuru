@@ -60,8 +60,29 @@
     _segmentedmenu.layer.borderColor = [UIColor colorWithRed:150/255.0 green:122/255.0 blue:85/255.0 alpha:1.0].CGColor;
    
     [self getCategoryData];
+    [self setBroder];
     // Do any additional setup after loading the view.
 }
+
+-(void) setBroder
+{
+    [ClsSetting SetBorder:_name_view cornerRadius:2 borderWidth:1];
+    _name_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    
+    [ClsSetting SetBorder:_email_view cornerRadius:2 borderWidth:1];
+    _email_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    
+    [ClsSetting SetBorder:_phone_view cornerRadius:2 borderWidth:1];
+    _phone_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    
+    [ClsSetting SetBorder:_category_view cornerRadius:2 borderWidth:1];
+    _category_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    
+    [ClsSetting SetBorder:_message_view cornerRadius:2 borderWidth:1];
+    _message_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    
+}
+
 -(void)getCategoryData
 {
      NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
@@ -192,19 +213,17 @@
 }
 - (IBAction)btnSubmit:(id)sender
 {
-    
-    
-    
-    
+
     MFMailComposeViewController *composer=[[MFMailComposeViewController alloc]init];
     [composer setMailComposeDelegate:self];
     
-    if ([MFMailComposeViewController canSendMail]) {
+    if ([MFMailComposeViewController canSendMail])
+    {
         [composer setToRecipients:[NSArray arrayWithObjects:@"b@infomanav.com", nil]];
         [composer setSubject:[NSString stringWithFormat:@"Get in touch:"]];
         
         //    [composer.setSubject.placeholder = [NSLocalizedString(@"This is a placeholder",)];
-        NSString *message=[NSString stringWithFormat:@"Hello AstaGuru Team,\n Name: %@\n EmailID: %@\n Phone:%@\n Category:%@ Message%@ ",[ClsSetting TrimWhiteSpaceAndNewLine:_txtname.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtEmail.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtPhone.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtCategory.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtMessage.text ]];
+        NSString *message=[NSString stringWithFormat:@"Hello AstaGuru Team,\n Name: %@\n EmailID: %@\n Phone: %@\n Category: %@\n Message: %@ ",[ClsSetting TrimWhiteSpaceAndNewLine:_txtname.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtEmail.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtPhone.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtCategory.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtMessage.text ]];
         
         [composer setMessageBody:message isHTML:NO];
         [composer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];

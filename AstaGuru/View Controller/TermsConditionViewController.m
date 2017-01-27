@@ -243,7 +243,7 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell3;
+//    UICollectionViewCell *cell3;
     OurValutionCollectionViewCell *OurValutioncell;
     
     //static NSString *identifier = @"Cell";
@@ -293,7 +293,7 @@
         }
         
         OurValutioncell.lblTitle.text=objAboutUs.strName;
-        
+        OurValutioncell.lblTitle.textAlignment = NSTextAlignmentJustified;
         
         
         

@@ -12,6 +12,8 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *clvCurrentOccution;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *lblCurrency1;
+@property(nonatomic)BOOL isSearch;
+@property(nonatomic,retain)NSMutableArray *arrSearch;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *clvBottomMenu;
 

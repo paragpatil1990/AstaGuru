@@ -30,6 +30,8 @@
 @end
 
 @protocol kDropDownListViewDelegate <NSObject>
+
+@optional
 - (void)DropDownListView:(DropDownListView *)dropdownListView didSelectedIndex:(NSInteger)anIndex;
 - (void)DropDownListView:(DropDownListView *)dropdownListView Datalist:(NSMutableArray*)ArryData;
 - (void)DropDownListViewDidCancel;

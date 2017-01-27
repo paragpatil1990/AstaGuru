@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface CareersViewController : UIViewController
+
+@property NSUInteger pageIndex;
+
+@property (strong, nonatomic) IBOutlet UITextView *textView;
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedMenu;
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;

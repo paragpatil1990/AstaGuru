@@ -13,5 +13,7 @@
 @property (nonatomic,retain)clsCurrentOccution *objCurrentOuction;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 @property (weak, nonatomic) IBOutlet UICollectionView *clvBottomMenu;
+@property(nonatomic)int IsSort;
+@property(nonatomic)int IsUpcoming;
 
 @end

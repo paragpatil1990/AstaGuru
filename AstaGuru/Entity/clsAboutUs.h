@@ -14,4 +14,6 @@
 @property(nonatomic,retain)NSString *strPost;
 @property(nonatomic,retain)NSString *strType;
 @property(nonatomic,retain)NSString *strEmail;
+@property(nonatomic,retain)NSString *strKey;
+
 @end

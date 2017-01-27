@@ -203,15 +203,26 @@
     CGContextSetShadowWithColor(ctx, CGSizeMake(1, 1), 0.5f, [UIColor blackColor].CGColor);
     [[UIColor colorWithWhite:1 alpha:1.] setFill];
     
-    if (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)) {
-        UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:16.0];
-        UIColor *cl=[UIColor whiteColor];
-        
-        NSDictionary *attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:cl};
-        [_kTitleText drawInRect:titleRect withAttributes:attributes];
-    }
-    else
-        [_kTitleText drawInRect:titleRect withFont:[UIFont systemFontOfSize:16.]];
+#ifdef __IPHONE_7_0
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:16.0];
+    UIColor *cl=[UIColor whiteColor];
+    NSDictionary *attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:cl};
+    [_kTitleText drawInRect:titleRect withAttributes:attributes];
+#else
+    [_kTitleText drawInRect:titleRect withFont:[UIFont systemFontOfSize:16.]]
+#endif
+    
+//    if (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0))
+//    {
+//        UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:16.0];
+//        UIColor *cl=[UIColor whiteColor];
+//        NSDictionary *attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:cl};
+//        [_kTitleText drawInRect:titleRect withAttributes:attributes];
+//    }
+//    else
+//        [_kTitleText drawInRect:rect withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.]}];
+
+//        [_kTitleText drawInRect:titleRect withFont:[UIFont systemFontOfSize:16.]];
     
     CGContextFillRect(ctx, separatorRect);
 }

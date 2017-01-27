@@ -9,7 +9,9 @@
 #import "PrivacyPoliceViewController.h"
 #import "SWRevealViewController.h"
 #import "AppDelegate.h"
-@interface PrivacyPoliceViewController ()
+#import <MessageUI/MFMailComposeViewController.h>
+#import <MessageUI/MessageUI.h>
+@interface PrivacyPoliceViewController ()<MFMailComposeViewControllerDelegate,UITextViewDelegate>
 
 @end
 
@@ -32,6 +34,13 @@
     self.sidebarButton.tintColor=[UIColor whiteColor];
     [[self navigationItem] setLeftBarButtonItem:self.sidebarButton];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+    _txt.textAlignment = NSTextAlignmentJustified;
+    _txt.dataDetectorTypes = UIDataDetectorTypeAll;
+    [_txt setTintColor:[UIColor colorWithRed:167/255.0 green:142/255.0 blue:105/255.0 alpha:1]];
+    _txt.editable = NO;
+    _txt.selectable = true;
+    _txt.delegate=self;
     // Do any additional setup after loading the view.
 }
 -(void)closePressed
@@ -49,7 +58,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange
+{
+    
+    return YES;
+}
 /*
 #pragma mark - Navigation
 

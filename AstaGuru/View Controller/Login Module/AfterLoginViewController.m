@@ -66,8 +66,9 @@
 - (IBAction)btnSignOut:(id)sender
 {
     //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
-    [[NSUserDefaults standardUserDefaults ]setObject:@"0" forKey:USER_id];
+    [[NSUserDefaults standardUserDefaults ] setObject:@"0" forKey:USER_id];
     BforeLoginViewController *rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"BforeLoginViewController"];
+    rootViewController.isCommingFromAfterProfile=1;
     [self.navigationController pushViewController:rootViewController animated:YES];
 }
 - (IBAction)MyAuctionGalleryPressed:(id)sender

@@ -11,11 +11,18 @@
 @interface GetInTouchViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
 @property (weak, nonatomic) IBOutlet UIButton *btncategory;
-@property (weak, nonatomic) IBOutlet CustomTextfied *txtEmail;
-@property (weak, nonatomic) IBOutlet CustomTextfied *txtname;
-@property (weak, nonatomic) IBOutlet CustomTextfied *txtPhone;
-@property (weak, nonatomic) IBOutlet CustomTextfied *txtCategory;
-@property (weak, nonatomic) IBOutlet CustomTextfied *txtMessage;
+@property (weak, nonatomic) IBOutlet UITextField *txtEmail;
+@property (weak, nonatomic) IBOutlet UITextField *txtname;
+@property (weak, nonatomic) IBOutlet UITextField *txtPhone;
+@property (weak, nonatomic) IBOutlet UITextField *txtCategory;
+@property (weak, nonatomic) IBOutlet UITextField *txtMessage;
+
+@property (strong, nonatomic) IBOutlet UIView *name_view;
+@property (strong, nonatomic) IBOutlet UIView *email_view;
+@property (strong, nonatomic) IBOutlet UIView *phone_view;
+@property (strong, nonatomic) IBOutlet UIView *category_view;
+@property (strong, nonatomic) IBOutlet UIView *message_view;
+
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedmenu;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;

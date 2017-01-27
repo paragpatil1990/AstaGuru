@@ -10,7 +10,16 @@
 #import "clsCurrentOccution.h"
 #import "CustomTextfied.h"
 #import "TPKeyboardAvoidingScrollView.h"
+
+@protocol AuctionItemBidViewControllerDelegaet
+-(void)refreshData;
+@end
+
 @interface AuctionItemBidViewController : UIViewController
+
+
+@property(nonatomic, assign) id <AuctionItemBidViewControllerDelegaet> delegate;
+
 @property (weak, nonatomic) IBOutlet UIView *viwContentview;
 @property (weak, nonatomic) IBOutlet UIButton *btnLot;
 @property (weak, nonatomic) IBOutlet UILabel *lblBeadValue;
@@ -27,6 +36,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnLodId;
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrKeytboard;
 @property (weak, nonatomic) IBOutlet UIView *viwProxyBidConfarmation;
-
+@property (weak, nonatomic) IBOutlet UIButton *btnConfirm;
+@property (weak, nonatomic) IBOutlet UILabel *lblAlert;
+@property(nonatomic)int IsSort;
+@property(nonatomic)int IsWrokArt;
+@property(nonatomic)int IsUpcoming;
+@property(nonatomic)int IsPast;
+@property(nonatomic, retain)NSString *Auction_id;
 
 @end

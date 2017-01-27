@@ -20,6 +20,7 @@
 #import "TermsConditionViewController.h"
 #import "HowToBuyViewController.h"
 #import "GetInTouchViewController.h"
+#import "CareersPageViewController.h"
 //#import "LoginViewController.h"
 @interface SidebarTableViewController ()
 {
@@ -166,7 +167,7 @@
     [[NSUserDefaults standardUserDefaults ]setObject:@"0" forKey:USER_id];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
     LoginViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    
+    rootViewController.IsCommingFromSideMenu=1;
     
     [navController setViewControllers: @[rootViewController] animated: YES];
     
@@ -231,14 +232,24 @@
         }
         else if (indexPath.row==1)
         {
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+          /*  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             ServicesViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"ServicesViewController"];
             
             
             [navController setViewControllers: @[rootViewController] animated: YES];
             
             [self.revealViewController setFrontViewController:navController];
+            [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];*/
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            HowToBuyViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"HowToBuyViewController"];
+            rootViewController.isHowTobuy=3;
+            
+            [navController setViewControllers: @[rootViewController] animated: YES];
+            
+            [self.revealViewController setFrontViewController:navController];
             [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+            
         }
         else if (indexPath.row==2)
         {
@@ -297,10 +308,11 @@
         }
         else if (indexPath.row==7)
         {
+//            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//            CareersViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"CareersViewController"];
+            
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            CareersViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"CareersViewController"];
-            
-            
+            CareersPageViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"CareersPageViewController"];
             [navController setViewControllers: @[rootViewController] animated: YES];
             
             [self.revealViewController setFrontViewController:navController];
@@ -320,8 +332,8 @@
         else if (indexPath.row==9)
         {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            TermsConditionViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"TermsConditionViewController"];
-          
+            HowToBuyViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"HowToBuyViewController"];
+            rootViewController.isHowTobuy=4;
             
             [navController setViewControllers: @[rootViewController] animated: YES];
             

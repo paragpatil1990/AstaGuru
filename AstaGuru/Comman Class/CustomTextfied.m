@@ -24,11 +24,11 @@
     UIFont* italicFont;
     if (UI_USER_INTERFACE_IDIOM()== UIUserInterfaceIdiomPad)
     {
-        italicFont =[UIFont fontWithName:@"WorkSans-Regular" size:12];;
+        italicFont =[UIFont fontWithName:@"WorkSans-Regular" size:14];;
     }
     else
     {
-         italicFont =[UIFont fontWithName:@"WorkSans-Regular" size:9];;
+         italicFont =[UIFont fontWithName:@"WorkSans-Regular" size:14];;
     }
     
     CALayer *border = [CALayer layer];
@@ -38,9 +38,12 @@
     border.borderWidth = borderWidth;
     [self.layer addSublayer:border];
     self.layer.masksToBounds = YES;
-    self.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
-    [[self placeholder] drawInRect:rect withFont:italicFont];
-    [[self text] drawInRect:rect withFont:italicFont];
+    self.layer.sublayerTransform = CATransform3DMakeTranslation(0, 0, 0);
+    
+    [[self placeholder] drawInRect:rect withAttributes:@{NSFontAttributeName:italicFont}];
+    [[self text] drawInRect:rect withAttributes:@{NSFontAttributeName:italicFont}];
+//    [[self placeholder] drawInRect:rect withFont:italicFont];
+//    [[self text] drawInRect:rect withFont:italicFont];
    
     /*[[NSAttributedString alloc] initWithString:self.placeholder
                                     attributes:@{

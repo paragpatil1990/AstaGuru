@@ -12,6 +12,8 @@
 #import "ClsSetting.h"
 #import "clsMyAuctionGallery.h"
 #import "clsSort.h"
+#import "ClsHowToBuy.h"
+#import "clsAboutUs.h"
 @interface parese : NSObject
 +(NSMutableArray*)parseCurrentOccution:(NSMutableArray*)json;
 +(NSMutableArray*)parsePastOccution:(NSMutableArray*)json;
@@ -19,5 +21,7 @@
 +(NSMutableArray*)parseCategory:(NSMutableArray*)json;
 +(NSMutableArray*)parseArtistInfo:(NSMutableArray*)json;
 +(NSMutableArray*)parseSortCurrentAuction:(NSMutableArray*)json;
++(NSMutableArray*)parsevacancy:(NSMutableArray*)json;
++(NSMutableArray*)parsevacancyTitle:(NSMutableArray*)json;
 
 @end

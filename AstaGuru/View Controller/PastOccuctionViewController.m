@@ -15,7 +15,7 @@
 #import "BforeLoginViewController.h"
 #import "AfterLoginViewController.h"
 #import "ItemOfPastAuctionViewController.h"
-
+#import "ArtistViewController.h"
 @interface PastOccuctionViewController ()<PassResepose>
 {
     int iOffset;
@@ -118,7 +118,7 @@ arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"CURRENT",@"UPCOMI
         if (_iIsUpcomming==1)
         {
             //if ([objpast.strAuctionId intValue]>[[[NSUserDefaults standardUserDefaults]valueForKey:@"CurrentAuctionID"] intValue])Upcoming
-            if ([objpast.strStatus isEqualToString:@"Upcoming"])
+            if ([objpast.strStatus isEqualToString:@"Upcomming"])
             {
                 [arrOccution addObject:objpast];
             }
@@ -166,32 +166,16 @@ arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"CURRENT",@"UPCOMI
     {
         if (indexPath.section==0)
         {
-             return CGSizeMake(collectionView1.frame.size.width, 20);
+            return CGSizeMake(collectionView1.frame.size.width, 20);
         }
-      else if (indexPath.section==2)
+        else if (indexPath.section==2)
         {
             return CGSizeMake(collectionView1.frame.size.width, 20);
         }
         else
         {
-       clsPastAuctionData *objPastOccution=[arrOccution objectAtIndex:indexPath.row];
-        CGSize maximumLabelSize = CGSizeMake((collectionView1.frame.size.width/2)-100, FLT_MAX);
-        CGRect labelRect1 = [objPastOccution.strAuctiontitle
-                             boundingRectWithSize:maximumLabelSize
-                             options:NSStringDrawingUsesLineFragmentOrigin
-                             attributes:@{
-                                          NSFontAttributeName : [UIFont systemFontOfSize:14]
-                                          }
-                             context:nil];
-        CGRect labelRect2 = [objPastOccution.strAuctiondate
-                             boundingRectWithSize:maximumLabelSize
-                             options:NSStringDrawingUsesLineFragmentOrigin
-                             attributes:@{
-                                          NSFontAttributeName : [UIFont systemFontOfSize:12]
-                                          }
-                             context:nil];
-        
-                  return   CGSizeMake((collectionView1.frame.size.width/2)-7,/*180+labelRect1.size.height+labelRect2.size.height*/225);
+            
+            return   CGSizeMake((collectionView1.frame.size.width/2)-7,230);
         }
     }
     else
@@ -201,12 +185,9 @@ arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"CURRENT",@"UPCOMI
         
         return CGSizeMake(width, collectionView1.frame.size.height);
     }
-    
-    
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    
     if (collectionView==_clvPastAuction)
     {
         if (section==0)
@@ -217,15 +198,12 @@ arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"CURRENT",@"UPCOMI
         {
             return 1;
         }
-        
         return  arrOccution.count;
-        
     }
     else
     {
         return arrBottomMenu.count;
     }
-    
 }
 
 
@@ -233,23 +211,23 @@ arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"CURRENT",@"UPCOMI
 {
     UICollectionViewCell *cell;
     PastAuctionCollectionViewCell *PastAuctionCell;
-   UICollectionViewCell *cell1;
+    UICollectionViewCell *cell1;
     
     if (collectionView==_clvPastAuction)
     {
         
         if (indexPath.section==0)
         {
-           
-                
-                static NSString *identifier = @"blankcell";
-                UICollectionViewCell *cell2 = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
             
-                
-                cell = cell2;
-           
+            
+            static NSString *identifier = @"blankcell";
+            UICollectionViewCell *cell2 = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+            
+            
+            cell = cell2;
+            
         }
-       else  if (indexPath.section==2)
+        else  if (indexPath.section==2)
         {
             
             
@@ -264,55 +242,56 @@ arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"CURRENT",@"UPCOMI
         else
         {
             clsPastAuctionData *objPastOccution=[arrOccution objectAtIndex:indexPath.row];
-            
-            
-            
-            
-        if (_iIsUpcomming==1)
-        {
-         
-            PastAuctionCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UpComingAuction" forIndexPath:indexPath];
-            PastAuctionCell.imgPastAuction.imageURL =[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[ClsSetting ImageURL], objPastOccution.strImage]];
-            PastAuctionCell.lblPastAuctionTitle.text=objPastOccution.strAuctiontitle;
-            PastAuctionCell.lblPastAuctionDate.text= objPastOccution.strAuctiondate;
-            
-            PastAuctionCell.layer.borderWidth=1;
-            PastAuctionCell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
-            
-            cell = PastAuctionCell;
-            
-            cell.layer.borderWidth=1;
-            cell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
-            PastAuctionCell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
-            
+            if (_iIsUpcomming==1)
+            {
+                
+                PastAuctionCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UpComingAuction" forIndexPath:indexPath];
+                
+                //            NSString *newString = [originalString stringByReplacingOccurancesOfString:@" " withString:@"%20"];
+                
+                NSString *spaceUrl = [[NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"%@%@",[ClsSetting ImageURL], objPastOccution.strImage]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                
+                PastAuctionCell.imgPastAuction.imageURL =[NSURL URLWithString:spaceUrl];
+                PastAuctionCell.lblPastAuctionTitle.text=objPastOccution.strAuctiontitle;
+                PastAuctionCell.lblPastAuctionDate.text= objPastOccution.strAuctiondate;
+                
+                PastAuctionCell.layer.borderWidth=1;
+                PastAuctionCell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
+                
+                cell = PastAuctionCell;
+                
+                cell.layer.borderWidth=1;
+                cell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
+                PastAuctionCell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
+                
+            }
+            else
+            {
+                PastAuctionCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PastAuction" forIndexPath:indexPath];
+                
+                NSString *spaceUrl = [[NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"%@%@",[ClsSetting ImageURL], objPastOccution.strImage]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                PastAuctionCell.imgPastAuction.imageURL =[NSURL URLWithString:spaceUrl];
+                PastAuctionCell.lblPastAuctionTitle.text=objPastOccution.strAuctiontitle;
+                PastAuctionCell.lblPastAuctionDate.text= objPastOccution.strAuctiondate;
+                if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
+                {
+                    PastAuctionCell.lblTotlaSaleValue.text=[NSString stringWithFormat:@"$%@",objPastOccution.strTotalSaleValueUs];
+                }
+                else
+                {
+                    PastAuctionCell.lblTotlaSaleValue.text=[NSString stringWithFormat:@"₹%@",objPastOccution.strTotalSaleValueRs];
+                }
+                PastAuctionCell.layer.borderWidth=1;
+                PastAuctionCell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
+                
+                cell = PastAuctionCell;
+                
+                cell.layer.borderWidth=1;
+                cell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
+                PastAuctionCell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
+                
+            }
         }
-        else
-        {
-        PastAuctionCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PastAuction" forIndexPath:indexPath];
-            PastAuctionCell.imgPastAuction.imageURL =[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[ClsSetting ImageURL], objPastOccution.strImage]];
-            PastAuctionCell.lblPastAuctionTitle.text=objPastOccution.strAuctiontitle;
-            PastAuctionCell.lblPastAuctionDate.text= objPastOccution.strAuctiondate;
-            
-            PastAuctionCell.layer.borderWidth=1;
-            PastAuctionCell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
-            
-            cell = PastAuctionCell;
-            
-            cell.layer.borderWidth=1;
-            cell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
-            PastAuctionCell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
-        
-        }
-            
-        
-        
-        }
-        
-        
-            
-        
-            
-        
     }
     else
     {
@@ -327,21 +306,21 @@ arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"CURRENT",@"UPCOMI
         if (_iIsUpcomming==1)
         {
             
-        if (indexPath.row==2)
-        {
-            
-            lblTitle.textColor=[UIColor colorWithRed:167.0/255.0 green:142.0/255.0 blue:105.0/255.0 alpha:1];
-            
-            lblline.backgroundColor=[UIColor colorWithRed:167.0/255.0 green:142.0/255.0 blue:105.0/255.0 alpha:1];
-            lblSelectedline.hidden=NO;
-            
-        }
-        else
-        {
-            lblTitle.textColor=[UIColor colorWithRed:124.0/255.0 green:124.0/255.0 blue:124.0/255.0 alpha:1];
-            lblline.backgroundColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1];
-            lblSelectedline.hidden=YES;
-        }
+            if (indexPath.row==2)
+            {
+                
+                lblTitle.textColor=[UIColor colorWithRed:167.0/255.0 green:142.0/255.0 blue:105.0/255.0 alpha:1];
+                
+                lblline.backgroundColor=[UIColor colorWithRed:167.0/255.0 green:142.0/255.0 blue:105.0/255.0 alpha:1];
+                lblSelectedline.hidden=NO;
+                
+            }
+            else
+            {
+                lblTitle.textColor=[UIColor colorWithRed:124.0/255.0 green:124.0/255.0 blue:124.0/255.0 alpha:1];
+                lblline.backgroundColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1];
+                lblSelectedline.hidden=YES;
+            }
         }
         else if (_iIsUpcomming==2)
         {
@@ -352,7 +331,7 @@ arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"CURRENT",@"UPCOMI
                 
                 lblline.backgroundColor=[UIColor colorWithRed:167.0/255.0 green:142.0/255.0 blue:105.0/255.0 alpha:1];
                 lblSelectedline.hidden=NO;
-             }
+            }
             else
             {
                 lblTitle.textColor=[UIColor colorWithRed:124.0/255.0 green:124.0/255.0 blue:124.0/255.0 alpha:1];
@@ -363,9 +342,91 @@ arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"CURRENT",@"UPCOMI
         cell=cell1;
     }
     return cell;
-    
-    
 }
+-(NSString*)timercount:(NSString*)dateStr fromDate:(NSString*)fromdate
+{
+//    NSString *dateString = dateStr; //@"12-12-2015";
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    NSDate *dateStr_Date = [[NSDate alloc] init];
+//    dateStr_Date = [dateFormatter dateFromString:dateString];
+//    
+//    NSString *fromdateString = fromdate; //@"12-12-2015";
+//    NSDateFormatter *fromdateFormatter = [[NSDateFormatter alloc] init];
+//    //    fromdateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+//    [fromdateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    NSDate *dateFromString = [[NSDate alloc] init];
+//    dateFromString = [fromdateFormatter dateFromString:fromdateString];
+//    
+//    NSCalendar *calendar = [NSCalendar currentCalendar];
+//    
+//    NSDateComponents *componentsHours = [calendar components:NSCalendarUnitHour fromDate:dateFromString];
+//    NSDateComponents *componentMint = [calendar components:NSCalendarUnitMinute fromDate:dateFromString];
+//    NSDateComponents *componentSec = [calendar components:NSCalendarUnitSecond fromDate:dateFromString];
+//    
+//    //    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+//    NSDateComponents *componentsDaysDiff = [calendar components:NSCalendarUnitDay
+//                                                       fromDate:dateFromString
+//                                                         toDate:dateStr_Date
+//                                                        options:0];
+//    
+//    long day = (long)componentsDaysDiff.day;
+//    long hours = (long)(24-componentsHours.hour);
+//    long minutes = (long)(60-componentMint.minute);
+//    long sec = (long)(60-componentSec.second);
+//    
+//    NSString *timeStr = [NSString stringWithFormat:@"%ldD %02ld:%02ld:%02ld",day,hours,minutes,sec];
+//    NSDate* enddate = dateStr_Date;
+//    NSTimeInterval distanceBetweenDates = [enddate timeIntervalSinceDate:dateFromString];
+//    double secondsInMinute = 60;
+//    NSInteger secondsBetweenDates = distanceBetweenDates / secondsInMinute;
+//    
+//    if (secondsBetweenDates == 0)
+//        return @"";
+//    else if (secondsBetweenDates < 0)
+//        return @"";
+//    else
+//        return timeStr;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    
+    
+    NSDate *closingDate = [dateFormatter dateFromString:dateStr];
+    
+    NSDate *currentDate = [dateFormatter dateFromString:fromdate];
+    
+    
+    
+    NSTimeInterval secondsBetween = [closingDate timeIntervalSinceDate:currentDate];
+    
+    
+    
+    int numberOfDays = secondsBetween / 86400;
+    
+    secondsBetween = (long)secondsBetween % 86400;
+    
+    int numberOfHours = secondsBetween / 3600;
+    
+    secondsBetween = (long)secondsBetween % 3600;
+    
+    int numberOfMinutes = secondsBetween / 60;
+    
+    secondsBetween = (long)secondsBetween % 60;
+    
+    NSString *timeStr = [NSString stringWithFormat:@"%dD %d:%d:%ld",numberOfDays,numberOfHours,numberOfMinutes,(long)secondsBetween];
+    
+    if (secondsBetween == 0)
+        return @"";
+    else if (secondsBetween < 0)
+        return @"";
+    else
+        return timeStr;
+
+}
+
 -(NSString*)remaningTime:(NSDate*)startDate endDate:(NSDate*)endDate
 {
     NSDateComponents *components;
@@ -417,24 +478,24 @@ arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"CURRENT",@"UPCOMI
             
             UINavigationController *navcontroll = (UINavigationController *)[self.revealViewController frontViewController];
             ViewController *objViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
-            [navcontroll pushViewController:objViewController animated:YES];
+            //[navcontroll pushViewController:objViewController animated:YES];
+            [navcontroll setViewControllers: @[objViewController] animated: YES];
+            
+            [self.revealViewController setFrontViewController:navcontroll];
+            [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
         }
        else if (indexPath.row==1)
         {
             
-            if ([[[NSUserDefaults standardUserDefaults] valueForKey:USER_id] intValue]>0)
-            {
-                
+           
                 UINavigationController *navcontroll = (UINavigationController *)[self.revealViewController frontViewController];
                 CurrentOccutionViewController *VCLikesControll = [self.storyboard instantiateViewControllerWithIdentifier:@"CurrentOccutionViewController"];
-                [navcontroll pushViewController:VCLikesControll animated:YES];
-            }
-            else
-            {
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
-                BforeLoginViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"BforeLoginViewController"];
-                [self.navigationController pushViewController:rootViewController animated:YES];
-            }
+                //[navcontroll pushViewController:VCLikesControll animated:YES];
+                [navcontroll setViewControllers: @[VCLikesControll] animated: YES];
+                
+                [self.revealViewController setFrontViewController:navcontroll];
+                [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+            
 
         }
        else if (indexPath.row==2)
@@ -466,19 +527,35 @@ arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"CURRENT",@"UPCOMI
     }
     else
     {
-        if (_iIsUpcomming!=1)
-        {
+        
             ItemOfPastAuctionViewController *objViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemOfPastAuctionViewController"];
             clsPastAuctionData *objPastAuctionData=[arrOccution objectAtIndex:indexPath.row];
             objViewController.objPast=objPastAuctionData;
+            objViewController.IsUpcomming=_iIsUpcomming;
             [self.navigationController pushViewController:objViewController animated:YES];
             
-        }
-    
+            
     }
     
 }
 
+- (IBAction)btnArtistInfo:(UIButton*)sender
+{
+    clsCurrentOccution *objCurrentOccution=[[clsCurrentOccution alloc]init];
+    objCurrentOccution=[arrOccution objectAtIndex:sender.tag];
+    ArtistViewController *objArtistViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ArtistViewController"];
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
+    {
+        objArtistViewController.iscurrencyInDollar=1;
+    }
+    else
+    {
+        objArtistViewController.iscurrencyInDollar=0;
+    }
+    
+    objArtistViewController.objCurrentOccution=objCurrentOccution;
+    [self.navigationController pushViewController:objArtistViewController animated:YES];
+}
 
 
 

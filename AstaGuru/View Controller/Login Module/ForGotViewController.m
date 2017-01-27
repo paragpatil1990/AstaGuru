@@ -8,7 +8,8 @@
 
 #import "ForGotViewController.h"
 #import "SWRevealViewController.h"
-@interface ForGotViewController ()
+#import "ClsSetting.h"
+@interface ForGotViewController ()<PassResepose>
 
 @end
 
@@ -75,5 +76,74 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)sendPassword_BtnClick:(UIButton *)sender
+{
+    if (_email_TextField.text.length == 0)
+    {
+        [ClsSetting ValidationPromt:@"Please enter your email"];
+    }
+    else{
+        NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+        ClsSetting *objSetting=[[ClsSetting alloc]init];
+        [objSetting CallWeb:dict url:[NSString stringWithFormat:@"users/?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed&filter=email=%@",[ClsSetting TrimWhiteSpaceAndNewLine:_email_TextField.text]] view:self.view Post:NO];
+        objSetting.PassReseposeDatadelegate=self;
+    }
+}
+
+-(void)passReseposeData:(id)arr
+{
+    //  NSMutableArray *arrOccution=[parese parseCurrentOccution:[arr valueForKey:@"resource"]];
+    NSError *error;
+    NSMutableDictionary *dict1 = [NSJSONSerialization JSONObjectWithData:arr options:0 error:&error];
+    NSMutableArray *arr1=[dict1 valueForKey:@"resource"];
+    if (arr1.count>0)
+    {
+        NSMutableDictionary *dict=[arr1 objectAtIndex:0];
+        if ([[dict valueForKey:@"email"] isEqualToString:[ClsSetting TrimWhiteSpaceAndNewLine:_email_TextField.text]])
+        {
+//            [ClsSetting ValidationPromt:@"Login Successfully"];
+            NSString *email = [dict valueForKey:@"email"];
+            NSLog(@"email == %@",email);
+            NSString *password = [dict valueForKey:@"password"];
+            NSLog(@"password == %@",password);
+            NSString *name = [dict valueForKey:@"name"];
+            NSLog(@"name == %@",name);
+            NSString *username = [dict valueForKey:@"username"];
+            [self SendEmail:email password:password username:username name:name];
+        }
+        else
+        {
+            [ClsSetting ValidationPromt:@"Enter valid email"];
+        }
+    }
+    else
+    {
+        [ClsSetting ValidationPromt:@"The email address entered by you was not present in our database. Please check the email address"];
+    }
+    
+}
+-(void)SendEmail:(NSString*)email password:(NSString*)password username:(NSString*)username name:(NSString*)name
+{
+    NSDictionary *dictTo = @{
+                             @"name":name,
+                             @"email":email,
+                             };
+    NSArray*arrTo=[[NSArray alloc]initWithObjects:dictTo, nil];
+    // NSDictionary *dictMail=[[NSDictionary alloc]init];
+    NSDictionary *dictMail = @{
+                               @"template":@"newsletter",
+                               @"to":arrTo,
+                               @"subject":@"Astaguru Password",
+                               @"body_text":[NSString stringWithFormat:@"Hi %@ \n Your Astaguru Login Credentials are, \n Username:%@ \n Password:%@",name,username ,password],
+                               @"from_name":@"NetSpace India SES",
+                               @"from_email":@"beta@netspaceindia.com",
+                               @"reply_to_name":@"NetSpace India",
+                               @"reply_to_email":@"beta@netspaceindia.com",
+                               
+                               };
+    [ClsSetting ValidationPromt:@"Email is sent to your register mail ID,Please check your mail box."];
+    [ClsSetting Email:dictMail view:self.view];
+}
 
 @end

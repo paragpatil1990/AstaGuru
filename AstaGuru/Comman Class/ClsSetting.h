@@ -12,6 +12,9 @@
 #import "iToast.h"
 #import "parese.h"
 #import "CustomTextfied.h"
+#import "MBProgressHUD.h"
+#import "AFNetworking.h"
+#import "CurrentDefultGridCollectionViewCell.h"
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 #define USER_id         @"userid"
 #define USER_NAME      @"username"
@@ -24,6 +27,7 @@
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
 #define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
 @protocol PassResepose
+@optional
 -(void)passReseposeData:(id)arr;
 -(void)passReseposeData1:(id)str;
 @end
@@ -39,13 +43,10 @@
 +(void)ValidationPromt:(NSString*)strValidationText;
 -(NSString *)Url;
 +(NSString *)ImageURL;
-+(NSMutableArray *)getMenu;
-+(NSMutableArray *)getMenuHome;
-+(NSMutableArray *)getMenuMyList;
-+(NSMutableArray *)getMenuSaved;
+
 +(void)SetBorder:(UIView *)viw cornerRadius:(CGFloat)CornerRadius borderWidth:(CGFloat)borderWidth;
 +(NSString*)getAddress:(CLLocation*)newLocation;
-
++(CGFloat)heightOfTextForString:(NSString *)aString andFont:(UIFont *)aFont maxSize:(CGSize)aSize;
 //+(void)setComments:(NSMutableArray*)arrComments label:(UILabel*)Title;
 -(void)CallWeb:(NSMutableDictionary*)dict url:(NSString*)strURL view:(UIView*)Callingview Post:(BOOL)isPost;
 @property (readwrite) id<PassResepose> PassReseposeDatadelegate;
@@ -55,9 +56,14 @@
 -(void)SendSMSOTP:(NSDictionary*)dict url:(NSString*)strURL view:(UIView*)Callingview;
 +(NSMutableDictionary*)RemoveNull:(NSMutableDictionary*)dict;
 +(NSMutableDictionary*)RemoveNullOnly:(NSMutableDictionary*)dict;
--(void)calllPutWeb2:(NSDictionary*)dict url:(NSString*)strURL view:(UIView*)Callingview;
+//-(void)calllPutWeb2:(NSDictionary*)dict url:(NSString*)strURL view:(UIView*)Callingview;
 -(void)calllPostWeb2:(NSDictionary*)dict url:(NSString*)strURL view:(UIView*)Callingview;
 +(void)myAstaGuru:(UINavigationController*)NavigationController;
 +(NSString*)getAttributedStringFormHtmlString:(NSString*)htmlString;
 +(void)Searchpage:(UINavigationController*)NavigationController;
+
+-(NSString *)UrlProcedure;
+-(void)CallWebDelete:(NSMutableDictionary*)dict url:(NSString*)strURL view:(UIView*)Callingview Post:(BOOL)isPost;
++(void)Email:(NSDictionary*)dict view:(UIView*)Callingview;
++(void)ISUSerLeading:(NSString*)strUserID Cell:(CurrentDefultGridCollectionViewCell*)cell;
 @end

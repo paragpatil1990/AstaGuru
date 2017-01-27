@@ -11,5 +11,7 @@
 @interface PrivacyPoliceViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
 @property(nonatomic)BOOL isPrivacyPolice;
+@property (weak, nonatomic) IBOutlet UITextView *txt;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+
 @end

@@ -13,13 +13,14 @@
 #import "SWRevealViewController.h"
 #import "SWRevealViewController.h"
 #import "PastOccuctionViewController.h"
+#import "AppDelegate.h"
 @interface FilterViewController ()<PassResepose>
 {
     NSMutableArray *arrMenu;
     NSMutableArray *arrCategory;
     NSMutableArray *arrArtist;
     NSMutableArray *arrBottomMenu;
-    NSMutableArray *arrselectArtist;
+    
     NSMutableArray *arrFinalFilter;
     
     int CurrentPage;
@@ -34,7 +35,8 @@
     CurrentPage=1;
      [self GetArtistInfo];
     
-    arrselectArtist=[[NSMutableArray alloc]init];
+    if (!_arrselectArtist) { _arrselectArtist=[[NSMutableArray alloc]init]; }
+    
     arrFinalFilter=[[NSMutableArray alloc]init];
     arrMenu=[[NSMutableArray alloc]initWithObjects:@"Artist",@"Category",nil];
      arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"CURRENT",@"UPCOMING",@"PAST", nil];
@@ -57,7 +59,7 @@
     // [btnBack addTarget:self action:@selector(backPressed) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btnBack];
     self.navigationItem.leftBarButtonItem = barButtonItem;
-    self.title=@"My Profile";
+    self.title=@"Filter Artist";
     self.sidebarButton=[[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleDone target:self action:@selector(closePressed)];
     [[self navigationItem] setLeftBarButtonItem:self.sidebarButton];
     self.sidebarButton.tintColor=[UIColor colorWithRed:167/255.0 green:142/255.0 blue:105/255.0 alpha:1.0];
@@ -65,18 +67,23 @@
     
     
     
-    self.sideleftbarButton=[[UIBarButtonItem alloc] initWithTitle:@"Clear" style:UIBarButtonItemStyleDone target:self action:@selector(btnProccedPressed)];
+    self.sideleftbarButton=[[UIBarButtonItem alloc] initWithTitle:@"Clear" style:UIBarButtonItemStyleDone target:self action:@selector(clearArtist)];
     self.sideleftbarButton.tintColor=[UIColor colorWithRed:167/255.0 green:142/255.0 blue:105/255.0 alpha:1.0];
     [[self navigationItem] setRightBarButtonItem:self.sideleftbarButton];
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor],
        NSFontAttributeName:[UIFont fontWithName:@"WorkSans-Medium" size:17]}];
 }
-- (void)btnProccedPressed
+-(void)clearArtist
 {
-    
-    
+    for (int i=0; i<arrArtist.count; i++)
+    {
+        clsArtistInfo *objArtist=[arrArtist objectAtIndex:i];
+        objArtist.isChecked=0;
+    }
+    [_clvFilter reloadData];
 }
+
 -(void)closePressed
 {
     
@@ -214,12 +221,12 @@
         cell1 = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
         
         UILabel *lblTitle = (UILabel *)[cell1 viewWithTag:30];
-        UILabel *lblline = (UILabel *)[cell1 viewWithTag:21];
+//        UILabel *lblline = (UILabel *)[cell1 viewWithTag:21];
         UILabel *lblSelectedline = (UILabel *)[cell1 viewWithTag:22];
         NSLog(@"%@",[arrBottomMenu objectAtIndex:indexPath.row]);
         lblTitle.text=[arrBottomMenu objectAtIndex:indexPath.row];
         
-        if (indexPath.row==1)
+        if (indexPath.row==_selectedTab)
         {
             UILabel *lblline = (UILabel *)[cell1 viewWithTag:21];
             lblTitle.textColor=[UIColor colorWithRed:167.0/255.0 green:142.0/255.0 blue:105.0/255.0 alpha:1];
@@ -230,7 +237,7 @@
         }
         else
         {
-            UILabel *lblline = (UILabel *)[cell1 viewWithTag:21];
+//            UILabel *lblline = (UILabel *)[cell1 viewWithTag:21];
             lblSelectedline.hidden=YES;
         }
         cell=cell1;
@@ -282,12 +289,12 @@
                 if (objclsArtistInfo.isChecked==0)
                 {
                     objclsArtistInfo.isChecked=1;
-                    [arrselectArtist addObject:objclsArtistInfo];
+                    [_arrselectArtist addObject:objclsArtistInfo];
                 }
                 else
                 {
                     objclsArtistInfo.isChecked=0;
-                    [arrselectArtist removeObject:objclsArtistInfo];
+                    [_arrselectArtist removeObject:objclsArtistInfo];
                 }
             /*}
             else if (CurrentPage==2)
@@ -353,9 +360,102 @@
     CurrentPage=1;
     NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
     ClsSetting *objSetting=[[ClsSetting alloc]init];
-   
+    if (_ispast==1)
+    {
+        
+        @try {
+            
+            MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            HUD.labelText = @"loading";
+            NSMutableDictionary *Discparam=[[NSMutableDictionary alloc]init];
+            // [Discparam setValue:@"cr2016" forKey:@"validate"];
+            //[Discparam setValue:@"banner" forKey:@"action"];
+            
+            
+            
+            
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+            manager.responseSerializer = [AFHTTPResponseSerializer serializer];  //AFHTTPResponseSerializer serializer
+            manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+            ClsSetting *objsetting=[[ClsSetting alloc]init];
+            
+            //NSArray *imgNameArr = [_objCurrentOuction.strthumbnail componentsSeparatedByString:@"/"];
+          //  NSString *imgName = [imgNameArr objectAtIndex:1];
+            NSString  *strQuery=[NSString stringWithFormat:@"%@/spGetArtistincurrentauction(%@,%d)?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objsetting UrlProcedure],_strType,_Auctionid];
+            NSString *url = strQuery;
+            NSLog(@"%@",url);
+            
+            NSString *encoded = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            [manager GET:encoded parameters:Discparam success:^(AFHTTPRequestOperation *operation, id responseObject)
+             {
+                 //  NSError *error=nil;
+                 NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                 NSError *error;
+                 NSMutableArray *dict1 = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
+                 NSLog(@"%@",responseStr);
+                 NSLog(@"%@",dict1);
+                 NSMutableArray *arr1=[parese parseArtistInfo:dict1];
+                 
+                 if (arr1.count>0)
+                 {
+                     arrArtist=[[NSMutableArray alloc]init];
+                     [arrArtist addObjectsFromArray:arr1];
+                     
+                     for (int i=0; i<_arrselectArtist.count; i++)
+                     {
+                         clsArtistInfo *objselectedArtistInfo=[_arrselectArtist objectAtIndex:i];
+                         for (int j=0; j<arrArtist.count; j++)
+                         {
+                             clsArtistInfo *objArtistInfo=[arrArtist objectAtIndex:j];
+                             if ([objselectedArtistInfo.strArtistid intValue]==[objArtistInfo.strArtistid intValue])
+                             {
+                                 objArtistInfo.isChecked=1;
+                                 break;
+                             }
+                         }
+                     }
+                     [_clvFilter reloadData];
+                 }
+                 else
+                 {
+                     [ClsSetting ValidationPromt:@"Information not available"];
+                 }
+             }
+                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                     NSLog(@"Error: %@", error);
+                     [MBProgressHUD hideHUDForView:self.view animated:YES];
+                     [ClsSetting ValidationPromt:error.localizedDescription];
+
+//                     [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                     if ([operation.response statusCode]==404)
+//                     {
+//                         [ClsSetting ValidationPromt:@"No Record Found"];
+//                     }
+//                     else
+//                     {
+//                         [ClsSetting internetConnectionPromt];
+//                     }
+                 }];
+            
+            
+        }
+        @catch (NSException *exception)
+        {
+            
+        }
+        @finally
+        {
+        }
+
+        
+    }
+    else
+    {
     [objSetting CallWeb:dict url:[NSString stringWithFormat:@"artistincurrentauction?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed"] view:self.view Post:NO];
     objSetting.PassReseposeDatadelegate=self;
+    }
     
 }
 -(void)getCategoryData
@@ -381,14 +481,35 @@
         if (arr1.count>0)
         {
             [arrArtist addObjectsFromArray:arr1];
+            
+            for (int i=0; i<_arrselectArtist.count; i++)
+            {
+                clsArtistInfo *objselectedArtistInfo=[_arrselectArtist objectAtIndex:i];
+                for (int j=0; j<arrArtist.count; j++)
+                {
+                    clsArtistInfo *objArtistInfo=[arrArtist objectAtIndex:j];
+                    if ([objselectedArtistInfo.strArtistid intValue]==[objArtistInfo.strArtistid intValue])
+                    {
+                        objArtistInfo.isChecked=1;
+                        break;
+                    }
+                }
+            }
+            
         }
         else
         {
             [ClsSetting ValidationPromt:@"Information not available"];
         }
         
+        if (_ispast==1)
+        {
+            
+        }
+        else
+        {
         [self getCurrentAuction];
-        
+        }
     }
     if ( CurrentPage==3)
     {
@@ -518,22 +639,36 @@
 */
 - (IBAction)btnRefinepressed:(id)sender
 {
-    for (int i=0; i<arrselectArtist.count; i++)
+    NSMutableArray *arrCheck=[[NSMutableArray alloc]init];
+    for (int i=0; i<arrArtist.count; i++)
     {
-        clsArtistInfo *objArtistInfo=[arrselectArtist objectAtIndex:i];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"strartist_id == %@",objArtistInfo.strArtistid];
+        clsArtistInfo *objArtistInfo=[arrArtist objectAtIndex:i];
         
-        NSArray *arrslectedbreed = [_arrFilter filteredArrayUsingPredicate:predicate];
-        for (int j=0; j<arrslectedbreed.count; j++)
+        if (objArtistInfo.isChecked==1)
         {
-            clsArtistInfo *objArtistInfo1=[arrslectedbreed objectAtIndex:j];
-            [arrFinalFilter addObject:objArtistInfo1];
-            
+            [arrCheck addObject:objArtistInfo];
         }
+        
+            
     }
+//    if (arrCheck.count>0)
+//    {
+        [_arrselectArtist removeAllObjects];
+        _arrselectArtist=arrCheck;
+//    }
+    if (_arrselectArtist.count>0)
+    {
     NSLog(@"%@",arrFinalFilter);
-    [_DelegateFilter filter:arrFinalFilter];
+    
+    AppDelegate * objAppDelegate=(AppDelegate*)[UIApplication sharedApplication].delegate;
+    objAppDelegate.isfilterStart=0;
+    [_DelegateFilter filter:arrFinalFilter SelectedArtistArray:_arrselectArtist];
     [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        [ClsSetting ValidationPromt:@"Please select refine result"];
+    }
 }
 
 @end

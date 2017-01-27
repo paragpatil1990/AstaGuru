@@ -17,4 +17,7 @@
 @property(nonatomic,retain)NSString *strAuctiondate;
 @property(nonatomic,retain)NSString *strAuctiontitle;
 @property(nonatomic,retain)NSString *strStatus;
+@property(nonatomic,retain)NSString *strTotalSaleValueRs;
+@property(nonatomic,retain)NSString *strTotalSaleValueUs;
+
 @end

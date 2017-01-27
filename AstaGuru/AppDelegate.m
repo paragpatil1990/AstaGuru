@@ -19,6 +19,32 @@
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     // Override point for customization after application launch.
+    
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
+    {
+        NSString *countrySymbol = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
+        if ([countrySymbol isEqualToString:@"IN"])
+        {
+            [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"isUSD"];
+        }
+        else
+        {
+            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"isUSD"];
+        }
+    }
+    else
+    {
+        NSString *countrySymbol = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
+        if ([countrySymbol isEqualToString:@"IN"])
+        {
+            [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"isUSD"];
+        }
+        else
+        {
+            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"isUSD"];
+        }
+    }
+
     return YES;
 }
 

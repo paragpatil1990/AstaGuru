@@ -9,5 +9,10 @@
 #import "AboutUsCollectionViewCell.h"
 
 @implementation AboutUsCollectionViewCell
+- (IBAction)btnEmaqilClicked:(id)sender
+{
+    [_AboutUsdelegate btnEmail:_objAboutUs];
+    NSLog(@"%@",_objAboutUs.strEmail);
+}
 
 @end

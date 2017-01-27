@@ -11,7 +11,9 @@
 #import "AppDelegate.h"
 #import "GetInTouchViewController.h"
 #import "WebViewViewController.h"
-@interface ContactUsViewController ()
+#define METERS_PER_MILE 230000.0
+
+@interface ContactUsViewController ()<TTTAttributedLabelDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrContact;
 
 
@@ -21,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title=@"Contact Us";
+    
     
     self.sideleftbarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-close"] style:UIBarButtonItemStyleDone target:self action:@selector(closePressed)];
     self.sideleftbarButton.tintColor=[UIColor whiteColor];
@@ -60,11 +62,78 @@
     
     MKPointAnnotation*    annotation = [[MKPointAnnotation alloc] init];
     CLLocationCoordinate2D myCoordinate;
-    myCoordinate.latitude=18.930721;
-    myCoordinate.longitude=72.833085;
+    myCoordinate.latitude=18.927601;
+    myCoordinate.longitude=72.832765;
     annotation.coordinate = myCoordinate;
     [self.viwmap addAnnotation:annotation];
+    
+    double miles = 0.5;
+    double scalingFactor = ABS( (cos(2 * M_PI * annotation.coordinate.latitude / 360.0) ));
+    MKCoordinateSpan span;
+    span.latitudeDelta = miles/69.0;
+    span.longitudeDelta = miles/(scalingFactor * 69.0);
+    MKCoordinateRegion region;
+    region.span = span;
+    region.center = annotation.coordinate;
+    [self.viwmap setRegion:region animated:YES];
+
+    
     // Do any additional setup after loading the view.
+    
+    
+    self.contact_Lbl.extendsLinkTouchArea = YES;
+    self.contact_Lbl.userInteractionEnabled = YES;
+    self.contact_Lbl.enabledTextCheckingTypes = NSTextCheckingAllSystemTypes; // Automatically detect links when the label text is subsequently changed
+    self.contact_Lbl.delegate = self; // Delegate methods are called when the user taps on a link (see `TTTAttributedLabelDelegate` protocol)
+    self.contact_Lbl.numberOfLines = 0;
+    self.contact_Lbl.text = @"+912222048138 / 39, +912222048140";
+//    self.contact_Lbl.text = @"7875512881 Fork me paragpatil.rane@gmail.com on GitHub! (https://github.com/mattt/TTTAttributedLabel/)"; // Repository URL will be automatically detected and linked
+
+    self.contactEmail_Lbl.extendsLinkTouchArea = YES;
+    self.contactEmail_Lbl.enabledTextCheckingTypes = NSTextCheckingAllSystemTypes; // Automatically detect links when the label text is subsequently changed
+    self.contactEmail_Lbl.delegate = self; // Delegate methods are called when the user taps on a link (see `TTTAttributedLabelDelegate` protocol)
+    self.contactEmail_Lbl.numberOfLines = 0;
+    self.contactEmail_Lbl.text = @"contact@astaguru.com";
+}
+
+#pragma mark - TTTAttributedLabelDelegate
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithPhoneNumber:(NSString *)phoneNumber
+{
+    //    NSString *numberString = self.product_Dic[@"contactNo"]; //@"7875512881";
+    //        NSURL *phoneNumber = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", numberString]];
+    
+    //        // Whilst this version will return you to your app once the phone call is over.
+    NSURL *phoneNumber_Url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", phoneNumber]];
+    
+    // Now that we have our `phoneNumber` as a URL. We need to check that the device we are using can open the URL.
+    // Whilst iPads, iPhone, iPod touchs can all open URLs in safari mobile they can't all
+    // open URLs that are numbers this is why we have `tel://` or `telprompt://`
+    if([[UIApplication sharedApplication] canOpenURL:phoneNumber_Url]) {
+        // So if we can open it we can now actually open it with
+        [[UIApplication sharedApplication] openURL:phoneNumber_Url];
+    }
+    
+}
+
+- (void)attributedLabel:(__unused TTTAttributedLabel *)label
+   didSelectLinkWithURL:(NSURL *)url
+{
+    [[UIApplication sharedApplication] openURL:url];
+
+//    [[[UIActionSheet alloc] initWithTitle:[url absoluteString] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Open Link in Safari", nil), nil] showInView:self.view];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet
+clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        return;
+    }
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:actionSheet.title]];
 }
 
 -(void)closePressed
@@ -103,7 +172,7 @@
         }
     }
     
-    
+    self.navigationItem.title=@"Contact Us";
      //_scrContact.contentSize=CGSizeMake(self.view.frame.size.width, _viwmap.frame.size.height+ _viwmap.frame.origin.y+30);
     //_viwcontentview.frame=CGRectMake(_viwcontentview.frame.origin.x, _viwcontentview.frame.origin.y, self.view.frame.size.width, _scrContact.contentSize.height);
 }

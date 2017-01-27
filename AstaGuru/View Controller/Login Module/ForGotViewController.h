@@ -13,5 +13,8 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrScreollviw;
 @property (weak, nonatomic) IBOutlet UIView *viwInnerview;
+@property (strong, nonatomic) IBOutlet UITextField *email_TextField;
+@property (strong, nonatomic) IBOutlet UIButton *sendPassword_Btn;
+- (IBAction)sendPassword_BtnClick:(UIButton *)sender;
 
 @end

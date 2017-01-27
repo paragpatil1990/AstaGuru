@@ -10,6 +10,7 @@
 #import "SWRevealViewController.h"
 #import "LoginViewController.h"
 #import "RegistrationViewController.h"
+#import "ViewController.h"
 @interface BforeLoginViewController ()
 
 @end
@@ -45,8 +46,17 @@
 }
 -(void)closePressed
 {
-    
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if (_isCommingFromAfterProfile==1)
+    {
+        UINavigationController *navcontroll = (UINavigationController *)[self.revealViewController frontViewController];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        ViewController *objProductViewController = [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
+        [navcontroll pushViewController:objProductViewController animated:YES];
+    }
+    else
+    {
+    [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 /*
@@ -72,6 +82,7 @@
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
     LoginViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    //rootViewController.IsCommingFromSideMenu=1;
     [self.navigationController pushViewController:rootViewController animated:YES];
 }
 

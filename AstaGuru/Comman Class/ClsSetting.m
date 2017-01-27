@@ -14,6 +14,7 @@
 #import "BforeLoginViewController.h"
 #import "AfterLoginViewController.h"
 #import "SearchViewController.h"
+
 @implementation ClsSetting
 {
    }
@@ -107,11 +108,17 @@
 }
 -(NSString *)Url
 {
-return @"http://54.169.222.181/api/v2/guru/_table/";
+//    restapi.infomanav.com/
+//    54.169.222.181
+return @"http://restapi.infomanav.com/api/v2/guru/_table/";
+}
+-(NSString *)UrlProcedure
+{
+    return @"http://restapi.infomanav.com/api/v2/guru/_proc";
 }
 +(NSString *)ImageURL
 {
-return @"http://arttrust.southeastasia.cloudapp.azure.com/";
+    return @"http://arttrust.southeastasia.cloudapp.azure.com/";
 }
 +(void)SetBorder:(UIView *)viw cornerRadius:(CGFloat)CornerRadius borderWidth:(CGFloat)borderWidth 
 {
@@ -127,55 +134,7 @@ return @"http://arttrust.southeastasia.cloudapp.azure.com/";
         viw.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
     }
 }
-+(NSMutableArray *)getMenu
-{
-    NSMutableArray *arrmenu=[[NSMutableArray alloc]init];
-    [arrmenu addObject:@"FeedWhiteWithTitle180"];
-    [arrmenu addObject:@"mylist180"];
-    [arrmenu addObject:@"footer_alert_gray_text180"];
-    [arrmenu addObject:@"G_white180"];
-    [arrmenu addObject:@"likeNo180"];
-    [arrmenu addObject:@"mylist180"];
-    [arrmenu addObject:@"MsgWhiteWithTitle180"];
-    return arrmenu;
-}
-+(NSMutableArray *)getMenuHome
-{
-    NSMutableArray *arrmenu=[[NSMutableArray alloc]init];
-    [arrmenu addObject:@"FeedRedWithTitile180"];
-    [arrmenu addObject:@"mylist180"];
-    [arrmenu addObject:@"footer_alert_gray_text180"];
-    [arrmenu addObject:@"Footer_G_white180"];
-    [arrmenu addObject:@"likeNo180"];
-    [arrmenu addObject:@"mylist180"];
-    [arrmenu addObject:@"MsgWhiteWithTitle180"];
-    return arrmenu;
-}
-+(NSMutableArray *)getMenuSaved
-{
-    NSMutableArray *arrmenu=[[NSMutableArray alloc]init];
-    [arrmenu addObject:@"FeedWhiteWithTitle180"];
-    [arrmenu addObject:@"mylist180"];
-    [arrmenu addObject:@"footer_alert_gray_text180"];
-    [arrmenu addObject:@"Footer_G_white180"];
-    [arrmenu addObject:@"like180"];
-    [arrmenu addObject:@"mylist180"];
-    [arrmenu addObject:@"MsgWhiteWithTitle180"];
-    return arrmenu;
-}
 
-+(NSMutableArray *)getMenuMyList
-{
-    NSMutableArray *arrmenu=[[NSMutableArray alloc]init];
-    [arrmenu addObject:@"FeedWhiteWithTitle180"];
-    [arrmenu addObject:@"MyList_Red180"];
-    [arrmenu addObject:@"footer_alert_gray_text180"];
-    [arrmenu addObject:@"Footer_G_white180"];
-    [arrmenu addObject:@"likeNo180"];
-    [arrmenu addObject:@"mylist180"];
-    [arrmenu addObject:@"MsgWhiteWithTitle180"];
-    return arrmenu;
-}
 
 +(NSString*)getAddress:(CLLocation*)newLocation
 {
@@ -278,9 +237,7 @@ return @"http://arttrust.southeastasia.cloudapp.azure.com/";
         NSString  *strQuery=[NSString stringWithFormat:@"%@%@",[self Url],strURL];
         NSString *url = strQuery;
         NSLog(@"%@",url);
-        
-        
-        
+    
         NSString *encoded = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [manager GET:encoded parameters:Discparam success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
@@ -293,9 +250,6 @@ return @"http://arttrust.southeastasia.cloudapp.azure.com/";
              NSLog(@"%@",dict1);
              [MBProgressHUD hideHUDForView:Callingview animated:YES];
              [_PassReseposeDatadelegate passReseposeData:responseObject];
-            
-           
-             
              
          }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -305,6 +259,52 @@ return @"http://arttrust.southeastasia.cloudapp.azure.com/";
               }];
         
         
+    }
+    @catch (NSException *exception)
+    {
+        
+    }
+    @finally
+    {
+    }
+}
+-(void)CallWebDelete:(NSMutableDictionary*)dict url:(NSString*)strURL view:(UIView*)Callingview Post:(BOOL)isPost
+{
+    @try {
+        
+        
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:Callingview animated:YES];
+        HUD.labelText = @"loading";
+        
+        
+        NSMutableDictionary *Discparam=[[NSMutableDictionary alloc]init];
+        Discparam=dict;
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];  //AFHTTPResponseSerializer serializer
+        manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+        
+        NSString  *strQuery=[NSString stringWithFormat:@"%@%@",[self Url],strURL];
+        NSString *url = strQuery;
+        NSLog(@"%@",url);
+        NSString *encoded = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [manager DELETE:encoded parameters:Discparam success:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             //  NSError *error=nil;
+             NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+             
+             NSError *error;
+             NSMutableArray *dict1 = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
+             NSLog(@"%@",responseStr);
+             NSLog(@"%@",dict1);
+             [MBProgressHUD hideHUDForView:Callingview animated:YES];
+             [_PassReseposeDatadelegate passReseposeData:responseObject];
+         }
+             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 NSLog(@"Error: %@", error);
+                 
+                 [MBProgressHUD hideHUDForView:Callingview animated:YES];
+             }];
     }
     @catch (NSException *exception)
     {
@@ -333,7 +333,7 @@ return @"http://arttrust.southeastasia.cloudapp.azure.com/";
     
     [manager POST:strURL parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
-          NSError *error=nil;
+//          NSError *error=nil;
         //NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         
        // NSError *error;
@@ -355,8 +355,7 @@ return @"http://arttrust.southeastasia.cloudapp.azure.com/";
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:Callingview animated:YES];
     HUD.labelText = @"loading";
-    
-    
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     NSLog(@"Dict %@",dict);
@@ -366,9 +365,9 @@ return @"http://arttrust.southeastasia.cloudapp.azure.com/";
     [serializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     manager.requestSerializer = serializer;
     
-    [manager POST:@"http://54.169.222.181/api/v2/guru/_table/users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:[NSString stringWithFormat:@"%@users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[self Url]] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
-        NSError *error=nil;
+//        NSError *error=nil;
         //NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         
         // NSError *error;
@@ -441,9 +440,9 @@ return @"http://arttrust.southeastasia.cloudapp.azure.com/";
     [serializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     manager.requestSerializer = serializer;
     
-    [manager PUT:@"http://54.169.222.181/api/v2/guru/_table/users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed" parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager PUT:[NSString stringWithFormat:@"%@users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[self Url]] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
-        NSError *error=nil;
+//        NSError *error=nil;
         //NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         
         // NSError *error;
@@ -595,6 +594,7 @@ return @"http://arttrust.southeastasia.cloudapp.azure.com/";
     }
     return str;
 }
+
 -(NSString *)stringByStrippingHTML:(NSString*)str
 {
     NSRange r;
@@ -603,6 +603,75 @@ return @"http://arttrust.southeastasia.cloudapp.azure.com/";
         str = [str stringByReplacingCharactersInRange:r withString:@""];
     }
     return str;
+}
++(CGFloat)heightOfTextForString:(NSString *)aString andFont:(UIFont *)aFont maxSize:(CGSize)aSize
+{
+    // iOS7
+    
+    CGSize sizeOfText = [aString boundingRectWithSize: aSize
+                                              options: (NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
+                                           attributes: [NSDictionary dictionaryWithObject:aFont
+                                                                                   forKey:NSFontAttributeName]
+                                              context: nil].size;
+    
+    return ceilf(sizeOfText.height);
+    
+    
+}
+
+
++(void)Email:(NSDictionary*)dict view:(UIView*)Callingview
+{
+    //MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:Callingview animated:YES];
+    //HUD.labelText = @"loading";
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    NSLog(@"Dict %@",dict);
+    
+    AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
+    [serializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [serializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    manager.requestSerializer = serializer;
+    
+    [manager POST:[NSString stringWithFormat:@"http://52.66.4.131/api/v2/awsses/?api_key=6dee0a21388b49db917cd64559c32bcbde93460f391a594ab7cc6666824d5c26"] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        NSLog(@"JSON: %@", responseObject);
+        
+//        NSError *error=nil;
+        //NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        
+        // NSError *error;
+        //  NSMutableDictionary *dict1 = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
+        // NSLog(@"%@",responseStr);
+        
+//        [_PassReseposeDatadelegate passReseposeData1:responseObject];
+       // [MBProgressHUD hideHUDForView:Callingview animated:YES];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        [MBProgressHUD hideHUDForView:Callingview animated:YES];
+        
+    }];
+    
+    
+}
++(void)ISUSerLeading:(NSString*)strUserID Cell:(CurrentDefultGridCollectionViewCell*)cell
+{
+    if (([[[NSUserDefaults standardUserDefaults] valueForKey:USER_id] intValue]>0))
+    {
+        
+        if ([[[NSUserDefaults standardUserDefaults] valueForKey:USER_id] intValue] == [strUserID intValue])
+        {
+            [cell.btnLot setBackgroundImage:[UIImage imageNamed:@"img-lotno-bg2"] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [cell.btnLot setBackgroundImage:[UIImage imageNamed:@"img-lotno-bg1.png"] forState:UIControlStateNormal];
+        }
+    }
+    
 }
 
 @end

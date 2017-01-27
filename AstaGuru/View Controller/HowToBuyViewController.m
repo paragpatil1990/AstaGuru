@@ -13,11 +13,16 @@
 #import "VideoViewInHowToBuy.h"
 #import "SWRevealViewController.h"
 #import "AppDelegate.h"
-@interface HowToBuyViewController ()<YTPlayerViewDelegate>
+#import "ClsSetting.h"
+#import "TTTAttributedLabel.h"
+#import "ClientRelationViewController.h"
+
+@interface HowToBuyViewController ()<YTPlayerViewDelegate, UIActionSheetDelegate, TTTAttributedLabelDelegate>
 {
     NSMutableArray *arrdata;
     NSMutableArray *arrHeaderview;
-    
+    NSMutableArray *arrVAcncyTitleOnly;
+
 }
 @end
 
@@ -30,12 +35,29 @@
     {
        [self Setup];
     }
+   else if (_isHowTobuy==3)
+    {
+        [self SetupServices];
+    }
+   else if (_isHowTobuy==4)
+   {
+       [self SetupTermsCondition];
+   }
+   else if (_isHowTobuy==5)
+   {
+       [self vacancy];
+   }
+    
     else
     {
         [self setupHowtosell];
     }
     [self setUpNavigationItem];
     _tblHowtoBuy.arrData=arrdata;
+    
+    self.tblHowtoBuy.estimatedRowHeight = 100.0;
+    self.tblHowtoBuy.rowHeight = UITableViewAutomaticDimension;
+    
     // Do any additional setup after loading the view.
 }
 
@@ -52,12 +74,22 @@
     {
         self.navigationItem.title=@"How To Buy";
     }
-    else
+   else if (_isHowTobuy==3)
     {
-       self.navigationItem.title=@"How To Sell";
+        self.navigationItem.title=@"Services";
     }
-    
-    
+   else if (_isHowTobuy==4)
+   {
+       self.navigationItem.title=@"Terms & Conditions";
+   }
+   else if (_isHowTobuy==5)
+   {
+//       self.navigationItem.title=@"Careers";
+   }
+   else
+   {
+       self.navigationItem.title=@"How To Sell";
+   }
     
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -76,16 +108,275 @@
     [[self navigationItem] setRightBarButtonItem:self.sideleftbarButton];
 }
 
+-(void)SetupServices
+{
+    arrdata=[[NSMutableArray alloc]init];
+    
+    
+    ClsHowToBuy *objhowtoBuy=[[ClsHowToBuy alloc]init];
+    objhowtoBuy.arrSubarray=[[NSMutableArray alloc] init];
+    objhowtoBuy.Titlel=@"Auction";
+    
+    NSString *str1=@"Established in the year 2008 AstaGuru, India's premium online auction house caters to a global clientele by conducting auctions for Modern & Contemporary Indian Art and have diversified over the period of time and curate auctions for Collectibles & Antiques as well. With an overall art management experience spanning over three decades we have amalgamated all our industry related knowledge and have molded it to function on a digital structure.";
+    clsAboutUs *objAboutUS=[[clsAboutUs alloc]init];
+    objAboutUS.strName=str1;
+    objAboutUS.strType=@"3";
+    [objhowtoBuy.arrSubarray addObject:objAboutUS];
+   
+    
+    
+    NSString *str11=@"With the world becoming one big market place we provide a safe and secure platform ensuring the ambitions of art collectors are achieved. With a well trained and highly efficient team, artworks & collectible antiques are filtered and only the best creations are part of our auctions. Art is always born with a soul and it is our prerogative to safeguard its sanctity.";
+    clsAboutUs *objAboutUS1=[[clsAboutUs alloc]init];
+    objAboutUS1.strName=str11;
+    objAboutUS1.strType=@"3";
+    [objhowtoBuy.arrSubarray addObject:objAboutUS1];
+    [arrdata addObject:objhowtoBuy];
+    
+    
+    
+    
+    ClsHowToBuy *objhowtoBuy1=[[ClsHowToBuy alloc]init];
+    objhowtoBuy1.Titlel=@"Consultation";
+    objhowtoBuy1.arrSubarray=[[NSMutableArray alloc] init];
+    
+    NSString *str111=@"Knowledge translates into wisdom when shared, therefore our doors are always open for individuals who are keen about enriching their lives through art. Our knowledge and industry experience equips us to guide you with regards to your art & collectibles related conundrums, based on your preferences and needs we help you understand which artwork will best suit your senses or which artifact will blend in with your commercial or residential space. ";
+    clsAboutUs *objAboutUS11=[[clsAboutUs alloc]init];
+    objAboutUS11.strName=str111;
+    objAboutUS11.strType=@"3";
+    [objhowtoBuy1.arrSubarray addObject:objAboutUS11];
+    NSString *str12=@"Our guiding force, Mr Vickram Sethi is an art connoisseur and has been associated with the world of art for over three decades. His valued insights are crucial, he not only takes into account the provenance but also has developed a keen eye to deduce and ascertain works with immense potential and seminal attributes. Art gets intertwined within the home it dwells in and its owner, we take pride in consulting and presiding this communion of joy.";
+    clsAboutUs *objAboutUS12=[[clsAboutUs alloc]init];
+    objAboutUS12.strName=str12;
+    objAboutUS12.strType=@"3";
+    [objhowtoBuy1.arrSubarray addObject:objAboutUS12];
+    [arrdata addObject:objhowtoBuy1];
+    
+    
+    
+    
+    ClsHowToBuy *objhowtoBuy2=[[ClsHowToBuy alloc]init];
+    objhowtoBuy2.arrSubarray=[[NSMutableArray alloc] init];
+    objhowtoBuy2.Titlel=@"Restoration";
+    
+    NSString *str21=@"Restoration is best left to the experts, considering this service entails the longevity of the artwork. Exposure to direct sunlight or moisture are deterrents and do not facilitate a conducive environment for storage and showcasing artworks of various mediums.";
+    clsAboutUs *objAboutUS21=[[clsAboutUs alloc]init];
+    objAboutUS21.strName=[NSString stringWithFormat:@"%@",str21];
+    objAboutUS21.strType=@"3";
+    [objhowtoBuy2.arrSubarray addObject:objAboutUS21];
+    
+    NSString *str22=@"We therefore undertake restoration operations not only to salvage an artwork which may be tampered but also in order to give it a protective shield. Work of such delicacy is entrusted to our high skilled restoration team, so you can be at complete peace of mind when your possession is in our care.";
+    clsAboutUs *objAboutUS22=[[clsAboutUs alloc]init];
+    objAboutUS22.strName=[NSString stringWithFormat:@"%@",str22];
+    objAboutUS22.strType=@"3";
+    [objhowtoBuy2.arrSubarray addObject:objAboutUS22];
+    
+    [arrdata addObject:objhowtoBuy2];
+    
+    
+    
+    ClsHowToBuy *objhowtoBuy3=[[ClsHowToBuy alloc]init];
+    objhowtoBuy3.arrSubarray=[[NSMutableArray alloc] init];
+    objhowtoBuy3.Titlel=@"Valuation";
+    
+    NSString *str31=@"Various parameters such as provenance, medium, period, subject, whether the artwork has been published and the overall condition, influence the value of the art work or collectibles. Since it is a niche market the advice and inputs from market experts are imperative to ascertain the true value of the creation.";
+    clsAboutUs *objAboutUS31=[[clsAboutUs alloc]init];
+    objAboutUS31.strName=[NSString stringWithFormat:@"%@",str31];
+    objAboutUS31.strType=@"3";
+    [objhowtoBuy3.arrSubarray addObject:objAboutUS31];
+    
+    NSString *str32=@"At AstaGuru, we have a stringent process in place, research and investigation done by our team looks into all the impactful aspects, be it a piece of art ranging from canvas to paper or artifacts such as rare pens & exquisite timepieces. Once the condition and authenticity is looked into, its value is determined. Through the course of our journey we have horned our skills, combined with a structurally sound and real time process, we conduct an in depth analysis of the artwork or collectible before calculating its value.";
+    clsAboutUs *objAboutUS32=[[clsAboutUs alloc]init];
+    objAboutUS32.strName=[NSString stringWithFormat:@"%@",str32];
+    objAboutUS32.strType=@"3";
+    [objhowtoBuy3.arrSubarray addObject:objAboutUS32];
+    
+    [arrdata addObject:objhowtoBuy3];
+    
+    
+}
+-(void)SetupTermsCondition
+{
+    arrdata=[[NSMutableArray alloc]init];
+    
+    
+    ClsHowToBuy *objhowtoBuy=[[ClsHowToBuy alloc]init];
+    objhowtoBuy.arrSubarray=[[NSMutableArray alloc] init];
+    objhowtoBuy.Titlel=@"General Terms";
+    
+    clsAboutUs *objclsAboutus1=[[clsAboutUs alloc]init];
+    objclsAboutus1.strName=@"By participating in this auction, you acknowledge that you are bound by the Conditions for Sale listed below and on the website www.astaguru.com\n";
+    objclsAboutus1.strType=@"3";
+    [objhowtoBuy.arrSubarray addObject:objclsAboutus1];
+    clsAboutUs *objclsAboutus2=[[clsAboutUs alloc]init];
+    objclsAboutus2.strName=@"Making a Winning Bid results in an enforceable contract of sale.";
+    objclsAboutus2.strType=@"1";
+    [objhowtoBuy.arrSubarray addObject:objclsAboutus2];
+    
+    clsAboutUs *objclsAboutus3=[[clsAboutUs alloc]init];
+    objclsAboutus3.strName=@"AstaGuru is authorized by the seller to display at AstaGuru's discretion images and description of all lots in the catalogue and on the website.";
+    objclsAboutus3.strType=@"1";
+    [objhowtoBuy.arrSubarray addObject:objclsAboutus3];
+    clsAboutUs *objclsAboutus4=[[clsAboutUs alloc]init];
+    objclsAboutus4.strName=@"AstaGuru can grant record and reject any bids.";
+    objclsAboutus4.strType=@"1";
+    [objhowtoBuy.arrSubarray addObject:objclsAboutus4];
+    
+    
+    clsAboutUs *objclsAboutus5=[[clsAboutUs alloc]init];
+    objclsAboutus5.strName=@"Bidding access shall be given on AstaGuru's discretion . AstaGuru may ask for a deposit on lots prior to giving bidding access.";
+    objclsAboutus5.strType=@"1";
+    [objhowtoBuy.arrSubarray addObject:objclsAboutus5];
+    
+    clsAboutUs *objclsAboutus6=[[clsAboutUs alloc]init];
+    objclsAboutus6.strName=@"AstaGuru may review bid histories of specific lots periodically to preserve the efficacy of the auction process.";
+    objclsAboutus6.strType=@"1";
+    [objhowtoBuy.arrSubarray addObject:objclsAboutus6];
+    
+    clsAboutUs *objclsAboutus7=[[clsAboutUs alloc]init];
+    objclsAboutus7.strName=@"AstaGuru has the right to withdraw a Property before, during or after the bidding, if it has reason to believe that the authenticity of the Property or accuracy of description is in doubt.";
+    objclsAboutus7.strType=@"1";
+    [objhowtoBuy.arrSubarray addObject:objclsAboutus7];
+    
+    clsAboutUs *objclsAboutus8=[[clsAboutUs alloc]init];
+    objclsAboutus8.strName=@"All proprieties shall be sold only if the reserve price in met. Reserve price is on each Property is confidential and shall not be disclosed . AstaGuru shall raise all invoices including buyers premium and related taxes.";
+    objclsAboutus8.strType=@"1";
+    [objhowtoBuy.arrSubarray addObject:objclsAboutus8];
+    
+    
+    clsAboutUs *objclsAboutus9=[[clsAboutUs alloc]init];
+    objclsAboutus9.strName=@"The Buyers Premium shall be calculated at 15% of the hammer price.";
+    objclsAboutus9.strType=@"1";
+    [objhowtoBuy.arrSubarray addObject:objclsAboutus9];
+    
+    clsAboutUs *objclsAboutus10=[[clsAboutUs alloc]init];
+    objclsAboutus10.strName=@"All foreign currency exchange rates during the Auction are made on a constant of 1:60 (USD:INR) . All invoicing details shall be provided by the buyer prior to the auction.";
+    objclsAboutus10.strType=@"1";
+    [objhowtoBuy.arrSubarray addObject:objclsAboutus10];
+    
+    
+    clsAboutUs *objclsAboutus11=[[clsAboutUs alloc]init];
+    objclsAboutus11.strName=@"All payments shall be made within 7 days from the date of the invoice.";
+    objclsAboutus11.strType=@"1";
+    [objhowtoBuy.arrSubarray addObject:objclsAboutus11];
+    
+    clsAboutUs *objclsAboutus12=[[clsAboutUs alloc]init];
+    objclsAboutus12.strName=@"In case payment is not made within the stated time period, it shall be treated as a breach of contract and the Seller may authorise AstaGuru to take any steps (including the institution of legal proceedings).";
+    objclsAboutus12.strType=@"1";
+    [objhowtoBuy.arrSubarray addObject:objclsAboutus12];
+    
+    clsAboutUs *objclsAboutus13=[[clsAboutUs alloc]init];
+    objclsAboutus13.strName=@"AstaGuru may charge a 2% late payment fine per month. . If the buyer wishes to collect the property from AstaGuru, it must be collected within 30 Days from the date of the auction. The buyer shall be charged a 2% storage fee if the property is not collected.";
+    objclsAboutus13.strType=@"1";
+    [objhowtoBuy.arrSubarray addObject:objclsAboutus13];
+    
+    clsAboutUs *objclsAboutus14=[[clsAboutUs alloc]init];
+    objclsAboutus14.strName=@"AstaGuru reserves the right not to award the Winning Bid to the Bidder with the highest Bid at Closing Date if it deems it necessary to do so. . In an unlikely event of any technical failure and the website is inaccessible. The lot closing time shall be extended.";
+    objclsAboutus14.strType=@"1";
+    [objhowtoBuy.arrSubarray addObject:objclsAboutus14];
+    
+    clsAboutUs *objclsAboutus15=[[clsAboutUs alloc]init];
+    objclsAboutus15.strName=@"Bids recorded prior to the technical problem shall stand valid according to the terms of sale.";
+    objclsAboutus15.strType=@"1";
+    [objhowtoBuy.arrSubarray addObject:objclsAboutus15];
+    [arrdata addObject:objhowtoBuy];
+    
+    
+    
+    
+    ClsHowToBuy *objhowtoBuy1=[[ClsHowToBuy alloc]init];
+    objhowtoBuy1.Titlel=@"Authenticity Guarantee";
+    objhowtoBuy1.arrSubarray=[[NSMutableArray alloc] init];
+    
+    clsAboutUs *objclsAboutus16=[[clsAboutUs alloc]init];
+    objclsAboutus16.strName=@"AstaGuru assures on behalf of the seller that all properties on the website are genuine work of the artist listed.";
+    objclsAboutus16.strType=@"1";
+    [objhowtoBuy1.arrSubarray addObject:objclsAboutus16];
+    
+    clsAboutUs *objclsAboutus17=[[clsAboutUs alloc]init];
+    objclsAboutus17.strName=@"How ever in an unlikely event if the property is proved to be inauthentic to AstaGuru's satisfaction within a period of 6 months from the collection date. The seller shall be liable to pay back the full amount to the buyer. These claims will be handled on a case-by-case basis, and will require that examinable proof which clearly demonstrates that the Property is inauthentic is provided by an established and acknowledged authority. Only the actual Buyer (as registered with AstaGuru) makes the claim.";
+    objclsAboutus17.strType=@"1";
+    [objhowtoBuy1.arrSubarray addObject:objclsAboutus17];
+    
+    clsAboutUs *objclsAboutus18=[[clsAboutUs alloc]init];
+    objclsAboutus18.strName=@"The property, when returned, should be in the same condition as when it was purchased.";
+    objclsAboutus18.strType=@"1";
+    [objhowtoBuy1.arrSubarray addObject:objclsAboutus18];
+    
+    clsAboutUs *objclsAboutus19=[[clsAboutUs alloc]init];
+    objclsAboutus19.strName=@"In case the Buyer request for a certificate of authentication for a particular artwork, Astaguru will levy the expenditure of the same onto the Buyer.";
+    objclsAboutus19.strType=@"1";
+    [objhowtoBuy1.arrSubarray addObject:objclsAboutus19];
+    
+    clsAboutUs *objclsAboutus20=[[clsAboutUs alloc]init];
+    objclsAboutus20.strName=@"AstaGuru shall charge the buyer in case any steps are to be taken for special expenses shall take place in order to prove the authenticity of the property.";
+    objclsAboutus20.strType=@"1";
+    [objhowtoBuy1.arrSubarray addObject:objclsAboutus20];
+    
+    clsAboutUs *objclsAboutus21=[[clsAboutUs alloc]init];
+    objclsAboutus21.strName=@"In case the seller fails to refund the funds. Astaguru shall be authorized by the buyer to take legal action on behalf of the buyer to recover the money at the expense of the buyer.";
+    objclsAboutus21.strType=@"1";
+    [objhowtoBuy1.arrSubarray addObject:objclsAboutus21];
+    [arrdata addObject:objhowtoBuy1];
+    
+    
+    
+    
+    ClsHowToBuy *objhowtoBuy2=[[ClsHowToBuy alloc]init];
+    objhowtoBuy2.arrSubarray=[[NSMutableArray alloc] init];
+    objhowtoBuy2.Titlel=@"Extent of AstaGuru's Liability";
+    
+    clsAboutUs *objclsAboutus22=[[clsAboutUs alloc]init];
+    objclsAboutus22.strName=@"AstaGuru will obtain the money from the seller and thereafter refund to the buyer the amount of purchase in case the work is not authentic.";
+    objclsAboutus22.strType=@"1";
+    [objhowtoBuy2.arrSubarray addObject:objclsAboutus22];
+    
+    clsAboutUs *objclsAboutus23=[[clsAboutUs alloc]init];
+    objclsAboutus23.strName=@"All damages and loss during transit are covered by the insurance policy, AstaGuru is not liable.";
+    objclsAboutus23.strType=@"1";
+    [objhowtoBuy2.arrSubarray addObject:objclsAboutus23];
+    clsAboutUs *objclsAboutus24=[[clsAboutUs alloc]init];
+    objclsAboutus24.strName=@"AstaGuru or any member of its team is not liable for any mistakes made in the catalogue.";
+    objclsAboutus24.strType=@"1";
+    [objhowtoBuy2.arrSubarray addObject:objclsAboutus24];
+    clsAboutUs *objclsAboutus25=[[clsAboutUs alloc]init];
+    objclsAboutus25.strName=@"AstaGuru is not liable for any claims in insurance.";
+    objclsAboutus25.strType=@"1";
+    [objhowtoBuy2.arrSubarray addObject:objclsAboutus25];
+    
+    clsAboutUs *objclsAboutus26=[[clsAboutUs alloc]init];
+    objclsAboutus26.strName=@"AstaGuru is not liable in case the website has any technical problems.";
+    objclsAboutus26.strType=@"1";
+    [objhowtoBuy2.arrSubarray addObject:objclsAboutus26];
+    clsAboutUs *objclsAboutus27=[[clsAboutUs alloc]init];
+    objclsAboutus27.strName=@"If any part of the Conditions for Sale between the Buyer and AstaGuru is found by any court to be invalid, illegal or unenforceable, that part may be discounted and the rest of the conditions shall be enforceable to the fullest extent permissible by law.";
+    objclsAboutus27.strType=@"1";
+    [objhowtoBuy2.arrSubarray addObject:objclsAboutus27];
+    [arrdata addObject:objhowtoBuy2];
+    
+    ClsHowToBuy *objhowtoBuy3=[[ClsHowToBuy alloc]init];
+    objhowtoBuy3.arrSubarray=[[NSMutableArray alloc] init];
+    objhowtoBuy3.Titlel=@"Law and Jurisdiction";
+    
+    clsAboutUs *objclsAboutus28=[[clsAboutUs alloc]init];
+    objclsAboutus28.strName=@"The terms and conditions of this Auction are subject to the laws of India, which will apply to the construction and to the effect of the clauses. All parties are subject to the exclusive jurisdiction of the courts at Mumbai, Maharashtra, India.";
+    objclsAboutus28.strType=@"3";
+    [objhowtoBuy3.arrSubarray addObject:objclsAboutus28];
+    [arrdata addObject:objhowtoBuy3];
+    
+    
+}
+
+
 -(void)setupHowtosell
 {
    
         arrdata=[[NSMutableArray alloc]init];
-        
-        
+    
+    
         ClsHowToBuy *objhowtoBuy=[[ClsHowToBuy alloc]init];
         objhowtoBuy.arrSubarray=[[NSMutableArray alloc] init];
         objhowtoBuy.Titlel=@"Evaluation";
-        
+    
         NSString *str1=@"The first step in the process is to arrange a consultation with one of our representatives. You can contact us or email us with details of your property. We shall then study the property and give you a valuation on the same. We will respond to your auction estimate request within 3 working days. It is very important to AstaGuru to provide the highest level of service; accordingly, we cannot rush valuations.";
         clsAboutUs *objAboutUS=[[clsAboutUs alloc]init];
         objAboutUS.strName=str1;
@@ -152,7 +443,7 @@
     
     clsAboutUs *objAboutUS43=[[clsAboutUs alloc]init];
     objAboutUS43.strName=@"The reserve is the confidential minimum selling price to which a consignor (you) and AstaGuru agree before the sale - your property's 'floor' price, below which no bid will be accepted. If bidding on your item fails to reach the reserve, we will not sell the piece and will advise you of your options. It is important to consider the reserve price in light of the fact that AstaGuru will assess fees and handling costs for unsold lots. ";
-    objAboutUS43.strType=@"2";
+    objAboutUS43.strType=@"1";
     [objhowtoBuy4.arrSubarray addObject:objAboutUS43];
     
     
@@ -164,7 +455,7 @@
   
     clsAboutUs *objAboutUS45=[[clsAboutUs alloc]init];
     objAboutUS45.strName=@"Sellers pay a commission that is deducted, along with any agreed-upon expenses, from the hammer price. Should you have any specific questions regarding the selling commission, please call the appropriate representative for more information.";
-    objAboutUS45.strType=@"2";
+    objAboutUS45.strType=@"1";
     [objhowtoBuy4.arrSubarray addObject:objAboutUS45];
     [arrdata addObject:objhowtoBuy4];
     
@@ -181,15 +472,88 @@
     
         
 }
--(void)closePressed
+-(void)vacancy
 {
     
+    @try {
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        HUD.labelText = @"loading";
+        
+        NSMutableDictionary *Discparam=[[NSMutableDictionary alloc]init];
+        // [Discparam setValue:@"cr2016" forKey:@"validate"];
+        //[Discparam setValue:@"banner" forKey:@"action"];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];  //AFHTTPResponseSerializer serializer
+        manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+        ClsSetting *objsetting=[[ClsSetting alloc]init];
+        NSString  *strQuery=[NSString stringWithFormat:@"%@jobs?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objsetting Url]];
+        NSString *url = strQuery;
+        NSLog(@"%@",url);
+        NSString *encoded = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [manager GET:encoded parameters:Discparam success:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             //  NSError *error=nil;
+//             NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+
+             NSError *error;
+             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
+             // NSLog(@"%@",responseStr);
+             // NSLog(@"%@",dict);
+             NSMutableArray *arrItemCount=[[NSMutableArray alloc]init];
+             arrVAcncyTitleOnly=[[NSMutableArray alloc]init];
+             arrItemCount=[parese parsevacancy:[dict valueForKey:@"resource"]];
+             
+             arrVAcncyTitleOnly=[parese parsevacancyTitle:[dict valueForKey:@"resource"]];;
+
+              arrdata=[[NSMutableArray alloc]init];
+             arrdata=arrItemCount;
+             [_tblHowtoBuy reloadData];
+             [HUD hide:YES];
+             
+         }
+             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 NSLog(@"Error: %@", error);
+                 [ClsSetting ValidationPromt:error.localizedDescription];
+//                 if ([operation.response statusCode]==404)
+//                 {
+//                     [ClsSetting ValidationPromt:@"No Record Found"];
+//                     
+//                 }
+//                 else
+//                 {
+//                     [ClsSetting internetConnectionPromt];
+//                     
+//                 }
+                 [HUD hide:YES];
+
+             }];
+        
+        
+    }
+    @catch (NSException *exception)
+    {
+        
+    }
+    @finally
+    {
+    }
+}
+-(void)closePressed
+{
+    if (_isHowTobuy==5)
+    {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    else
+    {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     SWRevealViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
     UIViewController *viewController =rootViewController;
     AppDelegate * objApp = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     objApp.window.rootViewController = viewController;
-    
+    }
 }
 -(void)Setup
 {
@@ -304,7 +668,7 @@
     
     ClsHowToBuy *objhowtoBuy5=[[ClsHowToBuy alloc]init];
     objhowtoBuy5.Titlel=@"Participate in our next auction";
-    NSString *str51=@"If you are interested in consigning works from your collection to our next sale, please contact us at contact@astaguru.com or at the auction help desk +91 22 2204 8138 / 39";
+    NSString *str51=@"If you are interested in consigning works from your collection to our next sale, please contact us at contact@astaguru.com or at the auction help desk +912222048138 / 39";
     objhowtoBuy5.arrSubarray=[[NSMutableArray alloc] init];
     clsAboutUs *objAboutUS51=[[clsAboutUs alloc]init];
     objAboutUS51.strName=str51;
@@ -562,7 +926,7 @@
     [objhowtoBuy6.arrSubarray addObject:objAboutUS647];
     
     clsAboutUs *objAboutUS648=[[clsAboutUs alloc]init];
-    objAboutUS645.strName=@"In addition to the hammer price, the buyer agrees to pay to us the buyers premium calculated at 15% of the winning bid value on each lot.";
+    objAboutUS648.strName=@"In addition to the hammer price, the buyer agrees to pay to us the buyers premium calculated at 15% of the winning bid value on each lot.";
     objAboutUS648.strType=@"1";
     [objhowtoBuy6.arrSubarray addObject:objAboutUS648];
     
@@ -616,7 +980,7 @@
     [objhowtoBuy7.arrSubarray addObject:objAboutUS77];
     
     clsAboutUs *objAboutUS78=[[clsAboutUs alloc]init];
-    objAboutUS68.strName=@"Shipping and Insurance";
+    objAboutUS78.strName=@"Shipping and Insurance";
     objAboutUS78.strType=@"2";
     [objhowtoBuy7.arrSubarray addObject:objAboutUS78];
     
@@ -696,8 +1060,33 @@
     
 
     //NSString *text=objHowToBuy.Titlel;
-    UILabel *lblSubtitle=(UILabel *)[cell viewWithTag:12];
-    lblSubtitle.text=objAboutUs.strName;
+    TTTAttributedLabel *lblSubtitle=(TTTAttributedLabel *)[cell viewWithTag:12];
+    //lblSubtitle.text=objAboutUs.strName;
+     
+        
+//        NSMutableParagraphStyle *paragraphStyles = [[NSMutableParagraphStyle alloc] init];
+//        paragraphStyles.alignment                = NSTextAlignmentJustified;    // To justified text
+//        paragraphStyles.firstLineHeadIndent      = 0.05;    // IMP: must have a value to make it work
+//        
+//        NSString *stringTojustify                = objAboutUs.strName;
+//        NSDictionary *attributes                 = @{NSParagraphStyleAttributeName: paragraphStyles,(id)kCTForegroundColorAttributeName : (id)[UIColor colorWithRed:96.0/255.0 green:96.0/255.0 blue:96.0/255.0 alpha:1.0].CGColor,NSFontAttributeName : [UIFont fontWithName:@"WorkSans-Regular" size:14]};
+//        NSMutableAttributedString *attributedString     = [[NSMutableAttributedString alloc] initWithString:stringTojustify attributes:attributes];
+//        lblSubtitle.attributedText             = attributedString;
+//        lblSubtitle.numberOfLines              = 0;
+//        [lblSubtitle sizeToFit];
+        lblSubtitle.extendsLinkTouchArea = YES;
+        lblSubtitle.textAlignment = NSTextAlignmentJustified;
+        lblSubtitle.enabledTextCheckingTypes = NSTextCheckingAllSystemTypes; // Automatically detect links when the label text is subsequently changed
+        lblSubtitle.delegate = self; // Delegate methods are called when the user taps on a link (see `TTTAttributedLabelDelegate` protocol)
+        lblSubtitle.numberOfLines = 0;
+        lblSubtitle.text = objAboutUs.strName; // Repository URL will be automatically detected and linked
+
+//        lblSubtitle.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+//        NSRange range = [lblSubtitle.text rangeOfString:@"contact@astaguru.com"];
+//        NSRange range1 = [lblSubtitle.text rangeOfString:@"+912222048138 / 39"];
+//        [lblSubtitle addLinkToURL:[NSURL URLWithString:@"http://arttrust.southeastasia.cloudapp.azure.com/"] withRange:range];
+//        [lblSubtitle addLinkToPhoneNumber:@"912222048138" withRange:range1];
+    // lblSubtitle.textAlignment = NSTextAlignmentJustified;
         cell1=cell;
    
     }
@@ -716,10 +1105,97 @@
         
         //NSString *text=objHowToBuy.Titlel;
         UILabel *lblSubtitle=(UILabel *)[cell viewWithTag:13];
-        lblSubtitle.text=objAboutUs.strName;
+        
+        //lblSubtitle.text=objAboutUs.strName;
+        //lblSubtitle.textAlignment = NSTextAlignmentJustified;
+        
+        NSMutableParagraphStyle *paragraphStyles = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyles.alignment                = NSTextAlignmentJustified;    // To justified text
+        paragraphStyles.firstLineHeadIndent      = 0.05;    // IMP: must have a value to make it work
+        
+        NSString *stringTojustify                = objAboutUs.strName;
+        NSDictionary *attributes                 = @{NSParagraphStyleAttributeName: paragraphStyles};
+        NSAttributedString *attributedString     = [[NSAttributedString alloc] initWithString:stringTojustify attributes:attributes];
+        
+        
+        
+        lblSubtitle.attributedText             = attributedString;
+        lblSubtitle.numberOfLines              = 0;
+        [lblSubtitle sizeToFit];
         cell1=cell;
     
     }
+    else if ([objAboutUs.strType intValue]==3)
+    {
+        
+        
+        static NSString* cellIdentifier = @"TextWithOutIcon";
+        
+        UITableViewCell* cell = [_tblHowtoBuy dequeueReusableCellWithIdentifier:cellIdentifier];
+        
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
+        //NSString *text=objHowToBuy.Titlel;
+        UILabel *lblSubtitle=(UILabel *)[cell viewWithTag:12];
+        //lblSubtitle.text=objAboutUs.strName;
+        //lblSubtitle.textAlignment = NSTextAlignmentJustified;
+        NSMutableParagraphStyle *paragraphStyles = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyles.alignment                = NSTextAlignmentJustified;    // To justified text
+        paragraphStyles.firstLineHeadIndent      = 0.05;    // IMP: must have a value to make it work
+        
+        NSString *stringTojustify                = objAboutUs.strName;
+        NSDictionary *attributes                 = @{NSParagraphStyleAttributeName: paragraphStyles};
+        NSAttributedString *attributedString     = [[NSAttributedString alloc] initWithString:stringTojustify attributes:attributes];
+        
+        lblSubtitle.attributedText             = attributedString;
+        lblSubtitle.numberOfLines              = 0;
+        [lblSubtitle sizeToFit];
+
+        
+        cell1=cell;
+        
+    }
+    else if ([objAboutUs.strType intValue]==4)
+    {
+        
+        
+        static NSString* cellIdentifier = @"ApplyNow";
+        
+        UITableViewCell* cell = [_tblHowtoBuy dequeueReusableCellWithIdentifier:cellIdentifier];
+        
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
+        //NSString *text=objHowToBuy.Titlel;
+        /*UILabel *lblSubtitle=(UILabel *)[cell viewWithTag:12];
+         //lblSubtitle.text=objAboutUs.strName;
+         //lblSubtitle.textAlignment = NSTextAlignmentJustified;
+         NSMutableParagraphStyle *paragraphStyles = [[NSMutableParagraphStyle alloc] init];
+         paragraphStyles.alignment                = NSTextAlignmentJustified;    // To justified text
+         paragraphStyles.firstLineHeadIndent      = 0.05;    // IMP: must have a value to make it work
+         
+         NSString *stringTojustify                = objAboutUs.strName;
+         NSDictionary *attributes                 = @{NSParagraphStyleAttributeName: paragraphStyles};
+         NSAttributedString *attributedString     = [[NSAttributedString alloc] initWithString:stringTojustify attributes:attributes];
+         
+         lblSubtitle.attributedText             = attributedString;
+         lblSubtitle.numberOfLines              = 0;
+         [lblSubtitle sizeToFit];*/
+        
+        
+        cell1=cell;
+        
+    }
+
     
  return cell1;
 }
@@ -747,7 +1223,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-     return 50;
+     return 40;
     /*if(section<arrdata.count-1)
     {
         
@@ -758,37 +1234,63 @@
         return self.view.frame.size.width/1.5;
     }*/
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+/*- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     ClsHowToBuy *objHowToBuy = [arrdata objectAtIndex:indexPath.section] ;
     clsAboutUs *objAboutUs=[objHowToBuy.arrSubarray objectAtIndex:indexPath.row];
     //NSString *text=objHowToBuy.Titlel;
    
-   
+    if ([objAboutUs.strType intValue]==1)
+    {
     
     CGSize maximumLabelSize = CGSizeMake(tableView.frame.size.width-31, FLT_MAX);
     CGRect labelRect1 = [objAboutUs.strName
                          boundingRectWithSize:maximumLabelSize
                          options:NSStringDrawingUsesLineFragmentOrigin
                          attributes:@{
-                                      NSFontAttributeName : [UIFont systemFontOfSize:17]
+                                      NSFontAttributeName : [UIFont fontWithName:@"WorkSans-Regular" size:15]
                                       }
                          context:nil];
-    return   labelRect1.size.height+8;
+    return   labelRect1.size.height+10;
+    }
+    else if ([objAboutUs.strType intValue]==3)
+    {
+        CGSize maximumLabelSize = CGSizeMake(tableView.frame.size.width-45, FLT_MAX);
+        CGRect labelRect1 = [objAboutUs.strName
+                             boundingRectWithSize:maximumLabelSize
+                             options:NSStringDrawingUsesLineFragmentOrigin
+                             attributes:@{
+                                          NSFontAttributeName : [UIFont fontWithName:@"WorkSans-Regular" size:14]
+                                          }
+                             context:nil];
+        return   labelRect1.size.height;
+    }
+    else
+    {
+        CGSize maximumLabelSize = CGSizeMake(tableView.frame.size.width-20, FLT_MAX);
+        CGRect labelRect1 = [objAboutUs.strName
+                             boundingRectWithSize:maximumLabelSize
+                             options:NSStringDrawingUsesLineFragmentOrigin
+                             attributes:@{
+                                          NSFontAttributeName : [UIFont fontWithName:@"WorkSans-Regular" size:15]
+                                          }
+                             context:nil];
+        return   labelRect1.size.height+8;
+    }
     
-}
+}*/
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
    // if (section<arrdata.count-1)
     //{
        
    
-    CGRect frame = tableView.frame;
+//    CGRect frame = tableView.frame;
     //static NSString *CellIdentifier = @"Header";
     ClsHowToBuy *objHowToBuy = [arrdata objectAtIndex:section] ;
     
     // NSString *strSection=[NSString stringWithFormat:@"%d",section];
-    NSString *HeaderIdentifier =[NSString stringWithFormat:@"%ld",(long)section];
+//    NSString *HeaderIdentifier =[NSString stringWithFormat:@"%ld",(long)section];
     
     HeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HeaderView"];
     if(!headerView)
@@ -900,9 +1402,7 @@
     NSLog(@"handleTapGesture11:%ld",(long)sender.tag);
     //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
     
-    VideoViewInHowToBuy *headerView=(HeaderView*)[_tblHowtoBuy headerViewForSection:sender.tag];
-    
-    
+//    VideoViewInHowToBuy *headerView=(VideoViewInHowToBuy*)[_tblHowtoBuy headerViewForSection:sender.tag];
     
     [self.tblHowtoBuy reloadData];
     
@@ -944,4 +1444,55 @@
     //[_tblHowtoBuy release];
     _tblHowtoBuy = nil;
 }
+
+#pragma mark - TTTAttributedLabelDelegate
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithPhoneNumber:(NSString *)phoneNumber
+{
+    //    NSString *numberString = self.product_Dic[@"contactNo"]; //@"7875512881";
+    //        NSURL *phoneNumber = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", numberString]];
+    
+    //        // Whilst this version will return you to your app once the phone call is over.
+    NSURL *phoneNumber_Url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", phoneNumber]];
+    
+    // Now that we have our `phoneNumber` as a URL. We need to check that the device we are using can open the URL.
+    // Whilst iPads, iPhone, iPod touchs can all open URLs in safari mobile they can't all
+    // open URLs that are numbers this is why we have `tel://` or `telprompt://`
+    if([[UIApplication sharedApplication] canOpenURL:phoneNumber_Url]) {
+        // So if we can open it we can now actually open it with
+        [[UIApplication sharedApplication] openURL:phoneNumber_Url];
+    }
+    
+}
+
+- (void)attributedLabel:(__unused TTTAttributedLabel *)label
+   didSelectLinkWithURL:(NSURL *)url
+{
+    [[UIApplication sharedApplication] openURL:url];
+
+//    [[[UIActionSheet alloc] initWithTitle:[url absoluteString] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Open Link in Safari", nil), nil] showInView:self.view];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet
+clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == actionSheet.cancelButtonIndex) {
+        return;
+    }
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:actionSheet.title]];
+}
+
+- (IBAction)btnApplyNow:(id)sender
+{
+    UINavigationController *navcontroll = (UINavigationController *)[self.revealViewController frontViewController];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ClientRelationViewController *objProductViewController = [storyboard instantiateViewControllerWithIdentifier:@"ClientRelationViewController"];
+    objProductViewController.arrJobTotle=arrVAcncyTitleOnly;
+    [navcontroll pushViewController:objProductViewController animated:YES];
+}
+
+
 @end

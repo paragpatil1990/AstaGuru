@@ -14,7 +14,6 @@
     NSMutableArray *arrLib=[[NSMutableArray alloc]init];
     for (int j=0; j<json.count; j++)
     {
-        
         clsCurrentOccution *objCurrentOccution=[[clsCurrentOccution alloc]init];
         NSMutableDictionary *dictLib=[json objectAtIndex:j];
         dictLib=[ClsSetting RemoveNullOnly:dictLib];
@@ -35,10 +34,15 @@
         objCurrentOccution.strproductdate=[dictLib valueForKey:@"productdate"];
         objCurrentOccution.strestamiate=[dictLib valueForKey:@"estamiate"];
         objCurrentOccution.strsmallimage=[dictLib valueForKey:@"smallimage"];
-        objCurrentOccution.strReference=[dictLib valueForKey:@"reference"];
+         NSString *strRefrance1=[ClsSetting TrimWhiteSpaceAndNewLine:[dictLib valueForKey:@"reference"]];
+        objCurrentOccution.strReference=strRefrance1;
         objCurrentOccution.strBidclosingtime=[dictLib valueForKey:@"Bidclosingtime"];
          objCurrentOccution.strOnline=[dictLib valueForKey:@"Online"];
         objCurrentOccution.strTypeOfCell=@"0";
+        objCurrentOccution.strCurrentDate = [dictLib valueForKey:@"currentDate"];
+        objCurrentOccution.strhumanFigure = [dictLib valueForKey:@"HumanFigure"];
+        objCurrentOccution.strauctionBanner = [dictLib valueForKey:@"auctionBanner"];
+        
         NSMutableDictionary *dictArtistInfo=[dictLib valueForKey:@"artist_by_artistid"];
          NSMutableDictionary *dictCategoryInfo=[dictLib valueForKey:@"category_by_categoryid"];
          NSMutableDictionary *dictMediumInfo=[dictLib valueForKey:@"medium_by_mediumid"];
@@ -63,7 +67,7 @@
         objCurrentOccution.objArtistInfo=objArtistInfo;
         objCurrentOccution.objCategoryInfo=objCategoryInfo;
         objCurrentOccution.objMediaInfo=objMediaInfo;
-        
+    
         [arrLib addObject:objCurrentOccution];
         
     }
@@ -87,6 +91,9 @@
         objPastAuctionData.strAuctiondate=[dictLib valueForKey:@"auctiondate"];
         objPastAuctionData.strAuctiontitle=[dictLib valueForKey:@"auctiontitle"];
         objPastAuctionData.strStatus=[dictLib valueForKey:@"status"];
+        objPastAuctionData.strTotalSaleValueRs=[dictLib valueForKey:@"totalSaleValueRs"];
+        objPastAuctionData.strTotalSaleValueUs=[dictLib valueForKey:@"totalSaleValueUs"];
+        
         [arrLib addObject:objPastAuctionData];
         
     }
@@ -110,7 +117,8 @@
         objMyAuctionGallery.strBidrecordid=[dictLib valueForKey:@"Bidrecordid"];
         objMyAuctionGallery.strFirstname=[dictLib valueForKey:@"Firstname"];
         objMyAuctionGallery.strLastname=[dictLib valueForKey:@"Lastname"];
-        objMyAuctionGallery.strReference=[dictLib valueForKey:@"Reference"];
+        NSString *strRefrance1=[ClsSetting TrimWhiteSpaceAndNewLine:[dictLib valueForKey:@"reference"]];
+        objMyAuctionGallery.strReference=strRefrance1;
         
         
         objMyAuctionGallery.strThumbnail=[dictLib valueForKey:@"Thumbnail"];
@@ -128,6 +136,8 @@
         objMyAuctionGallery.strvalidbidpricers=[dictLib valueForKey:@"validbidpricers"];
         objMyAuctionGallery.strvalidbidpriceus=[dictLib valueForKey:@"validbidpriceus"];
         objMyAuctionGallery.strFromBid=[NSString stringWithFormat:@"%d",fromBid];
+
+        
         if (fromBid!=1)
         {
             
@@ -175,7 +185,7 @@
         clsArtistInfo *objArtistInfo=[[clsArtistInfo alloc]init];
         NSMutableDictionary *dictLib=[json objectAtIndex:j];
         
-        dictLib=[ClsSetting RemoveNullOnly:dictLib];
+        //dictLib=[ClsSetting RemoveNullOnly:dictLib];
         objArtistInfo.strFirstName=[dictLib valueForKey:@"FirstName"];
         objArtistInfo.strLastName=[dictLib valueForKey:@"LastName"];
         objArtistInfo.strPicture=[dictLib valueForKey:@"Picture"];
@@ -195,23 +205,21 @@
     NSMutableArray *arrLib=[[NSMutableArray alloc]init];
     for (int j=0; j<json.count; j++)
     {
-        
         clsCurrentOccution *objCurrentOccution=[[clsCurrentOccution alloc]init];
         NSMutableDictionary *dictLib=[json objectAtIndex:j];
         dictLib=[ClsSetting RemoveNullOnly:dictLib];
+        objCurrentOccution.strmyuserid=[dictLib valueForKey:@"MyUserID"];
         objCurrentOccution.strproductid=[dictLib valueForKey:@"productid"];
-       
         objCurrentOccution.strtitle=[dictLib valueForKey:@"title"];
         objCurrentOccution.strdescription=[dictLib valueForKey:@"description"];
         objCurrentOccution.strartist_id=[dictLib valueForKey:@"artistid"];
-        objCurrentOccution.strpricers=[dictLib valueForKey:@"pricers"];
-        objCurrentOccution.strpriceus=[dictLib valueForKey:@"priceus"];
+        objCurrentOccution.strpricers=[dictLib valueForKey:@"Bidpricers"];
+        objCurrentOccution.strpriceus=[dictLib valueForKey:@"Bidpriceus"];
         objCurrentOccution.strcategory_id=[dictLib valueForKey:@"categoryid"];
         objCurrentOccution.strcategory=[dictLib valueForKey:@"category"];
         objCurrentOccution.strstyle_id=[dictLib valueForKey:@"styleid"];
         objCurrentOccution.strmedium_id=[dictLib valueForKey:@"mediumid"];
         objCurrentOccution.strmedium=[dictLib valueForKey:@"medium"];
-        // objCurrentOccution.str=[dictLib valueForKey:@"featured"];
         objCurrentOccution.strcollectors=[dictLib valueForKey:@"collectors"];
         objCurrentOccution.strthumbnail=[dictLib valueForKey:@"thumbnail"];
         objCurrentOccution.strimage=[dictLib valueForKey:@"image"];
@@ -219,37 +227,107 @@
         objCurrentOccution.strproductdate=[dictLib valueForKey:@"productdate"];
         objCurrentOccution.strestamiate=[dictLib valueForKey:@"estamiate"];
         objCurrentOccution.strsmallimage=[dictLib valueForKey:@"smallimage"];
-        objCurrentOccution.strReference=[dictLib valueForKey:@"reference"];
+        NSString *strRefrance1=[ClsSetting TrimWhiteSpaceAndNewLine:[dictLib valueForKey:@"reference"]];
+        objCurrentOccution.strReference=strRefrance1;
         objCurrentOccution.strBidclosingtime=[dictLib valueForKey:@"Bidclosingtime"];
         objCurrentOccution.strOnline=[dictLib valueForKey:@"Online"];
         objCurrentOccution.strFirstName=[dictLib valueForKey:@"FirstName"];
         objCurrentOccution.strLastName=[dictLib valueForKey:@"LastName"];
-        
+        objCurrentOccution.strArtistPicture=[dictLib valueForKey:@"Picture"];
+        objCurrentOccution.strArtistProfile=[dictLib valueForKey:@"Profile"];
+         objCurrentOccution.strDollarRate=[dictLib valueForKey:@"DollarRate"];
+        objCurrentOccution.strbidartistuserid=[dictLib valueForKey:@"bidartistuserid"];
         objCurrentOccution.strTypeOfCell=@"0";
-        
+        objCurrentOccution.strCurrentDate = [dictLib valueForKey:@"currentDate"];
+        objCurrentOccution.strhumanFigure = [dictLib valueForKey:@"HumanFigure"];
+        objCurrentOccution.strStatus = [dictLib valueForKey:@"status"];
+        objCurrentOccution.strauctionBanner = [dictLib valueForKey:@"auctionBanner"];
+
         NSMutableDictionary *dictArtistInfo=[dictLib valueForKey:@"artist_by_artistid"];
-      
-        
         clsArtistInfo *objArtistInfo=[[clsArtistInfo alloc]init];
         objArtistInfo.strArtistid=[dictArtistInfo valueForKey:@"artistid"];
         objArtistInfo.strFirstName=[dictArtistInfo valueForKey:@"FirstName"];
         objArtistInfo.strLastName=[dictArtistInfo valueForKey:@"LastName"];
         objArtistInfo.strProfile=[dictArtistInfo valueForKey:@"Profile"];
         objArtistInfo.strPicture=[dictArtistInfo valueForKey:@"Picture"];
-       
-       
-        
-        
-       
-        
-       
-        
         [arrLib addObject:objCurrentOccution];
         
     }
-    
-    
     return arrLib;
 }
 
++(NSMutableArray*)parsevacancy:(NSMutableArray*)json
+{
+    NSMutableArray *arrLib=[[NSMutableArray alloc]init];
+    for (int j=0; j<json.count; j++)
+    {
+        NSMutableDictionary *dictLib=[json objectAtIndex:j];
+        dictLib=[ClsSetting RemoveNullOnly:dictLib];
+        ClsHowToBuy *objHowtoby=[[ClsHowToBuy alloc]init];
+        objHowtoby.Titlel=[dictLib valueForKey:@"jobTitle"];
+        objHowtoby.arrSubarray=[[NSMutableArray alloc]init];
+        
+        NSArray *arrkeys = [dictLib allKeys];
+        
+        NSArray *arrname = @[@"Job Salary",@"Joining Time",@"Job Description",@"Functional Skills",@"Job Experience",@"Job Title",@"Technical Skills",@"Business Unit",@"Job Responsibility"];
+        
+        
+        for (int i=0; i<arrkeys.count; i++)
+        {
+            NSString *str  = [[arrkeys objectAtIndex:i] lowercaseString];
+            for (int m=0; m<arrname.count; m++)
+            {
+                NSString *mstr  = [[arrname objectAtIndex:m] lowercaseString];
+                NSString *withoutspace = [mstr stringByReplacingOccurrencesOfString:@" " withString:@""];
+                if ([str containsString:withoutspace])
+                {
+                    clsAboutUs *objAboutUs=[[clsAboutUs alloc]init];
+                    objAboutUs.strName = [arrname objectAtIndex:m];//[arrkeys objectAtIndex:i];
+                    objAboutUs.strType=@"2";
+                    if (![str isEqualToString:@"jobID"])
+                    {
+                        clsAboutUs *objAboutUs1=[[clsAboutUs alloc]init];
+                        objAboutUs1.strName=[dictLib valueForKey:[arrkeys objectAtIndex:i]];
+                        objAboutUs1.strType=@"3";
+                        [objHowtoby.arrSubarray addObject:objAboutUs];
+                        [objHowtoby.arrSubarray addObject:objAboutUs1];
+                    }
+                    break;
+                }
+            }
+        }
+        clsAboutUs *objAboutUs2=[[clsAboutUs alloc]init];
+        
+        //objAboutUs2.strName=[dictLib valueForKey:objAboutUs.strName];
+        objAboutUs2.strType=@"4";
+        [objHowtoby.arrSubarray addObject:objAboutUs2];
+        [arrLib addObject:objHowtoby];
+        
+        
+        
+    }
+    return arrLib;
+
+}
+
++(NSMutableArray*)parsevacancyTitle:(NSMutableArray*)json
+{
+    NSMutableArray *arrLib=[[NSMutableArray alloc]init];
+    for (int j=0; j<json.count; j++)
+    {
+        
+        
+        
+        NSMutableDictionary *dictLib=[json objectAtIndex:j];
+        dictLib=[ClsSetting RemoveNullOnly:dictLib];
+        //ClsHowToBuy *objHowtoby=[[ClsHowToBuy alloc]init];
+        //objHowtoby.Titlel=[dictLib valueForKey:@"jobTitle"];
+        
+        [arrLib addObject:dictLib];
+        
+        
+        
+    }
+    return arrLib;
+}
 @end

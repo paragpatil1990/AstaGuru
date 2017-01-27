@@ -274,7 +274,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	int nbSection = [self.collapseDataSource numberOfSectionsInTableView:tableView];
+	int nbSection = (int)[self.collapseDataSource numberOfSectionsInTableView:tableView];
     
 	while (nbSection < [self.sectionsStates count])
     {
@@ -333,7 +333,7 @@
     NSInteger index = tap.view.tag;
     if (index >= 0)
     {
-        [self toggleSection:(NSUInteger)index animated:YES];
+        [self toggleSection:(NSUInteger)index animated:NO];
     }
 }
 

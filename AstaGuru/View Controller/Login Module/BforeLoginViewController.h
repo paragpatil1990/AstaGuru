@@ -10,4 +10,5 @@
 
 @interface BforeLoginViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
+@property(nonatomic)int isCommingFromAfterProfile;
 @end

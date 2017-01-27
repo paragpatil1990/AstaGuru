@@ -11,6 +11,7 @@
 #import "clsCurrentOccution.h"
 #import "clsMyAuctionGallery.h"
 @protocol CurrentOccution
+@optional
 -(void)btnShotinfoPressed:(int)iSelectedIndex;
 -(void)ListSwipeOptionpressed:(int)option currentCellIndex:(int)index;
 @end
@@ -19,6 +20,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnArtist;
 @property (weak, nonatomic) IBOutlet EGOImageView *imgProduct;
 @property (weak, nonatomic) IBOutlet UIButton *btnLot;
+
+@property (strong, nonatomic) IBOutlet UILabel *lblLot;
+
+
 @property (weak, nonatomic) IBOutlet UIButton *btnShortInfo;
 - (IBAction)btnShortInfoPressed:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *lblArtistName;
@@ -43,18 +48,24 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblCurrentBuild;
 @property (weak, nonatomic) IBOutlet UIButton *btnproxy;
 @property (weak, nonatomic) IBOutlet UIButton *btnGridSelectedDetail;
-
 @property (weak, nonatomic) IBOutlet UILabel *lblNextValidBuild;
 
 @property (weak, nonatomic) IBOutlet UILabel *lblcurrentbid;
 @property (weak, nonatomic) IBOutlet UIButton *btnMaximizeImage;
+@property(nonatomic)int isCommingFromPast;
+@property(nonatomic)int isCommingFromUpcoming;
 
-- (IBAction)btnMaximizeImageClicked:(id)sender;
-- (IBAction)btnMyAuctionGallery:(id)sender;
-- (IBAction)btnBidNow:(id)sender;
-- (IBAction)btnProxyBid:(id)sender;
+//- (IBAction)btnMaximizeImageClicked:(id)sender;
+//- (IBAction)btnMyAuctionGallery:(id)sender;
+//- (IBAction)btnBidNow:(id)sender;
+//- (IBAction)btnProxyBid:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnBidHistory;
 @property (weak, nonatomic) IBOutlet UIButton *btnMyGallery;
+@property (weak, nonatomic) IBOutlet UILabel *pastStatictext;
+@property (weak, nonatomic) IBOutlet UIView *nextView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnMyGallery_width;
+
+-(void)setuparray;
 
 @end

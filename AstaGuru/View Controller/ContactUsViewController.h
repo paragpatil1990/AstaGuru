@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "TTTAttributedLabel.h"
 @interface ContactUsViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedMenu;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *valueChanged;
@@ -15,4 +16,7 @@
 @property (weak, nonatomic) IBOutlet MKMapView *viwmap;
 @property (weak, nonatomic) IBOutlet UIView *viwcontentview;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+@property (strong, nonatomic) IBOutlet TTTAttributedLabel *contact_Lbl;
+@property (strong, nonatomic) IBOutlet TTTAttributedLabel *contactEmail_Lbl;
+
 @end
