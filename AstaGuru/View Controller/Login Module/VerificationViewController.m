@@ -46,7 +46,6 @@
     {
         if ([_dict[@"MobileVerified"] intValue] != 1)
         {
-//            [self SendSMSOTP];
             _lblsmserror.hidden = NO;
             _lblsmserror.text = @"Not Verified";
             _lblsmserror.textColor = [UIColor redColor];
@@ -69,7 +68,6 @@
         
         if ([_dict[@"EmailVerified"] intValue] != 1)
         {
-//            [self SendEmail];
             _lblemailerror.hidden = NO;
             _lblemailerror.text = @"Not Verified";
             _lblemailerror.textColor = [UIColor redColor];
@@ -140,18 +138,18 @@
 }
 -(void)closePressed
 {
-    if (_IsCommingFromLoging==1)
-    {
+    //if (_IsCommingFromLoging==1)
+    //{
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         SWRevealViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
         UIViewController *viewController =rootViewController;
         AppDelegate * objApp = (AppDelegate*)[[UIApplication sharedApplication]delegate];
         objApp.window.rootViewController = viewController;
-    }
-    else
-    {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+    //}
+    //else
+    //{
+     //   [self.navigationController popViewControllerAnimated:YES];
+    //}
 }
 - (IBAction)btnBackPressed:(id)sender
 {
@@ -171,13 +169,17 @@
     {
         isVerificatinWorking=1;
         isSMS=1;
-        [_dict setValue:@"1" forKey:@"MobileVerified"];
-        [_dict setValue:@"1" forKey:@"EmailVerified"];
-        
-        NSMutableArray *arr = [NSMutableArray arrayWithObjects:_dict,nil];
+        NSDictionary *params = @{
+                                 @"userid":[[NSUserDefaults standardUserDefaults] valueForKey:USER_id],
+                                 @"MobileVerified":@"1",
+                                 @"EmailVerified":@"1",
+                                 @"admin": @"0"
+                                 };
+        NSMutableArray *arr = [NSMutableArray arrayWithObjects:params,nil];
         NSDictionary *pardsams = @{@"resource": arr};
-        _dictPostParameter = pardsams;
-         [self RegisterUser];
+        ClsSetting *objClssetting=[[ClsSetting alloc] init];
+        objClssetting.PassReseposeDatadelegate=self;
+        [objClssetting calllPutWeb:pardsams url:[NSString stringWithFormat:@"%@/users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objClssetting Url]] view:self.view];
     }
 }
 
@@ -190,34 +192,26 @@
 {
     if ([_btnMobileVerification.titleLabel.text isEqualToString:@"Verify"])
     {
-//        _viewShowContent.hidden=NO;
-//        _htViwShowContent.constant=100;
         [_btnMobileVerification setTitle:@"Resend" forState:UIControlStateNormal];
     }
     else if([_btnMobileVerification.titleLabel.text isEqualToString:@"Resend"])
     {
         [self SendSMSOTP];   //Code for Sending SMS ThroughSMS getWay
     }
-    
-    
 }
+
 - (IBAction)btnEmailVerificationPressed:(id)sender
 {
-    
     if ([_btnEmailVerifivation.titleLabel.text isEqualToString:@"Verify"])
     {
-//        _viwShowEmailContent.hidden=NO;
-//        _htviwShowEmailContent.constant=100;
         [_btnEmailVerifivation setTitle:@"Resend" forState:UIControlStateNormal];
     }
     else if ([_btnEmailVerifivation.titleLabel.text isEqualToString:@"Resend"])
     {
        [self SendEmail]; //Code for Sending Email ThroughSMS getWay
     }
-    
-    
-    
 }
+
 - (IBAction)btnCheckVerfysms:(id)sender
 {
     NSString *strSmsEnterString=[NSString stringWithFormat:@"%@%@%@%@",_smsOne.text,_smsTwo.text,_smsThree.text,_smsFour.text];
@@ -310,6 +304,8 @@
     [objSetting SendSMSOTP:dict url:[NSString stringWithFormat:@"http://gateway.netspaceindia.com/api/sendhttp.php?authkey=131841Aotn6vhT583570b5&mobiles=%@&message=%@&sender=AstGru&route=4&country=91",_strMobile,strMessage] view:self.view];
     objSetting.PassReseposeDatadelegate=self;
 }
+
+
 -(void)passReseposeData1:(id)str
 {
     if (isVerificatinWorking==1 && isSMS==1)
@@ -318,7 +314,9 @@
         NSLog(@"%@",value);
         NSDictionary *dictUser=[value objectAtIndex:0];
         [[NSUserDefaults standardUserDefaults] setValue:[dictUser valueForKey:@"userid"] forKey:USER_id];
-      
+        [[NSUserDefaults standardUserDefaults]setValue:@"0" forKey:@"confirmbid"];
+        [[NSUserDefaults standardUserDefaults]setValue:@"1" forKey:@"EmailVerified"];
+        [[NSUserDefaults standardUserDefaults]setValue:@"1" forKey:@"MobileVerified"];
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
         CongratulationViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"CongratulationViewController"];
@@ -340,59 +338,8 @@
         [ClsSetting ValidationPromt:[NSString stringWithFormat:@"OTP sent to your number %@",_strMobile]];
     }
 }
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    // Prevent crashing undo bug – see note below.
-  /*  if(range.length + range.location > textField.text.length)
-    {
-        return NO;
-    }
-    
-    NSUInteger newLength = [textField.text length] + [string length] - range.length;
-    if (textField == _smsOne)
-    {
-        [_smsTwo resignFirstResponder];
-    }
-    else if (textField == _smsTwo)
-    {
-        [_smsThree resignFirstResponder];
-        //UITextPosition *beginning = [textField beginningOfDocument];
-        //[_smsThree setSelectedTextRange:[textField textRangeFromPosition:beginning
-                                                            //toPosition:beginning]];
-    }
-    else if (textField == _smsThree)
-    {
-        UITextPosition *beginning = [textField beginningOfDocument];
-        [_smsFour setSelectedTextRange:[textField textRangeFromPosition:beginning
-                                                              toPosition:beginning]];
-    }
-    return newLength <= 1;*/
-   
-
-    /*if(textField == _smsOne)
-    {
-        if (_smsOne.text.length > 1  && range.length == 0 )
-        {
-            return NO;
-        }
-        else {
-           
-            [_smsTwo becomeFirstResponder];
-            return YES;
-        }
-    }
-    else if(textField == _smsTwo)
-    {
-        if (_smsTwo.text.length > 1  && range.length == 0 )
-        {
-            return NO;
-        }else {
-          
-            [_smsThree becomeFirstResponder];
-            return YES;
-        }
-    }
-    return YES;*/
-    
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
     NSString *currentString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if (textField==_smsOne)
     {
@@ -533,48 +480,48 @@
 //  
 //}
 
--(void)MobileVerification:(NSString*)strCodeKey CodeValue:(NSString*)strCodeValue verificationCodeKey:(NSString *)strVerificationCodeKey
-{
-    if ([self validate])
-    {
-        //SmsCode
-        
-        NSDictionary *params = @{
-                                 @"userid":[[NSUserDefaults standardUserDefaults]valueForKey:USER_id],
-                                 strCodeKey:strCodeValue,
-                                 strVerificationCodeKey:@"1",
-                                 @"admin": @"0",
-                                 };
-        
-        NSMutableArray *arr = [NSMutableArray arrayWithObjects:params,nil];
-        NSDictionary *pardsams = @{@"resource": arr};
-        
-        
-        ClsSetting *objClssetting=[[ClsSetting alloc] init];
-        // objClssetting.PassReseposeDatadelegate=self;
-        objClssetting.PassReseposeDatadelegate=self;
-        [objClssetting calllPutWeb:pardsams url:[NSString stringWithFormat:@"%@/users/?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objClssetting Url]] view:self.view];
-    }
-}
--(BOOL)validate
-{
-    if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtMobile.text].length==0)
-    {
-        [ClsSetting ValidationPromt:@"Pleae Enter First Name"];
-        return NO;
-    }
-    else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtEmail.text].length==0)
-    {
-        [ClsSetting ValidationPromt:@"Pleae Enter Last Name"];
-        return NO;
-    }
-    return YES;
-}
--(void)RegisterUser
-{
-    ClsSetting *objClssetting=[[ClsSetting alloc] init];
-    // objClssetting.PassReseposeDatadelegate=self;
-    objClssetting.PassReseposeDatadelegate=self;
-    [objClssetting calllPostWeb2:_dictPostParameter url:[NSString stringWithFormat:@"%@/users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objClssetting Url]] view:self.view];
-}
+//-(void)MobileVerification:(NSString*)strCodeKey CodeValue:(NSString*)strCodeValue verificationCodeKey:(NSString *)strVerificationCodeKey
+//{
+//    if ([self validate])
+//    {
+//        //SmsCode
+//        
+//        NSDictionary *params = @{
+//                                 @"userid":[[NSUserDefaults standardUserDefaults]valueForKey:USER_id],
+//                                 strCodeKey:strCodeValue,
+//                                 strVerificationCodeKey:@"1",
+//                                 @"admin": @"0",
+//                                 };
+//        
+//        NSMutableArray *arr = [NSMutableArray arrayWithObjects:params,nil];
+//        NSDictionary *pardsams = @{@"resource": arr};
+//        
+//        
+//        ClsSetting *objClssetting=[[ClsSetting alloc] init];
+//        // objClssetting.PassReseposeDatadelegate=self;
+//        objClssetting.PassReseposeDatadelegate=self;
+//        [objClssetting calllPutWeb:pardsams url:[NSString stringWithFormat:@"%@/users/?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objClssetting Url]] view:self.view];
+//    }
+//}
+//-(BOOL)validate
+//{
+//    if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtMobile.text].length==0)
+//    {
+//        [ClsSetting ValidationPromt:@"Pleae Enter First Name"];
+//        return NO;
+//    }
+//    else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtEmail.text].length==0)
+//    {
+//        [ClsSetting ValidationPromt:@"Pleae Enter Last Name"];
+//        return NO;
+//    }
+//    return YES;
+//}
+//-(void)RegisterUser
+//{
+//    ClsSetting *objClssetting=[[ClsSetting alloc] init];
+//    // objClssetting.PassReseposeDatadelegate=self;
+//    objClssetting.PassReseposeDatadelegate=self;
+//    [objClssetting calllPostWeb2:_dictPostParameter url:[NSString stringWithFormat:@"%@/users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objClssetting Url]] view:self.view];
+//}
 @end

@@ -113,16 +113,16 @@
         dict=[ClsSetting RemoveNullOnly:dict];
         NSString *strname=[dict valueForKey:@"name"];
         
-        NSArray * arrname = [strname componentsSeparatedByString:@" "];
-        if (arrname.count==2)
-        {
-            _txtFirstName.text=[arrname objectAtIndex:0];
-            _txtLastName.text=[arrname objectAtIndex:1];
-        }
-        else if (arrname.count==1)
-        {
-            _txtFirstName.text=[arrname objectAtIndex:0];
-        }
+        //NSArray * arrname = [strname componentsSeparatedByString:@" "];
+       // if (arrname.count==2)
+        //{
+            _txtFirstName.text=[dict valueForKey:@"name"];
+            _txtLastName.text=[dict valueForKey:@"lastname"];
+       // }
+        //else if (arrname.count==1)
+        //{
+          //  _txtFirstName.text=[arrname objectAtIndex:0];
+        //}
         _txtBillingName.text=[dict valueForKey:@"name"];
         _txtBillingAddress.text=[dict valueForKey:@"address1"];
         _txtCity.text=[dict valueForKey:@"city"];
@@ -172,13 +172,13 @@
 {
     if ([self validate])
     {
-        NSLog(@"%@ %@ %@",_txtBillingAddress.text,_txtBillingName.text,_txtBillingTelephoneNumber.text);
-        
         NSDictionary *params = @{
+                                 @"userid":[[NSUserDefaults standardUserDefaults] valueForKey:USER_id],
                                  @"t_username":_txtUserName.text,
                                  @"t_password":_txtPassword.text,
                                  @"t_firstname":_txtFirstName.text,
                                  @"t_lastname":_txtLastName.text,
+                                 @"t_mobile":_txtMobileNumber.text,
                                  @"t_City":_txtCity.text,
                                  @"t_State":_txtState.text,
                                  @"t_zip":_txtZip.text,
@@ -186,37 +186,31 @@
                                  @"t_address1":_txtBillingAddress.text,
                                  @"t_billingname":_txtBillingName.text,
                                  @"t_billingaddress":_txtBillingAddress.text,
+                                 @"t_billingcity":_txtCity.text,
+                                 @"t_billingstate":_txtState.text,
+                                 @"t_billingcountry":_txtCountry.text,
+                                 @"t_billingzip":_txtZip.text,
+                                 @"t_billingtelephone":_txtBillingTelephoneNumber.text,
                                  @"admin": @"0",
-                                 @"userid":[[NSUserDefaults standardUserDefaults] valueForKey:USER_id],
                                  @"nickname":_txtNickName.text,
                                  @"t_nickname":_txtNickName.text,
                                  @"password":_txtPassword.text,
                                  @"t_password":_txtPassword.text
                                  };
-        
         NSMutableArray *arr = [NSMutableArray arrayWithObjects:params,nil];
-        
         NSDictionary *pardsams = @{@"resource": arr};
-        
-        
         ClsSetting *objClssetting=[[ClsSetting alloc] init];
-        // objClssetting.PassReseposeDatadelegate=self;
         objClssetting.PassReseposeDatadelegate=self;
         [objClssetting calllPutWeb:pardsams url:[NSString stringWithFormat:@"%@/users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objClssetting Url]] view:self.view];
     }
-    //[self calllWeb];
 }
 -(void)closePressed
 {
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
 -(void)passReseposeData1:(id)str
 {
-    
-    
     NSArray *value = str[@"resource"];
     NSLog(@"%@",value);
     NSDictionary *dictUser=[value objectAtIndex:0];
@@ -276,8 +270,6 @@
         [ClsSetting ValidationPromt:@"Password & Confarm Password should be same"];
         return NO;
     }
-    
-    
     return YES;
 }
 /*

@@ -127,87 +127,88 @@
     }
     else
     {
-       // [self RegisterUser];
+        [self RegisterUser];
         
-        strSMSCode = [NSString stringWithFormat:@"%d",arc4random() % 9000 + 1000];
-        strEmailCode = [NSString stringWithFormat:@"%d",arc4random() % 9000 + 1000];
+//        strSMSCode = [NSString stringWithFormat:@"%d",arc4random() % 9000 + 1000];
+//        strEmailCode = [NSString stringWithFormat:@"%d",arc4random() % 9000 + 1000];
+//        
+//        NSString *nickname = [NSString stringWithFormat:@"Anonymous%u",arc4random() % 900000 + 100000];
+//        
+//        NSDictionary *params = @{@"name":[NSString stringWithFormat:@"%@",_txtFirstName.text],
+//                                 @"lastname":_txtLastName.text,
+//                                 @"city":_txtCity.text,
+//                                 @"country":_txtcountry.text,
+//                                 @"state":_txtState.text,
+//                                 @"zip":_txtZip.text,
+//                                 @"address1":_txtAddress.text,
+//                                 @"Mobile":_txtMobileNumber.text,
+//                                 @"telephone":_txtTelephoneNumber.text,
+//                                 @"fax":_txtFaxNumber.text,
+//                                 @"email":_txtEmail.text,
+//                                 @"username":_txtUserName.text,
+//                                 @"password":_txtPassword.text,
+//                                 @"nickname":nickname,
+//                                 @"t_username":_txtUserName.text,
+//                                 @"t_password":_txtPassword.text,
+//                                 @"t_firstname":_txtFirstName.text,
+//                                 @"t_lastname":_txtLastName.text,
+//                                 @"t_City":_txtCity.text,
+//                                 @"t_State":_txtState.text,
+//                                 @"t_Country":_txtcountry.text,
+//                                 @"t_zip":_txtZip.text,
+//                                 @"t_telephone":_txtTelephoneNumber.text,
+//                                 @"t_fax":_txtFaxNumber.text,
+//                                 @"t_email":_txtEmail.text,
+//                                 @"t_mobile":_txtMobileNumber.text,
+//                                 @"t_address1":_txtAddress.text,
+//                                 @"t_nickname":nickname,
+//                                 @"t_billingaddress":_txtAddress.text,
+//                                 @"t_billingname":[NSString stringWithFormat:@"%@ %@",_txtFirstName.text,_txtLastName.text],
+//                                 @"t_billingcity":_txtCity.text,
+//                                 @"t_billingstate":_txtState.text,
+//                                 @"t_billingcountry":_txtcountry.text,
+//                                 @"t_billingzip":_txtZip.text,
+//                                 @"t_billingtelephone":_txtTelephoneNumber.text,
+//                                 @"t_billingemail":_txtEmail.text,
+//                                 @"BillingName":[NSString stringWithFormat:@"%@ %@",_txtFirstName.text,_txtLastName.text],
+//                                 @"BillingCity":_txtCity.text,
+//                                 @"BillingState":_txtState.text,
+//                                 @"BillingCountry":_txtcountry.text,
+//                                 @"BillingZip":_txtZip.text,
+//                                 @"BillingAddress":_txtAddress.text,
+//                                 @"BillingTelephone":_txtTelephoneNumber.text,
+//                                 @"BillingEmail":_txtEmail.text,
+//                                 @"SmsCode":strSMSCode,
+//                                 @"admin": @"0",
+//                                 @"MobileVerified": @"1",
+//                                 @"EmailVerified":@"1",
+//                                 @"chatdept":@"test",
+//                                 @"confirmbid":@"0",
+//                                 @"Visits":@"0",
+//                                 @"buy":@"0",
+//                                 @"applyforbid":@"1",
+//                                 @"applyforchange":@"0",
+//                                 };
+//        
+//        NSMutableArray *arr = [NSMutableArray arrayWithObjects:params,nil];
+//        
+//        NSDictionary *pardsams = @{@"resource": arr};
         
-        NSString *nickname = [NSString stringWithFormat:@"Anonymous%u",arc4random() % 900000 + 100000];
-        
-        NSDictionary *params = @{@"name":[NSString stringWithFormat:@"%@",_txtFirstName.text],
-                                 @"lastname":_txtLastName.text,
-                                 @"city":_txtCity.text,
-                                 @"country":_txtcountry.text,
-                                 @"state":_txtState.text,
-                                 @"zip":_txtZip.text,
-                                 @"address1":_txtAddress.text,
-                                 @"Mobile":_txtMobileNumber.text,
-                                 @"telephone":_txtTelephoneNumber.text,
-                                 @"fax":_txtFaxNumber.text,
-                                 @"email":_txtEmail.text,
-                                 @"username":_txtUserName.text,
-                                 @"password":_txtPassword.text,
-                                 @"nickname":nickname,
-                                 @"t_username":_txtUserName.text,
-                                 @"t_password":_txtPassword.text,
-                                 @"t_firstname":_txtFirstName.text,
-                                 @"t_lastname":_txtLastName.text,
-                                 @"t_City":_txtCity.text,
-                                 @"t_State":_txtState.text,
-                                 @"t_Country":_txtcountry.text,
-                                 @"t_zip":_txtZip.text,
-                                 @"t_telephone":_txtTelephoneNumber.text,
-                                 @"t_fax":_txtFaxNumber.text,
-                                 @"t_email":_txtEmail.text,
-                                 @"t_mobile":_txtMobileNumber.text,
-                                 @"t_address1":_txtAddress.text,
-                                 @"t_nickname":nickname,
-                                 @"t_billingaddress":_txtAddress.text,
-                                 @"t_billingname":[NSString stringWithFormat:@"%@ %@",_txtFirstName.text,_txtLastName.text],
-                                 @"t_billingcity":_txtCity.text,
-                                 @"t_billingstate":_txtState.text,
-                                 @"t_billingcountry":_txtcountry.text,
-                                 @"t_billingzip":_txtZip.text,
-                                 @"t_billingtelephone":_txtTelephoneNumber.text,
-                                 @"t_billingemail":_txtEmail.text,
-                                 @"BillingName":[NSString stringWithFormat:@"%@ %@",_txtFirstName.text,_txtLastName.text],
-                                 @"BillingCity":_txtCity.text,
-                                 @"BillingState":_txtState.text,
-                                 @"BillingCountry":_txtcountry.text,
-                                 @"BillingZip":_txtZip.text,
-                                 @"BillingAddress":_txtAddress.text,
-                                 @"BillingTelephone":_txtTelephoneNumber.text,
-                                 @"BillingEmail":_txtEmail.text,
-                                 @"SmsCode":strSMSCode,
-                                 @"admin": @"0",
-                                 @"MobileVerified": @"1",
-                                 @"EmailVerified":@"1",
-                                 @"chatdept":@"test",
-                                 @"confirmbid":@"0",
-                                 @"Visits":@"0",
-                                 @"buy":@"0",
-                                 @"applyforbid":@"1",
-                                 @"applyforchange":@"0",
-                                 };
-        
-        NSMutableArray *arr = [NSMutableArray arrayWithObjects:params,nil];
-        
-        NSDictionary *pardsams = @{@"resource": arr};
-        
-        [[NSUserDefaults standardUserDefaults] setValue:[ClsSetting TrimWhiteSpaceAndNewLine:_txtUserName.text] forKey:USER_NAME];
-        VerificationViewController *rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"VerificationViewController"];
-        rootViewController.dictPostParameter=pardsams;
-        rootViewController.strEmail=[ClsSetting TrimWhiteSpaceAndNewLine:_txtEmail.text];
-        rootViewController.strMobile=[ClsSetting TrimWhiteSpaceAndNewLine:_txtMobileNumber.text];
-        rootViewController.strname=_txtFirstName.text;
-        rootViewController.strSMSCode=strSMSCode;
-        rootViewController.strEmialCode=strEmailCode;
-        rootViewController.isRegistration = YES;
-        [self.navigationController pushViewController:rootViewController animated:YES];
+//        [[NSUserDefaults standardUserDefaults] setValue:[ClsSetting TrimWhiteSpaceAndNewLine:_txtUserName.text] forKey:USER_NAME];
+//        VerificationViewController *rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"VerificationViewController"];
+//        rootViewController.dictPostParameter=pardsams;
+//        rootViewController.strEmail=[ClsSetting TrimWhiteSpaceAndNewLine:_txtEmail.text];
+//        rootViewController.strMobile=[ClsSetting TrimWhiteSpaceAndNewLine:_txtMobileNumber.text];
+//        rootViewController.strname=_txtFirstName.text;
+//        rootViewController.strSMSCode=strSMSCode;
+//        rootViewController.strEmialCode=strEmailCode;
+//        rootViewController.isRegistration = YES;
+//        [self.navigationController pushViewController:rootViewController animated:YES];
     }
     
 }
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -239,132 +240,105 @@
         {
             [ClsSetting ValidationPromt:@"Please accept terms and condition"];
         }
-       
-      
     }
-    //[self calllWeb];
 }
-
-
 -(void)RegisterUser
 {
     strSMSCode = [NSString stringWithFormat:@"%d",arc4random() % 9000 + 1000];
     strEmailCode = [NSString stringWithFormat:@"%d",arc4random() % 9000 + 1000];
     
-    NSDictionary *params = @{@"name":[NSString stringWithFormat:@"%@ %@",_txtFirstName.text,_txtLastName.text],
+    NSString *nickname = [NSString stringWithFormat:@"Anonymous%u",arc4random() % 900000 + 100000];
+    
+    NSDictionary *params = @{@"name":[NSString stringWithFormat:@"%@",_txtFirstName.text],
+                             @"lastname":_txtLastName.text,
                              @"city":_txtCity.text,
                              @"country":_txtcountry.text,
                              @"state":_txtState.text,
                              @"zip":_txtZip.text,
+                             @"address1":_txtAddress.text,
                              @"Mobile":_txtMobileNumber.text,
                              @"telephone":_txtTelephoneNumber.text,
                              @"fax":_txtFaxNumber.text,
                              @"email":_txtEmail.text,
                              @"username":_txtUserName.text,
                              @"password":_txtPassword.text,
+                             @"nickname":nickname,
                              @"t_username":_txtUserName.text,
                              @"t_password":_txtPassword.text,
                              @"t_firstname":_txtFirstName.text,
                              @"t_lastname":_txtLastName.text,
                              @"t_City":_txtCity.text,
                              @"t_State":_txtState.text,
+                             @"t_Country":_txtcountry.text,
                              @"t_zip":_txtZip.text,
                              @"t_telephone":_txtTelephoneNumber.text,
                              @"t_fax":_txtFaxNumber.text,
                              @"t_email":_txtEmail.text,
                              @"t_mobile":_txtMobileNumber.text,
+                             @"t_address1":_txtAddress.text,
+                             @"t_nickname":nickname,
+                             @"t_billingaddress":_txtAddress.text,
+                             @"t_billingname":[NSString stringWithFormat:@"%@ %@",_txtFirstName.text,_txtLastName.text],
+                             @"t_billingcity":_txtCity.text,
+                             @"t_billingstate":_txtState.text,
+                             @"t_billingcountry":_txtcountry.text,
+                             @"t_billingzip":_txtZip.text,
+                             @"t_billingtelephone":_txtTelephoneNumber.text,
+                             @"t_billingemail":_txtEmail.text,
+                             @"BillingName":[NSString stringWithFormat:@"%@ %@",_txtFirstName.text,_txtLastName.text],
+                             @"BillingCity":_txtCity.text,
+                             @"BillingState":_txtState.text,
+                             @"BillingCountry":_txtcountry.text,
+                             @"BillingZip":_txtZip.text,
+                             @"BillingAddress":_txtAddress.text,
+                             @"BillingTelephone":_txtTelephoneNumber.text,
+                             @"BillingEmail":_txtEmail.text,
                              @"SmsCode":strSMSCode,
                              @"admin": @"0",
-                             @"address1":_txtAddress.text,
-                             @"BillingAddress":_txtAddress.text,
-                             @"t_billingaddress":_txtAddress.text,
-                             @"t_address1":_txtAddress.text,
-                             @"MobileVerified": @"1"
+                             @"MobileVerified": @"0",
+                             @"EmailVerified":@"0",
+                             @"chatdept":@"test",
+                             @"confirmbid":@"0",
+                             @"Visits":@"0",
+                             @"buy":@"0",
+                             @"applyforbid":@"1",
+                             @"applyforchange":@"0",
                              };
     
     NSMutableArray *arr = [NSMutableArray arrayWithObjects:params,nil];
     
     NSDictionary *pardsams = @{@"resource": arr};
-    
-    
     ClsSetting *objClssetting=[[ClsSetting alloc] init];
     // objClssetting.PassReseposeDatadelegate=self;
     objClssetting.PassReseposeDatadelegate=self;
     [objClssetting calllPostWeb2:pardsams url:[NSString stringWithFormat:@"%@/users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objClssetting Url]] view:self.view];
 }
-
-
 -(void)closePressed
 {
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-/*-(void)calllWeb
-{
-    NSDictionary *params = @{@"name":[NSString stringWithFormat:@"%@ %@",_txtFirstName.text,_txtLastName.text],
-                             @"city":_txtCity.text,
-                             @"state":_txtState.text,
-                             @"zip":_txtZip.text,
-                             @"Mobile":_txtMobileNumber.text,
-                             @"telephone":_txtTelephoneNumber.text,
-                             @"fax":_txtFaxNumber.text,
-                             @"email":_txtEmail.text,
-                             @"t_username":_txtUserName.text,
-                             @"t_password":_txtPassword.text,
-                             @"t_firstname":_txtFirstName.text,
-                             @"t_lastname":_txtLastName.text,
-                             @"t_City":_txtCity.text,
-                             @"t_State":_txtState.text,
-                             @"t_zip":_txtZip.text,
-                             @"t_telephone":_txtTelephoneNumber.text,
-                             @"t_fax":_txtFaxNumber.text,
-                             @"t_email":_txtEmail.text,
-                             @"t_mobile":_txtMobileNumber.text,
-                             @"admin": @"0"
-                              };
-                              
-    
-    NSMutableArray *arr = [NSMutableArray arrayWithObjects:params,nil];
-    
-    NSDictionary *pardsams = @{@"resource": arr};
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    NSLog(@"Dict %@",pardsams);
-    
-    AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
-    [serializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [serializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    manager.requestSerializer = serializer;
-    
-    [manager POST:@"http://54.169.244.245/api/v2/guru/_table/users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed" parameters:pardsams success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        
-    }];
-    
-    
-}*/
 -(void)passReseposeData1:(id)str
 {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-//    [self SendSMSOTP];
     NSArray *value = str[@"resource"];
     NSLog(@"%@",value);
-    NSDictionary *dictUser=[value objectAtIndex:0];
-    [[NSUserDefaults standardUserDefaults] setValue:[dictUser valueForKey:@"userid"] forKey:USER_id];
+    NSMutableDictionary *dictUser=[value objectAtIndex:0];
+    NSDictionary *dict=[ClsSetting RemoveNullOnly:dictUser];
+
+//    [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"user"];
     [[NSUserDefaults standardUserDefaults] setValue:[ClsSetting TrimWhiteSpaceAndNewLine:_txtUserName.text] forKey:USER_NAME];
+    [[NSUserDefaults standardUserDefaults]setValue:[dict valueForKey:@"userid"] forKey:USER_id];
+    [[NSUserDefaults standardUserDefaults]setValue:@"0" forKey:@"confirmbid"];
+    [[NSUserDefaults standardUserDefaults]setValue:@"0" forKey:@"EmailVerified"];
+    [[NSUserDefaults standardUserDefaults]setValue:@"0" forKey:@"MobileVerified"];
     
     VerificationViewController *rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"VerificationViewController"];
+//    rootViewController.dictPostParameter=pardsams;
     rootViewController.strEmail=[ClsSetting TrimWhiteSpaceAndNewLine:_txtEmail.text];
     rootViewController.strMobile=[ClsSetting TrimWhiteSpaceAndNewLine:_txtMobileNumber.text];
     rootViewController.strname=_txtFirstName.text;
     rootViewController.strSMSCode=strSMSCode;
     rootViewController.strEmialCode=strEmailCode;
-    
+    rootViewController.isRegistration = YES;
     [self.navigationController pushViewController:rootViewController animated:YES];
 }
 -(BOOL)validate
@@ -447,15 +421,15 @@
     return YES;
 }
 
--(void)SendSMSOTP
-{
-    NSDictionary *dict=[[NSMutableDictionary alloc]init];
-    ClsSetting *objSetting=[[ClsSetting alloc]init];
-    NSString *strMessage=[NSString stringWithFormat:@"Dear %@, One Time Password for your Mobile Verification is %@.\nRegards, \nTeam Astaguru.",[ClsSetting TrimWhiteSpaceAndNewLine:_txtFirstName.text],strSMSCode ];
-    
-    [objSetting SendSMSOTP:dict url:[NSString stringWithFormat:@"http://api.smscountry.com/SMSCwebservice_bulk.aspx?User=Astaguru&passwd=icia12345&mobilenumber=%@&message=%@&sid =ASTGRU&mtype=N&DR=Y",[ClsSetting TrimWhiteSpaceAndNewLine:_txtMobileNumber.text],strMessage] view:self.view];
-    //objSetting.PassReseposeDatadelegate=self;
-}
+//-(void)SendSMSOTP
+//{
+//    NSDictionary *dict=[[NSMutableDictionary alloc]init];
+//    ClsSetting *objSetting=[[ClsSetting alloc]init];
+//    NSString *strMessage=[NSString stringWithFormat:@"Dear %@, One Time Password for your Mobile Verification is %@.\nRegards, \nTeam Astaguru.",[ClsSetting TrimWhiteSpaceAndNewLine:_txtFirstName.text],strSMSCode ];
+//    
+//    [objSetting SendSMSOTP:dict url:[NSString stringWithFormat:@"http://api.smscountry.com/SMSCwebservice_bulk.aspx?User=Astaguru&passwd=icia12345&mobilenumber=%@&message=%@&sid =ASTGRU&mtype=N&DR=Y",[ClsSetting TrimWhiteSpaceAndNewLine:_txtMobileNumber.text],strMessage] view:self.view];
+//    //objSetting.PassReseposeDatadelegate=self;
+//}
 /*
  #pragma mark - Navigation
  

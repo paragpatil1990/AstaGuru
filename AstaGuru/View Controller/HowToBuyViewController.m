@@ -17,7 +17,7 @@
 #import "TTTAttributedLabel.h"
 #import "ClientRelationViewController.h"
 
-@interface HowToBuyViewController ()<YTPlayerViewDelegate, UIActionSheetDelegate, TTTAttributedLabelDelegate>
+@interface HowToBuyViewController ()<YTPlayerViewDelegate, UIActionSheetDelegate, TTTAttributedLabelDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray *arrdata;
     NSMutableArray *arrHeaderview;
@@ -32,6 +32,8 @@
 {
     // Do any additional setup after loading the view.
     [super viewDidLoad];
+    self.tblHowtoBuy.estimatedRowHeight = 100.0;
+    self.tblHowtoBuy.rowHeight = UITableViewAutomaticDimension;
     arrHeaderview=[[NSMutableArray alloc]init];
     if (_isHowTobuy==1)
     {
@@ -55,18 +57,18 @@
     }
     [self setUpNavigationItem];
     _tblHowtoBuy.arrData=arrdata;
-    }
+}
 -(void)viewDidAppear:(BOOL)animated
 {
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    
-    self.tblHowtoBuy.estimatedRowHeight = 100.0;
-    self.tblHowtoBuy.rowHeight = UITableViewAutomaticDimension;
-    [_tblHowtoBuy openSection:0 animated:NO];
-    [_tblHowtoBuy closeSection:0 animated:NO];
+    _tblHowtoBuy.delegate = self;
+    _tblHowtoBuy.dataSource = self;
+    [_tblHowtoBuy reloadData];
+   //    [_tblHowtoBuy openSection:0 animated:NO];
+//    [_tblHowtoBuy closeSection:0 animated:NO];
 
 }
 -(void)setUpNavigationItem
@@ -1040,10 +1042,10 @@
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (_isHowTobuy == 2)
-    {
-        return [arrdata count]+1;
-    }
+   // if (_isHowTobuy == 2)
+  //  {
+     //   return [arrdata count]+1;
+    //}
     return [arrdata count];
 }
 
@@ -1332,8 +1334,10 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     _tblHowtoBuy.delegate = nil;
+    _tblHowtoBuy.dataSource = nil;
+
     //[_tblHowtoBuy release];
-    _tblHowtoBuy = nil;
+//    _tblHowtoBuy = nil;
 }
 
 #pragma mark - TTTAttributedLabelDelegate
@@ -1386,7 +1390,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 }
 - (IBAction)btnSubmitDetail:(UIButton *)sender
 {
-    NSLog(@"submit detail");
+    UINavigationController *navcontroll = (UINavigationController *)[self.revealViewController frontViewController];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ClientRelationViewController *objProductViewController = [storyboard instantiateViewControllerWithIdentifier:@"ClientRelationViewController"];
+    objProductViewController.arrJobTotle=arrVAcncyTitleOnly;
+    [navcontroll pushViewController:objProductViewController animated:YES];
 }
 
 

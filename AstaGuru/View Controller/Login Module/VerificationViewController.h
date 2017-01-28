@@ -25,7 +25,7 @@
 @property(nonatomic)int IsCommingFromLoging;
 
 @property(nonatomic,retain)NSString *strMobile,*strEmail,*strEmialCode,*strSMSCode;
-@property(nonatomic,retain)NSDictionary *dictPostParameter;
+//@property(nonatomic,retain)NSDictionary *dictPostParameter;
 @property(nonatomic,retain)NSMutableDictionary *dict;
 @property(nonatomic,retain)NSString *strname;
 @property BOOL isRegistration;
