@@ -232,15 +232,6 @@
         }
         else if (indexPath.row==1)
         {
-          /*  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            ServicesViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"ServicesViewController"];
-            
-            
-            [navController setViewControllers: @[rootViewController] animated: YES];
-            
-            [self.revealViewController setFrontViewController:navController];
-            [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];*/
-            
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             HowToBuyViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"HowToBuyViewController"];
             rootViewController.isHowTobuy=3;

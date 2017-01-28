@@ -305,7 +305,7 @@ sold by Astaguru till date. </string>
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="GVi-NW-0ot">
-                                                        <rect key="frame" x="0.0" y="0.5" width="319" height="144"/>
+                                                        <rect key="frame" x="0.0" y="1" width="319" height="144"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                             <rect key="frame" x="0.0" y="0.0" width="319" height="144"/>
@@ -1061,7 +1061,7 @@ sold by Astaguru till date. </string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYu-oA-UBh">
-                                                            <rect key="frame" x="4" y="76" width="69.5" height="13"/>
+                                                            <rect key="frame" x="4" y="76" width="70" height="13"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="5dW-2j-asg"/>
                                                             </constraints>
@@ -1082,7 +1082,7 @@ sold by Astaguru till date. </string>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDF-Yw-0WR">
-                                                            <rect key="frame" x="75.5" y="76" width="75.5" height="13"/>
+                                                            <rect key="frame" x="76" y="76" width="75" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.90196078430000004" green="0.23529411759999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -1444,7 +1444,7 @@ sold by Astaguru till date. </string>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mdh-d6-8eh">
-                                                            <rect key="frame" x="5" y="19" width="142" height="14"/>
+                                                            <rect key="frame" x="5" y="19" width="142" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" priority="250" constant="15" id="zda-OQ-YKf"/>
                                                             </constraints>
@@ -1453,29 +1453,29 @@ sold by Astaguru till date. </string>
                                                             <color key="highlightedColor" red="0.48627450980392156" green="0.48627450980392156" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxk-fg-Eyc">
-                                                            <rect key="frame" x="0.0" y="52" width="152" height="1"/>
+                                                            <rect key="frame" x="0.0" y="50" width="152" height="1"/>
                                                             <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="iN5-8v-Cck"/>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OB4-jQ-PMF">
-                                                            <rect key="frame" x="31" y="58" width="116" height="13"/>
+                                                            <rect key="frame" x="31" y="56" width="116" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="highlightedColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="₹20,0,00,000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d05-Qo-3P3">
-                                                            <rect key="frame" x="31" y="71" width="116" height="14"/>
+                                                            <rect key="frame" x="31" y="69" width="116" height="15"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="12"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jXZ-nT-wL7">
-                                                            <rect key="frame" x="0.0" y="90" width="152" height="34"/>
+                                                            <rect key="frame" x="0.0" y="89" width="152" height="35"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="₹22,00,00,000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a16-j7-D15">
-                                                                    <rect key="frame" x="31" y="15" width="116" height="14"/>
+                                                                    <rect key="frame" x="31" y="15" width="116" height="15"/>
                                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="12"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -1511,7 +1511,7 @@ sold by Astaguru till date. </string>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1YR-1x-X71">
-                                                            <rect key="frame" x="75.5" y="130" width="72.5" height="13"/>
+                                                            <rect key="frame" x="76" y="130" width="72" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.90196078431372551" green="0.23529411764705882" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -1524,13 +1524,13 @@ sold by Astaguru till date. </string>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hrk-k5-ezl">
-                                                            <rect key="frame" x="4" y="130" width="69.5" height="13"/>
+                                                            <rect key="frame" x="4" y="130" width="70" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.48627450980392156" green="0.48627450980392156" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="currentbid.png" translatesAutoresizingMaskIntoConstraints="NO" id="4y5-Dc-RWh">
-                                                            <rect key="frame" x="5" y="58" width="20" height="20"/>
+                                                            <rect key="frame" x="5" y="56" width="20" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="9am-VM-YeB"/>
                                                                 <constraint firstAttribute="width" constant="20" id="JdE-ed-BGl"/>
@@ -1893,7 +1893,7 @@ sold by Astaguru till date. </string>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mev-fC-hxS">
-                                                                    <rect key="frame" x="73.5" y="68" width="95.5" height="15"/>
+                                                                    <rect key="frame" x="74" y="69" width="95" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="Dmr-Sp-9lh"/>
                                                                     </constraints>
@@ -1902,7 +1902,7 @@ sold by Astaguru till date. </string>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpB-uQ-3Uf">
-                                                                    <rect key="frame" x="2" y="69" width="69.5" height="15"/>
+                                                                    <rect key="frame" x="2" y="69" width="70" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="fwQ-5h-Qhr"/>
                                                                     </constraints>
@@ -1911,7 +1911,7 @@ sold by Astaguru till date. </string>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="₹22,00,00,000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ZI-qQ-1pV">
-                                                                    <rect key="frame" x="88.5" y="51" width="82.5" height="14"/>
+                                                                    <rect key="frame" x="88.5" y="51" width="82.5" height="15"/>
                                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="12"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -2548,7 +2548,7 @@ sold by Astaguru till date. </string>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="12" contentMode="center" reuseIdentifier="cellone" id="RtL-hg-fJi" customClass="AboutUsCollectionViewCell">
-                                        <rect key="frame" x="213" y="96.5" width="379" height="30"/>
+                                        <rect key="frame" x="213" y="97" width="379" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="379" height="30"/>
@@ -2875,7 +2875,7 @@ Cg
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="valuation" id="yis-g6-Mhb" customClass="OurValutionCollectionViewCell">
-                                        <rect key="frame" x="11.5" y="50" width="352" height="29"/>
+                                        <rect key="frame" x="12" y="50" width="352" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="352" height="29"/>
@@ -2920,7 +2920,7 @@ Cg
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="contactcell" id="J8S-Yy-3CL">
-                                        <rect key="frame" x="11.5" y="84" width="352" height="142"/>
+                                        <rect key="frame" x="12" y="84" width="352" height="142"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="352" height="142"/>
@@ -3518,7 +3518,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="blankcell" id="p47-jh-T28">
-                                        <rect key="frame" x="32.5" y="87" width="310" height="66"/>
+                                        <rect key="frame" x="33" y="87" width="310" height="66"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="310" height="66"/>
@@ -3584,7 +3584,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TitleBid" id="UFj-f4-ByN">
-                                        <rect key="frame" x="32.5" y="0.0" width="310" height="87"/>
+                                        <rect key="frame" x="33" y="0.0" width="310" height="87"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="310" height="87"/>
@@ -3683,7 +3683,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                         </variation>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CurrentSelected1234" id="ero-pm-cEV" customClass="CurrentDefultGridCollectionViewCell">
-                                        <rect key="frame" x="32.5" y="97" width="310" height="290"/>
+                                        <rect key="frame" x="33" y="97" width="310" height="290"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="310" height="290"/>
@@ -4095,7 +4095,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BidCell" id="YMn-6O-AzD">
-                                        <rect key="frame" x="32.5" y="397" width="310" height="39"/>
+                                        <rect key="frame" x="33" y="397" width="310" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="310" height="39"/>
@@ -4474,7 +4474,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CurrentSelected1234" id="evz-qa-LuF" customClass="AdditionalChargesCollectionViewCell">
-                                        <rect key="frame" x="32.5" y="285" width="310" height="410"/>
+                                        <rect key="frame" x="33" y="285" width="310" height="410"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="310" height="410"/>
@@ -4841,7 +4841,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Menu" id="gtj-dZ-6dm">
-                                        <rect key="frame" x="29.5" y="41" width="316" height="38"/>
+                                        <rect key="frame" x="30" y="41" width="316" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="316" height="38"/>
@@ -4883,7 +4883,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                         </constraints>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Artist" id="P41-pw-stG">
-                                        <rect key="frame" x="29.5" y="89" width="316" height="38"/>
+                                        <rect key="frame" x="30" y="89" width="316" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="316" height="38"/>
@@ -5620,7 +5620,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CurrentDefult" id="GwW-NL-1qI" customClass="CurrentDefultGridCollectionViewCell">
-                                        <rect key="frame" x="163" y="150.5" width="152" height="266"/>
+                                        <rect key="frame" x="163" y="151" width="152" height="266"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="152" height="266"/>
@@ -6123,7 +6123,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                                     <color key="highlightedColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </label>
                                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzX-ss-2Pa">
-                                                                    <rect key="frame" x="71" y="68" width="98" height="15"/>
+                                                                    <rect key="frame" x="71" y="69" width="98" height="15"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="15" id="7hd-r4-tqm"/>
                                                                     </constraints>
@@ -6142,7 +6142,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="₹22,00,00,000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAM-mq-ZhV">
-                                                                    <rect key="frame" x="86" y="51" width="85" height="14"/>
+                                                                    <rect key="frame" x="86" y="51" width="85" height="15"/>
                                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="12"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -7015,7 +7015,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="blankcell" id="PPf-j7-O5y">
-                                        <rect key="frame" x="31.5" y="0.0" width="312" height="50"/>
+                                        <rect key="frame" x="32" y="0.0" width="312" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="312" height="50"/>
@@ -8112,7 +8112,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PastDefult" id="Zzb-o6-OO8" customClass="CurrentDefultGridCollectionViewCell">
-                                        <rect key="frame" x="165" y="410.5" width="152" height="266"/>
+                                        <rect key="frame" x="165" y="411" width="152" height="266"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="152" height="266"/>
@@ -8493,7 +8493,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="valuation" id="0qy-j5-hKO" customClass="OurValutionCollectionViewCell">
-                                        <rect key="frame" x="32.5" y="50" width="310" height="32"/>
+                                        <rect key="frame" x="33" y="50" width="310" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="310" height="32"/>
@@ -8746,6 +8746,54 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="howToSell" rowHeight="117" id="U4V-eQ-4fI">
+                                        <rect key="frame" x="0.0" y="188" width="375" height="117"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U4V-eQ-4fI" id="8J9-4m-lZb">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y62-xt-AJZ">
+                                                    <rect key="frame" x="113" y="76.5" width="150" height="32"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="150" id="Zjo-cx-mxA"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="17"/>
+                                                    <state key="normal" title="Submit Detail">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="btnApplyNow:" destination="6lc-ue-PmZ" eventType="touchUpInside" id="eoP-Eb-0km"/>
+                                                        <action selector="btnSubmitDetail:" destination="6lc-ue-PmZ" eventType="touchUpInside" id="xlV-Ea-ppz"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want To Sell?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvz-Tr-JcY">
+                                                    <rect key="frame" x="134" y="8" width="107" height="19"/>
+                                                    <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="6" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="748" text="If you have any item ready for auction, please let us know the details" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HfB-F6-Kqt">
+                                                    <rect key="frame" x="49" y="35" width="278" height="33.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="278" id="RI0-nU-xWb"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.46269190311431885" green="0.46277564764022827" blue="0.46268659830093384" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Dvz-Tr-JcY" firstAttribute="top" secondItem="8J9-4m-lZb" secondAttribute="top" constant="8" id="4Jk-gs-MCn"/>
+                                                <constraint firstItem="HfB-F6-Kqt" firstAttribute="top" secondItem="Dvz-Tr-JcY" secondAttribute="bottom" constant="8" id="AaN-W9-qmS"/>
+                                                <constraint firstItem="Y62-xt-AJZ" firstAttribute="top" secondItem="HfB-F6-Kqt" secondAttribute="bottom" constant="8" id="DMs-LW-6Cr"/>
+                                                <constraint firstItem="Y62-xt-AJZ" firstAttribute="centerX" secondItem="8J9-4m-lZb" secondAttribute="centerX" id="REZ-9s-pYd"/>
+                                                <constraint firstItem="HfB-F6-Kqt" firstAttribute="centerX" secondItem="Dvz-Tr-JcY" secondAttribute="centerX" id="ojI-oA-ltA"/>
+                                                <constraint firstItem="Dvz-Tr-JcY" firstAttribute="centerX" secondItem="8J9-4m-lZb" secondAttribute="centerX" id="te9-Xc-U6w"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="6lc-ue-PmZ" id="W2r-bA-NkC"/>
@@ -8762,12 +8810,12 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tblHowtoBuy" destination="Qfz-Yn-Lcx" id="Sz3-XD-UAM"/>
+                        <outlet property="tblHowtoBuy" destination="Qfz-Yn-Lcx" id="aIX-Mj-DMg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c6X-tz-8wr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5567" y="-1003"/>
+            <point key="canvasLocation" x="5565.6000000000004" y="-1003.4482758620691"/>
         </scene>
         <!--Detail Product View Controller-->
         <scene sceneID="MTI-Ks-H6w">
@@ -8792,7 +8840,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="x7A-nw-Fy1">
-                                        <rect key="frame" x="27.5" y="0.0" width="320" height="246"/>
+                                        <rect key="frame" x="28" y="0.0" width="320" height="246"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="246"/>
@@ -8873,7 +8921,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lot Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1G-WC-4DT">
-                                                    <rect key="frame" x="10" y="171" width="121.5" height="19"/>
+                                                    <rect key="frame" x="10" y="171" width="122" height="19"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -8969,7 +9017,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="110" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="₹20,0,00,000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jdE-px-yVX">
-                                                            <rect key="frame" x="102.5" y="18" width="86.5" height="16"/>
+                                                            <rect key="frame" x="102" y="18" width="87" height="16"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="16" id="3kZ-nP-9Kr"/>
                                                             </constraints>
@@ -9132,13 +9180,13 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5VY-O2-IVc">
-                                                    <rect key="frame" x="10" y="292" width="37.5" height="17"/>
+                                                    <rect key="frame" x="10" y="292" width="38" height="17"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="14" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RiX-5T-RLP">
-                                                    <rect key="frame" x="47.5" y="292" width="247.5" height="18"/>
+                                                    <rect key="frame" x="48" y="292" width="247" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="109" id="rPN-LE-deO"/>
                                                         <constraint firstAttribute="height" priority="250" constant="12" id="y18-3n-1Pa"/>
@@ -9362,7 +9410,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                         </variation>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DescriptionCell" id="Iiz-jd-h6Q">
-                                        <rect key="frame" x="27.5" y="713" width="320" height="85"/>
+                                        <rect key="frame" x="28" y="713" width="320" height="85"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
@@ -9408,7 +9456,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                         <size key="customSize" width="320" height="85"/>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WorkImageCell" id="HNC-Ro-yuR">
-                                        <rect key="frame" x="28.5" y="808" width="318" height="180"/>
+                                        <rect key="frame" x="29" y="808" width="318" height="180"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="318" height="180"/>
@@ -9428,7 +9476,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="26" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4Q-Ux-0zg">
-                                                    <rect key="frame" x="10" y="149" width="40.5" height="18"/>
+                                                    <rect key="frame" x="10" y="149" width="41" height="18"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="15"/>
                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -9541,7 +9589,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" tag="81" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYu-gx-Aru">
-                                                    <rect key="frame" x="13" y="41" width="74" height="16"/>
+                                                    <rect key="frame" x="13" y="41" width="80" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="V00-mQ-BfF"/>
                                                     </constraints>
@@ -9554,7 +9602,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" tag="31" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jl0-0L-fH6">
-                                                    <rect key="frame" x="5" y="80" width="98" height="28"/>
+                                                    <rect key="frame" x="5" y="80" width="108" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="fNY-ne-CFq"/>
                                                     </constraints>
@@ -9569,7 +9617,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </variation>
                                                 </button>
                                                 <button opaque="NO" tag="32" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zn3-iC-hwa">
-                                                    <rect key="frame" x="118" y="82" width="81" height="28"/>
+                                                    <rect key="frame" x="128" y="82" width="88" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="6u9-vE-I9N"/>
                                                     </constraints>
@@ -9584,14 +9632,14 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </variation>
                                                 </button>
                                                 <view tag="34" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NsK-b7-4SM">
-                                                    <rect key="frame" x="8" y="108" width="95" height="2"/>
+                                                    <rect key="frame" x="8" y="108" width="105" height="2"/>
                                                     <color key="backgroundColor" red="0.65490196078431373" green="0.55686274509803924" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="2" id="Fk4-NK-uXy"/>
                                                     </constraints>
                                                 </view>
                                                 <view tag="33" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z0b-Fc-x4o">
-                                                    <rect key="frame" x="118" y="108" width="90" height="2"/>
+                                                    <rect key="frame" x="128" y="108" width="90" height="2"/>
                                                     <color key="backgroundColor" red="0.65490196079999996" green="0.5568627451" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="XIC-OJ-wog"/>
@@ -9784,7 +9832,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             </constraints>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ceu-ZP-JiN">
-                                                            <rect key="frame" x="5" y="18" width="142" height="14"/>
+                                                            <rect key="frame" x="5" y="18" width="142" height="15"/>
                                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" priority="250" constant="15" id="2yJ-Nh-f98"/>
@@ -9853,13 +9901,13 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZm-As-WZa">
-                                                            <rect key="frame" x="5" y="154" width="57.5" height="13"/>
+                                                            <rect key="frame" x="5" y="154" width="63" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mEM-ey-r3f">
-                                                            <rect key="frame" x="64.5" y="154" width="84.5" height="13"/>
+                                                            <rect key="frame" x="70" y="154" width="79" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.90196078430000004" green="0.23529411759999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -10023,7 +10071,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kfD-9h-yYI">
-                                                            <rect key="frame" x="3" y="84" width="63.5" height="15"/>
+                                                            <rect key="frame" x="3" y="84" width="70" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="98a-FS-6UF"/>
                                                             </constraints>
@@ -10032,7 +10080,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhO-p9-F0C">
-                                                            <rect key="frame" x="68.5" y="84" width="83.5" height="15"/>
+                                                            <rect key="frame" x="75" y="84" width="77" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="50k-vW-m60"/>
                                                             </constraints>
@@ -10413,7 +10461,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="pastDefult" id="2L6-QV-kBI" customClass="CurrentDefultGridCollectionViewCell">
-                                        <rect key="frame" x="5" y="693.5" width="152" height="266"/>
+                                        <rect key="frame" x="5" y="694" width="152" height="266"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="152" height="266"/>
@@ -10995,7 +11043,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Total Sale Value" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzs-2V-xJt">
-                                                    <rect key="frame" x="8" y="124" width="134" height="14"/>
+                                                    <rect key="frame" x="8" y="124" width="134" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="250" constant="15" id="TrZ-bC-pFJ"/>
                                                     </constraints>
@@ -11004,7 +11052,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="₹20,00,00,000" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhO-mf-HFn">
-                                                    <rect key="frame" x="8" y="138" width="134" height="17"/>
+                                                    <rect key="frame" x="8" y="139" width="134" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="250" constant="21" id="hh0-53-kfj"/>
                                                     </constraints>
@@ -11013,7 +11061,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PWZ-dO-tW0">
-                                                    <rect key="frame" x="8" y="160" width="134" height="17"/>
+                                                    <rect key="frame" x="8" y="161" width="134" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="250" constant="14" id="6RV-Dh-spI"/>
                                                     </constraints>
@@ -11302,7 +11350,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="113" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3G-W0-517">
-                                                            <rect key="frame" x="3" y="84" width="63.5" height="15"/>
+                                                            <rect key="frame" x="3" y="84" width="70" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="sul-cG-eXg"/>
                                                             </constraints>
@@ -11311,7 +11359,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVJ-wb-rOs">
-                                                            <rect key="frame" x="68.5" y="84" width="83.5" height="15"/>
+                                                            <rect key="frame" x="75" y="84" width="77" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="BB4-Xg-J9Q"/>
                                                             </constraints>
@@ -11930,13 +11978,13 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="113" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjj-aL-Jmb">
-                                                            <rect key="frame" x="5" y="143" width="63.5" height="13"/>
+                                                            <rect key="frame" x="5" y="143" width="70" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZV-yP-API">
-                                                            <rect key="frame" x="70.5" y="143" width="76.5" height="13"/>
+                                                            <rect key="frame" x="77" y="143" width="70" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.90196078430000004" green="0.23529411759999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -12057,7 +12105,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CurrentDefultList" id="LyH-CC-dXZ" customClass="CurrentDefultGridCollectionViewCell">
-                                        <rect key="frame" x="34.5" y="345" width="306" height="124"/>
+                                        <rect key="frame" x="35" y="345" width="306" height="124"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="306" height="124"/>
@@ -12090,7 +12138,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                                                 </constraints>
                                                                             </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Report Condition" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P27-bg-m5t">
-                                                                                <rect key="frame" x="2" y="62" width="72" height="10.5"/>
+                                                                                <rect key="frame" x="2" y="62" width="72" height="21.5"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" priority="250" constant="34" id="vvA-pQ-Z8T"/>
                                                                                 </constraints>
@@ -12436,7 +12484,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CurrentSelectedList" id="dD7-JF-e19" customClass="CurrentDefultGridCollectionViewCell">
-                                        <rect key="frame" x="34.5" y="474" width="306" height="134"/>
+                                        <rect key="frame" x="35" y="474" width="306" height="134"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="306" height="134"/>
@@ -13168,7 +13216,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                 <rect key="frame" x="0.0" y="22" width="375" height="38"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qJN-5e-3RK" id="DOD-Ir-cwV">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="37.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="37"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="11" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uT2-RS-mOL">
@@ -13202,7 +13250,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                 <rect key="frame" x="0.0" y="60" width="375" height="106"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DeY-tu-zbu" id="dWh-xT-26J">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="105.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="105"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sign in to My AstaGuru" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNB-Z0-L4X">
@@ -13307,7 +13355,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7b-x6-Fdh">
-                                                            <rect key="frame" x="3" y="84" width="63.5" height="15"/>
+                                                            <rect key="frame" x="3" y="84" width="70" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="UPx-kD-p3o"/>
                                                             </constraints>
@@ -13316,7 +13364,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEq-DE-WRx">
-                                                            <rect key="frame" x="68.5" y="84" width="83.5" height="15"/>
+                                                            <rect key="frame" x="75" y="84" width="77" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="BMG-CV-Ca6"/>
                                                             </constraints>
@@ -13880,13 +13928,13 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cY-0a-BdZ">
-                                                            <rect key="frame" x="5" y="143" width="63.5" height="13"/>
+                                                            <rect key="frame" x="5" y="143" width="70" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HeZ-w8-egX">
-                                                            <rect key="frame" x="70.5" y="143" width="76.5" height="13"/>
+                                                            <rect key="frame" x="77" y="143" width="70" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.90196078430000004" green="0.23529411759999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -14024,7 +14072,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CurrentDefultList" id="yBK-Hh-6U0" customClass="CurrentDefultGridCollectionViewCell">
-                                        <rect key="frame" x="34.5" y="345" width="306" height="124"/>
+                                        <rect key="frame" x="35" y="345" width="306" height="124"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="306" height="124"/>
@@ -14057,7 +14105,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                                                 </constraints>
                                                                             </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Report Condition" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogS-ZM-STh">
-                                                                                <rect key="frame" x="2" y="62" width="72" height="10.5"/>
+                                                                                <rect key="frame" x="2" y="62" width="72" height="21.5"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" priority="250" constant="34" id="DPc-3c-Nez"/>
                                                                                 </constraints>
@@ -14391,7 +14439,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CurrentSelectedList" id="5Mp-az-6j9" customClass="CurrentDefultGridCollectionViewCell">
-                                        <rect key="frame" x="34.5" y="474" width="306" height="134"/>
+                                        <rect key="frame" x="35" y="474" width="306" height="134"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="306" height="134"/>

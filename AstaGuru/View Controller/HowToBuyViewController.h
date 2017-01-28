@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "STCollapseTableView.h"
 @interface HowToBuyViewController : UIViewController
-
 @property NSUInteger pageIndex;
+//@property (strong, nonatomic) IBOutlet STCollapseTableView *tblHowtoBuy;
+@property (strong, nonatomic) IBOutlet STCollapseTableView *tblHowtoBuy;
 
-
-@property (weak, nonatomic) IBOutlet STCollapseTableView *tblHowtoBuy;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
 @property (nonatomic)int isHowTobuy;

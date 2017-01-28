@@ -293,9 +293,6 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    
-        
-    
     UIView* view = [self.collapseDelegate tableView:tableView viewForHeaderInSection:section];
     
     if (self.shouldHandleHeadersTap)

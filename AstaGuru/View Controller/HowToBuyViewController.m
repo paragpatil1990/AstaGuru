@@ -1,4 +1,4 @@
-//
+ //
 //  HowToBuyViewController.m
 //  AstaGuru
 //
@@ -28,43 +28,46 @@
 
 @implementation HowToBuyViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
+    // Do any additional setup after loading the view.
     [super viewDidLoad];
     arrHeaderview=[[NSMutableArray alloc]init];
     if (_isHowTobuy==1)
     {
-       [self Setup];
+        [self Setup];
     }
-   else if (_isHowTobuy==3)
+    else if (_isHowTobuy==3)
     {
         [self SetupServices];
     }
-   else if (_isHowTobuy==4)
-   {
-       [self SetupTermsCondition];
-   }
-   else if (_isHowTobuy==5)
-   {
-       [self vacancy];
-   }
-    
+    else if (_isHowTobuy==4)
+    {
+        [self SetupTermsCondition];
+    }
+    else if (_isHowTobuy==5)
+    {
+        [self vacancy];
+    }
     else
     {
         [self setupHowtosell];
     }
     [self setUpNavigationItem];
     _tblHowtoBuy.arrData=arrdata;
+    }
+-(void)viewDidAppear:(BOOL)animated
+{
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
     
     self.tblHowtoBuy.estimatedRowHeight = 100.0;
     self.tblHowtoBuy.rowHeight = UITableViewAutomaticDimension;
-    
-    // Do any additional setup after loading the view.
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
- [_tblHowtoBuy openSection:0 animated:NO];
+    [_tblHowtoBuy openSection:0 animated:NO];
     [_tblHowtoBuy closeSection:0 animated:NO];
+
 }
 -(void)setUpNavigationItem
 {
@@ -1037,329 +1040,217 @@
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (_isHowTobuy == 2)
+    {
+        return [arrdata count]+1;
+    }
     return [arrdata count];
 }
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    ClsHowToBuy *objHowToBuy = [arrdata objectAtIndex:indexPath.section] ;
-    clsAboutUs *objAboutUs=[objHowToBuy.arrSubarray objectAtIndex:indexPath.row];
-    UITableViewCell* cell1;
-    if ([objAboutUs.strType intValue]==1)
-    {
-        
-    
-    static NSString* cellIdentifier = @"HowToBuy";
-    
-    UITableViewCell* cell = [_tblHowtoBuy dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (!cell)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
-    }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-
-    //NSString *text=objHowToBuy.Titlel;
-    TTTAttributedLabel *lblSubtitle=(TTTAttributedLabel *)[cell viewWithTag:12];
-    //lblSubtitle.text=objAboutUs.strName;
-     
-        
-//        NSMutableParagraphStyle *paragraphStyles = [[NSMutableParagraphStyle alloc] init];
-//        paragraphStyles.alignment                = NSTextAlignmentJustified;    // To justified text
-//        paragraphStyles.firstLineHeadIndent      = 0.05;    // IMP: must have a value to make it work
-//        
-//        NSString *stringTojustify                = objAboutUs.strName;
-//        NSDictionary *attributes                 = @{NSParagraphStyleAttributeName: paragraphStyles,(id)kCTForegroundColorAttributeName : (id)[UIColor colorWithRed:96.0/255.0 green:96.0/255.0 blue:96.0/255.0 alpha:1.0].CGColor,NSFontAttributeName : [UIFont fontWithName:@"WorkSans-Regular" size:14]};
-//        NSMutableAttributedString *attributedString     = [[NSMutableAttributedString alloc] initWithString:stringTojustify attributes:attributes];
-//        lblSubtitle.attributedText             = attributedString;
-//        lblSubtitle.numberOfLines              = 0;
-//        [lblSubtitle sizeToFit];
-        lblSubtitle.extendsLinkTouchArea = YES;
-        lblSubtitle.textAlignment = NSTextAlignmentJustified;
-        lblSubtitle.enabledTextCheckingTypes = NSTextCheckingAllSystemTypes; // Automatically detect links when the label text is subsequently changed
-        lblSubtitle.delegate = self; // Delegate methods are called when the user taps on a link (see `TTTAttributedLabelDelegate` protocol)
-        lblSubtitle.numberOfLines = 0;
-        lblSubtitle.text = objAboutUs.strName; // Repository URL will be automatically detected and linked
-
-//        lblSubtitle.enabledTextCheckingTypes = NSTextCheckingTypeLink;
-//        NSRange range = [lblSubtitle.text rangeOfString:@"contact@astaguru.com"];
-//        NSRange range1 = [lblSubtitle.text rangeOfString:@"+912222048138 / 39"];
-//        [lblSubtitle addLinkToURL:[NSURL URLWithString:@"http://arttrust.southeastasia.cloudapp.azure.com/"] withRange:range];
-//        [lblSubtitle addLinkToPhoneNumber:@"912222048138" withRange:range1];
-    // lblSubtitle.textAlignment = NSTextAlignmentJustified;
-        cell1=cell;
-   
-    }
-    else if ([objAboutUs.strType intValue]==2)
-    {
-        static NSString* cellIdentifier = @"TitlesInSubTitles";
-        
-        UITableViewCell* cell = [_tblHowtoBuy dequeueReusableCellWithIdentifier:cellIdentifier];
-        
-        if (!cell)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
-        }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        
-        //NSString *text=objHowToBuy.Titlel;
-        UILabel *lblSubtitle=(UILabel *)[cell viewWithTag:13];
-        
-        //lblSubtitle.text=objAboutUs.strName;
-        //lblSubtitle.textAlignment = NSTextAlignmentJustified;
-        
-        NSMutableParagraphStyle *paragraphStyles = [[NSMutableParagraphStyle alloc] init];
-        paragraphStyles.alignment                = NSTextAlignmentJustified;    // To justified text
-        paragraphStyles.firstLineHeadIndent      = 0.05;    // IMP: must have a value to make it work
-        
-        NSString *stringTojustify                = objAboutUs.strName;
-        NSDictionary *attributes                 = @{NSParagraphStyleAttributeName: paragraphStyles};
-        NSAttributedString *attributedString     = [[NSAttributedString alloc] initWithString:stringTojustify attributes:attributes];
-        
-        
-        
-        lblSubtitle.attributedText             = attributedString;
-        lblSubtitle.numberOfLines              = 0;
-        [lblSubtitle sizeToFit];
-        cell1=cell;
-    
-    }
-    else if ([objAboutUs.strType intValue]==3)
-    {
-        
-        
-        static NSString* cellIdentifier = @"TextWithOutIcon";
-        
-        UITableViewCell* cell = [_tblHowtoBuy dequeueReusableCellWithIdentifier:cellIdentifier];
-        
-        if (!cell)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
-        }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        
-        //NSString *text=objHowToBuy.Titlel;
-        UILabel *lblSubtitle=(UILabel *)[cell viewWithTag:12];
-        //lblSubtitle.text=objAboutUs.strName;
-        //lblSubtitle.textAlignment = NSTextAlignmentJustified;
-        NSMutableParagraphStyle *paragraphStyles = [[NSMutableParagraphStyle alloc] init];
-        paragraphStyles.alignment                = NSTextAlignmentJustified;    // To justified text
-        paragraphStyles.firstLineHeadIndent      = 0.05;    // IMP: must have a value to make it work
-        
-        NSString *stringTojustify                = objAboutUs.strName;
-        NSDictionary *attributes                 = @{NSParagraphStyleAttributeName: paragraphStyles};
-        NSAttributedString *attributedString     = [[NSAttributedString alloc] initWithString:stringTojustify attributes:attributes];
-        
-        lblSubtitle.attributedText             = attributedString;
-        lblSubtitle.numberOfLines              = 0;
-        [lblSubtitle sizeToFit];
-
-        
-        cell1=cell;
-        
-    }
-    else if ([objAboutUs.strType intValue]==4)
-    {
-        
-        
-        static NSString* cellIdentifier = @"ApplyNow";
-        
-        UITableViewCell* cell = [_tblHowtoBuy dequeueReusableCellWithIdentifier:cellIdentifier];
-        
-        if (!cell)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
-        }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        
-        //NSString *text=objHowToBuy.Titlel;
-        /*UILabel *lblSubtitle=(UILabel *)[cell viewWithTag:12];
-         //lblSubtitle.text=objAboutUs.strName;
-         //lblSubtitle.textAlignment = NSTextAlignmentJustified;
-         NSMutableParagraphStyle *paragraphStyles = [[NSMutableParagraphStyle alloc] init];
-         paragraphStyles.alignment                = NSTextAlignmentJustified;    // To justified text
-         paragraphStyles.firstLineHeadIndent      = 0.05;    // IMP: must have a value to make it work
-         
-         NSString *stringTojustify                = objAboutUs.strName;
-         NSDictionary *attributes                 = @{NSParagraphStyleAttributeName: paragraphStyles};
-         NSAttributedString *attributedString     = [[NSAttributedString alloc] initWithString:stringTojustify attributes:attributes];
-         
-         lblSubtitle.attributedText             = attributedString;
-         lblSubtitle.numberOfLines              = 0;
-         [lblSubtitle sizeToFit];*/
-        
-        
-        cell1=cell;
-        
-    }
-
-    
- return cell1;
-}
-
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    ClsHowToBuy *objHowToBuy = [arrdata objectAtIndex:section] ;
-    if(section<arrdata.count-1)
+    if (section == arrdata.count)
     {
-    HeaderView *headerView=[arrHeaderview objectAtIndex:section];
-    BOOL sectionIsOpen = [_tblHowtoBuy isOpenSection:section];
-    
-    if (sectionIsOpen)
-    {
-        headerView.imgCheckbox.image=[UIImage imageNamed:@"icon-expanded"];
-    }else
-    {
-        headerView.imgCheckbox.image=[UIImage imageNamed:@"icon-collapsed"];
+        return 0;
     }
+    else
+    {
+        ClsHowToBuy *objHowToBuy = [arrdata objectAtIndex:section] ;
+        if(section<arrdata.count-1)
+        {
+            HeaderView *headerView=[arrHeaderview objectAtIndex:section];
+            BOOL sectionIsOpen = [_tblHowtoBuy isOpenSection:section];
+            if (sectionIsOpen)
+            {
+                headerView.imgCheckbox.image=[UIImage imageNamed:@"icon-expanded"];
+            }else
+            {
+                headerView.imgCheckbox.image=[UIImage imageNamed:@"icon-collapsed"];
+            }
+        }
+        return  objHowToBuy.arrSubarray.count;
     }
-    return  objHowToBuy.arrSubarray.count;
+}
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell* cell1;
+    if (indexPath.section == arrdata.count)
+    {
+        static NSString* cellIdentifier = @"howToSell";
+        UITableViewCell* cell = [_tblHowtoBuy dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        }
+        cell1 = cell;
+    }
+    else
+    {
+        ClsHowToBuy *objHowToBuy = [arrdata objectAtIndex:indexPath.section] ;
+        clsAboutUs *objAboutUs=[objHowToBuy.arrSubarray objectAtIndex:indexPath.row];
+        if ([objAboutUs.strType intValue]==1)
+        {
+            static NSString* cellIdentifier = @"HowToBuy";
+            
+            UITableViewCell* cell = [_tblHowtoBuy dequeueReusableCellWithIdentifier:cellIdentifier];
+            
+            if (!cell)
+            {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+            //NSString *text=objHowToBuy.Titlel;
+            TTTAttributedLabel *lblSubtitle=(TTTAttributedLabel *)[cell viewWithTag:12];
+            lblSubtitle.extendsLinkTouchArea = YES;
+            lblSubtitle.textAlignment = NSTextAlignmentJustified;
+            lblSubtitle.enabledTextCheckingTypes = NSTextCheckingAllSystemTypes; // Automatically detect links when the label text is subsequently changed
+            lblSubtitle.delegate = self; // Delegate methods are called when the user taps on a link (see `TTTAttributedLabelDelegate` protocol)
+            lblSubtitle.numberOfLines = 0;
+            lblSubtitle.text = objAboutUs.strName; // Repository URL will be automatically detected and linked
+            cell1=cell;
+            
+        }
+        else if ([objAboutUs.strType intValue]==2)
+        {
+            static NSString* cellIdentifier = @"TitlesInSubTitles";
+            
+            UITableViewCell* cell = [_tblHowtoBuy dequeueReusableCellWithIdentifier:cellIdentifier];
+            
+            if (!cell)
+            {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            
+            //NSString *text=objHowToBuy.Titlel;
+            UILabel *lblSubtitle=(UILabel *)[cell viewWithTag:13];
+            
+            //lblSubtitle.text=objAboutUs.strName;
+            //lblSubtitle.textAlignment = NSTextAlignmentJustified;
+            
+            NSMutableParagraphStyle *paragraphStyles = [[NSMutableParagraphStyle alloc] init];
+            paragraphStyles.alignment                = NSTextAlignmentJustified;    // To justified text
+            paragraphStyles.firstLineHeadIndent      = 0.05;    // IMP: must have a value to make it work
+            
+            NSString *stringTojustify                = objAboutUs.strName;
+            NSDictionary *attributes                 = @{NSParagraphStyleAttributeName: paragraphStyles};
+            NSAttributedString *attributedString     = [[NSAttributedString alloc] initWithString:stringTojustify attributes:attributes];
+            
+            
+            
+            lblSubtitle.attributedText             = attributedString;
+            lblSubtitle.numberOfLines              = 0;
+            [lblSubtitle sizeToFit];
+            cell1=cell;
+            
+        }
+        else if ([objAboutUs.strType intValue]==3)
+        {
+            
+            
+            static NSString* cellIdentifier = @"TextWithOutIcon";
+            
+            UITableViewCell* cell = [_tblHowtoBuy dequeueReusableCellWithIdentifier:cellIdentifier];
+            
+            if (!cell)
+            {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            
+            //NSString *text=objHowToBuy.Titlel;
+            UILabel *lblSubtitle=(UILabel *)[cell viewWithTag:12];
+            //lblSubtitle.text=objAboutUs.strName;
+            //lblSubtitle.textAlignment = NSTextAlignmentJustified;
+            NSMutableParagraphStyle *paragraphStyles = [[NSMutableParagraphStyle alloc] init];
+            paragraphStyles.alignment                = NSTextAlignmentJustified;    // To justified text
+            paragraphStyles.firstLineHeadIndent      = 0.05;    // IMP: must have a value to make it work
+            
+            NSString *stringTojustify                = objAboutUs.strName;
+            NSDictionary *attributes                 = @{NSParagraphStyleAttributeName: paragraphStyles};
+            NSAttributedString *attributedString     = [[NSAttributedString alloc] initWithString:stringTojustify attributes:attributes];
+            
+            lblSubtitle.attributedText             = attributedString;
+            lblSubtitle.numberOfLines              = 0;
+            [lblSubtitle sizeToFit];
+            
+            
+            cell1=cell;
+            
+        }
+        else if ([objAboutUs.strType intValue]==4)
+        {
+            
+            
+            static NSString* cellIdentifier = @"ApplyNow";
+            
+            UITableViewCell* cell = [_tblHowtoBuy dequeueReusableCellWithIdentifier:cellIdentifier];
+            
+            if (!cell)
+            {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell1=cell;
+            
+        }
+    }
+    return cell1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-     return 40;
-    /*if(section<arrdata.count-1)
+    if (section == arrdata.count)
     {
-        
-     
+        return 118;
     }
     else
     {
-        return self.view.frame.size.width/1.5;
-    }*/
+        return 40;
+    }
 }
-/*- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
-    ClsHowToBuy *objHowToBuy = [arrdata objectAtIndex:indexPath.section] ;
-    clsAboutUs *objAboutUs=[objHowToBuy.arrSubarray objectAtIndex:indexPath.row];
-    //NSString *text=objHowToBuy.Titlel;
-   
-    if ([objAboutUs.strType intValue]==1)
-    {
-    
-    CGSize maximumLabelSize = CGSizeMake(tableView.frame.size.width-31, FLT_MAX);
-    CGRect labelRect1 = [objAboutUs.strName
-                         boundingRectWithSize:maximumLabelSize
-                         options:NSStringDrawingUsesLineFragmentOrigin
-                         attributes:@{
-                                      NSFontAttributeName : [UIFont fontWithName:@"WorkSans-Regular" size:15]
-                                      }
-                         context:nil];
-    return   labelRect1.size.height+10;
-    }
-    else if ([objAboutUs.strType intValue]==3)
-    {
-        CGSize maximumLabelSize = CGSizeMake(tableView.frame.size.width-45, FLT_MAX);
-        CGRect labelRect1 = [objAboutUs.strName
-                             boundingRectWithSize:maximumLabelSize
-                             options:NSStringDrawingUsesLineFragmentOrigin
-                             attributes:@{
-                                          NSFontAttributeName : [UIFont fontWithName:@"WorkSans-Regular" size:14]
-                                          }
-                             context:nil];
-        return   labelRect1.size.height;
-    }
-    else
-    {
-        CGSize maximumLabelSize = CGSizeMake(tableView.frame.size.width-20, FLT_MAX);
-        CGRect labelRect1 = [objAboutUs.strName
-                             boundingRectWithSize:maximumLabelSize
-                             options:NSStringDrawingUsesLineFragmentOrigin
-                             attributes:@{
-                                          NSFontAttributeName : [UIFont fontWithName:@"WorkSans-Regular" size:15]
-                                          }
-                             context:nil];
-        return   labelRect1.size.height+8;
-    }
-    
-}*/
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-   // if (section<arrdata.count-1)
-    //{
-       
-   
-//    CGRect frame = tableView.frame;
-    //static NSString *CellIdentifier = @"Header";
-    ClsHowToBuy *objHowToBuy = [arrdata objectAtIndex:section] ;
-    
-    // NSString *strSection=[NSString stringWithFormat:@"%d",section];
-//    NSString *HeaderIdentifier =[NSString stringWithFormat:@"%ld",(long)section];
-    
-    HeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HeaderView"];
-    if(!headerView)
+    if (section == arrdata.count)
     {
-        //    [tableView registerClass:[CustomHeaderView class] forHeaderFooterViewReuseIdentifier:HeaderIdentifier];
-        headerView = [[[NSBundle mainBundle] loadNibNamed:@"HeaderView"  owner:self  options:nil]objectAtIndex:0];
+      //  return [UIView new];;
+        static NSString* cellIdentifier = @"howToSell";
+        UITableViewCell* cell = [_tblHowtoBuy dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+        }
+        return cell;
     }
-    headerView.lblTitle.text=objHowToBuy.Titlel;
-   
-    [headerView.btnCheck addTarget:self action:@selector(infoButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-   
-    headerView.btnCheck.tag=section;
-    
-    BOOL sectionIsOpen = [_tblHowtoBuy isOpenSection:section];
-    
-    if (sectionIsOpen)
-    {
-        headerView.imgCheckbox.image=[UIImage imageNamed:@"icon-expanded.png"];
-    }else
-    {
-        headerView.imgCheckbox.image=[UIImage imageNamed:@"icon-collapsed.png"];
-    }
-    
-    [arrHeaderview addObject:headerView];
-    return headerView;
-    //return [self.headers objectAtIndex:section];
-   /* }
     else
     {
-        CGRect frame = tableView.frame;
-        //static NSString *CellIdentifier = @"Header";
         ClsHowToBuy *objHowToBuy = [arrdata objectAtIndex:section] ;
-        
-        // NSString *strSection=[NSString stringWithFormat:@"%d",section];
-        NSString *HeaderIdentifier =[NSString stringWithFormat:@"%ld",(long)section];
-        
-        VideoViewInHowToBuy *VideoView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderIdentifier];
-        if(!VideoView)
+        HeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HeaderView"];
+        if(!headerView)
         {
-            //    [tableView registerClass:[CustomHeaderView class] forHeaderFooterViewReuseIdentifier:HeaderIdentifier];
-            VideoView = [[[NSBundle mainBundle] loadNibNamed:@"VideoViewInHowToBuy"  owner:self  options:nil]objectAtIndex:0];
-            
-            
-            NSString *strVideoId=[self extractYoutubeIdFromLink:@"https://youtu.be/-V9WmhujSx4"];
-            NSDictionary *playerVars = @{
-                                         @"controls" : @0,
-                                         @"playsinline" : @0,
-                                         @"autohide" : @1,
-                                         @"showinfo" : @0,
-                                         @"modestbranding" : @0,
-                                         @"autoplay" : @0,
-                                         @"origin":@"http://www.youtube.com"
-                                         };
-            
-            // NSLog(@"strlib_video_thumb %@",_objLib.strlib_video_thumb);
-            [VideoView.videoPlayer loadWithVideoId:strVideoId playerVars:playerVars];
-            [VideoView.videoPlayer playVideo];
-            
-            VideoView.videoPlayer.delegate=self;
-             [_tblHowtoBuy openSection:section animated:NO];
-
-            
+            headerView = [[[NSBundle mainBundle] loadNibNamed:@"HeaderView"  owner:self  options:nil]objectAtIndex:0];
         }
-       
+        headerView.lblTitle.text=objHowToBuy.Titlel;
         
+        [headerView.btnCheck addTarget:self action:@selector(infoButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
+        headerView.btnCheck.tag=section;
         
-        return VideoView;
-    }*/
+        BOOL sectionIsOpen = [_tblHowtoBuy isOpenSection:section];
+        
+        if (sectionIsOpen)
+        {
+            headerView.imgCheckbox.image=[UIImage imageNamed:@"icon-expanded.png"];
+        }else
+        {
+            headerView.imgCheckbox.image=[UIImage imageNamed:@"icon-collapsed.png"];
+        }
+        [arrHeaderview addObject:headerView];
+        return headerView;
+    }
 }
 
 - (void)playerView:(YTPlayerView *)playerView didChangeToState:(YTPlayerState)state {
@@ -1492,6 +1383,10 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
     ClientRelationViewController *objProductViewController = [storyboard instantiateViewControllerWithIdentifier:@"ClientRelationViewController"];
     objProductViewController.arrJobTotle=arrVAcncyTitleOnly;
     [navcontroll pushViewController:objProductViewController animated:YES];
+}
+- (IBAction)btnSubmitDetail:(UIButton *)sender
+{
+    NSLog(@"submit detail");
 }
 
 
