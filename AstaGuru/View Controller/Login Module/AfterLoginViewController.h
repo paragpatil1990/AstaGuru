@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface AfterLoginViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
+@interface AfterLoginViewController : BaseViewController
 @end

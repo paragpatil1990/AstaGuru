@@ -7,19 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol Filter
--(void)filter:(NSMutableArray *)arrFilterArray SelectedArtistArray:(NSMutableArray *)arrSelectedArtist;
+#import "BaseViewController.h"
+#import "ArtistInfo.h"
+
+@protocol FilterViewControllerDelegate
+-(void)didFilterWithSelectedArray:(NSArray*)selectedArray;
+-(void)didCancelClearFilter;
 @end
-@interface FilterViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UICollectionView *clvFilter;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
-@property (weak, nonatomic) IBOutlet UICollectionView *clvBottom;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
-@property(nonatomic,retain)NSMutableArray *arrFilter;
-@property(readwrite)id<Filter> DelegateFilter;
-@property(nonatomic,retain)NSMutableArray *arrselectArtist;
-@property(nonatomic)int ispast;
-@property(nonatomic,retain)NSString *strType;
-@property(nonatomic) int Auctionid;
-@property(nonatomic) int selectedTab;
+
+@interface FilterViewController : BaseViewController
+
+@property (strong, nonatomic) IBOutlet UITableView *filterTableView;
+@property (strong, nonatomic) IBOutlet UICollectionView *clvBottom;
+
+@property (nonatomic, retain) id<FilterViewControllerDelegate>delegate;
+@property (nonatomic, retain) NSString *strAuctionName;
+@property (nonatomic, retain) NSString *strAuctionId;
+@property  AuctionType auctionType;
+@property (nonatomic, retain) NSMutableArray *selecteArtistArray;
+@property (nonatomic, retain) NSArray *artistArray;
+//@property (nonatomic, retain) CurrentAuction *currentAuction;
+
 @end

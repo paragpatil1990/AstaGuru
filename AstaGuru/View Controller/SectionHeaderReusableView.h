@@ -10,7 +10,5 @@
 
 
 @interface SectionHeaderReusableView : UICollectionReusableView
-@property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (weak, nonatomic) IBOutlet UILabel *title;
-
 @end

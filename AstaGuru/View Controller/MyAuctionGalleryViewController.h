@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
+@interface MyAuctionGalleryViewController : BaseViewController
+@property (nonatomic, assign) AuctionType auctionType;
 
-@interface MyAuctionGalleryViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
-@property (weak, nonatomic) IBOutlet UICollectionView *clvMyAuctionGallery;
+@property AFHTTPRequestOperation *task;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *clvMyAuctionGallary;
+@property (strong, nonatomic) IBOutlet UILabel *lblNoRecords;
 
 @end

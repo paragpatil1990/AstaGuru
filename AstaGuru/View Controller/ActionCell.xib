@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="WorkSans-Medium.otf">
+            <string>WorkSans-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActionCell" id="lNG-fl-37c">
+            <rect key="frame" x="0.0" y="0.0" width="70" height="107"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="70" height="107"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b2i-4J-9rT">
+                        <rect key="frame" x="5" y="27.5" width="60" height="52.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-bid-history.png" translatesAutoresizingMaskIntoConstraints="NO" id="4ik-bm-iG1">
+                                <rect key="frame" x="20" y="5" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="BdP-bZ-xe7"/>
+                                    <constraint firstAttribute="height" constant="20" id="I3A-QZ-n5H"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Bid Now" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qT-8s-3S2">
+                                <rect key="frame" x="0.0" y="33" width="60" height="14.5"/>
+                                <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="12"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4ik-bm-iG1" firstAttribute="top" secondItem="b2i-4J-9rT" secondAttribute="top" constant="5" id="3gR-Ot-vhH"/>
+                            <constraint firstAttribute="trailing" secondItem="0qT-8s-3S2" secondAttribute="trailing" id="5Y6-e8-taY"/>
+                            <constraint firstItem="4ik-bm-iG1" firstAttribute="centerX" secondItem="b2i-4J-9rT" secondAttribute="centerX" id="B0Q-l0-xeP"/>
+                            <constraint firstItem="0qT-8s-3S2" firstAttribute="top" secondItem="4ik-bm-iG1" secondAttribute="bottom" constant="8" id="KvU-xF-qhl"/>
+                            <constraint firstAttribute="bottom" secondItem="0qT-8s-3S2" secondAttribute="bottom" constant="5" id="jzD-48-UoO"/>
+                            <constraint firstItem="0qT-8s-3S2" firstAttribute="leading" secondItem="b2i-4J-9rT" secondAttribute="leading" id="qAN-JJ-EHM"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="b2i-4J-9rT" secondAttribute="trailing" constant="5" id="CJJ-yO-6Pu"/>
+                <constraint firstItem="b2i-4J-9rT" firstAttribute="centerY" secondItem="lNG-fl-37c" secondAttribute="centerY" id="VFH-2q-Ka5"/>
+                <constraint firstItem="b2i-4J-9rT" firstAttribute="leading" secondItem="lNG-fl-37c" secondAttribute="leading" constant="5" id="ccI-gX-zpm"/>
+            </constraints>
+            <size key="customSize" width="70" height="107"/>
+            <point key="canvasLocation" x="-255" y="1.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="icon-bid-history.png" width="72" height="72"/>
+    </resources>
+</document>

@@ -7,381 +7,305 @@
 //
 
 #import "OurValuattionViewController.h"
-#import "clsAboutUs.h"
-#import "OurValutionCollectionViewCell.h"
-#import "SectionHeaderReusableView.h"
-#import "SWRevealViewController.h"
-#import "AppDelegate.h"
+//#import "AboutUs.h"
+//#import "SectionHeaderReusableView.h"
+//#import "SWRevealViewController.h"
+//#import "AppDelegate.h"
 #import <MessageUI/MessageUI.h>
 #import "TTTAttributedLabel.h"
-@interface OurValuattionViewController ()<MFMailComposeViewControllerDelegate, TTTAttributedLabelDelegate>
+#import "DataHolder.h"
+
+@interface OurValuattionViewController ()<MFMailComposeViewControllerDelegate, TTTAttributedLabelDelegate, UITableViewDelegate, UITableViewDataSource>
 {
-    NSMutableArray *arrFirst;
-    NSMutableArray *arrSecond;
-    NSMutableArray *arrThired;
+    NSArray *arrHeader;
+    NSArray *arrValuation;
+    NSMutableArray *arrValuationProcress;
+    NSMutableArray *arrValuationNeed;
+    NSArray *arrValuationDsec;
 }
 @end
 
 @implementation OurValuattionViewController
 
+-(void)setUpNavigationItem
+{
+    self.title=@"Our Valuation";
+    [self setNavigationBarSlideButton];//Target:<#(id)#> selector:<#(SEL)#>]
+    [self setNavigationBarCloseButton];
+}
+
 - (void)viewDidLoad
 {
-    //UIImageView *titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TopNavigation"]];
-    //[self.navigationItem setTitleView:titleView];
-    
-    
-    self.sideleftbarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-close"] style:UIBarButtonItemStyleDone target:self action:@selector(closePressed)];
-    self.sideleftbarButton.tintColor=[UIColor whiteColor];
-    [[self navigationItem] setRightBarButtonItem:self.sideleftbarButton];
-    self.navigationItem.title=@"Our Valuation";
-    
-    self.sidebarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"signs"] style:UIBarButtonItemStyleDone target:self.revealViewController action:@selector(revealToggle:)];
-    self.sidebarButton.tintColor=[UIColor whiteColor];
-    [[self navigationItem] setLeftBarButtonItem:self.sidebarButton];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    
-    arrFirst=[[NSMutableArray alloc]init];
-    arrSecond=[[NSMutableArray alloc]init];
-    arrThired=[[NSMutableArray alloc]init];
-    [self CreateArray];
     [super viewDidLoad];
     
-   
-}
--(void)closePressed
-{
+    [self setUpNavigationItem];
+
+    self.tableValuation.estimatedRowHeight = 100.0;
+    self.tableValuation.rowHeight = UITableViewAutomaticDimension;
+    self.tableValuation.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableValuation.estimatedSectionHeaderHeight = 44;
+    self.tableValuation.sectionFooterHeight = 0;
+    UIView *view = [[UIView alloc] init] ;
+    view.backgroundColor = [UIColor whiteColor];
+    CGRect hFrame = self.tableValuation.tableHeaderView.frame;
+    hFrame.size.height = 10;
+    view.frame = hFrame;
+    [self.tableValuation setTableHeaderView:view];
+    [self.tableValuation setTableFooterView:view];
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SWRevealViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
-    UIViewController *viewController =rootViewController;
-    AppDelegate * objApp = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-    objApp.window.rootViewController = viewController;
-    
-}
--(void)CreateArray
-{
-    clsAboutUs *objclsAboutus1=[[clsAboutUs alloc]init];
-    objclsAboutus1.strName=@"\nNumerous criteria such as the historical significance of the work, the rarity of the work, and its physical condition, have to be assessed before a true value can be assigned to the piece. Upon a thorough analysis of these numerous criteria, AstaGuru will provide the client with an estimated value of the work.";
-    objclsAboutus1.strType=@"1";
-    [arrFirst addObject:objclsAboutus1];
-    
-    clsAboutUs *objclsAboutus2=[[clsAboutUs alloc]init];
-    objclsAboutus2.strName=@"Detailed study of pricing history for the artist since 1987";
-    objclsAboutus2.strType=@"2";
-    [arrSecond addObject:objclsAboutus2];
-    
-    clsAboutUs *objclsAboutus3=[[clsAboutUs alloc]init];
-    objclsAboutus3.strName=@"Price comparison with other works of the artist from similar periods";
-    objclsAboutus3.strType=@"2";
-    [arrSecond addObject:objclsAboutus3];
-    
-    clsAboutUs *objclsAboutus4=[[clsAboutUs alloc]init];
-    objclsAboutus4.strName=@"Price comparison with works by other contemporary artists";
-    objclsAboutus4.strType=@"2";
-    [arrSecond addObject:objclsAboutus4];
-    
-    clsAboutUs *objclsAboutus5=[[clsAboutUs alloc]init];
-    objclsAboutus5.strName=@"Research on historical significance of the work.";
-    objclsAboutus5.strType=@"2";
-    [arrSecond addObject:objclsAboutus5];
-    
-    clsAboutUs *objclsAboutus6=[[clsAboutUs alloc]init];
-    objclsAboutus6.strName=@"Previous auction price references";
-    objclsAboutus6.strType=@"2";
-    [arrSecond addObject:objclsAboutus6];
-    
-    clsAboutUs *objclsAboutus7=[[clsAboutUs alloc]init];
-    objclsAboutus7.strName=@"Current value estimation";
-    objclsAboutus7.strType=@"2";
-    [arrSecond addObject:objclsAboutus7];
-    
-    clsAboutUs *objclsAboutus8=[[clsAboutUs alloc]init];
-    objclsAboutus8.strName=@"Liquidity rating & analysis (if required)";
-    objclsAboutus8.strType=@"2";
-    [arrSecond addObject:objclsAboutus8];
-    
-    
-    clsAboutUs *objclsAboutus9=[[clsAboutUs alloc]init];
-    objclsAboutus9.strName=@"Rarity & availability analysis (if required)";
-    objclsAboutus9.strType=@"2";
-    [arrSecond addObject:objclsAboutus9];
-    
-    clsAboutUs *objclsAboutus10=[[clsAboutUs alloc]init];
-    objclsAboutus10.strName=@"Investment rationale (if required)";
-    objclsAboutus10.strType=@"2";
-    [arrSecond addObject:objclsAboutus10];
-    
-    
-    clsAboutUs *objclsAboutus11=[[clsAboutUs alloc]init];
-    objclsAboutus11.strName=@"A digital image";
-    objclsAboutus11.strType=@"2";
-    [arrThired addObject:objclsAboutus11];
-    
-    clsAboutUs *objclsAboutus12=[[clsAboutUs alloc]init];
-    objclsAboutus12.strName=@"Complete description (artist's name, date, medium, measurements)";
-    objclsAboutus12.strType=@"2";
-    [arrThired addObject:objclsAboutus12];
-    clsAboutUs *objclsAboutus13=[[clsAboutUs alloc]init];
-    objclsAboutus13.strName=@"Provenance";
-    objclsAboutus13.strType=@"2";
-    [arrThired addObject:objclsAboutus13];
-    clsAboutUs *objclsAboutus14=[[clsAboutUs alloc]init];
-    objclsAboutus14.strName=@"Exhibition and publication history";
-    objclsAboutus14.strType=@"2";
-    [arrThired addObject:objclsAboutus14];
-    
-    clsAboutUs *objclsAboutus15=[[clsAboutUs alloc]init];
-    objclsAboutus15.strName=@"We charge per hour or per artwork. Our fees are not related to the value of the collection. We are happy to provide estimates without obligation before beginning a valuation.";
-    objclsAboutus15.strType=@"1";
-    [arrThired addObject:objclsAboutus15];
-    
-    clsAboutUs *objclsAboutus16=[[clsAboutUs alloc]init];
-    objclsAboutus16.strName=@"Client confidentiality is of paramount importance to us. We work with insurers, banks, and law firms who greatly value client privacy and rely on us to preserve it";
-    objclsAboutus16.strType=@"1";
-    [arrThired addObject:objclsAboutus16];
-    
-    
-   
-    
-    
+    [self createArray];
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+-(void)createArray
 {
+    //Array header
+    arrHeader = [[NSArray alloc] initWithObjects:@"", @"The valuation process involves the following", @"What we need for a valuation?", @"", @"", nil];
+    //Array Valuation.
+    arrValuation = [[NSArray alloc] initWithObjects:@"Numerous criteria such as the historical significance of the work, the rarity of the work, and its physical condition, have to be assessed before a true value can be assigned to the piece. Upon a thorough analysis of these numerous criteria, AstaGuru will provide the client with an estimated value of the work.", nil];
     
-    return 4;
+    //Array Valuation Procress.
+    arrValuationProcress = [[NSMutableArray alloc]init];
+    DataHolder *data2 = [[DataHolder alloc] init];
+    data2.strDescription = @"Detailed study of pricing history for the artist since 1987";
+    [arrValuationProcress addObject:data2];
     
+    DataHolder *data3 = [[DataHolder alloc] init];
+    data3.strDescription = @"Price comparison with other works of the artist from similar periods";
+    [arrValuationProcress addObject:data3];
+    
+    DataHolder *data4 = [[DataHolder alloc] init];
+    data4.strDescription = @"Price comparison with works by other contemporary artists";
+    [arrValuationProcress addObject:data4];
+    
+    
+    DataHolder *data5 = [[DataHolder alloc] init];
+    data5.strDescription = @"Research on historical significance of the work.";
+    [arrValuationProcress addObject:data5];
+    
+    DataHolder *data6 = [[DataHolder alloc] init];
+    data6.strDescription = @"Previous auction price references";
+    [arrValuationProcress addObject:data6];
+    
+    DataHolder *data7 = [[DataHolder alloc] init];
+    data7.strDescription = @"Current value estimation";
+    [arrValuationProcress addObject:data7];
+    
+    DataHolder *data8 = [[DataHolder alloc] init];
+    data8.strDescription = @"Liquidity rating & analysis (if required)";
+    [arrValuationProcress addObject:data8];
+    
+    DataHolder *data9 = [[DataHolder alloc] init];
+    data9.strDescription = @"Rarity & availability analysis (if required)";
+    [arrValuationProcress addObject:data9];
+    
+    DataHolder *data10 = [[DataHolder alloc] init];
+    data10.strDescription = @"Investment rationale (if required)";
+    [arrValuationProcress addObject:data10];
+    
+    //Valuation need.
+    arrValuationNeed = [[NSMutableArray alloc] init];
+    DataHolder *data11 = [[DataHolder alloc] init];
+    data11.strDescription = @"A digital image";
+    [arrValuationNeed addObject:data11];
+    
+    DataHolder *data12 = [[DataHolder alloc] init];
+    data12.strDescription = @"Complete description (artist's name, date, medium, measurements)";
+    [arrValuationNeed addObject:data12];
+    
+    DataHolder *data13 = [[DataHolder alloc] init];
+    data13.strDescription = @"Provenance";
+    [arrValuationNeed addObject:data13];
+    
+    DataHolder *data14 = [[DataHolder alloc] init];
+    data14.strDescription = @"Exhibition and publication history";
+    [arrValuationNeed addObject:data14];
+    
+    //Array valuation Desc.
+    arrValuationDsec = [[NSArray alloc] initWithObjects:@"We charge per hour or per artwork. Our fees are not related to the value of the collection. We are happy to provide estimates without obligation before beginning a valuation.\n\nClient confidentiality is of paramount importance to us. We work with insurers, banks, and law firms who greatly value client privacy and rely on us to preserve it", nil];
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (section==0)
+    return 5;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    if (section == 0)
     {
-        return arrFirst.count;
+        return arrValuation.count;
     }
-    else if (section==1)
+    else if (section == 1)
     {
-        return arrSecond.count;
+        return arrValuationProcress.count;
     }
-    else if (section==2)
+    else if (section == 2)
     {
-        return arrThired.count;
+        return arrValuationNeed.count;
+    }
+    else if (section == 3)
+    {
+        return arrValuationDsec.count;
     }
     else
     {
-    return 1;
+        return 1;
     }
-    
-    
-    
+    return 0;
 }
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    //    UICollectionViewCell *cell3;
-    OurValutionCollectionViewCell *OurValutioncell;
-    
-    //static NSString *identifier = @"Cell";
-    
-    if (indexPath.section==3)
+    if ([arrHeader[section] isEqualToString:@""])
     {
-        UICollectionViewCell  *cell2 = [collectionView dequeueReusableCellWithReuseIdentifier:@"contactcell" forIndexPath:indexPath];
-        
-        TTTAttributedLabel *lblemail = (TTTAttributedLabel *)[cell2 viewWithTag:12];
-        lblemail.userInteractionEnabled = YES;
-        lblemail.extendsLinkTouchArea = YES;
-        lblemail.enabledTextCheckingTypes = NSTextCheckingAllSystemTypes; // Automatically detect links when the label text is subsequently changed
-        lblemail.delegate = self; // Delegate methods are called when the user taps on a link (see `TTTAttributedLabelDelegate` protocol)
-        lblemail.text = @"siddanth@theartstrust.com";
-        TTTAttributedLabel *lblphone = (TTTAttributedLabel *)[cell2 viewWithTag:11];
-        lblphone.userInteractionEnabled = YES;
-        lblphone.extendsLinkTouchArea = YES;
-        lblphone.enabledTextCheckingTypes = NSTextCheckingAllSystemTypes; // Automatically detect links when the label text is subsequently changed
-        lblphone.delegate = self; // Delegate methods are called when the user taps on a link (see `TTTAttributedLabelDelegate` protocol)
-        lblphone.text = @"+91 22 2204 8138 / 39 , +91 22 2204 8140";
-        return cell2;
+        return 0;
     }
-    else
-    {
-        OurValutioncell= [collectionView dequeueReusableCellWithReuseIdentifier:@"valuation" forIndexPath:indexPath];
-        
-        clsAboutUs *objAboutUs=[[clsAboutUs alloc]init];
-        
-        if (indexPath.section==0)
-        {
-            objAboutUs=[arrFirst objectAtIndex:indexPath.row];
-        }
-        else if(indexPath.section==1)
-        {
-            objAboutUs=[arrSecond objectAtIndex:indexPath.row];
-        }
-        else if(indexPath.section==2)
-        {
-            objAboutUs=[arrThired objectAtIndex:indexPath.row];
-        }
-        
-        if ([objAboutUs.strType intValue]==1)
-        {
-            OurValutioncell.wtImageConstant.constant=-8;
-        }
-        else
-        {
-            OurValutioncell.wtImageConstant.constant=15;
-        }
-        
-        //OurValutioncell.lblTitle.text=objAboutUs.strName;
-        
-        NSMutableParagraphStyle *paragraphStyles = [[NSMutableParagraphStyle alloc] init];
-        paragraphStyles.alignment                = NSTextAlignmentJustified;    // To justified text
-        paragraphStyles.firstLineHeadIndent      = 0.05;    // IMP: must have a value to make it work
-        
-        NSString *stringTojustify                = objAboutUs.strName;
-        NSDictionary *attributes                 = @{NSParagraphStyleAttributeName: paragraphStyles};
-        NSAttributedString *attributedString     = [[NSAttributedString alloc] initWithString:stringTojustify attributes:attributes];
-        
-        OurValutioncell.lblTitle.attributedText             = attributedString;
-        OurValutioncell.lblTitle.numberOfLines              = 0;
-        [OurValutioncell.lblTitle sizeToFit];
-        
-        
-        
-        return OurValutioncell;
-    }
-    
-}
-- (CGSize)collectionView:(UICollectionView *)collectionView1 layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    clsAboutUs *objAboutUs=[[clsAboutUs alloc]init];
-    
-    if (indexPath.section==3)
-    {
-       return CGSizeMake(collectionView1.frame.size.width, 145);
-    }
-    else
-    {
-    if (indexPath.section==0)
-    {
-        objAboutUs=[arrFirst objectAtIndex:indexPath.row];
-    }
-    else if(indexPath.section==1)
-    {
-        objAboutUs=[arrSecond objectAtIndex:indexPath.row];
-    }
-    else if(indexPath.section==2)
-    {
-        objAboutUs=[arrThired objectAtIndex:indexPath.row];
-    }
-
-    
-    CGSize maximumLabelSize;
-    if ([objAboutUs.strType intValue]==1)
-    {
-        maximumLabelSize = CGSizeMake(collectionView1.frame.size.width-29, FLT_MAX);
-        CGRect labelRect = [objAboutUs.strName
-                            boundingRectWithSize:maximumLabelSize
-                            options:NSStringDrawingUsesLineFragmentOrigin
-                            attributes:@{
-                                         NSFontAttributeName : [UIFont fontWithName:@"WorkSans-Regular" size:16]
-                                         }
-                            context:nil];
-        float height11= labelRect.size.height;
-        return CGSizeMake(collectionView1.frame.size.width, height11+10);
-    }
-    else
-    {
-            maximumLabelSize = CGSizeMake(collectionView1.frame.size.width-44, FLT_MAX);
-        CGRect labelRect = [objAboutUs.strName
-                            boundingRectWithSize:maximumLabelSize
-                            options:NSStringDrawingUsesLineFragmentOrigin
-                            attributes:@{
-                                         NSFontAttributeName : [UIFont fontWithName:@"WorkSans-Regular" size:16]
-                                         }
-                            context:nil];
-        
-        float height11= labelRect.size.height;
-        return CGSizeMake(collectionView1.frame.size.width, height11+10);
-    }
-        
-    
-        
-    }
-    
-    
-    
+    return UITableViewAutomaticDimension;
 }
 
+//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+//{
+//    if (section == 4)
+//    {
+//        return 10;
+//    }
+//    return 0;
+//}
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UICollectionReusableView *reusableview = nil;
-    
-    
-    
-    if (kind == UICollectionElementKindSectionHeader)
+    UITableViewCell *headerCell = [tableView dequeueReusableCellWithIdentifier:@"HeaderCell"];
+    UILabel *lblHeader = (UILabel*)[headerCell viewWithTag:11];
+    lblHeader.text = arrHeader[section];
+    headerCell.backgroundColor = [UIColor whiteColor];
+    return headerCell;
+}
+
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+//    UIView *view = [[UIView alloc] init] ;//]WithFrame:hFrame];
+////    view.backgroundColor = [UIColor redColor];
+//    CGRect hFrame = self.tableValuation.tableFooterView.frame;
+//    hFrame.size.height = 1;
+//    view.frame = hFrame;
+//    return view;//[UIView new];
+//}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell;
+    switch (indexPath.section)
     {
-        SectionHeaderReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
-        
-        if (indexPath.section==1)
+        case 0:
         {
-            headerView.title.hidden=NO;
-            headerView.title.text =@"The valuation process involves the following";
+            cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+            UILabel *lblValuation = (UILabel*)[cell viewWithTag:11];
+            lblValuation.text = arrValuation[indexPath.row];
         }
-        else  if (indexPath.section==2)
+        break;
+        case 1:
         {
-            headerView.title.text =@" What we need for a valuation?";
-            headerView.title.hidden=NO;
+            DataHolder *data = arrValuationProcress[indexPath.row];
+            cell = [tableView dequeueReusableCellWithIdentifier:@"ValuationCell"];
+            UILabel *lblValuation = (UILabel*)[cell viewWithTag:12];
+            lblValuation.text = data.strDescription;
+        }
+        break;
+        case 2:
+        {
+            DataHolder *data = arrValuationNeed[indexPath.row];
+            cell = [tableView dequeueReusableCellWithIdentifier:@"ValuationCell"];
+            UILabel *lblvaluation = (UILabel*)[cell viewWithTag:12];
+            lblvaluation.text = data.strDescription;
+        }
+        break;
+        case 3:
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+            UILabel *lblValuation = (UILabel*)[cell viewWithTag:11];
+            lblValuation.text = arrValuationDsec[indexPath.row];
+        }
+        break;
+        case 4:
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"ContactCell"];
             
+            TTTAttributedLabel *lblEmail = (TTTAttributedLabel*)[cell viewWithTag:11];
+            lblEmail.extendsLinkTouchArea = YES;
+            lblEmail.userInteractionEnabled = YES;
+            lblEmail.enabledTextCheckingTypes = NSTextCheckingAllSystemTypes; // Automatically detect links when the label text is subsequently changed
+            lblEmail.delegate = self; // Delegate methods are called when the user taps on a link (see `TTTAttributedLabelDelegate` protocol)
+            lblEmail.text = lblEmail.text;
+            
+            TTTAttributedLabel *lblMob = (TTTAttributedLabel*)[cell viewWithTag:12];
+            lblMob.extendsLinkTouchArea = YES;
+            lblMob.userInteractionEnabled = YES;
+            lblMob.enabledTextCheckingTypes = NSTextCheckingAllSystemTypes; // Automatically detect links when the label text is subsequently changed
+            lblMob.delegate = self; // Delegate methods are called when the user taps on a link (see `TTTAttributedLabelDelegate` protocol)
+            lblMob.text = lblMob.text;
         }
-        else
-        {
-            headerView.title.hidden=YES;
-        }
-        
-        
-        reusableview = headerView;
+        break;
+        default:
+            break;
     }
-    
-    if (kind == UICollectionElementKindSectionFooter) {
-        UICollectionReusableView *footerview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView" forIndexPath:indexPath];
-        
-        reusableview = footerview;
-    }
-    
-    return reusableview;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
 }
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    if (section==0)
-    {
-        return CGSizeZero;
-    }
-   else if (section==3)
-    {
-       return CGSizeMake(CGRectGetWidth(collectionView.bounds), 20);
-    }
-    else
-    {
-        return CGSizeMake(CGRectGetWidth(collectionView.bounds), 50);
-    }
 }
+
+
+//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+//{
+//    
+//    return 4;
+//    
+//}
+
+
+//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    //    UICollectionViewCell *cell3;
+//    OurValutionCollectionViewCell *OurValutioncell;
+//    
+//    //static NSString *identifier = @"Cell";
+//    
+//    if (indexPath.section==3)
+//    {
+//        UICollectionViewCell  *cell2 = [collectionView dequeueReusableCellWithReuseIdentifier:@"contactcell" forIndexPath:indexPath];
+//        
+//        TTTAttributedLabel *lblemail = (TTTAttributedLabel *)[cell2 viewWithTag:12];
+//        lblemail.userInteractionEnabled = YES;
+//        lblemail.extendsLinkTouchArea = YES;
+//        lblemail.enabledTextCheckingTypes = NSTextCheckingAllSystemTypes; // Automatically detect links when the label text is subsequently changed
+//        lblemail.delegate = self; // Delegate methods are called when the user taps on a link (see `TTTAttributedLabelDelegate` protocol)
+//        lblemail.text = @"siddanth@theartstrust.com";
+//        TTTAttributedLabel *lblphone = (TTTAttributedLabel *)[cell2 viewWithTag:11];
+//        lblphone.userInteractionEnabled = YES;
+//        lblphone.extendsLinkTouchArea = YES;
+//        lblphone.enabledTextCheckingTypes = NSTextCheckingAllSystemTypes; // Automatically detect links when the label text is subsequently changed
+//        lblphone.delegate = self; // Delegate methods are called when the user taps on a link (see `TTTAttributedLabelDelegate` protocol)
+//        lblphone.text = @"+91 22 2204 8138 / 39 , +91 22 2204 8140";
+//        return cell2;
+//    }
+//}
+
 
 #pragma mark - TTTAttributedLabelDelegate
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithPhoneNumber:(NSString *)phoneNumber
 {
-    //    NSString *numberString = self.product_Dic[@"contactNo"]; //@"7875512881";
-    //        NSURL *phoneNumber = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", numberString]];
-    
-    //        // Whilst this version will return you to your app once the phone call is over.
-    NSURL *phoneNumber_Url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", phoneNumber]];
-    
+    NSString *numberString = [phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",numberString]];
     // Now that we have our `phoneNumber` as a URL. We need to check that the device we are using can open the URL.
     // Whilst iPads, iPhone, iPod touchs can all open URLs in safari mobile they can't all
     // open URLs that are numbers this is why we have `tel://` or `telprompt://`
-    if([[UIApplication sharedApplication] canOpenURL:phoneNumber_Url]) {
+    if([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
         // So if we can open it we can now actually open it with
-        [[UIApplication sharedApplication] openURL:phoneNumber_Url];
+        [[UIApplication sharedApplication] openURL:phoneUrl];
     }
     
 }
@@ -390,19 +314,12 @@
    didSelectLinkWithURL:(NSURL *)url
 {
     [[UIApplication sharedApplication] openURL:url];
-    
-    //    [[[UIActionSheet alloc] initWithTitle:[url absoluteString] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Open Link in Safari", nil), nil] showInView:self.view];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
-
-
 
 /*
 #pragma mark - Navigation
@@ -444,20 +361,6 @@
     else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
-}
-
-- (IBAction)btnPhone:(id)sender
-{
-    NSString *phNo = @"+912222048138";
-    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phNo]];
-    [[UIApplication sharedApplication] openURL:phoneUrl];
-    /*if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
-        [[UIApplication sharedApplication] openURL:phoneUrl];
-    } else
-    {
-       UIAlertView *calert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Call facility is not available!!!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-        [calert show];
-    }*/
 }
 
 @end

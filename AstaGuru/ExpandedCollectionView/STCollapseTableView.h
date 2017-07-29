@@ -86,5 +86,4 @@
  */
 - (BOOL)isOpenSection:(NSUInteger)sectionIndex;
 
-@property(nonatomic,retain)NSMutableArray *arrData;
 @end

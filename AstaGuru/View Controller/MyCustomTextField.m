@@ -36,7 +36,6 @@
     if (![textField.text length] && isIos8 && isLessThanIos8_3) {
         [self deleteBackward];
     }
-    
     return shouldDelete;
 }
 - (void)deleteBackward {

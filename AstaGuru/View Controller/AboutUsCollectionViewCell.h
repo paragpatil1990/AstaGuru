@@ -7,19 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "clsAboutUs.h"
-#import <MessageUI/MFMailComposeViewController.h>
-#import <MessageUI/MessageUI.h>
-@protocol AboutUs
--(void)btnEmail:(clsAboutUs*)objAboutUS;
-//-(void)ListSwipeOptionpressed:(int)option currentCellIndex:(int)index;
+#import "AboutUs.h"
+//#import <MessageUI/MFMailComposeViewController.h>
+//#import <MessageUI/MessageUI.h>
+@protocol AboutUsDelegate
+-(void)didSendEmail:(AboutUs*)aboutus;
 @end
-@interface AboutUsCollectionViewCell : UICollectionViewCell<MFMailComposeViewControllerDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
-@property (weak, nonatomic) IBOutlet UIButton *btnEmail;
-@property (weak, nonatomic) IBOutlet UILabel *lblDesignation;
-@property (weak, nonatomic) IBOutlet UIImageView *img;
-@property (weak, nonatomic) IBOutlet UIImageView *imgEmail;
-@property (readwrite) id<AboutUs> AboutUsdelegate;
-@property(nonatomic,retain)clsAboutUs *objAboutUs;
+@interface AboutUsCollectionViewCell : UICollectionViewCell
+
+@property (strong, nonatomic) IBOutlet UILabel *lblTitle;
+@property (strong, nonatomic) IBOutlet UIButton *btnEmail;
+@property (strong, nonatomic) IBOutlet UILabel *lblDesignation;
+@property (strong, nonatomic) IBOutlet UIImageView *img;
+@property (strong, nonatomic) IBOutlet UIImageView *imgEmail;
+
+@property (nonatomic, retain) id<AboutUsDelegate> delegate;
+@property(nonatomic,retain)AboutUs *objAboutUs;
+
 @end

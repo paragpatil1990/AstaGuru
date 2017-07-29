@@ -44,7 +44,7 @@
 }
 
 - (void)setImageURL:(NSURL *)aURL {
-    self.placeholderImage=[UIImage imageNamed:@"icon1.png"];
+    self.placeholderImage=[UIImage imageNamed:@"welcome.jpg"];
 
 	if(imageURL) {
 		[[EGOImageLoader sharedImageLoader] removeObserver:self forURL:imageURL];

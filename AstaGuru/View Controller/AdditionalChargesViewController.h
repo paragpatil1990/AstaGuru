@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "clsCurrentOccution.h"
-@interface AdditionalChargesViewController : UIViewController
-@property (nonatomic,retain)clsCurrentOccution *objCurrentOuction;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+#import "BaseViewController.h"
+@interface AdditionalChargesViewController : BaseViewController
+
+@property (nonatomic,retain)CurrentAuction *currentAuction;
+
 @property (weak, nonatomic) IBOutlet UICollectionView *clvViewAdditionalCgharges;
-@property(nonatomic)int IsSort;
+//@property(nonatomic)int IsSort;
 @end

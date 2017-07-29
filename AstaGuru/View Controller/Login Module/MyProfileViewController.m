@@ -7,85 +7,74 @@
 //
 
 #import "MyProfileViewController.h"
-#import "ClsSetting.h"
-@interface MyProfileViewController ()<PassResepose>
-@property (weak, nonatomic) IBOutlet UITextField *txtFirstName;
-@property (weak, nonatomic) IBOutlet UITextField *txtLastName;
-@property (weak, nonatomic) IBOutlet UITextField *txtCity;
-@property (weak, nonatomic) IBOutlet UITextField *txtCountry;
-@property (weak, nonatomic) IBOutlet UITextField *txtState;
-@property (weak, nonatomic) IBOutlet UITextField *txtZip;
-@property (weak, nonatomic) IBOutlet UITextField *txtMobileNumber;
-@property (weak, nonatomic) IBOutlet UITextField *txtTelephoneNumber;
-@property (weak, nonatomic) IBOutlet UITextField *txtBillingTelephoneNumber;
-@property (weak, nonatomic) IBOutlet UITextField *txtEmail;
-@property (weak, nonatomic) IBOutlet UITextField *txtUserName;
-@property (weak, nonatomic) IBOutlet UITextField *txtPassword;
-@property (weak, nonatomic) IBOutlet UITextField *txtNickName;
-@property (weak, nonatomic) IBOutlet UITextField *txtBillingName;
-@property (weak, nonatomic) IBOutlet UITextField *txtBillingAddress;
 
+@interface MyProfileViewController ()
 @end
 
 @implementation MyProfileViewController
 
+-(void)setUpNavigationItem
+{
+    self.navigationItem.title = @"My Profile";
+    
+    UIBarButtonItem *cancelBarButtonItem  = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(closePressed)];
+    [self.navigationItem setLeftBarButtonItem:cancelBarButtonItem];
+    cancelBarButtonItem.tintColor=[UIColor colorWithRed:167/255.0 green:142/255.0 blue:105/255.0 alpha:1.0];
+
+    UIBarButtonItem *doneBarButtonItem =[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(btnDonePressed)];
+    doneBarButtonItem.tintColor=[UIColor colorWithRed:167/255.0 green:142/255.0 blue:105/255.0 alpha:1.0];
+    [self.navigationItem setRightBarButtonItem:doneBarButtonItem];
+}
+
+-(void)closePressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 - (void)viewDidLoad
 {
+    // Do any additional setup after loading the view.
+
     [super viewDidLoad];
     [self setUpNavigationItem];
-    [self GetProfile];
     [self setBroder];
-    // Do any additional setup after loading the view.
+
+    [self getUserProfile];
 }
 
 -(void) setBroder
 {
-    [ClsSetting SetBorder:_fName_View cornerRadius:2 borderWidth:1];
-    _fName_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    UIColor *bColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1];
+    [GlobalClass setBorder:_fName_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_lName_View cornerRadius:2 borderWidth:1];
-    _lName_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [GlobalClass setBorder:_lName_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_bname_View cornerRadius:2 borderWidth:1];
-    _bname_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [GlobalClass setBorder:_bname_View cornerRadius:2 borderWidth:1 color:bColor];
 
-    [ClsSetting SetBorder:_baddress_View cornerRadius:2 borderWidth:1];
-    _baddress_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [GlobalClass setBorder:_baddress_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_bcity_View cornerRadius:2 borderWidth:1];
-    _bcity_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [GlobalClass setBorder:_bcity_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_bcountry_View cornerRadius:2 borderWidth:1];
-    _bcountry_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [GlobalClass setBorder:_bcountry_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_bstate_View cornerRadius:2 borderWidth:1];
-    _bstate_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [GlobalClass setBorder:_bstate_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_bzip_View cornerRadius:2 borderWidth:1];
-    _bzip_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [GlobalClass setBorder:_bzip_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_mobile_View cornerRadius:2 borderWidth:1];
-    _mobile_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [GlobalClass setBorder:_mobile_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_telephone_View cornerRadius:2 borderWidth:1];
-    _telephone_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [GlobalClass setBorder:_telephone_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_btelephone_View cornerRadius:2 borderWidth:1];
-    _btelephone_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [GlobalClass setBorder:_btelephone_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_email_View cornerRadius:2 borderWidth:1];
-    _email_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [GlobalClass setBorder:_email_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_userName_View cornerRadius:2 borderWidth:1];
-    _userName_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [GlobalClass setBorder:_userName_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_password_View cornerRadius:2 borderWidth:1];
-    _password_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [GlobalClass setBorder:_password_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_nikname_View cornerRadius:2 borderWidth:1];
-    _nikname_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
-    
-    
+    [GlobalClass setBorder:_nikname_View cornerRadius:2 borderWidth:1 color:bColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,87 +82,80 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)GetProfile
+-(void)getUserProfile
 {
-    NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-    ClsSetting *objSetting=[[ClsSetting alloc]init];
-    [objSetting CallWeb:dict url:[NSString stringWithFormat:@"users/?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed&filter=userid=%@",[[NSUserDefaults standardUserDefaults] valueForKey:USER_id]] view:self.view Post:NO];
-    objSetting.PassReseposeDatadelegate=self;
+    [self getUserProfile:^(NSDictionary *userProfile){
+        _txtFirstName.text = [userProfile valueForKey:@"name"];
+        _txtLastName.text = [userProfile valueForKey:@"lastname"];
+        _txtBillingName.text = [userProfile valueForKey:@"name"];
+        _txtBillingAddress.text = [userProfile valueForKey:@"address1"];
+        _txtCity.text = [userProfile valueForKey:@"city"];
+        _txtState.text = [userProfile valueForKey:@"state"];
+        _txtZip.text = [userProfile valueForKey:@"zip"];
+        _txtMobileNumber.text = [userProfile valueForKey:@"Mobile"];
+        _txtTelephoneNumber.text = [userProfile valueForKey:@"telephone"];
+        _txtBillingTelephoneNumber.text = [userProfile valueForKey:@"telephone"];
+        _txtCity.text = [userProfile valueForKey:@"city"];
+        _txtEmail.text = [userProfile valueForKey:@"email"];
+        _txtUserName.text = [userProfile valueForKey:@"username"];
+        _txtPassword.text = [userProfile valueForKey:@"password"];
+        _txtNickName.text = [userProfile valueForKey:@"nickname"];
+        _txtCountry.text = [userProfile valueForKey:@"country"];
+    }];
 }
 
--(void)passReseposeData:(id)arr
-{
-    //  NSMutableArray *arrOccution=[parese parseCurrentOccution:[arr valueForKey:@"resource"]];
-    NSError *error;
-    NSMutableDictionary *dict1 = [NSJSONSerialization JSONObjectWithData:arr options:0 error:&error];
-    NSMutableArray *arr1=[dict1 valueForKey:@"resource"];
-    if (arr1.count>0)
-    {
-        NSMutableDictionary *dict=[arr1 objectAtIndex:0];
-        dict=[ClsSetting RemoveNullOnly:dict];
-        NSString *strname=[dict valueForKey:@"name"];
-        
-        //NSArray * arrname = [strname componentsSeparatedByString:@" "];
-       // if (arrname.count==2)
-        //{
-            _txtFirstName.text=[dict valueForKey:@"name"];
-            _txtLastName.text=[dict valueForKey:@"lastname"];
-       // }
-        //else if (arrname.count==1)
-        //{
-          //  _txtFirstName.text=[arrname objectAtIndex:0];
-        //}
-        _txtBillingName.text=[dict valueForKey:@"name"];
-        _txtBillingAddress.text=[dict valueForKey:@"address1"];
-        _txtCity.text=[dict valueForKey:@"city"];
-        _txtState.text=[dict valueForKey:@"state"];
-        _txtZip.text=[dict valueForKey:@"zip"];
-        _txtMobileNumber.text=[dict valueForKey:@"Mobile"];
-        _txtTelephoneNumber.text=[dict valueForKey:@"telephone"];
-        _txtBillingTelephoneNumber.text=[dict valueForKey:@"fax"];
-        _txtCity.text=[dict valueForKey:@"city"];
-        _txtEmail.text=[dict valueForKey:@"email"];
-        _txtUserName.text=[dict valueForKey:@"username"];
-        _txtPassword.text=[dict valueForKey:@"password"];
-        _txtNickName.text=[dict valueForKey:@"nickname"];
-        _txtCountry.text=[dict valueForKey:@"country"];
-        //_txtBillingAddress.text=@"";
-        
-    }
-    else
-    {
-        [ClsSetting ValidationPromt:@"Some thing went wrong"];
-    }
-    
-}
--(void)setUpNavigationItem
-{
-    UIButton *btnBack = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
-    [btnBack setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    // [btnBack addTarget:self action:@selector(backPressed) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btnBack];
-    self.navigationItem.leftBarButtonItem = barButtonItem;
-    self.title=@"My Profile";
-     self.sidebarButton=[[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleDone target:self action:@selector(closePressed)];
-    [[self navigationItem] setLeftBarButtonItem:self.sidebarButton];
-    self.sidebarButton.tintColor=[UIColor colorWithRed:167/255.0 green:142/255.0 blue:105/255.0 alpha:1.0];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//-(void)passReseposeData:(id)arr
+//{
+//    //  NSMutableArray *arrOccution=[parese parseCurrentOccution:[arr valueForKey:@"resource"]];
+//    NSError *error;
+//    NSMutableDictionary *dict1 = [NSJSONSerialization JSONObjectWithData:arr options:0 error:&error];
+//    NSMutableArray *arr1=[dict1 valueForKey:@"resource"];
+//    if (arr1.count>0)
+//    {
+//        NSMutableDictionary *dict=[arr1 objectAtIndex:0];
+//        dict=[ClsSetting RemoveNullOnly:dict];
+//      //  NSString *strname=[dict valueForKey:@"name"];
+//        
+//        //NSArray * arrname = [strname componentsSeparatedByString:@" "];
+//       // if (arrname.count==2)
+//        //{
+//            _txtFirstName.text=[dict valueForKey:@"name"];
+//            _txtLastName.text=[dict valueForKey:@"lastname"];
+//       // }
+//        //else if (arrname.count==1)
+//        //{
+//          //  _txtFirstName.text=[arrname objectAtIndex:0];
+//        //}
+//        _txtBillingName.text=[dict valueForKey:@"name"];
+//        _txtBillingAddress.text=[dict valueForKey:@"address1"];
+//        _txtCity.text=[dict valueForKey:@"city"];
+//        _txtState.text=[dict valueForKey:@"state"];
+//        _txtZip.text=[dict valueForKey:@"zip"];
+//        _txtMobileNumber.text=[dict valueForKey:@"Mobile"];
+//        _txtTelephoneNumber.text=[dict valueForKey:@"telephone"];
+//        _txtBillingTelephoneNumber.text=[dict valueForKey:@"fax"];
+//        _txtCity.text=[dict valueForKey:@"city"];
+//        _txtEmail.text=[dict valueForKey:@"email"];
+//        _txtUserName.text=[dict valueForKey:@"username"];
+//        _txtPassword.text=[dict valueForKey:@"password"];
+//        _txtNickName.text=[dict valueForKey:@"nickname"];
+//        _txtCountry.text=[dict valueForKey:@"country"];
+//        //_txtBillingAddress.text=@"";
+//        
+//    }
+//    else
+//    {
+//        [ClsSetting ValidationPromt:@"Some thing went wrong"];
+//    }
+//    
+//}
 
-    
-    
-    self.sideleftbarButton=[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(btnProccedPressed)];
-    self.sideleftbarButton.tintColor=[UIColor colorWithRed:167/255.0 green:142/255.0 blue:105/255.0 alpha:1.0];
-    [[self navigationItem] setRightBarButtonItem:self.sideleftbarButton];
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor whiteColor],
-       NSFontAttributeName:[UIFont fontWithName:@"WorkSans-Medium" size:17]}];
-}
-- (void)btnProccedPressed
+- (void)btnDonePressed
 {
     if ([self validate])
     {
         NSDictionary *params = @{
-                                 @"userid":[[NSUserDefaults standardUserDefaults] valueForKey:USER_id],
+                                 @"userid":[[NSUserDefaults standardUserDefaults] valueForKey:USER_ID],
                                  @"t_username":_txtUserName.text,
                                  @"t_password":_txtPassword.text,
                                  @"t_firstname":_txtFirstName.text,
@@ -197,77 +179,101 @@
                                  @"password":_txtPassword.text,
                                  @"t_password":_txtPassword.text
                                  };
-        NSMutableArray *arr = [NSMutableArray arrayWithObjects:params,nil];
-        NSDictionary *pardsams = @{@"resource": arr};
-        ClsSetting *objClssetting=[[ClsSetting alloc] init];
-        objClssetting.PassReseposeDatadelegate=self;
-        [objClssetting calllPutWeb:pardsams url:[NSString stringWithFormat:@"%@/users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objClssetting Url]] view:self.view];
+        NSMutableArray *resourceArray = [NSMutableArray arrayWithObjects:params,nil];
+        NSDictionary *parameters = @{@"resource": resourceArray};
+        
+        NSString *strUrl = [NSString stringWithFormat:@"users?api_key=%@", [GlobalClass apiKey]];
+        
+        [GlobalClass call_tablePUTWeb:strUrl parameters:parameters view:self.view success:^(id responseObject)
+         {
+             NSMutableArray *resourceArray = responseObject[@"resource"];
+             NSLog(@"%@",resourceArray);
+             if (resourceArray.count > 0)
+             {
+                 [GlobalClass showTost:@"Thank You!\nYour details will be updated soon. You might receive a verification call from our team."];
+                 
+//             NSDictionary *userIDDic = [resourceArray objectAtIndex:0];
+             
+//             [[NSUserDefaults standardUserDefaults] setValue:[userIDDic valueForKey:USER_ID] forKey:USER_ID];
+             
+                 [self.navigationController popViewControllerAnimated:YES];
+             }
+             else
+             {
+                 [GlobalClass showTost:[NSString stringWithFormat:@"Profile update fali! please try again."]];
+             }
+         }failure:^(NSError *error)
+         {
+             [GlobalClass showTost:error.localizedDescription];
+         }];
+
+        
+//        ClsSetting *objClssetting=[[ClsSetting alloc] init];
+//        objClssetting.PassReseposeDatadelegate=self;
+//        [objClssetting calllPutWeb:pardsams url:[NSString stringWithFormat:@"%@/users?api_key=%@",[ClsSetting tableURL],[ClsSetting apiKey]] view:self.view];
     }
 }
--(void)closePressed
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
--(void)passReseposeData1:(id)str
-{
-    NSArray *value = str[@"resource"];
-    NSLog(@"%@",value);
-    NSDictionary *dictUser=[value objectAtIndex:0];
-    [[NSUserDefaults standardUserDefaults] setValue:[dictUser valueForKey:@"userid"] forKey:USER_id];
-    [self.navigationController popViewControllerAnimated:YES];
-}
+//-(void)passReseposeData1:(id)str
+//{
+//    NSArray *value = str[@"resource"];
+//    NSLog(@"%@",value);
+//    NSDictionary *dictUser=[value objectAtIndex:0];
+//    [[NSUserDefaults standardUserDefaults] setValue:[dictUser valueForKey:@"userid"] forKey:USER_ID];
+//    [ClsSetting ValidationPromt:@"Thank You!\nYour details will be updated soon. You might receive a verification call from our team."];
+//    [self.navigationController popViewControllerAnimated:YES];
+//}
 
 -(BOOL)validate
 {
-    if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtFirstName.text].length==0)
+    if ([GlobalClass trimWhiteSpaceAndNewLine:_txtFirstName.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Enter First Name"];
+        [GlobalClass showTost:@"Pleae Enter First Name"];
         return NO;
     }
-    else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtLastName.text].length==0)
+    else if ([GlobalClass trimWhiteSpaceAndNewLine:_txtLastName.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Enter Last Name"];
+        [GlobalClass showTost:@"Pleae Enter Last Name"];
         return NO;
     }
-    else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtCity.text].length==0)
+    else if ([GlobalClass trimWhiteSpaceAndNewLine:_txtCity.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Select City Name"];
+        [GlobalClass showTost:@"Pleae Select City Name"];
         return NO;
     }
-    else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtCountry.text].length==0)
+    else if ([GlobalClass trimWhiteSpaceAndNewLine:_txtCountry.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Select Country Name"];
+        [GlobalClass showTost:@"Pleae Select Country Name"];
         return NO;
     }
-    else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtState.text].length==0)
+    else if ([GlobalClass trimWhiteSpaceAndNewLine:_txtState.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae select State Name"];
+        [GlobalClass showTost:@"Pleae select State Name"];
         return NO;
     }
-    else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtMobileNumber.text].length==0)
+    else if ([GlobalClass trimWhiteSpaceAndNewLine:_txtMobileNumber.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Enter Mobile Number"];
+        [GlobalClass showTost:@"Pleae Enter Mobile Number"];
         return NO;
     }
-    else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtEmail.text].length==0)
+    else if ([GlobalClass trimWhiteSpaceAndNewLine:_txtEmail.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Enter Email-id"];
+        [GlobalClass showTost:@"Pleae Enter Email-id"];
         return NO;
     }
-    else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtUserName.text].length==0)
+    else if ([GlobalClass trimWhiteSpaceAndNewLine:_txtUserName.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Enter User Name"];
+        [GlobalClass showTost:@"Pleae Enter User Name"];
         return NO;
     }
-    else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtPassword.text].length==0)
+    else if ([GlobalClass trimWhiteSpaceAndNewLine:_txtPassword.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Enter Password"];
+        [GlobalClass showTost:@"Pleae Enter Password"];
         return NO;
     }
     else if (![_txtPassword.text isEqualToString:_txtPassword.text])
     {
-        [ClsSetting ValidationPromt:@"Password & Confarm Password should be same"];
+        [GlobalClass showTost:@"Password & Confarm Password should be same"];
         return NO;
     }
     return YES;

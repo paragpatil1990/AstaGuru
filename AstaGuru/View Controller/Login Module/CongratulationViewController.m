@@ -7,70 +7,88 @@
 //
 
 #import "CongratulationViewController.h"
-#import "CurrentOccutionViewController.h"
-#import "ClsSetting.h"
-#import "SWRevealViewController.h"
-#import "AppDelegate.h"
+#import "CurrentAuctionViewController.h"
+//#import "GlobalClass.h"
+//#import "SWRevealViewController.h"
+//#import "AppDelegate.h"
 @interface CongratulationViewController ()
 
 @end
 
 @implementation CongratulationViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self setUpNavigationItem];
-    // Do any additional setup after loading the view.
+-(void)setUpNavigationItem
+{
+    self.navigationItem.title = @"Complete Sign Up";
+
+    self.navigationItem.leftBarButtonItem = nil;
+
+    [self.navigationItem setHidesBackButton:YES];
+
+    [self setNavigationBarCloseButton];
 }
 
-- (void)didReceiveMemoryWarning {
+-(void)closePressed
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SWRevealViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+    AppDelegate * objApp = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    objApp.window.rootViewController = rootViewController;
+}
+
+- (void)viewDidLoad
+{
+    // Do any additional setup after loading the view.
+    [super viewDidLoad];
+    [self setUpNavigationItem];
+    [self sendEmail];
+    self.isCommingFromSideMenu = YES;
+    [GlobalClass setBorder:_btnViewCurrentAuctions cornerRadius:2 borderWidth:1 color:[UIColor clearColor]];
+}
+
+
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)setUpNavigationItem
-{
-    UIButton *btnBack = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
-    [btnBack setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    // [btnBack addTarget:self action:@selector(backPressed) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btnBack];
-    self.navigationItem.leftBarButtonItem = barButtonItem;
-    
-    self.navigationItem.title=@"Complete Sign Up";
-    self.sideleftbarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-close"] style:UIBarButtonItemStyleDone target:self action:@selector(closePressed)];
-    self.sideleftbarButton.tintColor=[UIColor whiteColor];
-    [[self navigationItem] setRightBarButtonItem:self.sideleftbarButton];
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor whiteColor],
-       NSFontAttributeName:[UIFont fontWithName:@"WorkSans-Medium" size:17]}];
-    
-}
-- (IBAction)btnProccedPressed:(id)sender
+
+
+- (IBAction)btnViewCurrentAuctionPressed:(UIButton *)sender
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    CurrentOccutionViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"CurrentOccutionViewController"];
+    CurrentAuctionViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"CurrentAuctionViewController"];
     [self.navigationController pushViewController:rootViewController animated:YES];
 }
--(void)closePressed
-{
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SWRevealViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
-    UIViewController *viewController =rootViewController;
-    AppDelegate * objApp = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-    objApp.window.rootViewController = viewController;
-}
--(void)viewWillAppear:(BOOL)animated
-{
-_btnViewconnentAuctions .layer.cornerRadius=2;
-}
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)sendEmail
+{
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    HUD.labelText = @"loading";
+    
+    NSDictionary *userDic = [[NSUserDefaults standardUserDefaults] valueForKey:USER];
+    NSString *strName = [GlobalClass getUserFullName];
+    NSString *strEmail = [userDic valueForKey:USER_EMAIL];
+    
+    NSDictionary *dictMailParameters = @{
+                               @"to":@[@{
+                                           @"name":strName,
+                                           @"email":strEmail,
+                                           }],
+                               @"subject":@"Your Registration with Astaguru.com is confirmed & complete.",
+                               @"body_text": [NSString stringWithFormat:@"Dear %@,\nThank you for the information provided. Your account security is of paramount importance to us. Therefore we will have one of our representative call you on the number provided within the next 24 hours to verify the following details. Further to which we will provide you with bidding access for our auctions.\nIn case you would like to edit any details, please notify our representative during the course of your conversation.\n\nName: %@\nLastName: %@\nAddress: %@\nCity: %@\nZip: %@\nSate: %@\nCountry: %@\nTelephone: %@\nFax: %@\nEmail: %@\nUsername: %@\nPassword: %@\n\nFor any further assistance please feel free to write to us at, contact@astaguru.com or call us on 91-22 2204 8138/39. We will be glad to assist you.\nThanking You,\n\nWarm Regards,\nTeam AstaGuru\n",strName, userDic[@"name"], userDic[@"lastname"], userDic[@"address1"], userDic[@"city"], userDic[@"zip"], userDic[@"state"], userDic[@"country"], userDic[@"telephone"], userDic[@"fax"], userDic[@"email"], userDic[@"username"], userDic[@"password"]],
+                               };
+    
+    [GlobalClass sendEmail:dictMailParameters success:^(NSDictionary *responseObject)
+     {
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
+     }failure:^(NSError *error)
+     {
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
+     }];
+
+//    [ClsSetting sendEmailWithInfo:dictMail];
 }
-*/
 
 @end

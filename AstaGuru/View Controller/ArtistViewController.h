@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "clsCurrentOccution.h"
-@interface ArtistViewController : UIViewController
-@property(nonatomic,retain)clsCurrentOccution *objCurrentOccution;
-@property (weak, nonatomic) IBOutlet UICollectionView *clvArtistInfo;
-@property (nonatomic)int iscurrencyInDollar;
-- (IBAction)btnPastPressed:(id)sender;
-@property(nonatomic)int issort;
-@property(nonatomic)int IsUpcomming;
-@property(nonatomic)int IsPast;
+#import "BaseViewController.h"
 
+@interface ArtistViewController : BaseViewController
+
+@property (weak, nonatomic) IBOutlet UICollectionView *clvArtistInfo;
+
+@property(nonatomic,retain) CurrentAuction *currentAuction;
+@property AFHTTPRequestOperation *task;
+
+-(void)didChangedAuctionType;
+-(void)didReadMoreChanged;
 @end

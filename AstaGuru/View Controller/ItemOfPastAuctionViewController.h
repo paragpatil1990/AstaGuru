@@ -2,20 +2,27 @@
 //  ItemOfPastAuctionViewController.h
 //  AstaGuru
 //
-//  Created by sumit mashalkar on 17/10/16.
-//  Copyright © 2016 Aarya Tech. All rights reserved.
+//  Created by Amrit Singh on 7/3/17.
+//  Copyright © 2017 Aarya Tech. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "clsPastAuctionData.h"
-@interface ItemOfPastAuctionViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UICollectionView *ClvItemOfPastAuction;
-@property(nonatomic,retain)clsPastAuctionData *objPast;
-@property(nonatomic)int IsUpcomming;
-@property(nonatomic)int IsPast;
-@property(nonatomic)BOOL isSearch;
-@property(nonatomic)BOOL isWorkArt;
+#import "BaseViewController.h"
 
-@property(nonatomic,retain)NSMutableArray *arrSearch;
+@interface ItemOfPastAuctionViewController : BaseViewController
 
+@property (strong, nonatomic) IBOutlet UICollectionView *clvPastAuctionItem;
+@property (strong, nonatomic) IBOutlet UILabel *noRecords_Lbl;
+
+@property(nonatomic,retain) PastAuction *pastAuction;
+
+@property BOOL isSearch;
+@property (nonatomic) BOOL isFilter;
+
+//@property NSArray *arrSearch;
+//@property NSString *searchUrl;
+
+@property NSArray *pastAuctionItemArray;
+
+-(void)showAuctionAnalisys;
 @end

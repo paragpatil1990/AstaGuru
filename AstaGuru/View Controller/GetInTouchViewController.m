@@ -5,146 +5,108 @@
 //  Created by Aarya Tech on 21/10/16.
 //  Copyright © 2016 Aarya Tech. All rights reserved.
 //
-
-#import "GetInTouchViewController.h"
-#import "SWRevealViewController.h"
-#import "AppDelegate.h"
-#import "DropDownListView.h"
-#import "ClsSetting.h"
 #import <MessageUI/MessageUI.h>
-@interface GetInTouchViewController ()<kDropDownListViewDelegate,PassResepose,MFMailComposeViewControllerDelegate>
+#import "GetInTouchViewController.h"
+//#import "SWRevealViewController.h"
+//#import "AppDelegate.h"
+#import "DropDownListView.h"
+//#import "GlobalClass.h"
+#import "Category.h"
+
+@interface GetInTouchViewController ()<kDropDownListViewDelegate,MFMailComposeViewControllerDelegate>
 {
- DropDownListView * Dropobj;
+    DropDownListView * Dropobj;
     NSMutableArray *arrCategory;
 }
 @end
 
 @implementation GetInTouchViewController
 
-- (void)viewDidLoad {
+-(void)setUpNavigationItem
+{
+    self.title=@"Contact Us";
+    [self setNavigationBarSlideButton];//Target:<#(id)#> selector:<#(SEL)#>]
+    [self setNavigationBarCloseButton];
+}
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    self.navigationItem.title=@"Contact Us";
+    // Do any additional setup after loading the view.
+    
+   // [self setUpNavigationItem];
+    
     arrCategory=[[NSMutableArray alloc]init];
-    self.sideleftbarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-close"] style:UIBarButtonItemStyleDone target:self action:@selector(closePressed)];
-    self.sideleftbarButton.tintColor=[UIColor whiteColor];
-    [[self navigationItem] setRightBarButtonItem:self.sideleftbarButton];
-    
-    self.sidebarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"signs"] style:UIBarButtonItemStyleDone target:self.revealViewController action:@selector(revealToggle:)];
-    self.sidebarButton.tintColor=[UIColor whiteColor];
-    [[self navigationItem] setLeftBarButtonItem:self.sidebarButton];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-  if (UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad)
-    {
-        CGRect frame= _segmentedmenu.frame;
-        [_segmentedmenu setFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 50)];
-        
-        NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [UIColor whiteColor],NSForegroundColorAttributeName,nil];
-        
-        
-        [_segmentedmenu setTitleTextAttributes:attributes forState:UIControlStateNormal];
-        
-        
-        
-    }
-    else
-    {
-        
-        
-        //CGRect frame= _segmentedmenu.frame;
-        //[_segmentedmenu setFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 30)];
-    }
-    
-    _segmentedmenu.layer.borderWidth = 1.0;
-    _segmentedmenu.layer.cornerRadius=3.0;
-    _segmentedmenu.layer.borderColor = [UIColor colorWithRed:150/255.0 green:122/255.0 blue:85/255.0 alpha:1.0].CGColor;
+
+//    _segmentedmenu.layer.borderColor = [UIColor colorWithRed:150/255.0 green:122/255.0 blue:85/255.0 alpha:1.0].CGColor;
    
     [self getCategoryData];
     [self setBroder];
-    // Do any additional setup after loading the view.
-}
-
--(void) setBroder
-{
-    [ClsSetting SetBorder:_name_view cornerRadius:2 borderWidth:1];
-    _name_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
-    
-    [ClsSetting SetBorder:_email_view cornerRadius:2 borderWidth:1];
-    _email_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
-    
-    [ClsSetting SetBorder:_phone_view cornerRadius:2 borderWidth:1];
-    _phone_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
-    
-    [ClsSetting SetBorder:_category_view cornerRadius:2 borderWidth:1];
-    _category_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
-    
-    [ClsSetting SetBorder:_message_view cornerRadius:2 borderWidth:1];
-    _message_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
-    
-}
-
--(void)getCategoryData
-{
-     NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-    ClsSetting *objSetting=[[ClsSetting alloc]init];
-    objSetting.PassReseposeDatadelegate=self;
-    [objSetting CallWeb:dict url:[NSString stringWithFormat:@"category?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed"] view:self.view Post:NO];
-    
-}
--(void)passReseposeData:(id)arr
-{
-    NSError *error;
-    NSMutableArray *dict1 = [NSJSONSerialization JSONObjectWithData:arr options:0 error:&error];
-    
-    NSLog(@"%@",dict1);
-    NSMutableArray *arrItemCount=[[NSMutableArray alloc]init];
-    // arrItemCount=[parese parsePastOccution:[dict1 valueForKey:@"resource"]];
-    arrItemCount=[dict1 valueForKey:@"resource"];
-    
-    [arrCategory addObjectsFromArray:arrItemCount];
-   
-}
--(void)closePressed
-{
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SWRevealViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
-    UIViewController *viewController =rootViewController;
-    AppDelegate * objApp = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-    objApp.window.rootViewController = viewController;
-    
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 -(void)viewWillAppear:(BOOL)animated
 {
     
-    _segmentedmenu.selectedSegmentIndex=1;
-    for (int i=0; i<[_segmentedmenu.subviews count]; i++)
-    {
-        UIColor *tintcolor = [UIColor colorWithRed:150/255.0 green:122/255.0 blue:85/255.0 alpha:1.0];
-        if ([[_segmentedmenu.subviews objectAtIndex:i]isSelected])
-        {
-            
-            [[_segmentedmenu.subviews objectAtIndex:i] setTintColor:tintcolor];
-            
-        }
-        else
-        {
-            [[_segmentedmenu.subviews objectAtIndex:i] setTintColor:[UIColor whiteColor]];
-            NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        tintcolor,NSForegroundColorAttributeName,nil];
-            [_segmentedmenu setTitleTextAttributes:attributes forState:UIControlStateNormal];
-        }
-    }
+//    _segmentedmenu.selectedSegmentIndex=1;
+//    for (int i=0; i<[_segmentedmenu.subviews count]; i++)
+//    {
+//        UIColor *tintcolor = [UIColor colorWithRed:150/255.0 green:122/255.0 blue:85/255.0 alpha:1.0];
+//        if ([[_segmentedmenu.subviews objectAtIndex:i]isSelected])
+//        {
+//            
+//            [[_segmentedmenu.subviews objectAtIndex:i] setTintColor:tintcolor];
+//            
+//        }
+//        else
+//        {
+//            [[_segmentedmenu.subviews objectAtIndex:i] setTintColor:[UIColor whiteColor]];
+//            NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                        tintcolor,NSForegroundColorAttributeName,nil];
+//            [_segmentedmenu setTitleTextAttributes:attributes forState:UIControlStateNormal];
+//        }
+//    }
     
     
     //_scrContact.contentSize=CGSizeMake(self.view.frame.size.width, _viwmap.frame.size.height+ _viwmap.frame.origin.y+30);
     //_viwcontentview.frame=CGRectMake(_viwcontentview.frame.origin.x, _viwcontentview.frame.origin.y, self.view.frame.size.width, _scrContact.contentSize.height);
 }
-    // Do any additional setup after loading the view.
+
+-(void) setBroder
+{
+    UIColor *bColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1];
+
+    [GlobalClass setBorder:_name_view cornerRadius:2 borderWidth:1 color:bColor];
+    
+    [GlobalClass setBorder:_email_view cornerRadius:2 borderWidth:1 color:bColor];
+    
+    [GlobalClass setBorder:_phone_view cornerRadius:2 borderWidth:1 color:bColor];
+    
+    [GlobalClass setBorder:_category_view cornerRadius:2 borderWidth:1 color:bColor];
+    
+    [GlobalClass setBorder:_message_view cornerRadius:2 borderWidth:1 color:bColor];
+    
+}
+
+-(void)getCategoryData
+{
+    
+    NSString  *strUrl = [NSString stringWithFormat:@"category?api_key=%@", [GlobalClass apiKey]];
+    
+    [GlobalClass call_tableGETWebURL:strUrl parameters:nil view:self.view success:^(id responseObject)
+     {
+         arrCategory = [responseObject valueForKey:@"resource"];
+//         [Category parseCategory:[responseObject valueForKey:@"resource"]];
+         if (arrCategory.count == 0){
+             [GlobalClass showTost:@"Information not available"];
+         }
+     } failure:^(NSError *error){
+         [GlobalClass showTost:error.localizedDescription];
+     } callingCount:0];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 - (IBAction)segmentedPressed:(UISegmentedControl*)sender
 {
@@ -168,12 +130,7 @@
 #pragma mark - on btn click show drop down menu
 -(void)showPopUpWithTitle:(NSString*)popupTitle withOption:(NSArray*)arrOptions xy:(CGPoint)point size:(CGSize)size isMultiple:(BOOL)isMultiple
 {
-    NSString *parsekey;
-   
-        parsekey = @"category";
-   
-    
-    Dropobj = [[DropDownListView alloc] initWithTitle:popupTitle options:arrOptions xy:point size:size isMultiple:isMultiple parseKey:parsekey];
+    Dropobj = [[DropDownListView alloc] initWithTitle:popupTitle options:arrOptions xy:point size:size isMultiple:isMultiple parseKey:@"category"];
     Dropobj.delegate = self;
     [Dropobj showInView:self.view animated:YES];
     
@@ -185,15 +142,11 @@
     /*----------------Get Selected Value[Single selection]-----------------*/
    
    
-    NSDictionary *dict=[arrCategory objectAtIndex:anIndex];
+    NSDictionary *dict = [arrCategory objectAtIndex:anIndex];
     ;
-    _txtCategory.text=[dict valueForKey:@"category"];
-    
-        
-   
-    
-    
+    _txtCategory.text = [dict valueForKey:@"category"];
 }
+
 - (void)DropDownListView:(DropDownListView *)dropdownListView Datalist:(NSMutableArray*)ArryData{
     /*
      //----------------Get Selected Value[Multiple selection]-----------------
@@ -211,25 +164,52 @@
 {
     
 }
+
 - (IBAction)btnSubmit:(id)sender
 {
-
-    MFMailComposeViewController *composer=[[MFMailComposeViewController alloc]init];
-    [composer setMailComposeDelegate:self];
-    
-    if ([MFMailComposeViewController canSendMail])
+    if (_txtname.text.length == 0)
     {
-        [composer setToRecipients:[NSArray arrayWithObjects:@"b@infomanav.com", nil]];
-        [composer setSubject:[NSString stringWithFormat:@"Get in touch:"]];
-        
-        //    [composer.setSubject.placeholder = [NSLocalizedString(@"This is a placeholder",)];
-        NSString *message=[NSString stringWithFormat:@"Hello AstaGuru Team,\n Name: %@\n EmailID: %@\n Phone: %@\n Category: %@\n Message: %@ ",[ClsSetting TrimWhiteSpaceAndNewLine:_txtname.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtEmail.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtPhone.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtCategory.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtMessage.text ]];
-        
-        [composer setMessageBody:message isHTML:NO];
-        [composer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-        [self presentViewController:composer animated:YES completion:nil];
+        [GlobalClass showTost:@"Enter your name"];
     }
-    else {
+    else if (_txtEmail.text.length == 0)
+    {
+        [GlobalClass showTost:@"Enter your email"];
+    }
+    else if (![GlobalClass isValidEmail:_txtEmail.text])
+    {
+        [GlobalClass showTost:@"Please enter valid email-id"];
+    }
+    else if (_txtPhone.text.length == 0)
+    {
+        [GlobalClass showTost:@"Enter your phone number"];
+    }
+    else if (_txtCategory.text.length == 0)
+    {
+        [GlobalClass showTost:@"Select category"];
+    }
+    else if (_txtMessage.text.length == 0)
+    {
+        [GlobalClass showTost:@"Enter your message"];
+    }
+    else
+    {
+        MFMailComposeViewController *composer=[[MFMailComposeViewController alloc]init];
+        [composer setMailComposeDelegate:self];
+        
+        if ([MFMailComposeViewController canSendMail])
+        {
+            [composer setToRecipients:[NSArray arrayWithObjects:@"contact@astaguru.com", nil]];
+            [composer setSubject:[NSString stringWithFormat:@"Get in touch:"]];
+            
+            //    [composer.setSubject.placeholder = [NSLocalizedString(@"This is a placeholder",)];
+            NSString *message=[NSString stringWithFormat:@"Hello AstaGuru Team,\n Name: %@\n EmailID: %@\n Phone: %@\n Category: %@\n Message: %@ ",[GlobalClass trimWhiteSpaceAndNewLine:_txtname.text ],[GlobalClass trimWhiteSpaceAndNewLine:_txtEmail.text ],[GlobalClass trimWhiteSpaceAndNewLine:_txtPhone.text ],[GlobalClass trimWhiteSpaceAndNewLine:_txtCategory.text ],[GlobalClass trimWhiteSpaceAndNewLine:_txtMessage.text ]];
+            
+            [composer setMessageBody:message isHTML:NO];
+            [composer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+            [self presentViewController:composer animated:YES completion:nil];
+        }
+        else {
+        }
     }
 }
 

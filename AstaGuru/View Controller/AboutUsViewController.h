@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface AboutUsViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UILabel *txtAboutUs;
-@property (weak, nonatomic) IBOutlet UIView *viwinner;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrContent;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+@interface AboutUsViewController : BaseViewController
+//@property (weak, nonatomic) IBOutlet UILabel *txtAboutUs;
+//@property (weak, nonatomic) IBOutlet UIView *viwinner;
+//@property (weak, nonatomic) IBOutlet UIScrollView *scrContent;
+//@property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
+//@property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 @end

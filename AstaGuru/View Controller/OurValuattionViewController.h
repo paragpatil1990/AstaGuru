@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
+@interface OurValuattionViewController : BaseViewController
 
-@interface OurValuattionViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+@property (strong, nonatomic) IBOutlet UITableView *tableValuation;
+
 @end

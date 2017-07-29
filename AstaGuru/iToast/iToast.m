@@ -27,7 +27,7 @@ THE SOFTWARE.
 */
 
 
-#import "iToast.h"
+#import "IToast.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define CURRENT_TOAST_TAG 6984678
@@ -36,16 +36,16 @@ static const CGFloat kComponentPadding = 5;
 
 static iToastSettings *sharedSettings = nil;
 
-@interface iToast(private)
+@interface IToast(private)
 
-- (iToast *) settings;
+- (IToast *) settings;
 - (CGRect)_toastFrameForImageSize:(CGSize)imageSize withLocation:(iToastImageLocation)location andTextSize:(CGSize)textSize;
 - (CGRect)_frameForImage:(iToastType)type inToastFrame:(CGRect)toastFrame;
 
 @end
 
 
-@implementation iToast
+@implementation IToast
 
 
 - (id) initWithText:(NSString *) tex{
@@ -306,19 +306,19 @@ static iToastSettings *sharedSettings = nil;
 }
 
 
-+ (iToast *) makeText:(NSString *) _text{
-	iToast *toast = [[[iToast alloc] initWithText:_text] autorelease];
++ (IToast *) makeText:(NSString *) _text{
+	IToast *toast = [[[IToast alloc] initWithText:_text] autorelease];
 	
 	return toast;
 }
 
 
-- (iToast *) setDuration:(NSInteger ) duration{
+- (IToast *) setDuration:(NSInteger ) duration{
 	[self theSettings].duration = duration;
 	return self;
 }
 
-- (iToast *) setGravity:(iToastGravity) gravity 
+- (IToast *) setGravity:(iToastGravity) gravity 
 			 offsetLeft:(NSInteger) left
 			  offsetTop:(NSInteger) top{
 	[self theSettings].gravity = gravity;
@@ -327,48 +327,48 @@ static iToastSettings *sharedSettings = nil;
 	return self;
 }
 
-- (iToast *) setGravity:(iToastGravity) gravity{
+- (IToast *) setGravity:(iToastGravity) gravity{
 	[self theSettings].gravity = gravity;
 	return self;
 }
 
-- (iToast *) setPostion:(CGPoint) _position{
+- (IToast *) setPostion:(CGPoint) _position{
 	[self theSettings].postition = CGPointMake(_position.x, _position.y);
 	
 	return self;
 }
 
-- (iToast *) setFontSize:(CGFloat) fontSize{
+- (IToast *) setFontSize:(CGFloat) fontSize{
 	[self theSettings].fontSize = fontSize;
 	return self;
 }
 
-- (iToast *) setUseShadow:(BOOL) useShadow{
+- (IToast *) setUseShadow:(BOOL) useShadow{
 	[self theSettings].useShadow = useShadow;
 	return self;
 }
 
-- (iToast *) setCornerRadius:(CGFloat) cornerRadius{
+- (IToast *) setCornerRadius:(CGFloat) cornerRadius{
 	[self theSettings].cornerRadius = cornerRadius;
 	return self;
 }
 
-- (iToast *) setBgRed:(CGFloat) bgRed{
+- (IToast *) setBgRed:(CGFloat) bgRed{
 	[self theSettings].bgRed = bgRed;
 	return self;
 }
 
-- (iToast *) setBgGreen:(CGFloat) bgGreen{
+- (IToast *) setBgGreen:(CGFloat) bgGreen{
 	[self theSettings].bgGreen = bgGreen;
 	return self;
 }
 
-- (iToast *) setBgBlue:(CGFloat) bgBlue{
+- (IToast *) setBgBlue:(CGFloat) bgBlue{
 	[self theSettings].bgBlue = bgBlue;
 	return self;
 }
 
-- (iToast *) setBgAlpha:(CGFloat) bgAlpha{
+- (IToast *) setBgAlpha:(CGFloat) bgAlpha{
 	[self theSettings].bgAlpha = bgAlpha;
 	return self;
 }

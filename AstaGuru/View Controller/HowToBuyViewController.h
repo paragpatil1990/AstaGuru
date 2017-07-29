@@ -2,18 +2,15 @@
 //  HowToBuyViewController.h
 //  AstaGuru
 //
-//  Created by sumit mashalkar on 21/10/16.
-//  Copyright © 2016 Aarya Tech. All rights reserved.
+//  Created by Amrit Singh on 7/10/17.
+//  Copyright © 2017 Aarya Tech. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 #import "STCollapseTableView.h"
-@interface HowToBuyViewController : UIViewController
-@property NSUInteger pageIndex;
-//@property (strong, nonatomic) IBOutlet STCollapseTableView *tblHowtoBuy;
-@property (strong, nonatomic) IBOutlet STCollapseTableView *tblHowtoBuy;
+@interface HowToBuyViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource>
 
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
-@property (nonatomic)int isHowTobuy;
+@property (strong, nonatomic) IBOutlet STCollapseTableView *tableHowToBuy;
+
 @end

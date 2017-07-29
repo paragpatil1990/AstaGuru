@@ -8,62 +8,65 @@
 
 #import "ForGotViewController.h"
 #import "SWRevealViewController.h"
-#import "ClsSetting.h"
-@interface ForGotViewController ()<PassResepose>
+#import "GlobalClass.h"
+
+@interface ForGotViewController ()
 
 @end
 
 @implementation ForGotViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self setUpNavigationItem];
-     _scrScreollviw.keyboardDismissMode=UIScrollViewKeyboardDismissModeOnDrag;
-    _viwInnerview.layer.cornerRadius = _viwInnerview.frame.size.width/2;
-    _viwInnerview.clipsToBounds = YES;
-    // Do any additional setup after loading the view.
-}
 -(void)setUpNavigationItem
 {
-    self.sidebarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"signs"] style:UIBarButtonItemStyleDone target:self.revealViewController action:@selector(revealToggle:)];
-    self.sidebarButton.tintColor=[UIColor whiteColor];
-    self.title=@"Forgot Password";
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    [[self navigationItem] setLeftBarButtonItem:self.sidebarButton];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationItem.title = @"My AstaGuru";
+
+   // [self.navigationItem setHidesBackButton:YES];
     
-    [self.revealViewController setFrontViewController:self.navigationController];
-    [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+   // [self setNavigationBarCloseButton];//Target:self selector:@selector(closePressed)];
+
+    
+//    self.sidebarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"signs"] style:UIBarButtonItemStyleDone target:self.revealViewController action:@selector(revealToggle:)];
+//    self.sidebarButton.tintColor=[UIColor whiteColor];
+//    self.title=@"Forgot Password";
+//    [self.navigationController.navigationBar setTitleTextAttributes:
+//     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+//    [[self navigationItem] setLeftBarButtonItem:self.sidebarButton];
+//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+//    
+//    [self.revealViewController setFrontViewController:self.navigationController];
+//    [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
     
     
     
     //self.navigationItem.title=@"Sign Up";
-    self.sideleftbarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-close"] style:UIBarButtonItemStyleDone target:self action:@selector(closePressed)];
-    self.sideleftbarButton.tintColor=[UIColor whiteColor];
-    [[self navigationItem] setRightBarButtonItem:self.sideleftbarButton];
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor whiteColor],
-       NSFontAttributeName:[UIFont fontWithName:@"WorkSans-Medium" size:17]}];
-    
-    
+//    self.sideleftbarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-close"] style:UIBarButtonItemStyleDone target:self action:@selector(closePressed)];
+//    self.sideleftbarButton.tintColor=[UIColor whiteColor];
+//    [[self navigationItem] setRightBarButtonItem:self.sideleftbarButton];
+//    [self.navigationController.navigationBar setTitleTextAttributes:
+//     @{NSForegroundColorAttributeName:[UIColor whiteColor],
+//       NSFontAttributeName:[UIFont fontWithName:@"WorkSans-Medium" size:17]}];
+
 }
--(void)searchPressed
+
+-(void)closePressed
 {
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
--(void)myastaguru
+
+- (void)viewDidLoad
 {
+    // Do any additional setup after loading the view.
+
+    [super viewDidLoad];
+    [self setUpNavigationItem];
     
+     _scrScreollviw.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+    
+    [GlobalClass setBorder:_viwInnerview cornerRadius:_viwInnerview.frame.size.width/2 borderWidth:1 color:[UIColor clearColor]];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
--(void)closePressed
-{
-    
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -81,69 +84,102 @@
 {
     if (_email_TextField.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Please enter your email"];
+        [GlobalClass showTost:@"Please enter your email"];
     }
-    else{
-        NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-        ClsSetting *objSetting=[[ClsSetting alloc]init];
-        [objSetting CallWeb:dict url:[NSString stringWithFormat:@"users/?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed&filter=email=%@",[ClsSetting TrimWhiteSpaceAndNewLine:_email_TextField.text]] view:self.view Post:NO];
-        objSetting.PassReseposeDatadelegate=self;
-    }
-}
-
--(void)passReseposeData:(id)arr
-{
-    //  NSMutableArray *arrOccution=[parese parseCurrentOccution:[arr valueForKey:@"resource"]];
-    NSError *error;
-    NSMutableDictionary *dict1 = [NSJSONSerialization JSONObjectWithData:arr options:0 error:&error];
-    NSMutableArray *arr1=[dict1 valueForKey:@"resource"];
-    if (arr1.count>0)
+    else if (![GlobalClass isValidEmail:_email_TextField.text])
     {
-        NSMutableDictionary *dict=[arr1 objectAtIndex:0];
-        if ([[dict valueForKey:@"email"] isEqualToString:[ClsSetting TrimWhiteSpaceAndNewLine:_email_TextField.text]])
-        {
-//            [ClsSetting ValidationPromt:@"Login Successfully"];
-            NSString *email = [dict valueForKey:@"email"];
-            NSLog(@"email == %@",email);
-            NSString *password = [dict valueForKey:@"password"];
-            NSLog(@"password == %@",password);
-            NSString *name = [dict valueForKey:@"name"];
-            NSLog(@"name == %@",name);
-            NSString *username = [dict valueForKey:@"username"];
-            [self SendEmail:email password:password username:username name:name];
-        }
-        else
-        {
-            [ClsSetting ValidationPromt:@"Enter valid email"];
-        }
+        [GlobalClass showTost:@"Please enter valid email-id"];
     }
     else
     {
-        [ClsSetting ValidationPromt:@"The email address entered by you was not present in our database. Please check the email address"];
+        NSString *url = [NSString stringWithFormat:@"users/?api_key=%@&filter=email=%@", [GlobalClass apiKey], [GlobalClass trimWhiteSpaceAndNewLine:_email_TextField.text]];
+        
+        [GlobalClass call_tableGETWebURL:url parameters:nil view:self.view success:^(id responseObject)
+         {
+             NSMutableArray *resourceArray = responseObject[@"resource"];
+             if (resourceArray.count > 0)
+             {
+                 NSDictionary *userDict = [GlobalClass removeNullOnly:[resourceArray objectAtIndex:0]];
+                 NSLog(@"userDict = %@",userDict);
+                 NSString *email = [userDict valueForKey:@"email"];
+                 if ([[GlobalClass trimWhiteSpaceAndNewLine:email] isEqualToString:[GlobalClass trimWhiteSpaceAndNewLine:_email_TextField.text]])
+                 {
+                     NSString *password = [userDict valueForKey:@"password"];
+                     NSString *name = [NSString stringWithFormat:@"%@ %@",[userDict valueForKey:@"name"], [userDict valueForKey:@"lastname"]];
+                     NSString *username = [userDict valueForKey:@"username"];
+                     [self sendEmail:email password:password username:username name:name];
+                 }
+                 else
+                 {
+                     [GlobalClass showTost:@"Enter valid email"];
+                 }
+             }
+             else
+             {
+                 [GlobalClass showTost:@"The email address entered by you was not present in our database. Please check the email address"];
+             }
+         }failure:^(NSError *error)
+         {
+             [GlobalClass showTost:error.localizedDescription];
+         } callingCount:0];
+
+//        NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
+//        ClsSetting *objSetting=[[ClsSetting alloc]init];
+//        [objSetting CallWeb:dict url:[NSString stringWithFormat:@"users/?api_key=%@&filter=email=%@",[ClsSetting apiKey],[ClsSetting TrimWhiteSpaceAndNewLine:_email_TextField.text]] view:self.view Post:NO];
+//        objSetting.PassReseposeDatadelegate=self;
     }
-    
 }
--(void)SendEmail:(NSString*)email password:(NSString*)password username:(NSString*)username name:(NSString*)name
+
+//-(void)passReseposeData:(id)arr
+//{
+//    //  NSMutableArray *arrOccution=[parese parseCurrentOccution:[arr valueForKey:@"resource"]];
+//    NSError *error;
+//    NSMutableDictionary *dict1 = [NSJSONSerialization JSONObjectWithData:arr options:0 error:&error];
+//    NSMutableArray *arr1=[dict1 valueForKey:@"resource"];
+//    if (arr1.count>0)
+//    {
+//        NSMutableDictionary *dict=[arr1 objectAtIndex:0];
+//        if ([[dict valueForKey:@"email"] isEqualToString:[ClsSetting TrimWhiteSpaceAndNewLine:_email_TextField.text]])
+//        {
+////            [ClsSetting ValidationPromt:@"Login Successfully"];
+//            NSString *email = [dict valueForKey:@"email"];
+//            NSLog(@"email == %@",email);
+//            NSString *password = [dict valueForKey:@"password"];
+//            NSLog(@"password == %@",password);
+//            NSString *name = [dict valueForKey:@"name"];
+//            NSLog(@"name == %@",name);
+//            NSString *username = [dict valueForKey:@"username"];
+//            [self SendEmail:email password:password username:username name:name];
+//        }
+//        else
+//        {
+//            [ClsSetting ValidationPromt:@"Enter valid email"];
+//        }
+//    }
+//    else
+//    {
+//        [ClsSetting ValidationPromt:@"The email address entered by you was not present in our database. Please check the email address"];
+//    }
+//    
+//}
+
+-(void)sendEmail:(NSString*)email password:(NSString*)password username:(NSString*)username name:(NSString*)name
 {
-    NSDictionary *dictTo = @{
-                             @"name":name,
-                             @"email":email,
-                             };
-    NSArray*arrTo=[[NSArray alloc]initWithObjects:dictTo, nil];
-    // NSDictionary *dictMail=[[NSDictionary alloc]init];
-    NSDictionary *dictMail = @{
-                               @"template":@"newsletter",
-                               @"to":arrTo,
-                               @"subject":@"Astaguru Password",
-                               @"body_text":[NSString stringWithFormat:@"Hi %@ \n Your Astaguru Login Credentials are, \n Username:%@ \n Password:%@",name,username ,password],
-                               @"from_name":@"NetSpace India SES",
-                               @"from_email":@"beta@netspaceindia.com",
-                               @"reply_to_name":@"NetSpace India",
-                               @"reply_to_email":@"beta@netspaceindia.com",
-                               
-                               };
-    [ClsSetting ValidationPromt:@"Email is sent to your register mail ID,Please check your mail box."];
-    [ClsSetting Email:dictMail view:self.view];
+    NSDictionary *dictMailParameters = @{
+                                         @"to":@[@{
+                                                     @"name":name,
+                                                     @"email":email,
+                                                     }],
+                                         @"subject":@"Warm Greetings from AstaGuru Online Auction House.",
+                                         @"body_text": [NSString stringWithFormat:@"Dear %@,\n\nYour AstaGuru login credentials are,\nUsername : %@\nPassword : %@\n\nFor any further assistance please feel free to write to us at, contact@astaguru.com or call us on 91-22 2204 8138/39. We will be glad to assist you.\n\nWarm Regards,\nTeam AstaGuru\n",name, username, password]
+                                         };
+    
+    [GlobalClass sendEmail:dictMailParameters success:^(id responseObject)
+     {
+         [GlobalClass showTost:@"Email is sent to your register mail ID, Please check your mail box."];
+     }failure:^(NSError *error)
+     {
+     }];
 }
 
 @end

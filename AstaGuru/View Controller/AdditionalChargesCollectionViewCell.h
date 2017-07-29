@@ -10,23 +10,27 @@
 #import "EGOImageView.h"
 @interface AdditionalChargesCollectionViewCell : UICollectionViewCell
 
-
-@property (weak, nonatomic) IBOutlet EGOImageView *imgProduct;
-
-@property (weak, nonatomic) IBOutlet UILabel *lblArtistName;
-@property (weak, nonatomic) IBOutlet UILabel *lblProductName;
-@property (weak, nonatomic) IBOutlet UILabel *lblCategoryName;
-@property (weak, nonatomic) IBOutlet UILabel *lblMedium;
-@property (weak, nonatomic) IBOutlet UILabel *lblYear;
-@property (weak, nonatomic) IBOutlet UILabel *lblSize;
-@property (weak, nonatomic) IBOutlet UILabel *lblEstimation;
-@property (weak, nonatomic) IBOutlet UILabel *lblByyerPremium;
-@property (weak, nonatomic) IBOutlet UILabel *lblServiceTaxOnPremium;
-@property (weak, nonatomic) IBOutlet UILabel *lblVatOnHammerPrice;
-
-@property (weak, nonatomic) IBOutlet UILabel *lblHammerPrice;
-@property (weak, nonatomic) IBOutlet UILabel *lblGrandTotal;
-
-@property (weak, nonatomic) IBOutlet UIButton *btnLot;
-
+@property (strong, nonatomic) IBOutlet UIButton *btnLot;
+@property (strong, nonatomic) IBOutlet EGOImageView *imgProduct;
+@property (strong, nonatomic) IBOutlet UILabel *lblArtistText;
+@property (strong, nonatomic) IBOutlet UILabel *lblArtistName;
+@property (strong, nonatomic) IBOutlet UILabel *lblMediumText;
+@property (strong, nonatomic) IBOutlet UILabel *lblMedium;
+@property (strong, nonatomic) IBOutlet UILabel *lblYearText;
+@property (strong, nonatomic) IBOutlet UILabel *lblYear;
+@property (strong, nonatomic) IBOutlet UILabel *lblSizeText;
+@property (strong, nonatomic) IBOutlet UILabel *lblSize;
+@property (strong, nonatomic) IBOutlet UILabel *lblEstimateText;
+@property (strong, nonatomic) IBOutlet UILabel *lblEstimation;
+@property (strong, nonatomic) IBOutlet UILabel *lblHammerPriceText;
+@property (strong, nonatomic) IBOutlet UILabel *lblHammerPrice;
+@property (strong, nonatomic) IBOutlet UILabel *lblBuyersPremiumText;
+@property (strong, nonatomic) IBOutlet UILabel *lblBuyerPremium;
+@property (strong, nonatomic) IBOutlet UILabel *lblVatOnHammerPriceText;
+@property (strong, nonatomic) IBOutlet UILabel *lblVatOnHammerPrice;
+@property (strong, nonatomic) IBOutlet UILabel *lblGSTOnHammerPriceText;
+@property (strong, nonatomic) IBOutlet UILabel *lblGSTOnPremium;
+@property (strong, nonatomic) IBOutlet UILabel *lblGrandTotalText;
+@property (strong, nonatomic) IBOutlet UILabel *lblGrandTotal;
+@property (strong, nonatomic) IBOutlet UILabel *lblNoteText;
 @end

@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
+@interface PrivacyPoliceViewController : BaseViewController
+//@property(nonatomic)BOOL isPrivacyPolice;
 
-@interface PrivacyPoliceViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
-@property(nonatomic)BOOL isPrivacyPolice;
-@property (weak, nonatomic) IBOutlet UITextView *txt;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+@property (weak, nonatomic) IBOutlet UITextView *txtViewPrivacyPolice;
 
 @end

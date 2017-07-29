@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
+@interface CongratulationViewController : BaseViewController
+//@property (strong, nonatomic) IBOutlet UIBarButtonItem *leftBarButton;
+@property (weak, nonatomic) IBOutlet UIButton *btnViewCurrentAuctions;
 
-@interface CongratulationViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
-@property (weak, nonatomic) IBOutlet UIButton *btnViewconnentAuctions;
+- (IBAction)btnViewCurrentAuctionPressed:(UIButton *)sender;
+
+//@property(nonatomic,retain)NSString *strname;
+//@property(nonatomic,retain)NSString *strEmail;//,*strEmialCode,*strSMSCode,*strMobile;
+//@property(nonatomic,retain)NSMutableDictionary *dict;
 
 @end

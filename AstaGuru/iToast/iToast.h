@@ -56,7 +56,7 @@ typedef enum {
 
 @class iToastSettings;
 
-@interface iToast : NSObject {
+@interface IToast : NSObject {
 	iToastSettings *_settings;
 	
 	NSTimer *timer;
@@ -67,21 +67,21 @@ typedef enum {
 
 - (void) show;
 - (void) show:(iToastType) type;
-- (iToast *) setDuration:(NSInteger ) duration;
-- (iToast *) setGravity:(iToastGravity) gravity 
+- (IToast *) setDuration:(NSInteger ) duration;
+- (IToast *) setGravity:(iToastGravity) gravity 
 			 offsetLeft:(NSInteger) left
 			 offsetTop:(NSInteger) top;
-- (iToast *) setGravity:(iToastGravity) gravity;
-- (iToast *) setPostion:(CGPoint) position;
-- (iToast *) setFontSize:(CGFloat) fontSize;
-- (iToast *) setUseShadow:(BOOL) useShadow;
-- (iToast *) setCornerRadius:(CGFloat) cornerRadius;
-- (iToast *) setBgRed:(CGFloat) bgRed;
-- (iToast *) setBgGreen:(CGFloat) bgGreen;
-- (iToast *) setBgBlue:(CGFloat) bgBlue;
-- (iToast *) setBgAlpha:(CGFloat) bgAlpha;
+- (IToast *) setGravity:(iToastGravity) gravity;
+- (IToast *) setPostion:(CGPoint) position;
+- (IToast *) setFontSize:(CGFloat) fontSize;
+- (IToast *) setUseShadow:(BOOL) useShadow;
+- (IToast *) setCornerRadius:(CGFloat) cornerRadius;
+- (IToast *) setBgRed:(CGFloat) bgRed;
+- (IToast *) setBgGreen:(CGFloat) bgGreen;
+- (IToast *) setBgBlue:(CGFloat) bgBlue;
+- (IToast *) setBgAlpha:(CGFloat) bgAlpha;
 
-+ (iToast *) makeText:(NSString *) text;
++ (IToast *) makeText:(NSString *) text;
 
 -(iToastSettings *) theSettings;
 

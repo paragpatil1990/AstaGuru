@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
+#import "STCollapseTableView.h"
+@interface ServicesViewController : BaseViewController<UITableViewDelegate, UITableViewDataSource>
 
-@interface ServicesViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UITextView *txtServices;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+@property (strong, nonatomic) IBOutlet STCollapseTableView *tableServices;
+
 @end

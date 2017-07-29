@@ -8,13 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "TPKeyboardAvoidingScrollView.h"
-@interface ForGotViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+#import "BaseViewController.h"
+@interface ForGotViewController : BaseViewController
+
+//@property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
+//@property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrScreollviw;
 @property (weak, nonatomic) IBOutlet UIView *viwInnerview;
 @property (strong, nonatomic) IBOutlet UITextField *email_TextField;
 @property (strong, nonatomic) IBOutlet UIButton *sendPassword_Btn;
+
 - (IBAction)sendPassword_BtnClick:(UIButton *)sender;
 
 @end

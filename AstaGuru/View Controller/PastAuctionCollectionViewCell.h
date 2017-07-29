@@ -9,12 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "EGOImageView.h"
 @interface PastAuctionCollectionViewCell : UICollectionViewCell
-
-
-@property (weak, nonatomic) IBOutlet EGOImageView *imgPastAuction;
-@property (weak, nonatomic) IBOutlet UILabel *lblPastAuctionTitle;
-@property (weak, nonatomic) IBOutlet UILabel *Title;
-@property (weak, nonatomic) IBOutlet UILabel *lblTotlaSaleValue;
-@property (weak, nonatomic) IBOutlet UILabel *lblPastAuctionDate;
-
+@property (strong, nonatomic) IBOutlet EGOImageView *imgProduct;
+@property (strong, nonatomic) IBOutlet UILabel *lblProductName;
+@property (strong, nonatomic) IBOutlet UILabel *lblTotalSaleValueText;
+@property (strong, nonatomic) IBOutlet UILabel *lblTotlaSaleValue;
+@property (strong, nonatomic) IBOutlet UILabel *lblAuctionDate;
 @end

@@ -7,12 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+#import <UserNotifications/UserNotifications.h>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic)int isfilterStart;
-@property (nonatomic)int isRefreshstart;
-@property (nonatomic)int iSelectedSortInCurrentAuction;
+
+
+// This property is defiend to refreash data for selected sort index in current auction.
+@property NSInteger iSelectedSortInCurrentAuction;
+
+- (void)registerForRemoteNotification;
+
+
 @end
 

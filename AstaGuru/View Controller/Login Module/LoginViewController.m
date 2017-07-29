@@ -7,84 +7,54 @@
 //
 
 #import "LoginViewController.h"
-#import "SWRevealViewController.h"
 #import "RegistrationViewController.h"
-#import "ViewController.h"
+#import "HomeViewController.h"
 #import "AfterLoginViewController.h"
 #import "ForGotViewController.h"
 #import "VerificationViewController.h"
-@interface LoginViewController ()<PassResepose>
+//#import "GlobalClass.h"
+
+@interface LoginViewController ()
 
 @end
 
 @implementation LoginViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self setUpNavigationItem];
-    // Do any additional setup after loading the view.
-}
 -(void)setUpNavigationItem
 {
-    self.sidebarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"signs"] style:UIBarButtonItemStyleDone target:self.revealViewController action:@selector(revealToggle:)];
-    self.sidebarButton.tintColor=[UIColor whiteColor];
-    self.title=@"Sign In";
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    [[self navigationItem] setLeftBarButtonItem:self.sidebarButton];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.title = @"Sign In";
     
-    [self.revealViewController setFrontViewController:self.navigationController];
-    [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+    [self.navigationItem setHidesBackButton:YES];
     
-   
+   // [self setNavigationBarCloseButton];//Target:self selector:@selector(closePressed)];
     
-    //self.navigationItem.title=@"Sign Up";
-    self.sideleftbarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-close"] style:UIBarButtonItemStyleDone target:self action:@selector(closePressed)];
-    self.sideleftbarButton.tintColor=[UIColor whiteColor];
-    [[self navigationItem] setRightBarButtonItem:self.sideleftbarButton];
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor whiteColor],
-       NSFontAttributeName:[UIFont fontWithName:@"WorkSans-Medium" size:17]}];
+    //    UIBarButtonItem *closeBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-close"] style:UIBarButtonItemStyleDone target:self action:@selector(closePressed)];
+    //    closeBarButton.tintColor=[UIColor whiteColor];
+    //    [self.navigationItem setRightBarButtonItem:closeBarButton];
     
-    [ClsSetting SetBorder:_userName_View cornerRadius:2 borderWidth:1];
-    _userName_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    //    [self.navigationController.navigationBar setTitleTextAttributes:
+    //     @{NSForegroundColorAttributeName:[UIColor whiteColor],
+    //       NSFontAttributeName:[UIFont fontWithName:@"WorkSans-Medium" size:16]}];
+    
+}
 
-    [ClsSetting SetBorder:_password_View cornerRadius:2 borderWidth:1];
-    _password_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+- (void)viewDidLoad
+{
+    // Do any additional setup after loading the view.
 
-}
--(void)searchPressed
-{
+    [super viewDidLoad];
+    [self setUpNavigationItem];
+    [GlobalClass setBorder:_userName_View cornerRadius:2 borderWidth:1 color:[UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1]];
     
+    [GlobalClass setBorder:_password_View cornerRadius:2 borderWidth:1 color:[UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1]];
 }
--(void)myastaguru
+
+- (void)didReceiveMemoryWarning
 {
-    
-}
-- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)closePressed
-{
-    if (_IsCommingFromSideMenu==1)
-    {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        ViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
-        
-        
-        [self.navigationController setViewControllers: @[rootViewController] animated: YES];
-        
-        [self.revealViewController setFrontViewController:self.navigationController];
-        [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
-    }
-    else
-    {
-    [self.navigationController popViewControllerAnimated:YES];
-    }
-   
-}
+
 /*
 #pragma mark - Navigation
 
@@ -99,20 +69,78 @@
 {
     if (_txtUserName.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Please enter your username"];
+        [GlobalClass showTost:@"Please enter your username"];
     }
     else if (_txtPassword.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Please enter your password"];
+        [GlobalClass showTost:@"Please enter your password"];
     }
     else
     {
-        NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-        ClsSetting *objSetting=[[ClsSetting alloc]init];
-        [objSetting CallWeb:dict url:[NSString stringWithFormat:@"users/?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed&filter=username=%@",[ClsSetting TrimWhiteSpaceAndNewLine:_txtUserName.text]] view:self.view Post:NO];
-        objSetting.PassReseposeDatadelegate=self;
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        [appDelegate registerForRemoteNotification];
+
+        NSString *deviceToken = deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:DEVICETOKEN];
+        if(deviceToken == nil)
+        {
+            deviceToken = @"";
+        }
+
+        NSString *strurl = [NSString stringWithFormat:@"spUserLogin(%@,%@,%@,%@)", [GlobalClass trimWhiteSpaceAndNewLine:_txtUserName.text], [GlobalClass trimWhiteSpaceAndNewLine:_txtPassword.text], deviceToken,@"IOS"];
+
+        [GlobalClass call_procGETWebURL:strurl parameters:nil view:self.view success:^(id responseObject){
+            if ([responseObject isKindOfClass:[NSArray class]])
+            {
+                NSArray *userArray = responseObject;
+                if (userArray.count > 0)
+                {
+                    NSDictionary *userDic = [GlobalClass removeNullOnly:[userArray objectAtIndex:0]];
+                    if ([[GlobalClass trimWhiteSpaceAndNewLine:[userDic valueForKey:@"password"]] isEqualToString:[GlobalClass trimWhiteSpaceAndNewLine:_txtPassword.text]])
+                    {
+                        [[NSUserDefaults standardUserDefaults] setObject:userDic forKey:USER];
+                        [[NSUserDefaults standardUserDefaults] setValue:userDic[USER_NAME] forKey:USER_NAME];
+                        [[NSUserDefaults standardUserDefaults] setValue:userDic[USER_ID] forKey:USER_ID];
+                        
+                        if ([GlobalClass isUserVerified])
+                        {
+                            [GlobalClass showTost:@"Login Successfully"];
+                            if (self.isCommingFromSideMenu == 1)
+                            {
+                                [self showHomeViewController];
+                            }
+                            else
+                            {
+                                [self.navigationController popToRootViewControllerAnimated:YES];
+                            }
+                        }
+                        else
+                        {
+                            [GlobalClass showTost:@"Your are not verified"];
+                            VerificationViewController *rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"VerificationViewController"];
+                            rootViewController.isRegistration = NO;
+                            [self.navigationController pushViewController:rootViewController animated:YES];
+                        }
+                    }
+                    else
+                    {
+                        [GlobalClass showTost:@"Please Check Password"];
+                    }
+                }
+                else
+                {
+                    [GlobalClass showTost:@"Please Check Username"];
+                }
+            }
+            else
+            {
+                [GlobalClass showTost:@"Please try again!"];
+            }
+        } failure:^(NSError *error){
+            [GlobalClass showTost:error.localizedDescription];
+        } callingCount:0];
     }
 }
+
 - (IBAction)ForgotPasswordpressed:(id)sender
 {
     ForGotViewController *rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ForGotViewController"];
@@ -125,85 +153,72 @@
     [self.navigationController pushViewController:rootViewController animated:YES];
 }
 
--(void)passReseposeData:(id)arr
-{
- //  NSMutableArray *arrOccution=[parese parseCurrentOccution:[arr valueForKey:@"resource"]];
-    NSError *error;
-    NSMutableDictionary *dict1 = [NSJSONSerialization JSONObjectWithData:arr options:0 error:&error];
-    NSMutableArray *arr1=[dict1 valueForKey:@"resource"];
-    if (arr1.count>0)
-    {
-        NSMutableDictionary *dict=[arr1 objectAtIndex:0];
-        if ([[dict valueForKey:@"password"] isEqualToString:[ClsSetting TrimWhiteSpaceAndNewLine:_txtPassword.text]])
-        {
-            dict=[ClsSetting RemoveNullOnly:dict];
-            [[NSUserDefaults standardUserDefaults]setValue:[dict valueForKey:@"username"] forKey:USER_NAME];
-             [[NSUserDefaults standardUserDefaults]setValue:[dict valueForKey:@"userid"] forKey:USER_id];
-            [[NSUserDefaults standardUserDefaults]setValue:[dict valueForKey:@"confirmbid"] forKey:@"confirmbid"];
-            [[NSUserDefaults standardUserDefaults]setValue:[dict valueForKey:@"EmailVerified"] forKey:@"EmailVerified"];
-            [[NSUserDefaults standardUserDefaults]setValue:[dict valueForKey:@"MobileVerified"] forKey:@"MobileVerified"];
-
-            [[NSUserDefaults standardUserDefaults] setObject:dict forKey:@"user"];
-
-            if ([dict[@"EmailVerified"] intValue] == 1 && [dict[@"MobileVerified"] intValue] == 1)
-            {
-                [ClsSetting ValidationPromt:@"Login Successfully"];
-                if (_IsCommingFromSideMenu==1)
-                {
-                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                    ViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
-                    
-                    [self.navigationController setViewControllers: @[rootViewController] animated: YES];
-                    
-                    [self.revealViewController setFrontViewController:self.navigationController];
-                    [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
-                }
-                else
-                {
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                }
-            }
-            else
-            {
-                [ClsSetting ValidationPromt:@"Your are not Verified"];
-
-                NSString *strSMSCode = [NSString stringWithFormat:@"%d",arc4random() % 9000 + 1000];
-                NSString *strEmailCode = [NSString stringWithFormat:@"%d",arc4random() % 9000 + 1000];
-                
-                //                NSMutableArray *arr = [NSMutableArray arrayWithObjects:dict,nil];
-                //                NSDictionary *pardsams = @{@"resource": arr};
-                
-                VerificationViewController *rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"VerificationViewController"];
-                rootViewController.dict=dict;
-                rootViewController.strEmail=[ClsSetting TrimWhiteSpaceAndNewLine:dict[@"email"]];
-                rootViewController.strMobile=[ClsSetting TrimWhiteSpaceAndNewLine:dict[@"Mobile"]];
-                rootViewController.strname=dict[@"t_firstname"];
-                rootViewController.strSMSCode=strSMSCode;
-                rootViewController.strEmialCode=strEmailCode;
-                rootViewController.isRegistration = NO;
-                rootViewController.IsCommingFromLoging = 1;
-                [self.navigationController pushViewController:rootViewController animated:YES];
-
-            }
-           /* ViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
-            
-            
-            [self.navigationController setViewControllers: @[rootViewController] animated: YES];
-            
-            [self.revealViewController setFrontViewController:self.navigationController];
-            [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];*/
-            
-        }
-        else
-        {
-            [ClsSetting ValidationPromt:@"Please Check Password"];
-        }
-    }
-    else
-    {
-        [ClsSetting ValidationPromt:@"Please Check User Name"];
-    }
-    
-}
+//-(void)passReseposeData:(id)arr
+//{
+//    NSError *error;
+//    NSMutableArray *arr1 = [NSJSONSerialization JSONObjectWithData:arr options:0 error:&error];
+//    if (arr1.count>0)
+//    {
+//        NSMutableDictionary *dict=[arr1 objectAtIndex:0];
+//        if ([[dict valueForKey:@"password"] isEqualToString:[ClsSetting TrimWhiteSpaceAndNewLine:_txtPassword.text]])
+//        {
+//            dict = [ClsSetting RemoveNullOnly:dict];
+//            
+//            [[NSUserDefaults standardUserDefaults]setValue:[dict valueForKey:@"username"] forKey:USER_NAME];
+//            
+//            [[NSUserDefaults standardUserDefaults]setValue:[dict valueForKey:@"userid"] forKey:USER_ID];
+//            
+////            [[NSUserDefaults standardUserDefaults]setValue:[dict valueForKey:@"confirmbid"] forKey:@"confirmbid"];
+////            [[NSUserDefaults standardUserDefaults]setValue:[dict valueForKey:@"EmailVerified"] forKey:@"EmailVerified"];
+////            [[NSUserDefaults standardUserDefaults]setValue:[dict valueForKey:@"MobileVerified"] forKey:@"MobileVerified"];
+//
+//            [[NSUserDefaults standardUserDefaults] setObject:dict forKey:USER];
+//
+//            if ([ClsSetting isUserVerified])
+//            {
+//                [ClsSetting ValidationPromt:@"Login Successfully"];
+//                if (_IsCommingFromSideMenu == 1)
+//                {
+//                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//                    ViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
+//                    
+//                    [self.navigationController setViewControllers: @[rootViewController] animated: YES];
+//                    
+//                    [self.revealViewController setFrontViewController:self.navigationController];
+//                    [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+//                }
+//                else
+//                {
+//                    [self.navigationController popToRootViewControllerAnimated:YES];
+//                }
+//            }
+//            else
+//            {
+//                [ClsSetting ValidationPromt:@"Your are not Verified"];
+//
+////                NSString *strSMSCode = [NSString stringWithFormat:@"%d",arc4random() % 9000 + 1000];
+////                NSString *strEmailCode = [NSString stringWithFormat:@"%d",arc4random() % 9000 + 1000];
+//                VerificationViewController *rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"VerificationViewController"];
+////                rootViewController.dict=dict;
+////                rootViewController.strEmail=[ClsSetting TrimWhiteSpaceAndNewLine:dict[@"email"]];
+////                rootViewController.strMobile=[ClsSetting TrimWhiteSpaceAndNewLine:dict[@"Mobile"]];
+////                rootViewController.strName = dict[@"t_firstname"];
+////                rootViewController.strSMSCode=strSMSCode;
+////                rootViewController.strEmialCode=strEmailCode;
+//                rootViewController.isRegistration = NO;
+////                rootViewController.IsCommingFromLoging = 1;
+//                [self.navigationController pushViewController:rootViewController animated:YES];
+//            }
+//        }
+//        else
+//        {
+//            [ClsSetting ValidationPromt:@"Please Check Password"];
+//        }
+//    }
+//    else
+//    {
+//        [ClsSetting ValidationPromt:@"Please Check User Name"];
+//    }
+//}
 
 @end

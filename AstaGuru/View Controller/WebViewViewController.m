@@ -14,22 +14,22 @@
 
 @implementation WebViewViewController
 
-- (void)viewDidLoad {
+-(void)setUpNavigationItem
+{
+    [self setNavigationBarBackButton];
+}
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [_webview loadRequest:[NSURLRequest requestWithURL:_url]];
-    [_ActivityIndicator startAnimating];
+    [self setUpNavigationItem];
+    self.ActivityIndicator.hidden=NO;
+    self.ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    [self.view bringSubviewToFront:self.ActivityIndicator];
+    [self.webview loadRequest:[NSURLRequest requestWithURL:_url]];
+    [self.ActivityIndicator startAnimating];
 }
--(void)viewDidAppear:(BOOL)animated
-{
-    /* self.navigationItem.backBarButtonItem =
-     [[UIBarButtonItem alloc] initWithTitle:@"Back"
-     style:UIBarButtonItemStylePlain
-     target:nil
-     action:nil];*/
-    self.navigationController.navigationBar.backItem.title = @"Back";
-     self.title=[NSString stringWithFormat:@"AstaGuru"];
-}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -37,18 +37,16 @@
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [_ActivityIndicator stopAnimating];
-    _ActivityIndicator.hidden=YES;
+    [self.ActivityIndicator stopAnimating];
+    self.ActivityIndicator.hidden=YES;
 }
  -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    [_ActivityIndicator stopAnimating];
-    _ActivityIndicator.hidden=YES;
+    [self.ActivityIndicator stopAnimating];
+    self.ActivityIndicator.hidden=YES;
 }
 -(void)webViewDidStartLoad:(UIWebView *)webVie
 {
-    [_ActivityIndicator stopAnimating];
-    _ActivityIndicator.hidden=YES;
 }
 /*
 #pragma mark - Navigation

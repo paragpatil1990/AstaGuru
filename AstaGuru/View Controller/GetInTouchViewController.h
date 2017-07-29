@@ -7,15 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import  "CustomTextfied.h"
-@interface GetInTouchViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
-@property (weak, nonatomic) IBOutlet UIButton *btncategory;
-@property (weak, nonatomic) IBOutlet UITextField *txtEmail;
-@property (weak, nonatomic) IBOutlet UITextField *txtname;
-@property (weak, nonatomic) IBOutlet UITextField *txtPhone;
-@property (weak, nonatomic) IBOutlet UITextField *txtCategory;
-@property (weak, nonatomic) IBOutlet UITextField *txtMessage;
+#import "BaseViewController.h"
+
+@interface GetInTouchViewController : BaseViewController
 
 @property (strong, nonatomic) IBOutlet UIView *name_view;
 @property (strong, nonatomic) IBOutlet UIView *email_view;
@@ -23,7 +17,12 @@
 @property (strong, nonatomic) IBOutlet UIView *category_view;
 @property (strong, nonatomic) IBOutlet UIView *message_view;
 
+@property (strong, nonatomic) IBOutlet UITextField *txtEmail;
+@property (strong, nonatomic) IBOutlet UITextField *txtname;
+@property (strong, nonatomic) IBOutlet UITextField *txtPhone;
+@property (strong, nonatomic) IBOutlet UITextField *txtCategory;
+@property (strong, nonatomic) IBOutlet UITextField *txtMessage;
 
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedmenu;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+@property (strong, nonatomic) IBOutlet UIButton *btncategory;
+
 @end

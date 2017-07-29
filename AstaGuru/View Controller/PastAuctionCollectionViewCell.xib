@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="WorkSans-Medium.otf">
+            <string>WorkSans-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PastAuctionCell" id="iha-jx-RTu" customClass="PastAuctionCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="360"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="360"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wSI-8F-Iif">
+                        <rect key="frame" x="5" y="5" width="190" height="350"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PY7-ZZ-Wl3" customClass="EGOImageView">
+                                <rect key="frame" x="0.0" y="0.0" width="190" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="uCY-fc-gM7"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="246" verticalCompressionResistancePriority="746" text="Product Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cV-Iv-SXX">
+                                <rect key="frame" x="0.0" y="155" width="190" height="131.5"/>
+                                <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="247" verticalCompressionResistancePriority="747" text="Total Sale Value" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awf-Ac-1iz">
+                                <rect key="frame" x="0.0" y="290.5" width="190" height="14"/>
+                                <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="12"/>
+                                <color key="textColor" red="0.37647058820000001" green="0.37647058820000001" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="₹20,00,00,000" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcC-5e-IM9">
+                                <rect key="frame" x="0.0" y="309.5" width="190" height="16.5"/>
+                                <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="748" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AP7-DQ-N3l">
+                                <rect key="frame" x="0.0" y="331" width="190" height="14"/>
+                                <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="12"/>
+                                <color key="textColor" red="0.58431372550000005" green="0.47843137250000001" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4cV-Iv-SXX" firstAttribute="leading" secondItem="PY7-ZZ-Wl3" secondAttribute="leading" id="0QG-pb-KFN"/>
+                            <constraint firstItem="AP7-DQ-N3l" firstAttribute="leading" secondItem="rcC-5e-IM9" secondAttribute="leading" id="0bB-Cc-7Ut"/>
+                            <constraint firstItem="awf-Ac-1iz" firstAttribute="top" secondItem="4cV-Iv-SXX" secondAttribute="bottom" constant="4" id="2yb-E5-wE0"/>
+                            <constraint firstItem="AP7-DQ-N3l" firstAttribute="trailing" secondItem="rcC-5e-IM9" secondAttribute="trailing" id="EGu-hx-RRX"/>
+                            <constraint firstItem="PY7-ZZ-Wl3" firstAttribute="leading" secondItem="wSI-8F-Iif" secondAttribute="leading" id="EX7-KU-kF7"/>
+                            <constraint firstItem="4cV-Iv-SXX" firstAttribute="top" secondItem="PY7-ZZ-Wl3" secondAttribute="bottom" constant="5" id="KQk-D1-TB3"/>
+                            <constraint firstAttribute="trailing" secondItem="PY7-ZZ-Wl3" secondAttribute="trailing" id="LhS-6r-Tlh"/>
+                            <constraint firstItem="4cV-Iv-SXX" firstAttribute="trailing" secondItem="PY7-ZZ-Wl3" secondAttribute="trailing" id="Mg4-3t-I03"/>
+                            <constraint firstItem="rcC-5e-IM9" firstAttribute="trailing" secondItem="awf-Ac-1iz" secondAttribute="trailing" id="OAu-H6-tri"/>
+                            <constraint firstItem="awf-Ac-1iz" firstAttribute="leading" secondItem="4cV-Iv-SXX" secondAttribute="leading" id="Pbl-Yp-oXw"/>
+                            <constraint firstItem="rcC-5e-IM9" firstAttribute="top" secondItem="awf-Ac-1iz" secondAttribute="bottom" constant="5" id="Qoi-DM-oor"/>
+                            <constraint firstItem="awf-Ac-1iz" firstAttribute="trailing" secondItem="4cV-Iv-SXX" secondAttribute="trailing" id="U0p-fi-OcZ"/>
+                            <constraint firstItem="rcC-5e-IM9" firstAttribute="leading" secondItem="awf-Ac-1iz" secondAttribute="leading" id="gQm-yB-RcE"/>
+                            <constraint firstItem="PY7-ZZ-Wl3" firstAttribute="top" secondItem="wSI-8F-Iif" secondAttribute="top" id="um7-fX-nH3"/>
+                            <constraint firstItem="AP7-DQ-N3l" firstAttribute="top" secondItem="rcC-5e-IM9" secondAttribute="bottom" constant="5" id="utJ-09-Fvs"/>
+                            <constraint firstAttribute="bottom" secondItem="AP7-DQ-N3l" secondAttribute="bottom" constant="5" id="wex-0T-0Im"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="wSI-8F-Iif" firstAttribute="leading" secondItem="iha-jx-RTu" secondAttribute="leading" constant="5" id="I8g-yS-hIS"/>
+                <constraint firstItem="wSI-8F-Iif" firstAttribute="top" secondItem="iha-jx-RTu" secondAttribute="top" constant="5" id="O9C-Dv-ord"/>
+                <constraint firstAttribute="bottom" secondItem="wSI-8F-Iif" secondAttribute="bottom" constant="5" id="WOU-rV-hUn"/>
+                <constraint firstAttribute="trailing" secondItem="wSI-8F-Iif" secondAttribute="trailing" constant="5" id="xGp-qE-MYH"/>
+            </constraints>
+            <size key="customSize" width="155" height="250"/>
+            <connections>
+                <outlet property="imgProduct" destination="PY7-ZZ-Wl3" id="15j-eN-nIg"/>
+                <outlet property="lblAuctionDate" destination="AP7-DQ-N3l" id="mFz-4G-EgJ"/>
+                <outlet property="lblProductName" destination="4cV-Iv-SXX" id="Dsg-V1-f2T"/>
+                <outlet property="lblTotalSaleValueText" destination="awf-Ac-1iz" id="pCi-Ak-N0X"/>
+                <outlet property="lblTotlaSaleValue" destination="rcC-5e-IM9" id="Agj-T1-UQb"/>
+            </connections>
+            <point key="canvasLocation" x="1202" y="-138"/>
+        </collectionViewCell>
+    </objects>
+</document>

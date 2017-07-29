@@ -7,22 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ClsSetting.h"
-@interface LoginViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
-@property (weak, nonatomic) IBOutlet UITextField *txtUserName;
+#import "BaseViewController.h"
 
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
-//@property (weak, nonatomic) IBOutlet CustomTextfied *txtUserName;
+@interface LoginViewController : BaseViewController
+//@property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+//@property (strong, nonatomic) IBOutlet UIBarButtonItem *leftbarButton;
+
+@property (weak, nonatomic) IBOutlet UITextField *txtUserName;
+@property (weak, nonatomic) IBOutlet UITextField *txtPassword;
+@property (weak, nonatomic) IBOutlet UIView *userName_View;
+@property (weak, nonatomic) IBOutlet UIView *password_View;
+
 - (IBAction)ForgotPasswordpressed:(id)sender;
 - (IBAction)SugnUpPressed:(id)sender;
-@property (weak, nonatomic) IBOutlet UITextField *txtPassword;
-//@property (weak, nonatomic) IBOutlet CustomTextfied *txtPassword;
 - (IBAction)btnSignInPressed:(id)sender;
-@property(nonatomic)int IsCommingFromSideMenu;
-
-@property (weak, nonatomic) IBOutlet UIView *userName_View;
-
-@property (weak, nonatomic) IBOutlet UIView *password_View;
 
 @end

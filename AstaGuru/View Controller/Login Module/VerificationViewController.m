@@ -8,179 +8,160 @@
 
 #import "VerificationViewController.h"
 #import "CongratulationViewController.h"
-//#import "CustomTextfied.h"
-#import "SWRevealViewController.h"
-#import "ClsSetting.h"
-#import "ViewController.h"
-#import "AppDelegate.h"
-@interface VerificationViewController ()<PassResepose>
+//#import "SWRevealViewController.h"
+//#import "GlobalClass.h"
+//#import "HomeViewController.h"
+
+@interface VerificationViewController ()
 {
-    int isVerificatinWorking;
-    int isSMS;
+    int isSMSVerifyed;
+    int isEMAILVerifyed;
+    
+//    int isVerificatinWorking;
+//    int isSMS;
 }
-@property (weak, nonatomic) IBOutlet UIButton *btnMobileVerification;
-@property (weak, nonatomic) IBOutlet UIButton *btnEmailVerifivation;
-@property (weak, nonatomic) IBOutlet UIView *viewShowContent;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *htViwShowContent;
-@property (weak, nonatomic) IBOutlet UIView *viwShowEmailContent;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *htviwShowEmailContent;
-@property (strong, nonatomic) IBOutlet UILabel *lblsmserror;
-@property (strong, nonatomic) IBOutlet UILabel *lblemailerror;
 
 @end
 
 @implementation VerificationViewController
 
+-(void)setUpNavigationItem
+{
+    self.navigationItem.title = @"Verification";
+
+    [self.navigationItem setHidesBackButton:YES];
+    self.navigationItem.leftBarButtonItem = nil;
+
+    [self setNavigationBarCloseButton];//Target:self selector:@selector(closePressed)];
+
+//    UIBarButtonItem * btnClose = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-close"] style:UIBarButtonItemStylePlain target:self action:@selector(closePressed)];
+//    [self.navigationItem setRightBarButtonItem:btnClose];
+    
+//    [self.navigationController.navigationBar setTitleTextAttributes:
+//     @{NSForegroundColorAttributeName:[UIColor whiteColor],
+//       NSFontAttributeName:[UIFont fontWithName:@"WorkSans-Medium" size:16]}];
+}
+
+-(void)closePressed
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SWRevealViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
+    AppDelegate * objApp = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    objApp.window.rootViewController = rootViewController;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setUpNavigationItem];
+
     _lblemailerror.hidden= YES;
     _lblsmserror.hidden = YES;
-    [self setUpNavigationItem];
+    
+    _strName = [GlobalClass getUserFullName];
+    _strEmail = [[[NSUserDefaults standardUserDefaults] valueForKey:USER] valueForKey:USER_EMAIL];
+    _strMobile = [[[NSUserDefaults standardUserDefaults] valueForKey:USER] valueForKey:USER_MOBILE];
+    
+    isSMSVerifyed = 0;
+    isEMAILVerifyed = 0;
+    
     if (_isRegistration)
     {
-        [self SendSMSOTP];
-        [self SendEmail];
+//        [self sendSMSOTP];
+//        [self sendEmail];
     }
     else
     {
-        if ([_dict[@"MobileVerified"] intValue] != 1)
+        if ([[[[NSUserDefaults standardUserDefaults] valueForKey:USER] valueForKey:USER_MOBILEVERIFIED] intValue] != 1)
         {
             _lblsmserror.hidden = NO;
             _lblsmserror.text = @"Not Verified";
             _lblsmserror.textColor = [UIColor redColor];
+            [self sendSMSOTP];
         }
         else
         {
+            isSMSVerifyed = 1;
             
-            [_btnMobileVerification setTitle:@"Verified" forState:UIControlStateNormal];
-            [_btnMobileVerification setTitleColor:[UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+            [_btnSMSResend setTitle:@"Verified" forState:UIControlStateNormal];
+            [_btnSMSResend setTitleColor:[UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0] forState:UIControlStateNormal];
             
             _smsOne.hidden = YES;
             _smsTwo.hidden = YES;
             _smsThree.hidden = YES;
             _smsFour.hidden = YES;
+            
             _btnMobileVerify.hidden = YES;
+            
             _lblsmserror.hidden = YES;
             _lblsmserror.text = @"Verified";
             _lblsmserror.textColor = [UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0];
         }
         
-        if ([_dict[@"EmailVerified"] intValue] != 1)
+        if ([[[[NSUserDefaults standardUserDefaults] valueForKey:USER] valueForKey:USER_EMAILVERIFIED] intValue] != 1)
         {
             _lblemailerror.hidden = NO;
             _lblemailerror.text = @"Not Verified";
             _lblemailerror.textColor = [UIColor redColor];
+            [self sendEmail];
         }
         else
         {
-            isVerificatinWorking=1;
-            isSMS=2;
-            [_btnEmailVerifivation setTitle:@"Verified" forState:UIControlStateNormal];
-            [_btnEmailVerifivation setTitleColor:[UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+            isEMAILVerifyed = 1;
+
+//            isVerificatinWorking=1;
+//            isSMS=2;
+            
+            [_btnEmailResend setTitle:@"Verified" forState:UIControlStateNormal];
+            [_btnEmailResend setTitleColor:[UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+            
             _EmailOne.hidden = YES;
             _EmailTwo.hidden = YES;
             _EmailThree.hidden = YES;
             _EmailFour.hidden = YES;
+            
             _btnEmailVerify.hidden = YES;
+            
             _lblemailerror.hidden = YES;
             _lblemailerror.text = @"Verified";
             _lblemailerror.textColor = [UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0];
         }
     }
 }
--(void)setUpNavigationItem
-{
-    UIButton *btnBack = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
-    [btnBack setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    // [btnBack addTarget:self action:@selector(backPressed) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btnBack];
-    self.navigationItem.leftBarButtonItem = barButtonItem;
-    
-    self.navigationItem.title=@"Verification";
-    self.sideleftbarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-close"] style:UIBarButtonItemStyleDone target:self action:@selector(closePressed)];
-    self.sideleftbarButton.tintColor=[UIColor whiteColor];
-    [[self navigationItem] setRightBarButtonItem:self.sideleftbarButton];
-    
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor whiteColor],
-       NSFontAttributeName:[UIFont fontWithName:@"WorkSans-Medium" size:17]}];
-}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     NSArray *subviews;
-    subviews = [self.viewShowContent subviews];
+    subviews = [self.viewSMSContent subviews];
+    UIColor *color = [UIColor colorWithRed:196.0/255.0 green:196.0/255.0 blue:196.0/255.0 alpha:1.0];
     for(UIView *subview in subviews)
     {
         if([subview isKindOfClass:[UITextField class]])
         {
             UITextField *textField=(UITextField*)subview;
-            [ClsSetting underline:textField];
+            [GlobalClass underline:textField color:color];
         }
     }
-    subviews = [self.viwShowEmailContent subviews];
+    
+    subviews = [self.viewEmailContent subviews];
     for(UIView *subview in subviews)
     {
         if([subview isKindOfClass:[UITextField class]])
         {
             UITextField *textField=(UITextField*)subview;
-            [ClsSetting underline:textField];
+            [GlobalClass underline:textField color:color];
             
         }
     }
-   // _viewShowContent.hidden=YES;
-   // _viwShowEmailContent.hidden=YES;
-   // _htViwShowContent.constant=0;
-   // _htviwShowEmailContent.constant=0;
-    _txtEmail.text=_strEmail;
-    _txtMobile.text=_strMobile;
     
+    _txtEmail.text = _strEmail;
+    _txtMobile.text = _strMobile;
 }
--(void)closePressed
-{
-    //if (_IsCommingFromLoging==1)
-    //{
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        SWRevealViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
-        UIViewController *viewController =rootViewController;
-        AppDelegate * objApp = (AppDelegate*)[[UIApplication sharedApplication]delegate];
-        objApp.window.rootViewController = viewController;
-    //}
-    //else
-    //{
-     //   [self.navigationController popViewControllerAnimated:YES];
-    //}
-}
+
+
 - (IBAction)btnBackPressed:(id)sender
 {
     [self closePressed];
-}
-- (IBAction)btnProceedPressed:(id)sender
-{
-    if (![_btnMobileVerification.titleLabel.text isEqualToString:@"Verified"])
-    {
-        [ClsSetting ValidationPromt:@"To activate your AstaGuru account please verify your mobile number"];
-    }
-    else if(![_btnEmailVerifivation.titleLabel.text isEqualToString:@"Verified"])
-    {
-        [ClsSetting ValidationPromt:@"To activate your AstaGuru account please verify your Email Address"];
-    }
-    else
-    {
-        isVerificatinWorking=1;
-        isSMS=1;
-        NSDictionary *params = @{
-                                 @"userid":[[NSUserDefaults standardUserDefaults] valueForKey:USER_id],
-                                 @"MobileVerified":@"1",
-                                 @"EmailVerified":@"1",
-                                 @"admin": @"0"
-                                 };
-        NSMutableArray *arr = [NSMutableArray arrayWithObjects:params,nil];
-        NSDictionary *pardsams = @{@"resource": arr};
-        ClsSetting *objClssetting=[[ClsSetting alloc] init];
-        objClssetting.PassReseposeDatadelegate=self;
-        [objClssetting calllPutWeb:pardsams url:[NSString stringWithFormat:@"%@/users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objClssetting Url]] view:self.view];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -188,39 +169,35 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)btnMobileVerificationPressed:(id)sender
+
+- (IBAction)btnSMSResendPressed:(UIButton *)sender
 {
-    if ([_btnMobileVerification.titleLabel.text isEqualToString:@"Verify"])
+    
+//    if ([_btnSMSResend.titleLabel.text isEqualToString:@"Verify"])
+//    {
+//        [_btnSMSResend setTitle:@"Resend" forState:UIControlStateNormal];
+//    }
+//    else
+    
+    if([_btnSMSResend.titleLabel.text isEqualToString:@"Resend"])
     {
-        [_btnMobileVerification setTitle:@"Resend" forState:UIControlStateNormal];
-    }
-    else if([_btnMobileVerification.titleLabel.text isEqualToString:@"Resend"])
-    {
-        [self SendSMSOTP];   //Code for Sending SMS ThroughSMS getWay
+        [self sendSMSOTP];   //Code for Sending SMS ThroughSMS getWay
     }
 }
 
-- (IBAction)btnEmailVerificationPressed:(id)sender
+- (IBAction)btnVerifySMSPressed:(UIButton *)sender
 {
-    if ([_btnEmailVerifivation.titleLabel.text isEqualToString:@"Verify"])
-    {
-        [_btnEmailVerifivation setTitle:@"Resend" forState:UIControlStateNormal];
-    }
-    else if ([_btnEmailVerifivation.titleLabel.text isEqualToString:@"Resend"])
-    {
-       [self SendEmail]; //Code for Sending Email ThroughSMS getWay
-    }
-}
-
-- (IBAction)btnCheckVerfysms:(id)sender
-{
-    NSString *strSmsEnterString=[NSString stringWithFormat:@"%@%@%@%@",_smsOne.text,_smsTwo.text,_smsThree.text,_smsFour.text];
+    NSString *strSmsEnterString=[NSString stringWithFormat:@"%@%@%@%@", _smsOne.text, _smsTwo.text, _smsThree.text, _smsFour.text];
+    
     if ([_strSMSCode isEqualToString:strSmsEnterString])
     {
-      
+        
+        isSMSVerifyed = 1;
+        
         _lblsmserror.hidden = YES;
-        [_btnMobileVerification setTitle:@"Verified" forState:UIControlStateNormal];
-        [_btnMobileVerification setTitleColor:[UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+        
+        [_btnSMSResend setTitle:@"Verified" forState:UIControlStateNormal];
+        [_btnSMSResend setTitleColor:[UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0] forState:UIControlStateNormal];
         
         _smsOne.hidden = YES;
         _smsTwo.hidden = YES;
@@ -230,7 +207,7 @@
         _lblsmserror.hidden = YES;
         _lblsmserror.text = @"Verified";
         _lblsmserror.textColor = [UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0];
-       
+        
     }
     else
     {
@@ -238,28 +215,49 @@
         _lblsmserror.text = @"Invalid OTP Code";
         _lblsmserror.textColor = [UIColor redColor];
     }
+
 }
-- (IBAction)btnCheckVerifyEmail:(id)sender
+
+
+- (IBAction)btnEMAILResendPressed:(UIButton *)sender
+{
+//    if ([_btnEmailResend.titleLabel.text isEqualToString:@"Verify"])
+//    {
+//        [_btnEmailResend setTitle:@"Resend" forState:UIControlStateNormal];
+//    }
+//    else
+    if ([_btnEmailResend.titleLabel.text isEqualToString:@"Resend"])
+    {
+        [self sendEmail]; //Code for Sending Email ThroughSMS getWay
+    }
+}
+
+- (IBAction)btnVerifyEMAILPressed:(UIButton *)sender
 {
     NSString *strSmsEnterString=[NSString stringWithFormat:@"%@%@%@%@",_EmailOne.text,_EmailTwo.text,_EmailThree.text,_EmailFour.text];
-    if ([_strEmialCode isEqualToString:strSmsEnterString])
+    if ([_strEmailCode isEqualToString:strSmsEnterString])
     {
+        isEMAILVerifyed = 1;
+        
         _lblemailerror.hidden = YES;
-
-        isVerificatinWorking=1;
-        isSMS=2;
-        [_btnEmailVerifivation setTitle:@"Verified" forState:UIControlStateNormal];
-        [_btnEmailVerifivation setTitleColor:[UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+        
+//        isVerificatinWorking=1;
+//        isSMS=2;
+        
+        [_btnEmailResend setTitle:@"Verified" forState:UIControlStateNormal];
+        [_btnEmailResend setTitleColor:[UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0] forState:UIControlStateNormal];
         
         _EmailOne.hidden = YES;
         _EmailTwo.hidden = YES;
         _EmailThree.hidden = YES;
         _EmailFour.hidden = YES;
+        
         _btnEmailVerify.hidden = YES;
+        
         _lblemailerror.hidden = YES;
         _lblemailerror.text = @"Verified";
         _lblemailerror.textColor = [UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0];
-
+        
     }
     else
     {
@@ -268,76 +266,150 @@
         _lblemailerror.textColor = [UIColor redColor];
     }
 }
--(void)SendEmail
-{
-    
-    [ClsSetting ValidationPromt:[NSString stringWithFormat:@"OTP sent to your email %@",_strEmail]];
 
-    NSDictionary *dictTo = @{
-                             @"name":[NSString stringWithFormat:@"%@",_strname],
-                             @"email":_strEmail,
-                             
-                             };
-    NSArray*arrTo=[[NSArray alloc]initWithObjects:dictTo, nil];
-    // NSDictionary *dictMail=[[NSDictionary alloc]init];
-    NSDictionary *dictMail = @{
-                               @"template":@"newsletter",
-                               @"to":arrTo,
-                               @"subject":@"Astaguru Email Validation OTP",
-                               @"body_text":[NSString stringWithFormat:@"Hello \n OTP:%@",_strEmialCode],
-                               @"from_name":@"NetSpace India SES",
-                               @"from_email":@"beta@netspaceindia.com",
-                               @"reply_to_name":@"NetSpace India",
-                               @"reply_to_email":@"beta@netspaceindia.com",
-                               
+
+-(void)sendEmail
+{
+    _strEmailCode = [NSString stringWithFormat:@"%d",arc4random() % 9000 + 1000];
+    NSDictionary *dictMailParameters = @{
+                               @"to":@[@{
+                                           @"name":_strName,
+                                           @"email":_strEmail,
+                                           }],
+                               @"subject":@"Warm Greetings from AstaGuru  Online Auction House.",
+                               @"body_text": [NSString stringWithFormat:@"Dear %@,\n\n    Thank you for choosing AstaGuru Online Auction House. We are glad that you have given us this opportunity to cater to your Indian Art related requirements. Looking forward to building a longstanding relationship with you.\nPlease Enter the OTP %c%@%c to complete the registration & verification process.\nIn case you are unable to open the link, please write to us at, contact@astaguru.com or call us on 91-22 2204 8138/39. We will be glad to assist you further.\n\nWarm Regards,\nTeam AstaGuru\n",_strName,'"',_strEmailCode,'"']
                                };
-    [ClsSetting Email:dictMail view:self.view];
-}
--(void)SendSMSOTP
-{
-    NSDictionary *dict=[[NSMutableDictionary alloc]init];
-    ClsSetting *objSetting=[[ClsSetting alloc]init];
-    NSString *strMessage=[NSString stringWithFormat:@"Dear %@, One Time Password for your Mobile Verification is %@.\nRegards, \nTeam Astaguru.",_strname,_strSMSCode ];
     
-    //[objSetting SendSMSOTP:dict url:[NSString stringWithFormat:@"http://gateway.netspaceindia.com/api/sendhttp.php?authkey=131841Aotn6vhT583570b5&mobiles=%@&message=%@&sender=AstGru&route=4&country=91",[dictResult valueForKey:@"mobilrNum"],strMessage] view:self.view]
-    
-    [objSetting SendSMSOTP:dict url:[NSString stringWithFormat:@"http://gateway.netspaceindia.com/api/sendhttp.php?authkey=131841Aotn6vhT583570b5&mobiles=%@&message=%@&sender=AstGru&route=4&country=91",_strMobile,strMessage] view:self.view];
-    objSetting.PassReseposeDatadelegate=self;
+    [GlobalClass sendEmail:dictMailParameters success:^(id responseObject)
+     {
+         [GlobalClass showTost:[NSString stringWithFormat:@"OTP sent to your email %@",_strEmail]];
+     }failure:^(NSError *error)
+     {
+     }];
 }
 
-
--(void)passReseposeData1:(id)str
+-(void)sendSMSOTP
 {
-    if (isVerificatinWorking==1 && isSMS==1)
+    _strSMSCode = [NSString stringWithFormat:@"%d",arc4random() % 9000 + 1000];
+    NSString *strMessage=[NSString stringWithFormat:@"Dear %@, One Time Password for your Mobile Verification is %@.\nRegards, \nTeam Astaguru.",_strName,_strSMSCode ];
+    
+    NSDictionary *paraDic = @{
+                              @"mobiles":_strMobile,
+                              @"message":strMessage,
+                              };
+    
+    [GlobalClass sendSMS:paraDic success:^(NSDictionary *responseObject)
+                                 {
+                                     [GlobalClass showTost:[NSString stringWithFormat:@"OTP sent to your number %@",_strMobile]];
+                                 }
+                                failure:^(NSError *error)
+                                     {
+                                     }];
+}
+
+- (IBAction)btnProceedPressed:(id)sender
+{
+    if (![_btnSMSResend.titleLabel.text isEqualToString:@"Verified"])
     {
-        NSArray *value = str[@"resource"];
-        NSLog(@"%@",value);
-        NSDictionary *dictUser=[value objectAtIndex:0];
-        [[NSUserDefaults standardUserDefaults] setValue:[dictUser valueForKey:@"userid"] forKey:USER_id];
-        [[NSUserDefaults standardUserDefaults]setValue:@"0" forKey:@"confirmbid"];
-        [[NSUserDefaults standardUserDefaults]setValue:@"1" forKey:@"EmailVerified"];
-        [[NSUserDefaults standardUserDefaults]setValue:@"1" forKey:@"MobileVerified"];
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
-        CongratulationViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"CongratulationViewController"];
-        [self.navigationController pushViewController:rootViewController animated:YES];
-        
-       
-       
+        [GlobalClass showTost:@"To activate your AstaGuru account please verify your mobile number"];
     }
-    else if (isVerificatinWorking==1 && isSMS==2)
+    else if(![_btnEmailResend.titleLabel.text isEqualToString:@"Verified"])
     {
-        _viwShowEmailContent.hidden=YES;
-        _htviwShowEmailContent.constant=0;
-        [_btnEmailVerifivation setTitle:@"Verified" forState:UIControlStateNormal];
-        [_btnEmailVerifivation setTitleColor:[UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-        [self btnEmailVerificationPressed:_btnEmailVerifivation];
+        [GlobalClass showTost:@"To activate your AstaGuru account please verify your Email Address"];
     }
     else
     {
-        [ClsSetting ValidationPromt:[NSString stringWithFormat:@"OTP sent to your number %@",_strMobile]];
+        NSString *userid;
+        if (_isRegistration)
+        {
+            userid = [[NSUserDefaults standardUserDefaults] valueForKey:RUSER_ID];
+        }
+        else
+        {
+            userid = [[NSUserDefaults standardUserDefaults] valueForKey:USER_ID];
+        }
+        
+        NSDictionary *paraDic = @{
+                                  @"userid":userid,
+                                  @"MobileVerified":@"1",
+                                  @"EmailVerified":@"1",
+                                  @"admin": @"0"
+                                  };
+        NSArray *resourceArray = [NSArray arrayWithObjects:paraDic,nil];
+        NSDictionary *parameter = @{@"resource": resourceArray};
+
+        NSString *strUrl = [NSString stringWithFormat:@"users?api_key=%@",[GlobalClass apiKey]];
+        
+        [GlobalClass call_tablePUTWeb:strUrl parameters:parameter view:self.view success:^(id responseObject)
+         {
+             NSMutableArray *resourceArray = responseObject[@"resource"];
+             if (resourceArray.count > 0)
+             {
+                 [GlobalClass showTost:[NSString stringWithFormat:@"Congratulation your verification are done"]];
+                 
+                 NSLog(@"%@",resourceArray);
+                 NSDictionary *userIDDic = [resourceArray objectAtIndex:0];
+                 
+                 [[NSUserDefaults standardUserDefaults] setValue:[userIDDic valueForKey:USER_ID] forKey:USER_ID];
+                 
+                 NSMutableDictionary *saveUserDic = [[NSUserDefaults standardUserDefaults] valueForKey:USER];
+                 [saveUserDic setValue:@"1" forKey:USER_MOBILEVERIFIED];
+                 [saveUserDic setValue:@"1" forKey:USER_EMAILVERIFIED];
+                 [[NSUserDefaults standardUserDefaults] setObject:saveUserDic forKey:USER];
+                 [[NSUserDefaults standardUserDefaults] synchronize];
+                 
+                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
+                 CongratulationViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"CongratulationViewController"];
+                 [self.navigationController pushViewController:rootViewController animated:YES];
+             }
+             else
+             {
+                 [GlobalClass showTost:[NSString stringWithFormat:@"Verification fail! please try again."]];
+             }
+             
+         }failure:^(NSError *error)
+         {
+             [GlobalClass showTost:error.localizedDescription];
+         }];
     }
 }
+
+//-(void)passReseposeData1:(id)str
+//{
+//    if (isVerificatinWorking==1 && isSMS==1)
+//    {
+//        [ClsSetting ValidationPromt:[NSString stringWithFormat:@"Congratulation your verification are done"]];
+//        
+//        NSArray *value = str[@"resource"];
+//        NSLog(@"%@",value);
+//        NSDictionary *dictUser = [value objectAtIndex:0];
+//        [[NSUserDefaults standardUserDefaults] setValue:[dictUser valueForKey:USER_ID] forKey:USER_ID];
+//        
+////        [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:USER_CONFIRMBID];
+////        [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:USER_EMAILVERIFIED];
+////        [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:USER_MOBILEVERIFIED];
+//        
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
+//        CongratulationViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"CongratulationViewController"];
+////        rootViewController.strname = _strname;
+////        rootViewController.strEmail = _strEmail;
+////        rootViewController.dict = _dict;
+//        [self.navigationController pushViewController:rootViewController animated:YES];
+//    }
+//    else if (isVerificatinWorking==1 && isSMS==2)
+//    {
+//        _viwShowEmailContent.hidden=YES;
+//        _htviwShowEmailContent.constant=0;
+//        [_btnEmailVerifivation setTitle:@"Verified" forState:UIControlStateNormal];
+//        [_btnEmailVerifivation setTitleColor:[UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+//        [self btnEmailVerificationPressed:_btnEmailVerifivation];
+//    }
+//    else
+//    {
+//        [ClsSetting ValidationPromt:[NSString stringWithFormat:@"OTP sent to your number %@",_strMobile]];
+//    }
+//}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     NSString *currentString = [textField.text stringByReplacingCharactersInRange:range withString:string];
@@ -465,63 +537,4 @@
     return YES;
 }
 
-//- (BOOL)textFieldShouldReturn:(UITextField *)textField
-//{
-//    [textField resignFirstResponder];
-//    
-//    return YES;
-//}
-//- (void)textFieldDidBeginEditing:(UITextField *)textField {
-//    textField.placeholder = nil;
-//}
-//- (void)textFieldDidEndEditing:(UITextField *)textField
-//{
-//           textField.placeholder = @"x";
-//  
-//}
-
-//-(void)MobileVerification:(NSString*)strCodeKey CodeValue:(NSString*)strCodeValue verificationCodeKey:(NSString *)strVerificationCodeKey
-//{
-//    if ([self validate])
-//    {
-//        //SmsCode
-//        
-//        NSDictionary *params = @{
-//                                 @"userid":[[NSUserDefaults standardUserDefaults]valueForKey:USER_id],
-//                                 strCodeKey:strCodeValue,
-//                                 strVerificationCodeKey:@"1",
-//                                 @"admin": @"0",
-//                                 };
-//        
-//        NSMutableArray *arr = [NSMutableArray arrayWithObjects:params,nil];
-//        NSDictionary *pardsams = @{@"resource": arr};
-//        
-//        
-//        ClsSetting *objClssetting=[[ClsSetting alloc] init];
-//        // objClssetting.PassReseposeDatadelegate=self;
-//        objClssetting.PassReseposeDatadelegate=self;
-//        [objClssetting calllPutWeb:pardsams url:[NSString stringWithFormat:@"%@/users/?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objClssetting Url]] view:self.view];
-//    }
-//}
-//-(BOOL)validate
-//{
-//    if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtMobile.text].length==0)
-//    {
-//        [ClsSetting ValidationPromt:@"Pleae Enter First Name"];
-//        return NO;
-//    }
-//    else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtEmail.text].length==0)
-//    {
-//        [ClsSetting ValidationPromt:@"Pleae Enter Last Name"];
-//        return NO;
-//    }
-//    return YES;
-//}
-//-(void)RegisterUser
-//{
-//    ClsSetting *objClssetting=[[ClsSetting alloc] init];
-//    // objClssetting.PassReseposeDatadelegate=self;
-//    objClssetting.PassReseposeDatadelegate=self;
-//    [objClssetting calllPostWeb2:_dictPostParameter url:[NSString stringWithFormat:@"%@/users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objClssetting Url]] view:self.view];
-//}
 @end
