@@ -63,7 +63,7 @@
 {
     NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
     ClsSetting *objSetting=[[ClsSetting alloc]init];
-    [objSetting CallWeb:dict url:[NSString stringWithFormat:@"users/?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed&filter=userid=%@",[[NSUserDefaults standardUserDefaults] valueForKey:USER_id]] view:self.view Post:NO];
+    [objSetting CallWeb:dict url:[NSString stringWithFormat:@"users/?api_key=%@&filter=userid=%@",[ClsSetting apiKey],[[NSUserDefaults standardUserDefaults] valueForKey:USER_id]] view:self.view Post:NO];
     objSetting.PassReseposeDatadelegate=self;
 }
 -(void)passReseposeData:(id)arr
@@ -222,23 +222,14 @@
                 [self checkBlackOrNot:[dictUserProfile valueForKey:@"country"] label:UserInfoCell.lblBillingCountry];
                 [self checkBlackOrNot:[dictUserProfile valueForKey:@"Mobile"] label:UserInfoCell.lblBillingPhone];
                 [self checkBlackOrNot:[dictUserProfile valueForKey:@"email"] label:UserInfoCell.lblBillingEmail];
-                /* UILabel *lblUsername = (UILabel *)[cell1 viewWithTag:21];
-                 lblUsername.text=[NSString stringWithFormat:@"No of Bids: %lu",(unsigned long)arrBidHistoryData.count];*/
+             
                 cell=UserInfoCell;
             }
             else if (indexPath.section==1)
             {
                 CurrentSelectedGridCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CurrentSelected1234" forIndexPath:indexPath];
                 
-                /*[UIView transitionWithView:CurrentDefultGridCell.contentView
-                 duration:5
-                 options:UIViewAnimationOptionTransitionFlipFromLeft
-                 animations:^{
-                 
-                 CurrentDefultGridCollectionViewCell      *CurrentDefultGridCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CurrentInfo" forIndexPath:indexPath];
-                 
-                 
-                 } completion:nil];*/
+              
                 NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init] ;
                 [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
                 [numberFormatter setMaximumFractionDigits:0];
@@ -248,17 +239,13 @@
                 {
                     numberFormatter.currencyCode = @"USD";
                     
-//                    int price = [_objCurrentOuction.strpriceus intValue];
-//                    NSNumber *num = [NSNumber numberWithInt:price];
-//                    NSString *strCurrentBuild = [numberFormatter stringFromNumber:num];
-                    
                     int price =[_objCurrentOuction.strpriceus intValue];
                     NSNumber *num = [NSNumber numberWithInt:price];
                     NSString *strCurrentBuild = [numberFormatter stringFromNumber:num];
                     CurrentSelectedGridCell.lblHammerPrice.text=[NSString stringWithFormat:@"%@",strCurrentBuild];
                     int Primium=(price*15)/100;
-                    int vat =(price*13.5)/100;
-                    int taxOnPrimium=(Primium*15)/100;
+                    int vat =(price*12)/100;
+                    int taxOnPrimium=(Primium*18)/100;
                     int FinalPrice=price+Primium+vat+taxOnPrimium;
                     
                     NSString *strNextValidBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:Primium]];
@@ -318,31 +305,44 @@
                         
                         CurrentSelectedGridCell.lblEstimation.text=[NSString stringWithFormat:@"%@ - %@",strFromRs,strToRs];
                         
-                        
                     }
                 }
-                if (_IsSort==1)
+                
+                if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
                 {
-                    CurrentSelectedGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",_objCurrentOuction.strFirstName,_objCurrentOuction.strLastName];
-                    CurrentSelectedGridCell.lblMedium.text= _objCurrentOuction.strmedium;
-                    CurrentSelectedGridCell.lblCategoryName.text=_objCurrentOuction.strcategory;
+                    CurrentSelectedGridCell.lblEstimation.text=_objCurrentOuction.strestamiate;
                 }
                 else
                 {
-                    CurrentSelectedGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",_objCurrentOuction.objArtistInfo.strFirstName,_objCurrentOuction.objArtistInfo.strLastName];
-                    CurrentSelectedGridCell.lblMedium.text= _objCurrentOuction.objMediaInfo.strMediumName;
-                    CurrentSelectedGridCell.lblCategoryName.text=_objCurrentOuction.objCategoryInfo.strCategoryName;
+                    CurrentSelectedGridCell.lblEstimation.text=_objCurrentOuction.strcollectors;
                 }
                 
-                
+                if ([_objCurrentOuction.strAuctionname isEqualToString:@"Collectibles Auction"])
+                {
+                    UIView *subvuew = (UIView*) [CurrentSelectedGridCell viewWithTag:10];
+                    UILabel *Lbl_1 = (UILabel *)[subvuew viewWithTag:1];
+                    Lbl_1.text = @"Title: ";
+                    UILabel *Lbl_2 = (UILabel *)[subvuew viewWithTag:2];
+                    Lbl_2.text = @"Description: ";
+                    UILabel *Lbl_3 = (UILabel *)[subvuew viewWithTag:3];
+                    Lbl_3.text = @"";
+                    
+                    CurrentSelectedGridCell.lblArtistName.text=_objCurrentOuction.strtitle;
+                    NSString *ht = [ClsSetting getAttributedStringFormHtmlString:_objCurrentOuction.strPrdescription];
+                    CurrentSelectedGridCell.lblMedium.text= ht;
+                    CurrentSelectedGridCell.lblYear.text = @"";
+                    CurrentSelectedGridCell.lblSize.text = [NSString stringWithFormat:@"%@ in",_objCurrentOuction.strproductsize];
+                }
+                else
+                {
+
+                        CurrentSelectedGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",_objCurrentOuction.strFirstName,_objCurrentOuction.strLastName];
+                        CurrentSelectedGridCell.lblMedium.text=[NSString stringWithFormat:@"%@",_objCurrentOuction.strmedium];
+                    CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@ in",_objCurrentOuction.strproductsize];
+                    CurrentSelectedGridCell.lblYear.text=[NSString stringWithFormat:@"%@",_objCurrentOuction.strproductdate];
+                }
                 CurrentSelectedGridCell.lblProductName.text= _objCurrentOuction.strtitle;
-                
-                CurrentSelectedGridCell.lblYear.text= _objCurrentOuction.strproductdate;
-                CurrentSelectedGridCell.lblSize.text= [NSString stringWithFormat:@"%@ in",_objCurrentOuction.strproductsize];
-                CurrentSelectedGridCell.imgProduct.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[ClsSetting ImageURL], _objCurrentOuction.strthumbnail]];
-                
-                
-                
+                CurrentSelectedGridCell.imgProduct.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[ClsSetting imageURL], _objCurrentOuction.strthumbnail]];
                 [CurrentSelectedGridCell.btnLot setTitle:[NSString stringWithFormat:@"Lot:%@",[ClsSetting TrimWhiteSpaceAndNewLine:_objCurrentOuction.strReference]] forState:UIControlStateNormal];
                 cell = CurrentSelectedGridCell;
                 
@@ -353,16 +353,7 @@
             if (indexPath.section==0)
             {
                 CurrentSelectedGridCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CurrentSelected1234" forIndexPath:indexPath];
-                
-                /*[UIView transitionWithView:CurrentDefultGridCell.contentView
-                 duration:5
-                 options:UIViewAnimationOptionTransitionFlipFromLeft
-                 animations:^{
-                 
-                 CurrentDefultGridCollectionViewCell      *CurrentDefultGridCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CurrentInfo" forIndexPath:indexPath];
-                 
-                 
-                 } completion:nil];*/
+            
                 NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init] ;
                 [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
                 [numberFormatter setMaximumFractionDigits:0];
@@ -421,8 +412,6 @@
                     NSArray *subStrings = [_objCurrentOuction.strestamiate componentsSeparatedByString:@"–"]; //or rather @" - "
                     if (subStrings.count>1)
                     {
-                        // strFromRangeString = [subStrings objectAtIndex:0];
-                        //  strToRangeString = [subStrings objectAtIndex:1];
                         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
                         formatter.numberStyle = NSNumberFormatterDecimalStyle;
                         NSString *strFromRangeString = [[subStrings objectAtIndex:0] stringByTrimmingCharactersInSet:nonNumbersSet];
@@ -440,29 +429,50 @@
                         
                     }
                     
+                    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
+                    {
+                        CurrentSelectedGridCell.lblEstimation.text=_objCurrentOuction.strestamiate;
+                    }
+                    else
+                    {
+                        CurrentSelectedGridCell.lblEstimation.text=_objCurrentOuction.strcollectors;
+                    }
                     
                 }
-                if (_IsSort==1)
+                
+                if ([_objCurrentOuction.strAuctionname isEqualToString:@"Collectibles Auction"])
                 {
-                    CurrentSelectedGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",_objCurrentOuction.strFirstName,_objCurrentOuction.strLastName];
-                    CurrentSelectedGridCell.lblMedium.text= _objCurrentOuction.strmedium;
-                    CurrentSelectedGridCell.lblCategoryName.text=_objCurrentOuction.strcategory;
+                    UIView *subvuew = (UIView*) [CurrentSelectedGridCell viewWithTag:10];
+
+                    UILabel *Lbl_1 = (UILabel *)[subvuew viewWithTag:1];
+                    Lbl_1.text = @"Title: ";
+                    UILabel *Lbl_2 = (UILabel *)[subvuew viewWithTag:2];
+                    Lbl_2.text = @"Description: ";
+                    UILabel *Lbl_3 = (UILabel *)[subvuew viewWithTag:3];
+                    Lbl_3.text = @"";
+                    
+                    CurrentSelectedGridCell.lblArtistName.text=_objCurrentOuction.strtitle;
+                    NSString *ht = [ClsSetting getAttributedStringFormHtmlString:_objCurrentOuction.strPrdescription];
+                    CurrentSelectedGridCell.lblMedium.text= ht;
+                    CurrentSelectedGridCell.lblYear.text = @"";
+                    CurrentSelectedGridCell.lblSize.text = [NSString stringWithFormat:@"%@ in",_objCurrentOuction.strproductsize];
                 }
                 else
                 {
-                    CurrentSelectedGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",_objCurrentOuction.objArtistInfo.strFirstName,_objCurrentOuction.objArtistInfo.strLastName];
-                    CurrentSelectedGridCell.lblMedium.text= _objCurrentOuction.objMediaInfo.strMediumName;
-                    CurrentSelectedGridCell.lblCategoryName.text=_objCurrentOuction.objCategoryInfo.strCategoryName;
+
+                        CurrentSelectedGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",_objCurrentOuction.strFirstName,_objCurrentOuction.strLastName];
+                        CurrentSelectedGridCell.lblMedium.text=[NSString stringWithFormat:@"%@",_objCurrentOuction.strmedium];
+
+                    
+                    CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@ in",_objCurrentOuction.strproductsize];
+                    CurrentSelectedGridCell.lblYear.text=[NSString stringWithFormat:@"%@",_objCurrentOuction.strproductdate];
                 }
-                
                 
                 CurrentSelectedGridCell.lblProductName.text= _objCurrentOuction.strtitle;
                 
                 CurrentSelectedGridCell.lblYear.text= _objCurrentOuction.strproductdate;
                 CurrentSelectedGridCell.lblSize.text= [NSString stringWithFormat:@"%@ in",_objCurrentOuction.strproductsize];
-                CurrentSelectedGridCell.imgProduct.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[ClsSetting ImageURL], _objCurrentOuction.strthumbnail]];
-                
-                
+                CurrentSelectedGridCell.imgProduct.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[ClsSetting imageURL], _objCurrentOuction.strthumbnail]];
                 
                 [CurrentSelectedGridCell.btnLot setTitle:[NSString stringWithFormat:@"Lot:%@",[ClsSetting TrimWhiteSpaceAndNewLine:_objCurrentOuction.strReference]] forState:UIControlStateNormal];
                 cell = CurrentSelectedGridCell;
@@ -475,22 +485,34 @@
         static NSString *identifier = @"Cell11";
         cell1 = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
         
-        UILabel *lblTitle = (UILabel *)[cell1 viewWithTag:30];
-        UILabel *lblSelectedline = (UILabel *)[cell1 viewWithTag:22];
-        NSLog(@"%@",[arrBottomMenu objectAtIndex:indexPath.row]);
+        UILabel *lblTitle = (UILabel *)[cell1 viewWithTag:20];
         lblTitle.text=[arrBottomMenu objectAtIndex:indexPath.row];
+        
+        UILabel *lblSelectedline = (UILabel *)[cell1 viewWithTag:22];
+        lblSelectedline.hidden=YES;
+        
+        UIButton *btnLive = (UIButton *)[cell1 viewWithTag:23];
+        btnLive.layer.cornerRadius = 4;
+        btnLive.hidden = YES;
+        
+        UILabel *lblline = (UILabel *)[cell1 viewWithTag:21];
+
+        if (indexPath.row == 1)
+        {
+            btnLive.hidden = NO;
+        }
+        
         if (indexPath.row==1)
         {
-            UILabel *lblline = (UILabel *)[cell1 viewWithTag:21];
             lblTitle.textColor=[UIColor colorWithRed:167.0/255.0 green:142.0/255.0 blue:105.0/255.0 alpha:1];
             
             lblline.backgroundColor=[UIColor colorWithRed:167.0/255.0 green:142.0/255.0 blue:105.0/255.0 alpha:1];
             lblSelectedline.hidden=NO;
-            
         }
         else
         {
-//            UILabel *lblline = (UILabel *)[cell1 viewWithTag:21];
+            lblTitle.textColor=[UIColor blackColor];//[UIColor colorWithRed:124.0/255.0 green:124.0/255.0 blue:124.0/255.0 alpha:1];
+            lblline.backgroundColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1];
             lblSelectedline.hidden=YES;
         }
         cell=cell1;

@@ -16,7 +16,7 @@
 #import "ClsSetting.h"
 #import "TTTAttributedLabel.h"
 #import "ClientRelationViewController.h"
-
+#import "HowToSellViewController.h"
 @interface HowToBuyViewController ()<YTPlayerViewDelegate, UIActionSheetDelegate, TTTAttributedLabelDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray *arrdata;
@@ -55,7 +55,6 @@
     {
         [self setupHowtosell];
     }
-    [self setUpNavigationItem];
     _tblHowtoBuy.arrData=arrdata;
 }
 -(void)viewDidAppear:(BOOL)animated
@@ -64,6 +63,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    [self setUpNavigationItem];
     _tblHowtoBuy.delegate = self;
     _tblHowtoBuy.dataSource = self;
     [_tblHowtoBuy reloadData];
@@ -492,20 +492,15 @@
         manager.requestSerializer = [AFHTTPRequestSerializer serializer];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];  //AFHTTPResponseSerializer serializer
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
-        ClsSetting *objsetting=[[ClsSetting alloc]init];
-        NSString  *strQuery=[NSString stringWithFormat:@"%@jobs?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objsetting Url]];
+        NSString  *strQuery=[NSString stringWithFormat:@"%@jobs?api_key=%@",[ClsSetting tableURL],[ClsSetting apiKey]];
         NSString *url = strQuery;
         NSLog(@"%@",url);
         NSString *encoded = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [manager GET:encoded parameters:Discparam success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
-             //  NSError *error=nil;
-//             NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-
+         
              NSError *error;
              NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
-             // NSLog(@"%@",responseStr);
-             // NSLog(@"%@",dict);
              NSMutableArray *arrItemCount=[[NSMutableArray alloc]init];
              arrVAcncyTitleOnly=[[NSMutableArray alloc]init];
              arrItemCount=[parese parsevacancy:[dict valueForKey:@"resource"]];
@@ -521,21 +516,8 @@
              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  NSLog(@"Error: %@", error);
                  [ClsSetting ValidationPromt:error.localizedDescription];
-//                 if ([operation.response statusCode]==404)
-//                 {
-//                     [ClsSetting ValidationPromt:@"No Record Found"];
-//                     
-//                 }
-//                 else
-//                 {
-//                     [ClsSetting internetConnectionPromt];
-//                     
-//                 }
                  [HUD hide:YES];
-
              }];
-        
-        
     }
     @catch (NSException *exception)
     {
@@ -1042,10 +1024,10 @@
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-   // if (_isHowTobuy == 2)
-  //  {
-     //   return [arrdata count]+1;
-    //}
+    if (_isHowTobuy == 2)
+    {
+        return [arrdata count]+1;
+    }
     return [arrdata count];
 }
 
@@ -1150,8 +1132,6 @@
         }
         else if ([objAboutUs.strType intValue]==3)
         {
-            
-            
             static NSString* cellIdentifier = @"TextWithOutIcon";
             
             UITableViewCell* cell = [_tblHowtoBuy dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -1183,10 +1163,8 @@
             cell1=cell;
             
         }
-        else if ([objAboutUs.strType intValue]==4)
+        else if ([objAboutUs.strType intValue] == 4)
         {
-            
-            
             static NSString* cellIdentifier = @"ApplyNow";
             
             UITableViewCell* cell = [_tblHowtoBuy dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -1197,7 +1175,6 @@
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell1=cell;
-            
         }
     }
     return cell1;
@@ -1385,15 +1362,16 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
     UINavigationController *navcontroll = (UINavigationController *)[self.revealViewController frontViewController];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ClientRelationViewController *objProductViewController = [storyboard instantiateViewControllerWithIdentifier:@"ClientRelationViewController"];
-    objProductViewController.arrJobTotle=arrVAcncyTitleOnly;
+    objProductViewController.arrJobTitle = arrVAcncyTitleOnly;
     [navcontroll pushViewController:objProductViewController animated:YES];
 }
+
 - (IBAction)btnSubmitDetail:(UIButton *)sender
 {
     UINavigationController *navcontroll = (UINavigationController *)[self.revealViewController frontViewController];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ClientRelationViewController *objProductViewController = [storyboard instantiateViewControllerWithIdentifier:@"ClientRelationViewController"];
-    objProductViewController.arrJobTotle=arrVAcncyTitleOnly;
+    HowToSellViewController *objProductViewController = [storyboard instantiateViewControllerWithIdentifier:@"HowToSellViewController"];
+    objProductViewController.arrJobTitle=arrVAcncyTitleOnly;
     [navcontroll pushViewController:objProductViewController animated:YES];
 }
 

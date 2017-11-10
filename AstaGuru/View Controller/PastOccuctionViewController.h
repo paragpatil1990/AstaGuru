@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *clvPastAuction;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 @property (weak, nonatomic) IBOutlet UICollectionView *clvBottomMenu;
-@property ( nonatomic)int iIsUpcomming;
+@property (nonatomic)int IsUpcomming;
+@property (strong, nonatomic) IBOutlet UILabel *noRecords_Lbl;
 
 @end

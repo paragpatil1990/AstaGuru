@@ -19,5 +19,6 @@
 @property(nonatomic,retain)NSString *strStatus;
 @property(nonatomic,retain)NSString *strTotalSaleValueRs;
 @property(nonatomic,retain)NSString *strTotalSaleValueUs;
+@property(nonatomic,retain)NSString *strupcomingCountVal;
 
 @end

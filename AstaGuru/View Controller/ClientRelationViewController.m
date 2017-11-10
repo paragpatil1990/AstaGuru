@@ -36,28 +36,24 @@
 
     _arrSelectSource = @[@{@"source":@"News Paper"}, @{@"source":@"Social Media"}, @{@"source":@"Social Networking"}, @{@"source":@"Friend"}];
     
-    [ClsSetting SetBorder:_chooseFile_Btn cornerRadius:2 borderWidth:1];
+    [ClsSetting SetBorder:_chooseFile_Btn cornerRadius:2 borderWidth:1 color:[UIColor colorWithRed:200.0/255 green:200.0/255 blue:200.0/255 alpha:1.0]];
 }
+
 -(void) setBroder
 {
-    [ClsSetting SetBorder:_name_view cornerRadius:2 borderWidth:1];
-    _name_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    UIColor *bColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1];
+
+    [ClsSetting SetBorder:_name_view cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_email_view cornerRadius:2 borderWidth:1];
-    _email_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_email_view cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_job_view cornerRadius:2 borderWidth:1];
-    _job_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_job_view cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_choosefile_view cornerRadius:2 borderWidth:1];
-    _choosefile_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_choosefile_view cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_message_view cornerRadius:2 borderWidth:1];
-    _message_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_message_view cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_aboutus_view cornerRadius:2 borderWidth:1];
-    _aboutus_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
-    
+    [ClsSetting SetBorder:_aboutus_view cornerRadius:2 borderWidth:1 color:bColor];    
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,7 +84,7 @@
 - (IBAction)btnJobTitlePressed:(id)sender
 {
     [Dropobj fadeOut];
-    [self showPopUpWithTitle:@"Select Job Title" withOption:_arrJobTotle xy:CGPointMake(((SCREEN_WIDTH/2) - (287/2)), 130) size:CGSizeMake(287, SCREEN_HEIGHT/1.8) isMultiple:NO parseKey:@"jobTitle"];
+    [self showPopUpWithTitle:@"Select Job Title" withOption:_arrJobTitle xy:CGPointMake(((SCREEN_WIDTH/2) - (287/2)), 130) size:CGSizeMake(287, SCREEN_HEIGHT/1.8) isMultiple:NO parseKey:@"jobTitle"];
 }
 
 - (IBAction)BtnSelectSource_Click:(UIButton *)sender
@@ -122,7 +118,7 @@
         _txtSelectSource.text=[dict valueForKey:@"source"];
     }
     else{
-        NSDictionary *dict=[_arrJobTotle objectAtIndex:anIndex];
+        NSDictionary *dict=[_arrJobTitle objectAtIndex:anIndex];
         _txtJobTitle.text=[dict valueForKey:@"jobTitle"];
     }
 }
@@ -202,7 +198,6 @@
             NSString *boundary = [self generateBoundaryString];
             NSMutableURLRequest *request;
             // configure the request
-            //http://mypetzcenter.com/ser_my_profile/add_coupon
             request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://mobile.adwallz.co/beta/astaguru/PHPMailer-master/examples/smtp.php"]]];
             [request setHTTPMethod:@"POST"];
             

@@ -86,7 +86,7 @@
     else{
         NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
         ClsSetting *objSetting=[[ClsSetting alloc]init];
-        [objSetting CallWeb:dict url:[NSString stringWithFormat:@"users/?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed&filter=email=%@",[ClsSetting TrimWhiteSpaceAndNewLine:_email_TextField.text]] view:self.view Post:NO];
+        [objSetting CallWeb:dict url:[NSString stringWithFormat:@"users/?api_key=%@&filter=email=%@",[ClsSetting apiKey],[ClsSetting TrimWhiteSpaceAndNewLine:_email_TextField.text]] view:self.view Post:NO];
         objSetting.PassReseposeDatadelegate=self;
     }
 }
@@ -136,14 +136,15 @@
                                @"to":arrTo,
                                @"subject":@"Astaguru Password",
                                @"body_text":[NSString stringWithFormat:@"Hi %@ \n Your Astaguru Login Credentials are, \n Username:%@ \n Password:%@",name,username ,password],
-                               @"from_name":@"NetSpace India SES",
-                               @"from_email":@"beta@netspaceindia.com",
-                               @"reply_to_name":@"NetSpace India",
-                               @"reply_to_email":@"beta@netspaceindia.com",
+                               @"from_name":@"AstaGuru",
+                               @"from_email":@"info@infomanav.com",
+                               @"reply_to_name":@"AstaGuru",
+                               @"reply_to_email":@"info@infomanav.com",
                                
                                };
+    [ClsSetting sendEmailWithInfo:dictMail];
+
     [ClsSetting ValidationPromt:@"Email is sent to your register mail ID,Please check your mail box."];
-    [ClsSetting Email:dictMail view:self.view];
 }
 
 @end

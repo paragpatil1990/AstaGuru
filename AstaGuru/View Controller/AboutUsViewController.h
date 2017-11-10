@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface AboutUsViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UILabel *txtAboutUs;
-@property (weak, nonatomic) IBOutlet UIView *viwinner;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrContent;
+//@property (weak, nonatomic) IBOutlet UILabel *txtAboutUs;
+//@property (weak, nonatomic) IBOutlet UIView *viwinner;
+//@property (weak, nonatomic) IBOutlet UIScrollView *scrContent;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sideleftbarButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+@property (weak, nonatomic) IBOutlet UICollectionView *clv_aboutus;
+
 @end

@@ -23,12 +23,18 @@
 #import "MyAuctionGalleryViewController.h"
 #import "VerificationViewController.h"
  BOOL isList;
-@interface ItemOfPastAuctionViewController ()<PassResepose,CurrentOccution,Filter>
+
+@interface ItemOfPastAuctionViewController ()<PassResepose,CurrentOccution,FilterDelegate>
 {
     NSMutableArray *arrPactAuctionItem;
     int iOffset;
     BOOL isReloadDate;
     NSMutableArray *arrSelectedArtistarray;
+    NSArray *arrSearchResult;
+
+    clsCurrentOccution *objCurrentOccutionForAuctionName;
+    BOOL isFilter;
+
 }
 @end
 
@@ -37,29 +43,39 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-     arrPactAuctionItem=[[NSMutableArray alloc]init];
-    if (_isSearch==YES)
+    _noRecords_Lbl.hidden = YES;
+    
+    isFilter = NO;
+    
+    arrSearchResult = [[NSArray alloc]init];
+    arrPactAuctionItem=[[NSMutableArray alloc]init];
+    
+    if (_isSearch == YES)
     {
-        arrPactAuctionItem=_arrSearch;
-        
+        arrSearchResult = _arrSearch;
+        arrPactAuctionItem = [_arrSearch mutableCopy];
     }
     else if (_isWorkArt == YES)
     {
-        [self GetWrokArt];
+        [self getRecordPriceArtworks];
+    }
+    else if (_isMyPurchase == YES)
+    {
+        [self getMyPurchase];
     }
     else
     {
-        [self GetArtistOccuctionInfo:1];
+        [self getAccuctions];
     }
-    
-    //auctionbaner
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    [self.ClvItemOfPastAuction reloadData];
     [self setUpNavigationItem];
 }
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
@@ -74,9 +90,10 @@
 {
     [super viewDidDisappear:YES];
 }
+
 -(void)setUpNavigationItem
 {
-    if (_IsUpcomming==1)
+    if (_IsUpcomming == 1)
     {
         _IsPast = 0;
     }
@@ -84,12 +101,14 @@
     {
         _IsPast = 1;
     }
-    if(_isSearch==1)
+    
+    if(_isSearch == 1)
     {
-        if (_IsUpcomming==1)
+        if (_IsUpcomming == 1)
         {
             _IsPast = 0;
-          self.title=[NSString stringWithFormat:@"Upcoming Auctions"];
+          
+            self.title=[NSString stringWithFormat:@"Upcoming Auctions"];
         }
         else
         {
@@ -99,12 +118,19 @@
     }
     else if (_isWorkArt == YES)
     {
-        self.title=[NSString stringWithFormat:@"Art Work"];
+        self.navigationItem.title =@"Record Price Artworks";
+        self.title=[NSString stringWithFormat:@"Record Price Artworks"];
+    }
+    else if (_isMyPurchase == YES)
+    {
+        self.navigationItem.title =@"My Purchase";
+        self.title=[NSString stringWithFormat:@"My Purchase"];
     }
     else
     {
         self.title=[NSString stringWithFormat:@"%@",_objPast.strAuctiontitle];
     }
+    
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
@@ -138,46 +164,48 @@
 {
      [ClsSetting Searchpage:self.navigationController];
 }
+
 -(void)myastaguru
 {
     [ClsSetting myAstaGuru:self.navigationController];
 }
 
--(void)GetWrokArt
+-(void)getRecordPriceArtworks
 {
-    
-//    NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-    ClsSetting *objSetting=[[ClsSetting alloc]init];
-
     @try {
         
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         HUD.labelText = @"loading";
         NSMutableDictionary *Discparam=[[NSMutableDictionary alloc]init];
-        // [Discparam setValue:@"cr2016" forKey:@"validate"];
-        //[Discparam setValue:@"banner" forKey:@"action"];
-    
+        
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-        manager.responseSerializer = [AFHTTPResponseSerializer serializer];  //AFHTTPResponseSerializer serializer
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
-//        ClsSetting *objsetting=[[ClsSetting alloc]init];
-        NSString  *strQuery=[NSString stringWithFormat:@"%@recordPriceArtworks?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objSetting Url]];
+        NSString  *strQuery=[NSString stringWithFormat:@"%@recordPriceArtworks?api_key=%@",[ClsSetting tableURL],[ClsSetting apiKey]];
         NSString *url = strQuery;
         NSLog(@"%@",url);
         NSString *encoded = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [manager GET:encoded parameters:Discparam success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
-             //  NSError *error=nil;
-             //NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-             
              NSError *error;
              [MBProgressHUD hideHUDForView:self.view animated:YES];
              NSMutableArray *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
              NSMutableArray *arr1=[dict valueForKey:@"resource"];
              NSMutableArray *arrItemCount=[parese parseSortCurrentAuction:arr1];
              arrPactAuctionItem=arrItemCount;
-             //[arrPactAuctionItem addObjectsFromArray:arrItemCount];
+             if (arrPactAuctionItem.count == 0)
+             {
+                 _ClvItemOfPastAuction.hidden = YES;
+                 _noRecords_Lbl.hidden = NO;
+                 _noRecords_Lbl.text = @"There is no any record price artworks auction still yet.";
+             }
+             else
+             {
+                 _ClvItemOfPastAuction.hidden = NO;
+                 _noRecords_Lbl.hidden = YES;
+                 _noRecords_Lbl.text = @"";
+             }
              [_ClvItemOfPastAuction reloadData];
              
          }
@@ -185,17 +213,6 @@
                  NSLog(@"Error: %@", error);
                  [MBProgressHUD hideHUDForView:self.view animated:YES];
                  [ClsSetting ValidationPromt:error.localizedDescription];
-
-//                 if ([operation.response statusCode]==404)
-//                 {
-//                     [ClsSetting ValidationPromt:@"No Record Found"];
-//                     
-//                 }
-//                 else
-//                 {
-//                     [ClsSetting internetConnectionPromt];
-//                     
-//                 }
              }];
     }
     @catch (NSException *exception)
@@ -209,43 +226,87 @@
     
 }
 
--(void)GetArtistOccuctionInfo:(int)isCurrentOccution
-{
-    
-//        NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-        ClsSetting *objSetting=[[ClsSetting alloc]init];
-    
+-(void)getMyPurchase
+{    
     @try {
         
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         HUD.labelText = @"loading";
         NSMutableDictionary *Discparam=[[NSMutableDictionary alloc]init];
-        // [Discparam setValue:@"cr2016" forKey:@"validate"];
-        //[Discparam setValue:@"banner" forKey:@"action"];
-        
         
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-        manager.responseSerializer = [AFHTTPResponseSerializer serializer];  //AFHTTPResponseSerializer serializer
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
-//        ClsSetting *objsetting=[[ClsSetting alloc]init];
-        NSString  *strQuery=[NSString stringWithFormat:@"%@/spPastAuction(%@)?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objSetting UrlProcedure],_objPast.strAuctionId];
+        
+        NSString  *strQuery=[NSString stringWithFormat:@"%@/spMyPurchase(%@)?api_key=%@",[ClsSetting procedureURL],[[NSUserDefaults standardUserDefaults] valueForKey:USER_id],[ClsSetting apiKey]];
+        
+        NSString *url = strQuery;
+        NSLog(@"%@",url);
+        NSString *encoded = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [manager GET:encoded parameters:Discparam success:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             NSError *error;
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             NSMutableArray *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
+             NSMutableArray *arrItemCount=[parese parseSortCurrentAuction:dict];
+             arrPactAuctionItem=arrItemCount;
+             if (arrPactAuctionItem.count == 0)
+             {
+                 _ClvItemOfPastAuction.hidden = YES;
+                 _noRecords_Lbl.hidden = NO;
+                 _noRecords_Lbl.text = @"There is no lot in your Purchase.";
+             }
+             else
+             {
+                 _ClvItemOfPastAuction.hidden = NO;
+                 _noRecords_Lbl.hidden = YES;
+                 _noRecords_Lbl.text = @"";
+             }
+
+             [_ClvItemOfPastAuction reloadData];
+             
+         }
+             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 NSLog(@"Error: %@", error);
+                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                 [ClsSetting ValidationPromt:error.localizedDescription];
+             }];
+    }
+    @catch (NSException *exception)
+    {
+        
+    }
+    @finally
+    {
+    }
+}
+
+-(void)getAccuctions
+{    
+    @try {
+        
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        HUD.labelText = @"loading";
+        NSMutableDictionary *Discparam=[[NSMutableDictionary alloc]init];
+      
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+        NSString  *strQuery=[NSString stringWithFormat:@"%@/spPastAuction(%@,%@,%@)?api_key=%@",[ClsSetting procedureURL],_objPast.strAuctionId,@"P",@" ",[ClsSetting apiKey]];
         NSString *url = strQuery;
         NSLog(@"%@",url);
         
         NSString *encoded = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [manager GET:encoded parameters:Discparam success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
-             //  NSError *error=nil;
-             //NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-             
              NSError *error;
              [MBProgressHUD hideHUDForView:self.view animated:YES];
              NSMutableArray *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
-             //NSMutableArray *arr1=[dict valueForKey:@""];
              NSMutableArray *arrItemCount=[parese parseSortCurrentAuction:dict];
+             [arrPactAuctionItem removeAllObjects];
              arrPactAuctionItem=arrItemCount;
-             
              for (int i=0; i<arrPactAuctionItem.count; i++)
              {
                  clsCurrentOccution *objacution=[arrPactAuctionItem objectAtIndex:i];
@@ -256,18 +317,31 @@
                      {
                          objFilterResult.IsSwapOn=objacution.IsSwapOn;
                          objFilterResult.strTypeOfCell=objacution.strTypeOfCell;
-                         
                          break;
                      }
                  }
              }
-
-//             [arrPactAuctionItem removeAllObjects];
-//             arrPactAuctionItem=arrItemCount;
-////             [_clvCurrentOccution reloadData];
-
              
-             //[arrPactAuctionItem addObjectsFromArray:arrItemCount];
+             if (arrPactAuctionItem.count == 0)
+             {
+                 _ClvItemOfPastAuction.hidden = YES;
+                 _noRecords_Lbl.hidden = NO;
+                 if (_IsUpcomming == 1)
+                 {
+                     _noRecords_Lbl.text = @"There is no any upcoming auction still yet.";
+                 }
+                 else
+                 {
+                     _noRecords_Lbl.text = @"There is no any past auction still yet.";
+                 }
+             }
+             else
+             {
+                 _ClvItemOfPastAuction.hidden = NO;
+                 _noRecords_Lbl.hidden = YES;
+                 _noRecords_Lbl.text = @"";
+             }
+
              [_ClvItemOfPastAuction reloadData];
              
          }
@@ -275,17 +349,6 @@
                  NSLog(@"Error: %@", error);
                  [MBProgressHUD hideHUDForView:self.view animated:YES];
                  [ClsSetting ValidationPromt:error.localizedDescription];
-
-//                 if ([operation.response statusCode]==404)
-//                 {
-//                     [ClsSetting ValidationPromt:@"No Record Found"];
-//                     
-//                 }
-//                 else
-//                 {
-//                     [ClsSetting internetConnectionPromt];
-//                     
-//                 }
              }];
     }
     @catch (NSException *exception)
@@ -295,18 +358,14 @@
     @finally
     {
     }
-    
-    
 }
 
 -(void)passReseposeData:(id)arr
 {
-    //  NSMutableArray *arrOccution=[parese parseCurrentOccution:[arr valueForKey:@"resource"]];
-   
-        NSError *error;
-        NSMutableDictionary *dict1 = [NSJSONSerialization JSONObjectWithData:arr options:0 error:&error];
-        NSMutableArray *arr1=[dict1 valueForKey:@"resource"];
-   NSMutableArray *arrItemCount=[parese parseSortCurrentAuction:arr1];
+    NSError *error;
+    NSMutableDictionary *dict1 = [NSJSONSerialization JSONObjectWithData:arr options:0 error:&error];
+    NSMutableArray *arr1=[dict1 valueForKey:@"resource"];
+    NSMutableArray *arrItemCount=[parese parseSortCurrentAuction:arr1];
     if (arrItemCount.count==10)
     {
         isReloadDate=YES;
@@ -324,31 +383,53 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    
-    return 2;
-    
+    return 4;
 }
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    if (section == 2)
+    {
+        return UIEdgeInsetsMake(0, 8, 0, 8);
+    }
+    return UIEdgeInsetsMake(0, 0, 0, 0);
+}
+
+
 - (CGSize)collectionView:(UICollectionView *)collectionView1 layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if (indexPath.section==0)
     {
-        return   CGSizeMake(collectionView1.frame.size.width,145);
+        if (_isMyPurchase == YES)
+        {
+            return   CGSizeMake(collectionView1.frame.size.width,50);
+        }
+        else
+        {
+            return   CGSizeMake(collectionView1.frame.size.width,142);
+        }
+    }
+    if (indexPath.section==1 || indexPath.section == 3)
+    {
+        return   CGSizeMake((collectionView1.frame.size.width),10);
     }
     else
     {
         if (isList==TRUE)
         {
-            return   CGSizeMake((collectionView1.frame.size.width)-10,134);
+            return   CGSizeMake((collectionView1.frame.size.width) - 16, 155);
         }
-        
-        return   CGSizeMake((collectionView1.frame.size.width/2)-7,266);
+        return   CGSizeMake((collectionView1.frame.size.width/2)-12, 290);
     }
-    
 }
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (section==0)
+    {
+        return 1;
+    }
+    else if (section == 1 || section == 3)
     {
         return 1;
     }
@@ -356,30 +437,31 @@
     {
         return  arrPactAuctionItem.count;
     }
-    
 }
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CurrentDefultGridCollectionViewCell *CurrentDefultGridCell;
     CurrentDefultGridCollectionViewCell *CurrentSelectedGridCell;
     TOPCollectionViewCell *TopStaticCell;
-    UICollectionViewCell *cell1;
+    UICollectionViewCell *cell;
     if (indexPath.section==0)
     {
-        
         TopStaticCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TopCell" forIndexPath:indexPath];
-        if (isList==TRUE)
+        EGOImageView *imgServices = (EGOImageView *)[TopStaticCell viewWithTag:22];
+
+        if (isList == TRUE)
         {
             [TopStaticCell.btnGrid setImage:[UIImage imageNamed:@"icon-Grid-Def"] forState:UIControlStateNormal];
             [TopStaticCell.btnList setImage:[UIImage imageNamed:@"icon-list-sel"] forState:UIControlStateNormal];
-            
         }
         else
         {
             [TopStaticCell.btnGrid setImage:[UIImage imageNamed:@"icon-grid"] forState:UIControlStateNormal];
             [TopStaticCell.btnList setImage:[UIImage imageNamed:@"icon-list"] forState:UIControlStateNormal];
         }
-        if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isUSD"])
         {
             TopStaticCell.lblCurrency.text=@"USD";
         }
@@ -388,128 +470,96 @@
             TopStaticCell.lblCurrency.text=@"INR";
         }
         
-        if (_IsUpcomming==1)
+        if (_IsUpcomming == 1)
         {
             TopStaticCell.btnAuctionAnalist.hidden=YES;
         }
-        else if (_isWorkArt == YES)
+        else
         {
+            TopStaticCell.btnAuctionAnalist.hidden=NO;
+            [TopStaticCell.btnAuctionAnalist addTarget:self action:@selector(btnAuctionAnalistPressed:) forControlEvents:UIControlEventTouchUpInside];
+        }
+
+        if (_isWorkArt == YES || _isMyPurchase == YES || _isSearch == YES)
+        {
+            if (_isMyPurchase == YES)
+            {
+                UIView *liveView = (UIView *)[TopStaticCell viewWithTag:11];
+                liveView.hidden = YES;
+                TopStaticCell.imgContianView.hidden = YES;
+                TopStaticCell.img_height.constant = 0;
+                imgServices.hidden =  YES;
+            }
             TopStaticCell.btnAuctionAnalist.hidden=YES;
             TopStaticCell.btnFilter.hidden = YES;
             TopStaticCell.lblFilter.hidden = YES;
             TopStaticCell.iconDropdown.hidden = YES;
         }
-        else
-        {
-            TopStaticCell.btnAuctionAnalist.hidden=false;
-            [TopStaticCell.btnAuctionAnalist addTarget:self action:@selector(btnAuctionAnalistPressed:) forControlEvents:UIControlEventTouchUpInside];
-        }
+
         
         if (arrPactAuctionItem.count>0)
         {
             clsCurrentOccution *objCurrentOccution=[arrPactAuctionItem objectAtIndex:0];
-            //        NSString *auctionBanner = objCurrentOccution.strauctionBanner;
-            EGOImageView *imgServices = (EGOImageView *)[TopStaticCell viewWithTag:22];
-            NSString *spaceUrl = [[NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"%@%@",[ClsSetting ImageURL], objCurrentOccution.strauctionBanner]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            imgServices.imageURL=[NSURL URLWithString:spaceUrl];
-        }
-        
-        
-        cell1 = TopStaticCell;
-    }
-    
-    else
-    {
-        clsCurrentOccution *objCurrentOccution=[arrPactAuctionItem objectAtIndex:indexPath.row];
-        if (isList==FALSE)
-        {
-            if ([objCurrentOccution.strTypeOfCell intValue]==1)
+            NSString *spaceUrl;
+            
+            if (isFilter == YES)
             {
-                CurrentSelectedGridCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CurrentSelected" forIndexPath:indexPath];
-                
-                CurrentSelectedGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",objCurrentOccution.strFirstName,objCurrentOccution.strLastName];
-                CurrentSelectedGridCell.lblProductName.text= objCurrentOccution.strtitle;
-                CurrentSelectedGridCell.lblMedium.text=objCurrentOccution.strmedium;
-                CurrentSelectedGridCell.lblCategoryName.text= objCurrentOccution.strcategory;
-                CurrentSelectedGridCell.lblYear.text=objCurrentOccution.strproductdate;
-                CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@ in",objCurrentOccution.strproductsize] ;
-                
-                CurrentSelectedGridCell.lblEstimation.text=objCurrentOccution.strestamiate;
-                CurrentSelectedGridCell.layer.borderWidth=1;
-                CurrentDefultGridCell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
-                [CurrentSelectedGridCell.btnLot setTitle:[NSString stringWithFormat:@"Lot:%@",objCurrentOccution.strReference] forState:UIControlStateNormal];
-                CurrentSelectedGridCell.CurrentOccutiondelegate=self;
-                CurrentSelectedGridCell.iSelectedIndex=(int)indexPath.row;
-                CurrentSelectedGridCell.objCurrentOccution=objCurrentOccution;
-                CurrentSelectedGridCell.CurrentOccutiondelegate=self;
-                CurrentSelectedGridCell.btnDetail.tag=indexPath.row;
-                CurrentSelectedGridCell.btnGridSelectedDetail.tag=indexPath.row;
-                CurrentSelectedGridCell.btnBidHistory.tag=indexPath.row;
-                
-                NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init] ;
-                [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-                [numberFormatter setMaximumFractionDigits:0];
-                if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
+                spaceUrl = [[NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"%@%@",[ClsSetting imageURL], objCurrentOccution.strauctionBanner]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            }
+            else
+            {
+                if (_isWorkArt == YES || _isSearch == YES)
                 {
-                    numberFormatter.currencyCode = @"USD";
-                    NSString *strCurrentBuild = [numberFormatter stringFromNumber:objCurrentOccution.strpriceus];
-                    
-                    
-                    CurrentSelectedGridCell.lblCurrentBuild.text=[NSString stringWithFormat:@"%@",strCurrentBuild];
-                    
-                    
-                    int price =[objCurrentOccution.strpriceus intValue];
-                    int priceIncreaserete=(price*15)/100;
-                    
-                    int FinalPrice=price+priceIncreaserete;
-                    NSString *strNextValidBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:FinalPrice]];
-                    
-                    CurrentSelectedGridCell.lblNextValidBuild.text=[NSString stringWithFormat:@"%@",strNextValidBuild];
-                    
+                    spaceUrl = [NSString stringWithFormat:@"%@",objCurrentOccution.strauctionBanner];
                 }
                 else
                 {
-                    numberFormatter.currencyCode = @"INR";
-                    NSString *strCurrentBuild = [numberFormatter stringFromNumber:objCurrentOccution.strpricers];
-                    
-                    
-                    CurrentSelectedGridCell.lblCurrentBuild.text=[NSString stringWithFormat:@"%@",strCurrentBuild];
-                    
-                    
-                    int price =[objCurrentOccution.strpricers intValue];
-                    int priceIncreaserete=(price*15)/100;
-                    
-                    int FinalPrice=price+priceIncreaserete;
-                    NSString *strNextValidBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:FinalPrice]];
-                    CurrentSelectedGridCell.lblNextValidBuild.text=[NSString stringWithFormat:@"%@",strNextValidBuild];
-                    
-                    NSCharacterSet *nonNumbersSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789.,"] invertedSet];
-                    NSArray *subStrings = [objCurrentOccution.strestamiate componentsSeparatedByString:@"–"]; //or rather @" - " //or rather @" - "
-                    if (subStrings.count>1)
-                    {
-                        
-                        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-                        formatter.numberStyle = NSNumberFormatterDecimalStyle;
-                        NSString *strFromRangeString = [[subStrings objectAtIndex:0] stringByTrimmingCharactersInSet:nonNumbersSet];
-                        NSString *strToRangeString = [[subStrings objectAtIndex:1] stringByTrimmingCharactersInSet:nonNumbersSet];
-                        
-                        float Fromnumber = [[formatter numberFromString:strFromRangeString] intValue]*[[[NSUserDefaults standardUserDefaults]valueForKey:@"DollarRate"] floatValue];
-                        
-                        float Tonumber = [[formatter numberFromString:strToRangeString] intValue]*[[[NSUserDefaults standardUserDefaults]valueForKey:@"DollarRate"] floatValue];
-                        
-                        NSString *strFromRs = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:Fromnumber]];
-                        NSString *strToRs = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:Tonumber]];
-                        
-                        CurrentSelectedGridCell.lblEstimation.text=[NSString stringWithFormat:@"%@ - %@",strFromRs,strToRs];
-                        
-                    }
+                    spaceUrl = [[NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"%@%@",[ClsSetting imageURL], objCurrentOccution.strauctionBanner]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                 }
+            }
+            
+            imgServices.imageURL=[NSURL URLWithString:spaceUrl];
+        }
+        cell = TopStaticCell;
+    }
+    else if (indexPath.section == 1 || indexPath.section == 3)
+    {
+        static NSString *identifier = @"blankcell";
+        UICollectionViewCell *cell2 = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+        cell = cell2;
+    }
+    else
+    {
+        objCurrentOccutionForAuctionName = [arrPactAuctionItem objectAtIndex:0];
+        clsCurrentOccution *objCurrentOccution = [arrPactAuctionItem objectAtIndex:indexPath.row];
+        if (isList == FALSE)
+        {
+            if ([objCurrentOccution.strTypeOfCell intValue]==1)
+            {
+                if (_IsUpcomming)
+                {
+                    CurrentSelectedGridCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UpcommingSelected" forIndexPath:indexPath];
+                }
+                else
+                {
+                    CurrentSelectedGridCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PastSelected" forIndexPath:indexPath];
+                }
+                
+                CurrentSelectedGridCell.lblLot.text = [NSString stringWithFormat:@"Lot:%@",objCurrentOccution.strReference];
+                [ClsSetting SetBorder:CurrentSelectedGridCell.lblLot cornerRadius:8 borderWidth:1 color:[UIColor clearColor]];
+                
+                CurrentSelectedGridCell.CurrentOccutiondelegate=self;
+                CurrentSelectedGridCell.objCurrentOccution=objCurrentOccution;
+                CurrentSelectedGridCell.iSelectedIndex=(int)indexPath.row;
+                CurrentSelectedGridCell.btnDetail.tag=indexPath.row;
+                CurrentSelectedGridCell.btnGridSelectedDetail.tag=indexPath.row;
+                CurrentSelectedGridCell.btnproxy.tag=indexPath.row;
+                
                 if (_IsUpcomming==1)
                 {
                     CurrentSelectedGridCell.isCommingFromUpcoming = 1;
                     CurrentSelectedGridCell.isCommingFromPast = 0;
                     CurrentSelectedGridCell.btnproxy.hidden=NO;
-                    CurrentSelectedGridCell.btnproxy.tag=indexPath.row;
                 }
                 else
                 {
@@ -517,96 +567,132 @@
                     CurrentSelectedGridCell.isCommingFromPast = 1;
                     CurrentSelectedGridCell.btnproxy.hidden=YES;
                 }
-                cell1 = CurrentSelectedGridCell;
-            }
-            else
-            {
                 
-                CurrentDefultGridCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CurrentDefult" forIndexPath:indexPath];
-                
-                NSString *spaceUrl = [[NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"%@%@",[ClsSetting ImageURL], objCurrentOccution.strthumbnail]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                CurrentDefultGridCell.imgProduct.imageURL=[NSURL URLWithString:spaceUrl];
-                CurrentDefultGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",objCurrentOccution.strFirstName,objCurrentOccution.strLastName];
-                CurrentDefultGridCell.lblProductName.text= objCurrentOccution.strtitle;
-                
-                
-                [self addTapGestureOnProductimage:CurrentDefultGridCell.imgProduct indexpathrow:indexPath.row];
-                
-                CurrentDefultGridCell.iSelectedIndex=(int)indexPath.row;
-                
-                CurrentDefultGridCell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
-                [CurrentDefultGridCell.btnLot setTitle:[NSString stringWithFormat:@"Lot:%@",objCurrentOccution.strReference] forState:UIControlStateNormal];
-                CurrentDefultGridCell.CurrentOccutiondelegate=self;
-                CurrentDefultGridCell.objCurrentOccution=objCurrentOccution;
-                
-                
-                NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init] ;
-                [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-                [numberFormatter setMaximumFractionDigits:0];
-                if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
+                if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
                 {
-                    numberFormatter.currencyCode = @"USD";
-                    NSString *strCurrentBuild = [numberFormatter stringFromNumber:objCurrentOccution.strpriceus];
+                    UILabel *Lbl_1 = (UILabel *)[CurrentSelectedGridCell viewWithTag:1];
+                    Lbl_1.text = @"Title: ";
+                    UILabel *Lbl_2 = (UILabel *)[CurrentSelectedGridCell viewWithTag:2];
+                    Lbl_2.text = @"Description: ";
+                    UILabel *Lbl_3 = (UILabel *)[CurrentSelectedGridCell viewWithTag:3];
+                    Lbl_3.text = @"";
                     
-                    
-                    CurrentDefultGridCell.lblCurrentBuild.text=[NSString stringWithFormat:@"%@",strCurrentBuild];
-                    
-                    
-                    int price =[objCurrentOccution.strpriceus intValue];
-                    int priceIncreaserete=(price*15)/100;
-                    
-                    int FinalPrice=price+priceIncreaserete;
-                    NSString *strNextValidBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:FinalPrice]];
-                    
-                    CurrentDefultGridCell.lblNextValidBuild.text=[NSString stringWithFormat:@"%@",strNextValidBuild];
-                    if (_IsUpcomming==1)
-                    {
-                        CurrentDefultGridCell.pastStatictext.hidden=YES;
-                        NSString *strBASICBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:price]];
-                        CurrentDefultGridCell.lblNextValidBuild.text=[NSString stringWithFormat:@"%@",strBASICBuild];
-                    }
+                    CurrentSelectedGridCell.lblArtistName.text=objCurrentOccution.strtitle;
+                    NSString *ht = [ClsSetting getAttributedStringFormHtmlString:objCurrentOccution.strPrdescription];
+                    CurrentSelectedGridCell.lblMedium.text= ht;
+                    CurrentSelectedGridCell.lblYear.text= @"";
+                    CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@ in",objCurrentOccution.strproductsize];
                     
                 }
                 else
                 {
-                    numberFormatter.currencyCode = @"INR";
-                    NSString *strCurrentBuild = [numberFormatter stringFromNumber:objCurrentOccution.strpricers];
-                    
-                    
-                    CurrentDefultGridCell.lblCurrentBuild.text=[NSString stringWithFormat:@"%@",strCurrentBuild];
-                    
-                    
-                    int price =[objCurrentOccution.strpricers intValue];
-                    int priceIncreaserete=(price*15)/100;
-                    
-                    int FinalPrice=price+priceIncreaserete;
-                    NSString *strNextValidBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:FinalPrice]];
-                    CurrentDefultGridCell.lblNextValidBuild.text=[NSString stringWithFormat:@"%@",strNextValidBuild];
-                    
-                    if (_IsUpcomming==1)
-                    {
-                        CurrentDefultGridCell.pastStatictext.hidden=YES;
-                        NSString *strBASICBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:price]];
-                        CurrentDefultGridCell.lblNextValidBuild.text=[NSString stringWithFormat:@"%@",strBASICBuild];
-                    }
-                    
+                    CurrentSelectedGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",objCurrentOccution.strFirstName,objCurrentOccution.strLastName];
+                    CurrentSelectedGridCell.lblMedium.text= objCurrentOccution.strmedium;
+                    CurrentSelectedGridCell.lblCategoryName.text=objCurrentOccution.strcategory;
+                    CurrentSelectedGridCell.lblYear.text= objCurrentOccution.strproductdate;
+                    CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@ in",objCurrentOccution.strproductsize];
                 }
+                
+                if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
+                {
+                    CurrentSelectedGridCell.lblEstimation.text=objCurrentOccution.strestamiate;
+                }
+                else
+                {
+                    CurrentSelectedGridCell.lblEstimation.text=objCurrentOccution.strcollectors;
+                }
+                cell = CurrentSelectedGridCell;
+            }
+            else
+            {
+                if (_IsUpcomming)
+                {
+                    CurrentDefultGridCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UpcommingDefult" forIndexPath:indexPath];
+                }
+                else
+                {
+                    CurrentDefultGridCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PastDefult" forIndexPath:indexPath];
+                }
+                
+                NSString *imgUrl = [[NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"%@%@",[ClsSetting imageURL], objCurrentOccution.strthumbnail]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                CurrentDefultGridCell.imgProduct.imageURL = [NSURL URLWithString:imgUrl];
+                [self addTapGestureOnProductimage:CurrentDefultGridCell.imgProduct indexpathrow:indexPath.row];
+
+                CurrentDefultGridCell.lblLot.text = [NSString stringWithFormat:@"Lot:%@",objCurrentOccution.strReference];
+                [ClsSetting SetBorder:CurrentDefultGridCell.lblLot cornerRadius:8 borderWidth:1 color:[UIColor clearColor]];
+                
+                CurrentDefultGridCell.CurrentOccutiondelegate=self;
+                CurrentDefultGridCell.objCurrentOccution=objCurrentOccution;
+                CurrentDefultGridCell.iSelectedIndex=(int)indexPath.row;
+                CurrentDefultGridCell.btnArtist.tag=indexPath.row;
+                CurrentDefultGridCell.btnDetail.tag=indexPath.row;
+                CurrentDefultGridCell.btnMyGallery.tag = indexPath.row;
+                
+                if ([objCurrentOccutionForAuctionName.strAuctionname isEqualToString:@"Collectibles Auction"])
+                {
+                    CurrentDefultGridCell.lblArtistName.text = @"";
+                    CurrentDefultGridCell.btnArtist.enabled = NO;
+                }
+                else
+                {
+                    CurrentDefultGridCell.btnArtist.enabled = YES;
+                    CurrentDefultGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",objCurrentOccution.strFirstName,objCurrentOccution.strLastName];
+                }
+                
+                CurrentDefultGridCell.lblProductName.text= objCurrentOccution.strtitle;
+            
+                NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init] ;
+                [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+                [numberFormatter setMaximumFractionDigits:0];
+                
+                NSInteger currentBid;
+                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isUSD"])
+                {
+                    numberFormatter.currencyCode = @"USD";
+                    currentBid = [objCurrentOccution.strpriceus integerValue];
+                }
+                else
+                {
+                    numberFormatter.currencyCode = @"INR";
+                    currentBid = [objCurrentOccution.strpricers integerValue];
+                }
+                
+                NSInteger incresedRate = (currentBid*15)/100;
+                NSInteger incresedPrice = currentBid + incresedRate;
                 
                 if (_IsUpcomming == 1)
                 {
-                    CurrentDefultGridCell.isCommingFromUpcoming = 1;
-                    CurrentDefultGridCell.isCommingFromPast = 0;
-                    CurrentDefultGridCell.btnMyGallery.tag=indexPath.row;
+//                    CurrentDefultGridCell.isCommingFromUpcoming = 1;
+//                    CurrentDefultGridCell.isCommingFromPast = 0;
+                    
+                    CurrentDefultGridCell.lblNextValidBuild.text = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:currentBid]];
+                    CurrentDefultGridCell.lbl_startPriceText.text = @"Start price";
+                    CurrentDefultGridCell.pastStatictext.hidden=YES;
                 }
-                else{
-                    CurrentDefultGridCell.isCommingFromUpcoming = 0;
-                    CurrentDefultGridCell.isCommingFromPast = 1;
-                    CurrentDefultGridCell.btnMyGallery.hidden=YES;
-                    CurrentDefultGridCell.btnMyGallery_width.constant = 0;
+                else
+                {
+//                    CurrentDefultGridCell.isCommingFromUpcoming = 0;
+//                    CurrentDefultGridCell.isCommingFromPast = 1;
+
+                    CurrentDefultGridCell.lblNextValidBuild.text = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:incresedPrice]];
+                    CurrentDefultGridCell.lbl_startPriceText.text = @"";
+                    
+                    
+                    if ([objCurrentOccution.strpricelow  intValue] > [objCurrentOccution.strpricers intValue] )
+                    {
+                        CurrentDefultGridCell.lblNextValidBuild.text = @"Bought In";
+                        CurrentDefultGridCell.pastStatictext.hidden = YES;
+//                        CurrentDefultGridCell.lblProductName.hidden = YES;
+                    }
+                    else
+                    {
+//                        CurrentDefultGridCell.hidden = NO;
+                        CurrentDefultGridCell.pastStatictext.hidden = NO;
+                        CurrentDefultGridCell.pastStatictext.text = @"(Inclusive of 15% Buyers Premium)";
+                    }
+
                 }
-                CurrentDefultGridCell.btnDetail.tag=indexPath.row;
-                CurrentDefultGridCell.btnArtist.tag=indexPath.row;
-                cell1 = CurrentDefultGridCell;
+                cell = CurrentDefultGridCell;
             }
             
         }
@@ -616,200 +702,167 @@
             {
                 CurrentSelectedGridCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CurrentSelectedList" forIndexPath:indexPath];
                 
-                NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init] ;
-                [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-                [numberFormatter setMaximumFractionDigits:0];
+                CurrentSelectedGridCell.imgProduct.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[ClsSetting imageURL], objCurrentOccution.strthumbnail]];
                 
-                if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"]==YES)
-                {
-                    numberFormatter.currencyCode = @"USD";
-                    NSString *strCurrentBuild = [numberFormatter stringFromNumber:objCurrentOccution.strpriceus];
-                    
-                    
-                    CurrentDefultGridCell.lblCurrentBuild.text=[NSString stringWithFormat:@"%@",strCurrentBuild];
-                    
-                    int price =[objCurrentOccution.strpriceus intValue];
-                    int priceIncreaserete=(price*15)/100;
-                    
-                    int FinalPrice=price+priceIncreaserete;
-                    NSString *strNextValidBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:FinalPrice]];
-                    
-                    CurrentDefultGridCell.lblNextValidBuild.text=[NSString stringWithFormat:@"%@",strNextValidBuild];
-                }
-                else
-                {
-                    numberFormatter.currencyCode = @"INR";
-                    NSString *strCurrentBuild = [numberFormatter stringFromNumber:objCurrentOccution.strpricers];
-                    CurrentDefultGridCell.lblCurrentBuild.text=[NSString stringWithFormat:@"%@",strCurrentBuild];
-                    
-                    int price =[objCurrentOccution.strpricers intValue];
-                    int priceIncreaserete=(price*15)/100;
-                    int FinalPrice=price+priceIncreaserete;
-                    NSString *strNextValidBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:FinalPrice]];
-                    
-                    CurrentDefultGridCell.lblNextValidBuild.text=[NSString stringWithFormat:@"%@",strNextValidBuild];
-                    
-                }
-                CurrentSelectedGridCell.imgProduct.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[ClsSetting ImageURL], objCurrentOccution.strthumbnail]];
-                [self addTapGestureOnProductimage:CurrentDefultGridCell.imgProduct indexpathrow:indexPath.row];
-                CurrentSelectedGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",objCurrentOccution.strFirstName,objCurrentOccution.strLastName];
-                CurrentSelectedGridCell.lblMedium.text= objCurrentOccution.strmedium;
-                CurrentSelectedGridCell.lblCategoryName.text=objCurrentOccution.strcategory;
-                CurrentSelectedGridCell.lblProductName.text= objCurrentOccution.strtitle;
-                CurrentSelectedGridCell.lblYear.text= objCurrentOccution.strproductdate;
-                CurrentSelectedGridCell.lblSize.text= [NSString stringWithFormat:@"%@ in",objCurrentOccution.strproductsize];
-                CurrentSelectedGridCell.CurrentOccutiondelegate=self;
-                NSString *timeStr =[self timercount:objCurrentOccution.strBidclosingtime fromDate:objCurrentOccution.strCurrentDate];
-                if ([timeStr isEqualToString:@""])
-                    CurrentSelectedGridCell.lblCoundown.text=@"Auction Closed";
-                else
-                    CurrentSelectedGridCell.lblCoundown.text=timeStr;
+                [self addTapGestureOnProductimage:CurrentSelectedGridCell.imgProduct indexpathrow:indexPath.row];
                 
-                CurrentSelectedGridCell.lblEstimation.text=objCurrentOccution.strestamiate;
-                CurrentSelectedGridCell.layer.borderWidth=1;
-                CurrentDefultGridCell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
-                [CurrentSelectedGridCell.btnLot setTitle:[NSString stringWithFormat:@"Lot:%@",objCurrentOccution.strReference] forState:UIControlStateNormal];
+                CurrentSelectedGridCell.lblLot.text = [NSString stringWithFormat:@"Lot:%@",objCurrentOccution.strReference];
+                [ClsSetting SetBorder:CurrentSelectedGridCell.lblLot cornerRadius:8 borderWidth:1 color:[UIColor clearColor]];
+                
                 CurrentSelectedGridCell.CurrentOccutiondelegate=self;
-                CurrentSelectedGridCell.iSelectedIndex=(int)indexPath.row;
                 CurrentSelectedGridCell.objCurrentOccution=objCurrentOccution;
-                CurrentSelectedGridCell.CurrentOccutiondelegate=self;
-                if (_IsUpcomming == 1)
+                CurrentSelectedGridCell.iSelectedIndex=(int)indexPath.row;
+                CurrentSelectedGridCell.btnGridSelectedDetail.tag = indexPath.row;
+                
+                if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
                 {
-                    CurrentSelectedGridCell.isCommingFromUpcoming = 1;
-                    CurrentSelectedGridCell.isCommingFromPast = 0;
+                    UILabel *Lbl_1 = (UILabel *)[CurrentSelectedGridCell viewWithTag:11];
+                    Lbl_1.text = @"Title: ";
+                    UILabel *Lbl_2 = (UILabel *)[CurrentSelectedGridCell viewWithTag:12];
+                    Lbl_2.text = @"Description: ";
+                    UILabel *Lbl_3 = (UILabel *)[CurrentSelectedGridCell viewWithTag:13];
+                    Lbl_3.text = @"";
+                    
+                    CurrentSelectedGridCell.lblArtistName.text=objCurrentOccution.strtitle;
+                    NSString *ht = [ClsSetting getAttributedStringFormHtmlString:objCurrentOccution.strPrdescription];
+                    CurrentSelectedGridCell.lblMedium.text= ht;
+                    CurrentSelectedGridCell.lblYear.text= @"";
+                    CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@ in",objCurrentOccution.strproductsize];
                 }
-                else{
-                    CurrentSelectedGridCell.isCommingFromUpcoming = 0;
-                    CurrentSelectedGridCell.isCommingFromPast = 1;
+                else
+                {
+                    CurrentSelectedGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",objCurrentOccution.strFirstName,objCurrentOccution.strLastName];
+                    CurrentSelectedGridCell.lblMedium.text= objCurrentOccution.strmedium;
+                    CurrentSelectedGridCell.lblCategoryName.text=objCurrentOccution.strcategory;
+                    CurrentSelectedGridCell.lblYear.text= objCurrentOccution.strproductdate;
+                    CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@ in",objCurrentOccution.strproductsize];
                 }
-                [CurrentSelectedGridCell setuparray];
-                cell1 = CurrentSelectedGridCell;
+                
+                if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
+                {
+                    CurrentSelectedGridCell.lblEstimation.text=objCurrentOccution.strestamiate;
+                }
+                else
+                {
+                    CurrentSelectedGridCell.lblEstimation.text=objCurrentOccution.strcollectors;
+                }
+                cell = CurrentSelectedGridCell;
                 
             }
             else
             {
+                if (_IsUpcomming)
+                {
+                    CurrentDefultGridCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UpcommingDefultList" forIndexPath:indexPath];
+                }
+                else
+                {
+                    CurrentDefultGridCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PastDefultList" forIndexPath:indexPath];
+                }
                 
-                CurrentDefultGridCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CurrentDefultList" forIndexPath:indexPath];
+                NSString *spaceUrl = [[NSString stringWithFormat:@"%@", [NSString stringWithFormat:@"%@%@",[ClsSetting imageURL], objCurrentOccution.strthumbnail]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+                CurrentDefultGridCell.imgProduct.imageURL=[NSURL URLWithString:spaceUrl];
+                [self addTapGestureOnProductimage:CurrentDefultGridCell.imgProduct indexpathrow:indexPath.row];
+
+                CurrentDefultGridCell.lblProductName.text= objCurrentOccution.strtitle;
+
+                CurrentDefultGridCell.lblLot.text = [NSString stringWithFormat:@"Lot:%@",objCurrentOccution.strReference];
+                [ClsSetting SetBorder:CurrentDefultGridCell.lblLot cornerRadius:8 borderWidth:1 color:[UIColor clearColor]];
+                
+                [CurrentDefultGridCell setupGesture];
+
+                CurrentDefultGridCell.CurrentOccutiondelegate=self;
+                CurrentDefultGridCell.objCurrentOccution=objCurrentOccution;
+                CurrentDefultGridCell.iSelectedIndex=(int)indexPath.row;
+                CurrentDefultGridCell.btnDetail.tag=indexPath.row;
+                CurrentDefultGridCell.btnArtist.tag=indexPath.row;
+
+                
+                if ([objCurrentOccutionForAuctionName.strAuctionname isEqualToString:@"Collectibles Auction"])
+                {
+                    CurrentDefultGridCell.lblArtistName.text = @"";
+                    CurrentDefultGridCell.btnArtist.enabled = NO;
+                }
+                else
+                {
+                    CurrentDefultGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",objCurrentOccution.strFirstName,objCurrentOccution.strLastName];
+                }
+            
                 NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init] ;
                 [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
                 [numberFormatter setMaximumFractionDigits:0];
                 
-                if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"]==YES)
+                NSInteger currentBid;
+                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isUSD"])
                 {
                     numberFormatter.currencyCode = @"USD";
-                    NSString *strCurrentBuild = [numberFormatter stringFromNumber:objCurrentOccution.strpriceus];
-                    
-                    
-                    CurrentDefultGridCell.lblCurrentBuild.text=[NSString stringWithFormat:@"%@",strCurrentBuild];
-                    
-                    int price =[objCurrentOccution.strpriceus intValue];
-                    int priceIncreaserete=(price*15)/100;
-                    
-                    int FinalPrice=price+priceIncreaserete;
-                    NSString *strNextValidBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:FinalPrice]];
-                    
-                    CurrentDefultGridCell.lblNextValidBuild.text=[NSString stringWithFormat:@"%@",strNextValidBuild];
-                    if (_IsUpcomming==1)
-                    {
-                        CurrentDefultGridCell.pastStatictext.hidden=YES;
-                        NSString *strBASICBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:price]];
-                        CurrentDefultGridCell.lblNextValidBuild.text=[NSString stringWithFormat:@"%@",strBASICBuild];
-                    }
+                    currentBid = [objCurrentOccution.strpriceus integerValue];
                 }
                 else
                 {
                     numberFormatter.currencyCode = @"INR";
-                    NSString *strCurrentBuild = [numberFormatter stringFromNumber:objCurrentOccution.strpricers];
-                    
-                    
-                    
-                    CurrentDefultGridCell.lblCurrentBuild.text=[NSString stringWithFormat:@"%@",strCurrentBuild];
-                    
-                    int price =[objCurrentOccution.strpricers intValue];
-                    int priceIncreaserete=(price*15)/100;
-                    int FinalPrice=price+priceIncreaserete;
-                    NSString *strNextValidBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:FinalPrice]];
-                    
-                    CurrentDefultGridCell.lblNextValidBuild.text=[NSString stringWithFormat:@"%@",strNextValidBuild];
-                    if (_IsUpcomming==1)
-                    {
-                        CurrentDefultGridCell.pastStatictext.hidden=YES;
-                        NSString *strBASICBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:price]];
-                        CurrentDefultGridCell.lblNextValidBuild.text=[NSString stringWithFormat:@"%@",strBASICBuild];
-                    }
-                    
+                    currentBid = [objCurrentOccution.strpricers integerValue];
                 }
                 
-                NSString *spaceUrl = [[NSString stringWithFormat:@"%@", [NSString stringWithFormat:@"%@%@",[ClsSetting ImageURL], objCurrentOccution.strthumbnail]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                CurrentDefultGridCell.imgProduct.imageURL=[NSURL URLWithString:spaceUrl];
-                
-                [self addTapGestureOnProductimage:CurrentDefultGridCell.imgProduct indexpathrow:indexPath.row];
-                
-                CurrentDefultGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",objCurrentOccution.strFirstName,objCurrentOccution.strLastName];
-                CurrentDefultGridCell.lblMedium.text= objCurrentOccution.strmedium;
-                CurrentDefultGridCell.lblCategoryName.text=objCurrentOccution.strcategory;
+                NSInteger incresedRate = (currentBid*15)/100;
+                NSInteger incresedPrice = currentBid + incresedRate;
                 
                 
-                CurrentDefultGridCell.lblProductName.text= objCurrentOccution.strtitle;
-                
-                
-                CurrentDefultGridCell.lblYear.text= objCurrentOccution.strproductdate;
-                
-                CurrentDefultGridCell.iSelectedIndex=(int)indexPath.row;
-                CurrentDefultGridCell.objCurrentOccution=objCurrentOccution;
-                CurrentDefultGridCell.btnDetail.tag=indexPath.row;
-                CurrentDefultGridCell.btnArtist.tag=indexPath.row;
-                
-                if (objCurrentOccution.IsSwapOn==1)
-                {
-                    CurrentDefultGridCell.viwSwap.frame=CGRectMake((CurrentDefultGridCell.viwSwap.frame.size.width/4)-CurrentDefultGridCell.viwSwap.frame.size.width, CurrentDefultGridCell.viwSwap.frame.origin.y, CurrentDefultGridCell.viwSwap.frame.size.width, CurrentDefultGridCell.viwSwap.frame.size.width);
-                }
-                else
-                {
-                    CurrentDefultGridCell.viwSwap.frame=CGRectMake(0, CurrentDefultGridCell.viwSwap.frame.origin.y, CurrentDefultGridCell.viwSwap.frame.size.width, CurrentDefultGridCell.viwSwap.frame.size.width);
-                }
-                
-                NSString *timeStr =[self timercount:objCurrentOccution.strBidclosingtime fromDate:objCurrentOccution.strCurrentDate];
-                if ([timeStr isEqualToString:@""])
-                    CurrentDefultGridCell.lblCoundown.text=@"Auction Closed";
-                else
-                    CurrentDefultGridCell.lblCoundown.text=timeStr;
-                cell1.layer.borderWidth=1;
-                CurrentDefultGridCell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
-                [CurrentDefultGridCell.btnLot setTitle:[NSString stringWithFormat:@"Lot:%@",objCurrentOccution.strReference] forState:UIControlStateNormal];
-                CurrentDefultGridCell.CurrentOccutiondelegate=self;
                 if (_IsUpcomming == 1)
                 {
                     CurrentDefultGridCell.isCommingFromUpcoming = 1;
                     CurrentDefultGridCell.isCommingFromPast = 0;
+                    
+                    CurrentDefultGridCell.lblNextValidBuild.text = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:currentBid]];
+                    CurrentDefultGridCell.lbl_startPriceText.text = @"Start price";
+                    CurrentDefultGridCell.pastStatictext.hidden=YES;
+                    
+                    if (objCurrentOccution.IsSwapOn == 1)
+                    {
+                        CurrentDefultGridCell.viwSwap.frame = CGRectMake(-(CurrentDefultGridCell.viwSwap.frame.size.width/2), CurrentDefultGridCell.viwSwap.frame.origin.y, CurrentDefultGridCell.viwSwap.frame.size.width, CurrentDefultGridCell.viwSwap.frame.size.width);
+                    }
+                    else
+                    {
+                        CurrentDefultGridCell.viwSwap.frame = CGRectMake(0, CurrentDefultGridCell.viwSwap.frame.origin.y, CurrentDefultGridCell.viwSwap.frame.size.width, CurrentDefultGridCell.viwSwap.frame.size.width);
+                    }
+
                 }
                 else
                 {
                     CurrentDefultGridCell.isCommingFromUpcoming = 0;
                     CurrentDefultGridCell.isCommingFromPast = 1;
+                    
+                    CurrentDefultGridCell.lblNextValidBuild.text = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:incresedPrice]];
+                    CurrentDefultGridCell.lbl_startPriceText.text = @"";
+                    
+                    
+                    if ([objCurrentOccution.strpricelow  intValue] > [objCurrentOccution.strpricers intValue] )
+                    {
+                        CurrentDefultGridCell.lblNextValidBuild.text = @"Bought In";
+                        CurrentDefultGridCell.pastStatictext.hidden = YES;
+                    }
+                    else
+                    {
+                        CurrentDefultGridCell.pastStatictext.hidden = NO;
+                        CurrentDefultGridCell.pastStatictext.text = @"(Inclusive of 15% Buyers Premium)";
+                    }
+                    if (objCurrentOccution.IsSwapOn==1)
+                    {
+                        CurrentDefultGridCell.viwSwap.frame=CGRectMake(-(CurrentDefultGridCell.viwSwap.frame.size.width/4), CurrentDefultGridCell.viwSwap.frame.origin.y, CurrentDefultGridCell.viwSwap.frame.size.width, CurrentDefultGridCell.viwSwap.frame.size.width);
+                    }
+                    else
+                    {
+                        CurrentDefultGridCell.viwSwap.frame=CGRectMake(0, CurrentDefultGridCell.viwSwap.frame.origin.y, CurrentDefultGridCell.viwSwap.frame.size.width, CurrentDefultGridCell.viwSwap.frame.size.width);
+                    }
                 }
                 [CurrentDefultGridCell setuparray];
-                cell1 = CurrentDefultGridCell;
+                cell = CurrentDefultGridCell;
             }
         }
-        cell1.layer.borderWidth=1;
-        cell1.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
-        CurrentDefultGridCell.layer.borderColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1].CGColor;
+        
+        [ClsSetting SetBorder:cell cornerRadius:1 borderWidth:1 color:[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1]];
     }
-    return cell1;
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    
-    if (section==0 ||section==1)
-    {
-        return CGSizeZero;
-    }
-    else
-    {
-        return CGSizeMake(CGRectGetWidth(collectionView.bounds), 15);
-    }
+    return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
@@ -825,30 +878,23 @@
     }
 }
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(NSString*)timercount:(NSString*)dateStr fromDate:(NSString*)fromdate
+
+/*-(NSString*)timercount:(NSString*)dateStr fromDate:(NSString*)fromdate
 {
-    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
-    
     
     NSDate *closingDate = [dateFormatter dateFromString:dateStr];
     
     NSDate *currentDate = [dateFormatter dateFromString:fromdate];
     
-    
-    
     NSTimeInterval secondsBetween = [closingDate timeIntervalSinceDate:currentDate];
-    
-    
     
     int numberOfDays = secondsBetween / 86400;
     
@@ -871,57 +917,14 @@
     else
         return timeStr;
 
-}
+}*/
 
--(NSString*)remaningTime:(NSDate*)startDate endDate:(NSDate*)endDate
-{
-    NSDateComponents *components;
-    NSInteger days;
-    NSInteger hour;
-    NSInteger minutes;
-    NSString *durationString;
-    
-    components = [[NSCalendar currentCalendar] components: NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute fromDate: startDate toDate: endDate options: 0];
-    
-    days = [components day];
-    hour = [components hour];
-    minutes = [components minute];
-    
-    if(days>0)
-    {
-        if(days>1)
-            durationString=[NSString stringWithFormat:@"%ld days",(long)days];
-        else
-            durationString=[NSString stringWithFormat:@"%ld day",(long)days];
-        return durationString;
-    }
-    if(hour>0)
-    {
-        if(hour>1)
-            durationString=[NSString stringWithFormat:@"%ld hours",(long)hour];
-        else
-            durationString=[NSString stringWithFormat:@"%ld hour",(long)hour];
-        return durationString;
-    }
-    if(minutes>0)
-    {
-        if(minutes>1)
-            durationString = [NSString stringWithFormat:@"%ld minutes",(long)minutes];
-        else
-            durationString = [NSString stringWithFormat:@"%ld minute",(long)minutes];
-        
-        return durationString;
-    }
-    NSString *strDate=[NSString stringWithFormat:@"%ld day %ld:%ld",(long)days,(long)hour,(long)minutes];
-    return strDate;
-}
 -(void)ListSwipeOptionpressed:(int)option currentCellIndex:(int)index
 {
     if (option==1)
     {
         UIButton *btn=[[UIButton alloc]init];
         btn.tag=index;
-//        [self btnBidHistoryPressed:btn];
     }
     else if (option==2)
     {
@@ -937,7 +940,6 @@
     {
         UIButton *btn=[[UIButton alloc]init];
         btn.tag=index;
-//        [self btnBidNowPressed:btn];
     }
     
 }
@@ -945,29 +947,20 @@
 -(void)btnShotinfoPressed:(int)iSelectedIndex
 {
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:iSelectedIndex inSection:1];
-    NSMutableArray *arrindexpath=[[NSMutableArray alloc]initWithObjects:indexPath, nil];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:iSelectedIndex inSection:2];
+    NSMutableArray *arrindexpath=[[NSMutableArray alloc] initWithObjects:indexPath, nil];
     [_ClvItemOfPastAuction reloadItemsAtIndexPaths: arrindexpath];
-    
-    //[_clvCurrentOccution reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:x section:0]];
     
 }
 - (IBAction)btnMaximizePressed:(UIButton*)sender
 {
-    clsCurrentOccution *objCurrentOccution=[[clsCurrentOccution alloc]init];
-    objCurrentOccution=[arrPactAuctionItem objectAtIndex:sender.tag];
-    
-    
-    //UICollectionViewCell *cell = [_clvCurrentOccution ]
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:1];
+    clsCurrentOccution *objCurrentOccution=[arrPactAuctionItem objectAtIndex:sender.tag];
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:2];
     JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
-#if TRY_AN_ANIMATED_GIF == 1
-    imageInfo.imageURL = [NSURL URLWithString:@"http://media.giphy.com/media/O3QpFiN97YjJu/giphy.gif"];
-#else
-    imageInfo.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[ClsSetting ImageURL],objCurrentOccution.strimage]];//@"http://arttrust.southeastasia.cloudapp.azure.com/paintings/feb_auction2o.jpg"];
-#endif
-    CurrentDefultGridCollectionViewCell * cell = (CurrentDefultGridCollectionViewCell*)[_ClvItemOfPastAuction cellForItemAtIndexPath:indexPath];
-    // CurrentDefultGridCollectionViewCell *cell1= (CurrentDefultGridCollectionViewCell*)cell;
+    imageInfo.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[ClsSetting imageURL],objCurrentOccution.strimage]];
+    CurrentDefultGridCollectionViewCell * cell = (CurrentDefultGridCollectionViewCell*)
+    [_ClvItemOfPastAuction cellForItemAtIndexPath:indexPath];
     imageInfo.referenceRect = cell.imgProduct.frame;
     imageInfo.referenceView = cell.imgProduct.superview;
     imageInfo.referenceContentMode = cell.imgProduct.contentMode;
@@ -981,13 +974,8 @@
     
     // Present the view controller.
     [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
-    /*  UINavigationController *navcontroll = (UINavigationController *)[self.revealViewController frontViewController];
-     DetailProductViewController *objProductViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailProductViewController"];
-     objProductViewController.objCurrentOccution=objCurrentOccution;
-     [navcontroll pushViewController:objProductViewController animated:YES];*/
-    
-    
 }
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 {
     
@@ -1020,27 +1008,17 @@
     
     DetailProductViewController *objProductViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"DetailProductViewController"];
     objProductViewController.objCurrentOccution=objCurrentOccution;
-    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
-    {
-      objProductViewController.iscurrencyInDollar=1;
-    }
-    objProductViewController.IsSort=1;
+//    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
+//    {
+//      objProductViewController.iscurrencyInDollar=1;
+//    }
     objProductViewController.IsUpcomming = _IsUpcomming;
     objProductViewController.IsPast = _IsPast;
-    objProductViewController.Auction_id = _objPast.strAuctionId;
+    objProductViewController.Auction_id = objCurrentOccutionForAuctionName.strOnline;
     [self.navigationController pushViewController:objProductViewController animated:YES];
-    
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 - (IBAction)btnCurrencyChanged:(id)sender
 {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isUSD"])
@@ -1058,46 +1036,50 @@
 - (IBAction)btnFilter:(id)sender
 {
     FilterViewController *objFilterViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"FilterViewController"];
-    objFilterViewController.arrFilter=arrPactAuctionItem;
     objFilterViewController.ispast=1;
     objFilterViewController.arrselectArtist=arrSelectedArtistarray;
     if (_IsUpcomming==1)
     {
-        objFilterViewController.strType=@"upcoming";
+        objFilterViewController.strType=@"Upcomming";
         objFilterViewController.selectedTab=2;
-
     }
     else
     {
         objFilterViewController.strType=@"Past";
         objFilterViewController.selectedTab=3;
-
     }
-    objFilterViewController.Auctionid=[_objPast.strAuctionId intValue];
-    objFilterViewController.DelegateFilter=self;
+    objFilterViewController.auctionName = objCurrentOccutionForAuctionName.strAuctionname;
+    objFilterViewController.auctionID = [objCurrentOccutionForAuctionName.strOnline intValue];
+    objFilterViewController.delegateFilter=self;
     [self.navigationController pushViewController:objFilterViewController animated:YES];
-    
-    
 }
--(void)filter:(NSMutableArray *)arrFilterArray SelectedArtistArray:(NSMutableArray *)arrSelectedArtist
+
+-(void)clearCancelFilter
 {
-//    NSString *arrArtistId=[[NSString alloc ]init];
+    if (_isSearch == YES)
+    {
+        isFilter = NO;
+        arrPactAuctionItem = [arrSearchResult mutableCopy];
+        [_ClvItemOfPastAuction reloadData];
+    }
+    else
+    {
+        [self getAccuctions];
+    }
+}
+
+-(void)filter:(NSMutableArray *)arrFilterArray selectedArtistArray:(NSMutableArray *)arrSelectedArtist
+{
+    isFilter = YES;
     NSString *str=[[NSString alloc] init];
-//    (artistid=%@)or(artistid=%@)
     for (int i=0; i<arrSelectedArtist.count; i++)
     {
         clsArtistInfo *objartistinfo=[arrSelectedArtist objectAtIndex:i];
-        str= [str stringByAppendingString:[NSString stringWithFormat:@"(artistid=%@)",objartistinfo.strArtistid]];
-        if (arrSelectedArtist.count-1 != i)
-        {
-            str= [str stringByAppendingString:@"or"];
-        }
+        str = [str stringByAppendingString:[NSString stringWithFormat:@"%@%@",objartistinfo.strArtistid,@"K"]];
     }
-    NSLog(@"str:%@",str);
-    [self filter:str];
-    [arrPactAuctionItem removeAllObjects];
-    arrSelectedArtistarray=arrSelectedArtist;
+    [self filterAuctions:str];
     
+    arrSelectedArtistarray=arrSelectedArtist;
 }
 - (IBAction)btnBidHistory:(UIButton*)sender
 {
@@ -1134,22 +1116,21 @@
         {
             if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"confirmbid"] intValue] == 1)
             {
-                clsCurrentOccution *objCurrentOccution=[[clsCurrentOccution alloc]init];
-                objCurrentOccution=[arrPactAuctionItem objectAtIndex:sender.tag];
+                clsCurrentOccution *objCurrentOccution=[arrPactAuctionItem objectAtIndex:sender.tag];
                 AuctionItemBidViewController *objAuctionItemBidViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"AuctionItemBidViewController"];
                 objAuctionItemBidViewController.objCurrentOuction=objCurrentOccution;
                 objAuctionItemBidViewController.isBidNow=FALSE;
                 objAuctionItemBidViewController.IsUpcoming = _IsUpcomming;
                 objAuctionItemBidViewController.IsPast = _IsPast;
-                objAuctionItemBidViewController.Auction_id = _objPast.strAuctionId;
-                if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
-                {
-                    objAuctionItemBidViewController.iscurrencyInDollar=1;
-                }
-                else
-                {
-                    objAuctionItemBidViewController.iscurrencyInDollar=0;
-                }
+                objAuctionItemBidViewController.Auction_id = objCurrentOccutionForAuctionName.strOnline; // _objPast.strAuctionId;
+//                if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
+//                {
+//                    objAuctionItemBidViewController.iscurrencyInDollar=1;
+//                }
+//                else
+//                {
+//                    objAuctionItemBidViewController.iscurrencyInDollar=0;
+//                }
                 
                 [self addChildViewController:objAuctionItemBidViewController];
                 [self.view addSubview:objAuctionItemBidViewController.view];
@@ -1195,8 +1176,10 @@
 - (IBAction)btnAuctionAnalistPressed:(UIButton*)sender
 {
     WebViewViewController *objWebViewViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WebViewViewController"];
-    
-    objWebViewViewController.url=[NSURL URLWithString:[NSString stringWithFormat:@"http://astaguru.com:81/auction-analysis-mobile.aspx?astaguruauction=%@",_objPast.strAuctionId]];
+    NSString *strUrl = [NSString stringWithFormat:@"%@%@",[ClsSetting autionAnalysisURL],objCurrentOccutionForAuctionName.strOnline];
+    NSURL *url = [NSURL URLWithString:[ClsSetting TrimWhiteSpaceAndNewLine:strUrl]];
+    NSLog(@"strUrl = %@  url = %@",strUrl, url);
+    objWebViewViewController.url=url;// _objPast.strAuctionId]];
     [self.navigationController pushViewController:objWebViewViewController animated:YES];
 }
 
@@ -1205,15 +1188,15 @@
     clsCurrentOccution *objCurrentOccution=[[clsCurrentOccution alloc]init];
     objCurrentOccution=[arrPactAuctionItem objectAtIndex:sender.tag];
     ArtistViewController *objArtistViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ArtistViewController"];
-    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
-    {
-        objArtistViewController.iscurrencyInDollar=1;
-    }
-    else
-    {
-        objArtistViewController.iscurrencyInDollar=0;
-    }
-    objArtistViewController.objCurrentOccution=objCurrentOccution;
+//    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
+//    {
+//        objArtistViewController.iscurrencyInDollar=1;
+//    }
+//    else
+//    {
+//        objArtistViewController.iscurrencyInDollar=0;
+//    }
+    objArtistViewController.objCurrentOccution1 = objCurrentOccution;
 //    objArtistViewController.IsUpcomming = _IsUpcomming;
 //    objArtistViewController.IsPast = _IsPast;
     [self.navigationController pushViewController:objArtistViewController animated:YES];
@@ -1229,11 +1212,16 @@
     }
     else
     {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
-        BforeLoginViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"BforeLoginViewController"];
-        [self.navigationController pushViewController:rootViewController animated:YES];
+        [self goLoginVC];
     }
 }
+-(void)goLoginVC
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
+    BforeLoginViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"BforeLoginViewController"];
+    [self.navigationController pushViewController:rootViewController animated:YES];
+}
+
 -(void)insertItemToAuctionGallery:(clsCurrentOccution*)_objCurrentOuction
 {
     NSString *str;
@@ -1255,61 +1243,20 @@
     {
         strUserid=@"1972";
     }
-    /* NSDictionary *params = @{
-     
-     @"AuctionId":[[NSUserDefaults standardUserDefaults] valueForKey:@"CurrentAuctionID"],
-     @"Bidpricers":_objCurrentOuction.strpricers,
-     @"Bidpriceus":_objCurrentOuction.strpriceus,
-     @"Firstname":_objCurrentOuction.strFirstName,
-     @"Lastname":_objCurrentOuction.strLastName,
-     @"Reference":_objCurrentOuction.strReference,
-     @"Thumbnail":_objCurrentOuction.strthumbnail,
-     @"UserId":strUserid,
-     @"Username":str,
-     @"anoname":@"",
-     @"currentbid":@"0",
-     @"daterec":@"",
-     @"earlyproxy":@"",
-     @"productid":_objCurrentOuction.strproductid,
-     @"proxy":@"",
-     @"recentbid":@"",
-     @"validbidpricers":@"",
-     @"validbidpriceus":@"",
-     @"Bidrecordid":@""
-     
-     };
-     
-     NSMutableArray *arr = [NSMutableArray arrayWithObjects:params,nil];
-     
-     NSDictionary *pardsams = @{@"resource": arr};
-     
-     
-     
-     ClsSetting *objClssetting=[[ClsSetting alloc] init];
-     // objClssetting.PassReseposeDatadelegate=self;
-     objClssetting.PassReseposeDatadelegate=self;
-     [objClssetting calllPostWeb:pardsams url:[NSString stringWithFormat:@"%@mygallery?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed&filter=username=%@",[objClssetting Url],str] view:self.view];*/
+    
     @try {
         
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         HUD.labelText = @"loading";
         NSMutableDictionary *Discparam=[[NSMutableDictionary alloc]init];
-        // [Discparam setValue:@"cr2016" forKey:@"validate"];
-        //[Discparam setValue:@"banner" forKey:@"action"];
-        
-        
-        
-        
+       
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.requestSerializer = [AFHTTPRequestSerializer serializer];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];  //AFHTTPResponseSerializer serializer
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
-        ClsSetting *objsetting=[[ClsSetting alloc]init];
-        NSString  *strQuery=[NSString stringWithFormat:@"%@/spAddToGallery(%@,%@)?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objsetting UrlProcedure],_objCurrentOuction.strproductid,strUserid];
+        NSString  *strQuery=[NSString stringWithFormat:@"%@/spAddToGallery(%@,%@)?api_key=%@",[ClsSetting procedureURL],_objCurrentOuction.strproductid,strUserid,[ClsSetting apiKey]];
         NSString *url = strQuery;
         NSLog(@"%@",url);
-        
-        
         
         NSString *encoded = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [manager GET:encoded parameters:Discparam success:^(AFHTTPRequestOperation *operation, id responseObject)
@@ -1331,17 +1278,6 @@
                  NSLog(@"Error: %@", error);
                  [MBProgressHUD hideHUDForView:self.view animated:YES];
                  [ClsSetting ValidationPromt:error.localizedDescription];
-
-//                 if ([operation.response statusCode]==404)
-//                 {
-//                     [ClsSetting ValidationPromt:@"No Record Found"];
-//                     
-//                 }
-//                 else
-//                 {
-//                     [ClsSetting internetConnectionPromt];
-//                     
-//                 }
              }];
         
         
@@ -1353,7 +1289,6 @@
     @finally
     {
     }
-    //[self myAuctionGallery];
 }
 -(void)passReseposeData1:(id)str
 {
@@ -1365,80 +1300,80 @@
     
     UINavigationController *navcontroll = (UINavigationController *)[self.revealViewController frontViewController];
     
-    MyAuctionGalleryViewController *objAfterLoginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MyAuctionGalleryViewController"];
-    [navcontroll pushViewController:objAfterLoginViewController animated:YES];
+    MyAuctionGalleryViewController *objMyAuctionGalleryViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MyAuctionGalleryViewController"];
+    objMyAuctionGalleryViewController.isCurrent = 0;
+    [navcontroll pushViewController:objMyAuctionGalleryViewController animated:YES];
 }
 
 
--(void)filter:(NSString*)strid
+-(void)filterAuctions:(NSString*)strid
 {
-    
-//    NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-    ClsSetting *objSetting=[[ClsSetting alloc]init];
-
-    
     @try {
         
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         HUD.labelText = @"loading";
         NSMutableDictionary *Discparam=[[NSMutableDictionary alloc]init];
-        // [Discparam setValue:@"cr2016" forKey:@"validate"];
-        //[Discparam setValue:@"banner" forKey:@"action"];
+       
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.requestSerializer = [AFHTTPRequestSerializer serializer];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];  //AFHTTPResponseSerializer serializer
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
-        NSString  *strQuery=[NSString stringWithFormat:@"%@getPastAuction?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed&filter=(Online=%@)and(%@)",[objSetting Url],_objPast.strAuctionId,strid];
+        
+        NSString *strtype;
+//        _objPast.strAuctionname
+        if ([objCurrentOccutionForAuctionName.strAuctionname isEqualToString:@"Collectibles Auction"])
+        {
+            strtype = @"C";
+        }
+        else if (_IsUpcomming == 1)
+        {
+           strtype = @"U";
+        }
+        else if (_IsPast == 1)
+        {
+            strtype = @"P";
+        }
+        
+        NSString  *strQuery=[NSString stringWithFormat:@"%@/spPastAuction(%@,%@,%@)?api_key=%@",[ClsSetting procedureURL],objCurrentOccutionForAuctionName.strOnline,strtype,strid,[ClsSetting apiKey]];
+
         NSString *url = strQuery;
         NSLog(@"%@",url);
+        
         NSString *encoded = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [manager GET:encoded parameters:Discparam success:^(AFHTTPRequestOperation *operation, id responseObject)
          {
-             //  NSError *error=nil;
-             //NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-             
              NSError *error;
              [MBProgressHUD hideHUDForView:self.view animated:YES];
-             NSMutableArray *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
-             NSMutableArray *arr1=[dict valueForKey:@"resource"];
-             [arrPactAuctionItem removeAllObjects];
-             if (dict.count>0)
-             {
-                 NSMutableArray *arrItemCount=[parese parseSortCurrentAuction:arr1];
-                 arrPactAuctionItem=arrItemCount; 
-             }
-                        //[arrPactAuctionItem addObjectsFromArray:arrItemCount];
-             [_ClvItemOfPastAuction reloadData];
              
+             NSMutableArray *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
+             NSMutableArray *arrItemCount=[parese parseSortCurrentAuction:dict];
+             [arrPactAuctionItem removeAllObjects];
+             arrPactAuctionItem=arrItemCount;
+             if (arrPactAuctionItem.count == 0)
+             {
+                 _noRecords_Lbl.hidden = NO;
+                 _noRecords_Lbl.text = @"No record found, please try some other filtration options.";
+             }
+             else
+             {
+                 _noRecords_Lbl.hidden = YES;
+                 _noRecords_Lbl.text = @"";
+             }
+             [_ClvItemOfPastAuction reloadData];
          }
              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  NSLog(@"Error: %@", error);
                  [MBProgressHUD hideHUDForView:self.view animated:YES];
                  [ClsSetting ValidationPromt:error.localizedDescription];
-
-//                 if ([operation.response statusCode]==404)
-//                 {
-//                     [ClsSetting ValidationPromt:@"No Record Found"];
-//                     
-//                 }
-//                 else
-//                 {
-//                     [ClsSetting internetConnectionPromt];
-//                     
-//                 }
              }];
-        
         
     }
     @catch (NSException *exception)
     {
-        
     }
     @finally
     {
     }
-    
-    
 }
 
 

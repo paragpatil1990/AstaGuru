@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface CareersPageViewController : UIViewController<UIPageViewControllerDelegate, UIPageViewControllerDataSource>
+@interface CareersPageViewController : UIViewController<UIPageViewControllerDelegate>
 
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedMenu;

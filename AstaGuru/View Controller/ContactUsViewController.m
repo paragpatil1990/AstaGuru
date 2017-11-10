@@ -87,8 +87,6 @@
     self.contact_Lbl.delegate = self; // Delegate methods are called when the user taps on a link (see `TTTAttributedLabelDelegate` protocol)
     self.contact_Lbl.numberOfLines = 0;
     self.contact_Lbl.text = @"+912222048138 / 39, +912222048140";
-//    self.contact_Lbl.text = @"7875512881 Fork me paragpatil.rane@gmail.com on GitHub! (https://github.com/mattt/TTTAttributedLabel/)"; // Repository URL will be automatically detected and linked
-
     self.contactEmail_Lbl.extendsLinkTouchArea = YES;
     self.contactEmail_Lbl.enabledTextCheckingTypes = NSTextCheckingAllSystemTypes; // Automatically detect links when the label text is subsequently changed
     self.contactEmail_Lbl.delegate = self; // Delegate methods are called when the user taps on a link (see `TTTAttributedLabelDelegate` protocol)
@@ -100,9 +98,6 @@
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithPhoneNumber:(NSString *)phoneNumber
 {
-    //    NSString *numberString = self.product_Dic[@"contactNo"]; //@"7875512881";
-    //        NSURL *phoneNumber = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", numberString]];
-    
     //        // Whilst this version will return you to your app once the phone call is over.
     NSURL *phoneNumber_Url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", phoneNumber]];
     

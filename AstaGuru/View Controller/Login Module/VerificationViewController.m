@@ -49,6 +49,7 @@
             _lblsmserror.hidden = NO;
             _lblsmserror.text = @"Not Verified";
             _lblsmserror.textColor = [UIColor redColor];
+            [self SendSMSOTP];
         }
         else
         {
@@ -71,6 +72,7 @@
             _lblemailerror.hidden = NO;
             _lblemailerror.text = @"Not Verified";
             _lblemailerror.textColor = [UIColor redColor];
+            [self SendEmail];
         }
         else
         {
@@ -169,8 +171,18 @@
     {
         isVerificatinWorking=1;
         isSMS=1;
+        
+        NSString *userid;
+        if (_isRegistration)
+        {
+            userid = [[NSUserDefaults standardUserDefaults] valueForKey:@"ruserid"];
+        }
+        else
+        {
+            userid = [[NSUserDefaults standardUserDefaults] valueForKey:USER_id];
+        }
         NSDictionary *params = @{
-                                 @"userid":[[NSUserDefaults standardUserDefaults] valueForKey:USER_id],
+                                 @"userid":userid,
                                  @"MobileVerified":@"1",
                                  @"EmailVerified":@"1",
                                  @"admin": @"0"
@@ -179,7 +191,7 @@
         NSDictionary *pardsams = @{@"resource": arr};
         ClsSetting *objClssetting=[[ClsSetting alloc] init];
         objClssetting.PassReseposeDatadelegate=self;
-        [objClssetting calllPutWeb:pardsams url:[NSString stringWithFormat:@"%@/users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objClssetting Url]] view:self.view];
+        [objClssetting calllPutWeb:pardsams url:[NSString stringWithFormat:@"%@/users?api_key=%@",[ClsSetting tableURL],[ClsSetting apiKey]] view:self.view];
     }
 }
 
@@ -276,30 +288,27 @@
     NSDictionary *dictTo = @{
                              @"name":[NSString stringWithFormat:@"%@",_strname],
                              @"email":_strEmail,
-                             
                              };
+    
     NSArray*arrTo=[[NSArray alloc]initWithObjects:dictTo, nil];
     // NSDictionary *dictMail=[[NSDictionary alloc]init];
     NSDictionary *dictMail = @{
                                @"template":@"newsletter",
                                @"to":arrTo,
-                               @"subject":@"Astaguru Email Validation OTP",
-                               @"body_text":[NSString stringWithFormat:@"Hello \n OTP:%@",_strEmialCode],
-                               @"from_name":@"NetSpace India SES",
-                               @"from_email":@"beta@netspaceindia.com",
-                               @"reply_to_name":@"NetSpace India",
-                               @"reply_to_email":@"beta@netspaceindia.com",
-                               
+                               @"subject":@"Warm Greetings from AstaGuru  Online Auction House.",//@"Astaguru Email Validation OTP",
+                               @"body_text": [NSString stringWithFormat:@"Dear %@,\n\n    Thank you for choosing AstaGuru Online Auction House. We are glad that you have given us this opportunity to cater to your Indian Art related requirements. Looking forward to building a longstanding relationship with you.\nPlease Enter the OTP %c%@%c to complete the registration & verification process.\nIn case you are unable to open the link, please write to us at, contact@astaguru.com or call us on 91-22 2204 8138/39. We will be glad to assist you further.\n\nWarm Regards,\nTeam AstaGuru\n",_strname,'"',_strEmialCode,'"'],
+                               @"from_name":@"AstaGuru",
+                               @"from_email":@"info@infomanav.com",
+                               @"reply_to_name":@"AstaGuru",
+                               @"reply_to_email":@"info@infomanav.com",
                                };
-    [ClsSetting Email:dictMail view:self.view];
+    [ClsSetting sendEmailWithInfo:dictMail];
 }
 -(void)SendSMSOTP
 {
     NSDictionary *dict=[[NSMutableDictionary alloc]init];
     ClsSetting *objSetting=[[ClsSetting alloc]init];
     NSString *strMessage=[NSString stringWithFormat:@"Dear %@, One Time Password for your Mobile Verification is %@.\nRegards, \nTeam Astaguru.",_strname,_strSMSCode ];
-    
-    //[objSetting SendSMSOTP:dict url:[NSString stringWithFormat:@"http://gateway.netspaceindia.com/api/sendhttp.php?authkey=131841Aotn6vhT583570b5&mobiles=%@&message=%@&sender=AstGru&route=4&country=91",[dictResult valueForKey:@"mobilrNum"],strMessage] view:self.view]
     
     [objSetting SendSMSOTP:dict url:[NSString stringWithFormat:@"http://gateway.netspaceindia.com/api/sendhttp.php?authkey=131841Aotn6vhT583570b5&mobiles=%@&message=%@&sender=AstGru&route=4&country=91",_strMobile,strMessage] view:self.view];
     objSetting.PassReseposeDatadelegate=self;
@@ -310,6 +319,8 @@
 {
     if (isVerificatinWorking==1 && isSMS==1)
     {
+        [ClsSetting ValidationPromt:[NSString stringWithFormat:@"Congratulation your verification are done"]];
+        
         NSArray *value = str[@"resource"];
         NSLog(@"%@",value);
         NSDictionary *dictUser=[value objectAtIndex:0];
@@ -318,12 +329,14 @@
         [[NSUserDefaults standardUserDefaults]setValue:@"1" forKey:@"EmailVerified"];
         [[NSUserDefaults standardUserDefaults]setValue:@"1" forKey:@"MobileVerified"];
         
+//        [[NSUserDefaults standardUserDefaults] setObject:dictUser forKey:@"user"];
+        
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
         CongratulationViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"CongratulationViewController"];
+        rootViewController.strname = _strname;
+        rootViewController.strEmail = _strEmail;
+        rootViewController.dict = _dict;
         [self.navigationController pushViewController:rootViewController animated:YES];
-        
-       
-       
     }
     else if (isVerificatinWorking==1 && isSMS==2)
     {
@@ -465,63 +478,4 @@
     return YES;
 }
 
-//- (BOOL)textFieldShouldReturn:(UITextField *)textField
-//{
-//    [textField resignFirstResponder];
-//    
-//    return YES;
-//}
-//- (void)textFieldDidBeginEditing:(UITextField *)textField {
-//    textField.placeholder = nil;
-//}
-//- (void)textFieldDidEndEditing:(UITextField *)textField
-//{
-//           textField.placeholder = @"x";
-//  
-//}
-
-//-(void)MobileVerification:(NSString*)strCodeKey CodeValue:(NSString*)strCodeValue verificationCodeKey:(NSString *)strVerificationCodeKey
-//{
-//    if ([self validate])
-//    {
-//        //SmsCode
-//        
-//        NSDictionary *params = @{
-//                                 @"userid":[[NSUserDefaults standardUserDefaults]valueForKey:USER_id],
-//                                 strCodeKey:strCodeValue,
-//                                 strVerificationCodeKey:@"1",
-//                                 @"admin": @"0",
-//                                 };
-//        
-//        NSMutableArray *arr = [NSMutableArray arrayWithObjects:params,nil];
-//        NSDictionary *pardsams = @{@"resource": arr};
-//        
-//        
-//        ClsSetting *objClssetting=[[ClsSetting alloc] init];
-//        // objClssetting.PassReseposeDatadelegate=self;
-//        objClssetting.PassReseposeDatadelegate=self;
-//        [objClssetting calllPutWeb:pardsams url:[NSString stringWithFormat:@"%@/users/?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objClssetting Url]] view:self.view];
-//    }
-//}
-//-(BOOL)validate
-//{
-//    if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtMobile.text].length==0)
-//    {
-//        [ClsSetting ValidationPromt:@"Pleae Enter First Name"];
-//        return NO;
-//    }
-//    else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtEmail.text].length==0)
-//    {
-//        [ClsSetting ValidationPromt:@"Pleae Enter Last Name"];
-//        return NO;
-//    }
-//    return YES;
-//}
-//-(void)RegisterUser
-//{
-//    ClsSetting *objClssetting=[[ClsSetting alloc] init];
-//    // objClssetting.PassReseposeDatadelegate=self;
-//    objClssetting.PassReseposeDatadelegate=self;
-//    [objClssetting calllPostWeb2:_dictPostParameter url:[NSString stringWithFormat:@"%@/users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objClssetting Url]] view:self.view];
-//}
 @end

@@ -7,8 +7,15 @@
 //
 
 #import "AppDelegate.h"
+#import "CWStatusBarNotification.h"
+#import "ATAppUpdater.h"
+#import "Harpy.h"
+#define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
-@interface AppDelegate ()
+
+@interface AppDelegate ()<HarpyDelegate>
+
+//@property (strong, nonatomic) CWStatusBarNotification *notification;
 
 @end
 
@@ -17,35 +24,285 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     // Override point for customization after application launch.
-    
-    if ([[NSUserDefaults standardUserDefaults]boolForKey:@"isUSD"])
+ 
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
+    NSDictionary *userInfo = [launchOptions valueForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"];
+    NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
+
+    if(apsInfo)
     {
-        NSString *countrySymbol = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
-        if ([countrySymbol isEqualToString:@"IN"])
-        {
-            [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"isUSD"];
-        }
-        else
-        {
-            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"isUSD"];
-        }
+        NSString *message = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+        [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"isNoti"];
+        [[NSUserDefaults standardUserDefaults] setValue:message forKey:@"NotificationBody"];
+        [[NSUserDefaults standardUserDefaults] setValue:[userInfo valueForKey:@"NotificationID"] forKey:@"NotificationID"];
     }
     else
     {
+        [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"isNoti"];
+
         NSString *countrySymbol = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
-        if ([countrySymbol isEqualToString:@"IN"])
+
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isUSD"])
         {
-            [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"isUSD"];
+            if ([countrySymbol isEqualToString:@"IN"])
+            {
+                [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"isUSD"];
+            }
+            else
+            {
+                [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"isUSD"];
+            }
         }
         else
         {
-            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"isUSD"];
+            if ([countrySymbol isEqualToString:@"IN"])
+            {
+                [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"isUSD"];
+            }
+            else
+            {
+                [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"isUSD"];
+            }
         }
+        [self registerForRemoteNotification];
     }
+    [[Harpy sharedInstance] setPresentingViewController:_window.rootViewController];
+//    [[Harpy sharedInstance] setDelegate:self];
+    [[Harpy sharedInstance] setAlertType:HarpyAlertTypeOption];
+    [[Harpy sharedInstance] setDebugEnabled:true];
+    [[Harpy sharedInstance] checkVersion];
+    
+//    [self needsUpdate];
+    
+//    ATAppUpdater *updater = [ATAppUpdater sharedUpdater];
+//    [updater setAlertTitle:@"AstaGuru"];
+//    [updater setAlertMessage:@"Please update the latest version of the application for smooth functioning."];
+//    [updater setAlertUpdateButtonTitle:@"Update"];
+//    [updater setAlertCancelButtonTitle:@"Not Now"];
+////    [updater setDelegate:self]; // Optional
+//    [updater showUpdateWithConfirmation];
+//    [[ATAppUpdater sharedUpdater] showUpdateWithConfirmation];
 
     return YES;
+}
+
+
+-(BOOL) needsUpdate
+{
+    NSDictionary* infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString* appID = infoDictionary[@"CFBundleIdentifier"];
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"http://itunes.apple.com/lookup?bundleId=%@", appID]];
+    NSData* data = [NSData dataWithContentsOfURL:url];
+    NSDictionary* lookup = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    
+    if ([lookup[@"resultCount"] integerValue] == 1){
+        NSString* appStoreVersion = lookup[@"results"][0][@"version"];
+        NSString* currentVersion = infoDictionary[@"CFBundleShortVersionString"];
+        if (![appStoreVersion isEqualToString:currentVersion])
+        {
+            NSLog(@"Need to update [%@ != %@]", appStoreVersion, currentVersion);
+            NSString *msgstr = [NSString stringWithFormat:@"Please update the latest version of application for smooth functioning"];
+            UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"AstaGuru"  message:msgstr  preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"Update" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                        {
+                                            NSString *appName = [NSString stringWithString:[[[NSBundle mainBundle] infoDictionary]   objectForKey:@"CFBundleName"]];
+                                            NSURL *appStoreURL = [NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.com/app/%@",[appName stringByReplacingOccurrencesOfString:@" " withString:@""]]];
+                                            [[UIApplication sharedApplication] openURL:appStoreURL];
+//                                            [self dismissViewControllerAnimated:YES completion:nil];
+                                        }]];
+            
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Not Now" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//                [self dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alertController addAction:cancelAction];
+            
+            [[[UIApplication sharedApplication] keyWindow].rootViewController presentViewController:alertController animated:YES completion:nil];
+            return YES;
+        }
+    }
+    return NO;
+}
+
+
+- (void)registerForRemoteNotification
+{
+    if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0"))
+    {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error)
+        {
+            if(!error)
+            {
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+            }
+        }];
+    }
+    else
+    {
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+}
+
+-(void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+    // Prepare the Device Token for Registration (remove spaces and < >)
+    NSString *deviceToken_Str = [[[[deviceToken description]
+                                   stringByReplacingOccurrencesOfString:@"<"withString:@""]
+                                  stringByReplacingOccurrencesOfString:@">" withString:@""]
+                                 stringByReplacingOccurrencesOfString: @" " withString: @""];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:deviceToken_Str forKey:@"deviceToken"];
+    [defaults synchronize];
+}
+
+-(void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+    if (error.code == 3010)
+    {
+    }
+    else
+    {
+    }
+}
+
+#ifdef IS_OS_8_OR_LATER
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    //register to receive notifications
+    [application registerForRemoteNotifications];
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
+{
+    NSLog(@"applicationState = %ld",(long)[UIApplication sharedApplication].applicationState);
+
+    //handle the actions
+    if ([identifier isEqualToString:@"declineAction"]){
+    }
+    else if ([identifier isEqualToString:@"answerAction"]){
+    }
+}
+#endif
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    /**
+     * Dump your code here according to your requirement after receiving push
+     */
+    
+//    NSLog(@"User Info : %@",userInfo);
+    
+    NSInteger badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badge+[[[userInfo valueForKey:@"aps"] valueForKey:@"badge"] integerValue]];
+    
+    if (application.applicationState == UIApplicationStateActive )
+    {
+        NSLog(@"didReceiveRemoteNotification applicationState = Active");
+    }
+    else if (application.applicationState == UIApplicationStateBackground)
+    {
+        NSLog(@"didReceiveRemoteNotification applicationState = Background");
+
+        NSString *message = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"isNoti"];
+        [[NSUserDefaults standardUserDefaults] setValue:message forKey:@"NotificationBody"];
+        [[NSUserDefaults standardUserDefaults] setValue:[userInfo valueForKey:@"NotificationID"] forKey:@"NotificationID"];
+        
+        self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+        
+    }
+    else
+    {
+        NSLog(@"didReceiveRemoteNotification applicationState = Inactive");
+        
+        NSString *message = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+
+        
+        [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"isNoti"];
+        [[NSUserDefaults standardUserDefaults] setValue:message forKey:@"NotificationBody"];
+        [[NSUserDefaults standardUserDefaults] setValue:[userInfo valueForKey:@"NotificationID"] forKey:@"NotificationID"];
+        
+        self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+    }
+
+}
+
+
+//Called when a notification is delivered to a foreground app.
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
+{
+//    NSLog(@"User Info : %@",notification.request.content.userInfo);
+    NSDictionary *userInfo = notification.request.content.userInfo;
+    NSInteger badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badge+[[[userInfo valueForKey:@"aps"] valueForKey:@"badge"] integerValue]];
+    
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive )
+    {
+        NSLog(@"willPresentNotification applicationState = Active");
+    }
+    else if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground)
+    {
+        NSLog(@"willPresentNotification applicationState = Background");
+    }
+    else
+    {
+        NSLog(@"willPresentNotification applicationState = Inactive");
+    }
+
+    completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);
+}
+
+//Called to let your app know which action was selected by the user for a given notification.
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler
+{
+    NSDictionary *userInfo = response.notification.request.content.userInfo;
+//    NSLog(@"User Info : %@",response.notification.request.content.userInfo);
+
+    NSInteger badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:badge+[[[userInfo valueForKey:@"aps"] valueForKey:@"badge"] integerValue]];
+    
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive )
+    {
+        NSLog(@"didReceiveNotificationResponse applicationState = Active");
+        
+        NSString *message = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"isNoti"];
+        [[NSUserDefaults standardUserDefaults] setValue:message forKey:@"NotificationBody"];
+        [[NSUserDefaults standardUserDefaults] setValue:[userInfo valueForKey:@"NotificationID"] forKey:@"NotificationID"];
+        
+        self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+
+    }
+    else if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground)
+    {
+        NSLog(@"didReceiveNotificationResponse applicationState = Background");
+        
+        NSString *message = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+
+        [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"isNoti"];
+        [[NSUserDefaults standardUserDefaults] setValue:message forKey:@"NotificationBody"];
+        [[NSUserDefaults standardUserDefaults] setValue:[userInfo valueForKey:@"NotificationID"] forKey:@"NotificationID"];
+        
+        self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+    }
+    else
+    {
+        NSLog(@"didReceiveNotificationResponse applicationState = Inactive");
+        
+        NSString *message = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
+
+        [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:@"isNoti"];
+        [[NSUserDefaults standardUserDefaults] setValue:message forKey:@"NotificationBody"];
+        [[NSUserDefaults standardUserDefaults] setValue:[userInfo valueForKey:@"NotificationID"] forKey:@"NotificationID"];
+        
+        self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+    }
+    completionHandler();
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -13,6 +13,7 @@
 #import "AfterLoginViewController.h"
 #import "ForGotViewController.h"
 #import "VerificationViewController.h"
+#import "AppDelegate.h"
 @interface LoginViewController ()<PassResepose>
 
 @end
@@ -47,11 +48,9 @@
      @{NSForegroundColorAttributeName:[UIColor whiteColor],
        NSFontAttributeName:[UIFont fontWithName:@"WorkSans-Medium" size:17]}];
     
-    [ClsSetting SetBorder:_userName_View cornerRadius:2 borderWidth:1];
-    _userName_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_userName_View cornerRadius:2 borderWidth:1 color:[UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1]];
 
-    [ClsSetting SetBorder:_password_View cornerRadius:2 borderWidth:1];
-    _password_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_password_View cornerRadius:2 borderWidth:1 color:[UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1]];
 
 }
 -(void)searchPressed
@@ -107,12 +106,43 @@
     }
     else
     {
-        NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
-        ClsSetting *objSetting=[[ClsSetting alloc]init];
-        [objSetting CallWeb:dict url:[NSString stringWithFormat:@"users/?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed&filter=username=%@",[ClsSetting TrimWhiteSpaceAndNewLine:_txtUserName.text]] view:self.view Post:NO];
-        objSetting.PassReseposeDatadelegate=self;
+//        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//        [[UIApplication sharedApplication] registerForRemoteNotifications];
+        
+        NSString *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+        if (deviceToken == nil)
+        {
+            deviceToken = @"";
+        }
+        
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        HUD.labelText = @"loading";
+        NSMutableDictionary *Discparam=[[NSMutableDictionary alloc]init];
+
+        NSString  *strQuery=[NSString stringWithFormat:@"%@/spUserLogin(%@,%@,%@,%@)?api_key=%@",[ClsSetting procedureURL],[ClsSetting TrimWhiteSpaceAndNewLine:_txtUserName.text], [ClsSetting TrimWhiteSpaceAndNewLine:_txtPassword.text],deviceToken,@"IOS",[ClsSetting apiKey]];
+        NSString *url = strQuery;
+        NSLog(@"%@",url);
+
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        manager.responseSerializer = [AFHTTPResponseSerializer serializer];  //AFHTTPResponseSerializer serializer
+        manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+        NSString *encoded = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+        [manager GET:encoded parameters:Discparam success:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             [self passReseposeData:responseObject];
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+         }
+             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 NSLog(@"Error: %@", error);
+                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                 [ClsSetting ValidationPromt:error.localizedDescription];
+             }];
     }
 }
+
 - (IBAction)ForgotPasswordpressed:(id)sender
 {
     ForGotViewController *rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ForGotViewController"];
@@ -127,10 +157,8 @@
 
 -(void)passReseposeData:(id)arr
 {
- //  NSMutableArray *arrOccution=[parese parseCurrentOccution:[arr valueForKey:@"resource"]];
     NSError *error;
-    NSMutableDictionary *dict1 = [NSJSONSerialization JSONObjectWithData:arr options:0 error:&error];
-    NSMutableArray *arr1=[dict1 valueForKey:@"resource"];
+    NSMutableArray *arr1 = [NSJSONSerialization JSONObjectWithData:arr options:0 error:&error];
     if (arr1.count>0)
     {
         NSMutableDictionary *dict=[arr1 objectAtIndex:0];
@@ -169,10 +197,6 @@
 
                 NSString *strSMSCode = [NSString stringWithFormat:@"%d",arc4random() % 9000 + 1000];
                 NSString *strEmailCode = [NSString stringWithFormat:@"%d",arc4random() % 9000 + 1000];
-                
-                //                NSMutableArray *arr = [NSMutableArray arrayWithObjects:dict,nil];
-                //                NSDictionary *pardsams = @{@"resource": arr};
-                
                 VerificationViewController *rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"VerificationViewController"];
                 rootViewController.dict=dict;
                 rootViewController.strEmail=[ClsSetting TrimWhiteSpaceAndNewLine:dict[@"email"]];
@@ -185,14 +209,6 @@
                 [self.navigationController pushViewController:rootViewController animated:YES];
 
             }
-           /* ViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
-            
-            
-            [self.navigationController setViewControllers: @[rootViewController] animated: YES];
-            
-            [self.revealViewController setFrontViewController:self.navigationController];
-            [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];*/
-            
         }
         else
         {
@@ -203,7 +219,6 @@
     {
         [ClsSetting ValidationPromt:@"Please Check User Name"];
     }
-    
 }
 
 @end

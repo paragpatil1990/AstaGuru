@@ -14,6 +14,8 @@
 #import "MyProfileViewController.h"
 #import "ClsSetting.h"
 #import "MyAuctionGalleryViewController.h"
+#import "NotificationViewController.h"
+#import "ItemOfPastAuctionViewController.h"
 @interface AfterLoginViewController ()
 
 @end
@@ -22,8 +24,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setUpNavigationItem];
     // Do any additional setup after loading the view.
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [self setUpNavigationItem];
+
 }
 -(void)setUpNavigationItem
 {
@@ -65,15 +72,16 @@
 
 - (IBAction)btnSignOut:(id)sender
 {
-    //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
-    //[[NSUserDefaults standardUserDefaults ] setObject:@"0" forKey:USER_id];
-    NSUserDefaults * defs = [NSUserDefaults standardUserDefaults];
-    NSDictionary * dict = [defs dictionaryRepresentation];
-    for (id key in dict)
-    {
-        [defs removeObjectForKey:key];
-    }
-    [defs synchronize];
+    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:USER_id];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+//    NSUserDefaults * defs = [NSUserDefaults standardUserDefaults];
+//    NSDictionary * dict = [defs dictionaryRepresentation];
+//    for (id key in dict)
+//    {
+//        [defs removeObjectForKey:key];
+//    }
+//    [defs synchronize];
     
     BforeLoginViewController *rootViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"BforeLoginViewController"];
     rootViewController.isCommingFromAfterProfile=1;
@@ -83,7 +91,27 @@
 {
     UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MyAuctionGalleryViewController *rootViewController = [storyBoard instantiateViewControllerWithIdentifier:@"MyAuctionGalleryViewController"];
+    rootViewController.isCurrent = 1;
     [self.navigationController pushViewController:rootViewController animated:YES];
+}
+- (IBAction)notificationPressed:(id)sender {
+    
+    UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    NotificationViewController *rootViewController = [storyBoard instantiateViewControllerWithIdentifier:@"NotificationViewController"];
+    [self.navigationController pushViewController:rootViewController animated:YES];
+    
+}
+
+- (IBAction)myPurchasePressed:(id)sender
+{
+    UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ItemOfPastAuctionViewController *objViewController = [storyBoard instantiateViewControllerWithIdentifier:@"ItemOfPastAuctionViewController"];
+    objViewController.IsUpcomming = 0;
+    objViewController.IsPast = 0;
+    objViewController.isWorkArt = NO;
+    objViewController.isMyPurchase = YES;
+    objViewController.isSearch = NO;
+    [self.navigationController pushViewController:objViewController animated:YES];
 }
 
 /*

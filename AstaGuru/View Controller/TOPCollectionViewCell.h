@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "iCarousel.h"
 @interface TOPCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIButton *btnList;
 @property (weak, nonatomic) IBOutlet UILabel *lblCurrency;
@@ -17,4 +17,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnFilter;
 @property (strong, nonatomic) IBOutlet UILabel *lblFilter;
 @property (strong, nonatomic) IBOutlet UIImageView *iconDropdown;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *img_height;
+@property (strong, nonatomic) IBOutlet iCarousel *imgContianView;
+
 @end

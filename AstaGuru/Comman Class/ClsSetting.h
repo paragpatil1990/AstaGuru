@@ -15,17 +15,14 @@
 #import "MBProgressHUD.h"
 #import "AFNetworking.h"
 #import "CurrentDefultGridCollectionViewCell.h"
-#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 #define USER_id         @"userid"
 #define USER_NAME      @"username"
-#define CUST_MOBILENO   @"cust_number"
-#define CUST_NAME       @"cust_name"
-#define CUST_IMAGE       @"cust_image"
-#define CUST_ZIP       @"cust_zip"
-#define CUST_CITY       @"cust_city"
-#define CUST_STATE       @"cust_state"
+
+//#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
 #define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+
 @protocol PassResepose
 @optional
 -(void)passReseposeData:(id)arr;
@@ -35,18 +32,19 @@
 @interface ClsSetting : NSObject
 
 +(CGFloat)CalculateHeightOfTextview:(UITextView *)TxtVw;
-+(void)Downloadimage;
 +(void)underline:(UIView*)textField;
 +(NSString*)TrimWhiteSpaceAndNewLine:(NSString*)strString;
 +(BOOL) NSStringIsValidEmail:(NSString *)checkString;
 +(void)internetConnectionPromt;
 +(void)ValidationPromt:(NSString*)strValidationText;
--(NSString *)Url;
-+(NSString *)ImageURL;
-
-+(void)SetBorder:(UIView *)viw cornerRadius:(CGFloat)CornerRadius borderWidth:(CGFloat)borderWidth;
++(void)SetBorder:(UIView *)viw cornerRadius:(CGFloat)CornerRadius borderWidth:(CGFloat)borderWidth color:(UIColor*)color;
 +(NSString*)getAddress:(CLLocation*)newLocation;
-+(CGFloat)heightOfTextForString:(NSString *)aString andFont:(UIFont *)aFont maxSize:(CGSize)aSize;
+//+(CGFloat)heightOfTextForString:(NSString *)aString andFont:(UIFont *)aFont maxSize:(CGSize)aSize;
+
++(CGFloat)heightForNSString:(NSString *)text havingWidth:(CGFloat)widthValue andFont:(UIFont *)font;
++(CGFloat)heightForNSAttributedString:(NSAttributedString*)astr havingWidth:(CGFloat)width;
+
+
 //+(void)setComments:(NSMutableArray*)arrComments label:(UILabel*)Title;
 -(void)CallWeb:(NSMutableDictionary*)dict url:(NSString*)strURL view:(UIView*)Callingview Post:(BOOL)isPost;
 @property (readwrite) id<PassResepose> PassReseposeDatadelegate;
@@ -62,8 +60,15 @@
 +(NSString*)getAttributedStringFormHtmlString:(NSString*)htmlString;
 +(void)Searchpage:(UINavigationController*)NavigationController;
 
--(NSString *)UrlProcedure;
++(NSString *)tableURL;
++(NSString *)imageURL;
++(NSString *)procedureURL;
++(NSString *)apiKey;
++(NSString *)autionAnalysisURL;
++(NSString *)emailURL;
+
 -(void)CallWebDelete:(NSMutableDictionary*)dict url:(NSString*)strURL view:(UIView*)Callingview Post:(BOOL)isPost;
-+(void)Email:(NSDictionary*)dict view:(UIView*)Callingview;
+
++(void)sendEmailWithInfo:(NSDictionary*)infoDic;
 +(void)ISUSerLeading:(NSString*)strUserID Cell:(CurrentDefultGridCollectionViewCell*)cell;
 @end

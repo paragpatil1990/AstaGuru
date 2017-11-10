@@ -19,7 +19,9 @@
 #import "PastOccuctionViewController.h"
 #import "SearchViewController.h"
 #import "ItemOfPastAuctionViewController.h"
-@interface ViewController ()<YTPlayerViewDelegate,UISearchBarDelegate>
+#import "NotificationViewController.h"
+#import "MIBadgeButton.h"
+@interface ViewController ()<YTPlayerViewDelegate,UISearchBarDelegate, iCarouselDelegate, iCarouselDataSource>
 {
     NSMutableArray *arrmBanner;
     NSMutableArray *arrmBanner2;
@@ -28,7 +30,6 @@
     NSMutableArray *arrmBanner5;
     NSMutableArray *arrBottomMenu;
     UIButton *btnBack;
-    
 }
 @property (nonatomic, strong) UISearchBar *searchBar;
 @end
@@ -44,7 +45,7 @@
     arrmBanner3=[[NSMutableArray alloc]init];
     arrmBanner4=[[NSMutableArray alloc]init];
     arrmBanner5=[[NSMutableArray alloc]init];
-    arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"CURRENT",@"UPCOMING",@"PAST", nil];
+    arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"AUCTION",@"UPCOMING",@"PAST", nil];
    
     self.sidebarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"signs"] style:UIBarButtonItemStyleDone target:self.revealViewController action:@selector(revealToggle:)];
     self.sidebarButton.tintColor=[UIColor whiteColor];
@@ -61,18 +62,18 @@
     [self.revealViewController setFrontViewController:self.navigationController];
     [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
     
-    
-    
-   // self.sideleftbarButton=[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-search"] style:UIBarButtonItemStyleDone target:self action:@selector(searchPressed)];
-    
     btnBack = [[UIButton alloc]initWithFrame:CGRectMake(-20, 0, -20, 20)];
     [btnBack setImage:[UIImage imageNamed:@"icon-search"] forState:UIControlStateNormal];
     [btnBack addTarget:self action:@selector(searchPressed) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithCustomView:btnBack];
     
-    UIButton *btnBack1 = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, -20)];
+    
+    MIBadgeButton *btnBack1 = [[MIBadgeButton alloc]initWithFrame:CGRectMake(0, 0, 20,20)];
     [btnBack1 setImage:[UIImage imageNamed:@"icon-myastaguru"] forState:UIControlStateNormal];
     [btnBack1 addTarget:self action:@selector(myastaguru) forControlEvents:UIControlEventTouchUpInside];
+    [btnBack1 setBadgeBackgroundColor:[UIColor colorWithRed:167.0/255.0 green:142.0/255.0 blue:105.0/255.0 alpha:1]];
+    [btnBack1 setBadgeEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    
     UIBarButtonItem *barButtonItem1 = [[UIBarButtonItem alloc]initWithCustomView:btnBack1];
     UIBarButtonItem *spaceFix = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:NULL];
     spaceFix.width = -12;
@@ -80,12 +81,12 @@
     spaceFix.width = -8;
     [self.navigationItem setRightBarButtonItems:@[spaceFix,barButtonItem,spaceFix1, barButtonItem1]];
     
-    //self.sideleftbarButton.tintColor=[UIColor whiteColor];
-   // [[self navigationItem] setRightBarButtonItem:self.sideleftbarButton];
+  
     SWRevealViewController *revealController = [self revealViewController];
     [revealController tapGestureRecognizer];
-    [self Getanner];
     _vwCarousel.pagingEnabled=YES;
+    _vwCarousel.delegate = self;
+    _vwCarousel.dataSource = self;
     
     _imgVideo.userInteractionEnabled = YES;
     
@@ -105,8 +106,30 @@
 {
     [super viewWillAppear:YES];
     self.navigationItem.title =@"AstaGuru";
+    
     _htVideoViews.constant=(self.view.frame.size.width/2.15);
+    
+//    [self needsUpdate];
+    
+    NSString *isNoti = [[NSUserDefaults standardUserDefaults] valueForKey:@"isNoti"];
+    NSLog(@"isNoti == %@",isNoti);
+    
+    if ([isNoti isEqualToString:@"1"])
+    {
+        [[NSUserDefaults standardUserDefaults] setValue:@"0" forKey:@"isNoti"];
+        if (([[[NSUserDefaults standardUserDefaults] valueForKey:USER_id] intValue]>0) )
+        {
+            UIStoryboard *storyBoard=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            NotificationViewController *rootViewController = [storyBoard instantiateViewControllerWithIdentifier:@"NotificationViewController"];
+            //        rootViewController.record = @{@"NotificationBody":[[NSUserDefaults standardUserDefaults] valueForKey:@"NotificationBody"],@"NotificationID":[[NSUserDefaults standardUserDefaults] valueForKey:@"NotificationID"]};
+            [self.navigationController pushViewController:rootViewController animated:YES];
+        }
+    }
+    
+    [self Getbanner];
+    //[self SendEmail];
 }
+
 -(void)searchPressed
 {
     [ClsSetting Searchpage:self.navigationController];
@@ -115,8 +138,7 @@
 {
     [ClsSetting myAstaGuru:self.navigationController];
 }
-
--(void)Getanner
+-(void)Getbanner
 {
     //-------
     @try {
@@ -124,21 +146,15 @@
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         HUD.labelText = @"loading";
         NSMutableDictionary *Discparam=[[NSMutableDictionary alloc]init];
-        // [Discparam setValue:@"cr2016" forKey:@"validate"];
-        //[Discparam setValue:@"banner" forKey:@"action"];
-        
-        
-        ClsSetting *objSetting=[[ClsSetting alloc]init];
-        
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.requestSerializer = [AFHTTPRequestSerializer serializer];
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];  //AFHTTPResponseSerializer serializer
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
-        NSString  *strQuery=[NSString stringWithFormat:@"%@home_banner?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objSetting Url]];
+        
+        NSString  *strQuery=[NSString stringWithFormat:@"%@/spGetHomeBanner?api_key=%@",[ClsSetting procedureURL],[ClsSetting apiKey]];
+        
         NSString *url = strQuery;
         NSLog(@"%@",url);
-        
-        
         
         NSString *encoded = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [manager GET:encoded parameters:Discparam success:^(AFHTTPRequestOperation *operation, id responseObject)
@@ -147,15 +163,19 @@
              NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
              
              NSError *error;
-             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
+             NSMutableArray *arrElement = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
              NSLog(@"%@",responseStr);
-             NSLog(@"%@",dict);
              
-             
-             NSMutableArray*arrElement=[dict valueForKey:@"resource"];
+             [arrmBanner removeAllObjects];
+             [arrmBanner2 removeAllObjects];
+             [arrmBanner3 removeAllObjects];
+             [arrmBanner4 removeAllObjects];
+             [arrmBanner5 removeAllObjects];
+
              for (int i=0; i< arrElement.count; i++)
              {
                  NSDictionary *dictElement=[arrElement objectAtIndex:i];
+            
                  if ([[dictElement valueForKey:@"bannerType"] intValue]==1)
                  {
                      [arrmBanner addObject:dictElement];
@@ -177,8 +197,11 @@
                      [arrmBanner5 addObject:dictElement];
                  }
              }
+   
              [_vwCarousel reloadData];
+             
              [MBProgressHUD hideHUDForView:self.view animated:YES];
+             
              [self.pgControl setNumberOfPages:[arrmBanner count]];
              [self.pgVideo setNumberOfPages:[arrmBanner5 count]];
              [self.pgControlUpcommingAuction setNumberOfPages:[arrmBanner2 count]];
@@ -189,8 +212,6 @@
              [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
              _webview.scrollView.bounces = NO;
              [_webview setMediaPlaybackRequiresUserAction:NO];
-             
-             
              
              [_vwCarousel reloadData];
              [_clvUpcommingAuction reloadData];
@@ -214,13 +235,14 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
-    return [arrmBanner count];
+    return arrmBanner.count;
 }
 
 // this delegate method returns banner views.
@@ -228,12 +250,12 @@
 {
     UIView *bannerview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.vwCarousel.frame.size.width,self.vwCarousel.frame.size.height)];
     
-    EGOImageView *imgvw=[[EGOImageView alloc]initWithPlaceholderImage:[UIImage imageNamed:@"banner"]];
+    EGOImageView *imgvw = [[EGOImageView alloc] initWithPlaceholderImage:[UIImage imageNamed:@"img-default-painting.png"]];
     
     [imgvw setFrame:bannerview.frame];
     
     //[imgvw setContentMode:UIViewContentModeScaleAspectFit];
-    UIButton *btn=[[UIButton alloc]initWithFrame:bannerview.frame];
+//    UIButton *btn=[[UIButton alloc]initWithFrame:bannerview.frame];
     
     //[btn addTarget:self action:@selector(OpenBannerdUrl:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -251,35 +273,82 @@
     
     [bannerview addSubview:imgvw];
     
-    [bannerview addSubview:btn];
+//    [bannerview addSubview:btn];
     
     return  bannerview;
 }
+
 - (void)carouselCurrentItemIndexDidChange:(iCarousel *)carousel
 {
     [self.pgControl setCurrentPage:[carousel currentItemIndex]];
-    
 }
+
+- (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
+{
+    NSDictionary *dict = [ClsSetting RemoveNullOnly:[arrmBanner objectAtIndex:index]];
+    clsPastAuctionData *objPastAuctionData = [[clsPastAuctionData alloc]init];
+    objPastAuctionData.strAuctionname = dict[@"Auctionname"];
+    objPastAuctionData.strAuctionId = dict[@"urlID"];
+    objPastAuctionData.strAuctiontitle = dict[@"Auctionname"];
+    if ([dict[@"auctionPageUrl"] isEqualToString:@"Current"])
+    {
+        UINavigationController *navcontroll = (UINavigationController *)[self.revealViewController frontViewController];
+        CurrentOccutionViewController *VCLikesControll = [self.storyboard instantiateViewControllerWithIdentifier:@"CurrentOccutionViewController"];
+        [navcontroll setViewControllers: @[VCLikesControll] animated: YES];
+        [self.revealViewController setFrontViewController:navcontroll];
+        [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+    }
+    else
+    {
+        ItemOfPastAuctionViewController *objViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemOfPastAuctionViewController"];
+        objViewController.objPast = objPastAuctionData;
+        objViewController.isWorkArt = NO;
+        objViewController.isMyPurchase = NO;
+        objViewController.isSearch = NO;
+        if ([dict[@"auctionPageUrl"] isEqualToString:@"Upcomming"])
+        {
+            objViewController.IsUpcomming = 1;
+            objViewController.IsPast = 0;
+            [self.navigationController pushViewController:objViewController animated:YES];
+        }
+        else if ([dict[@"auctionPageUrl"] isEqualToString:@"Past"])
+        {
+            objViewController.IsUpcomming = 0;
+            objViewController.IsPast = 1;
+            [self.navigationController pushViewController:objViewController animated:YES];
+        }
+    }
+//    else if ([dict[@"auctionPageUrl"] isEqualToString:@"Past"])
+//    {
+//        ItemOfPastAuctionViewController *objViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemOfPastAuctionViewController"];
+//        objViewController.objPast=objPastAuctionData;
+//        objViewController.IsUpcomming = 0;
+//        objViewController.IsPast = 1;
+//        objViewController.isWorkArt = 0;
+//        objViewController.isMyPurchase = 0;
+//        objViewController.isSearch = 0;
+//        [self.navigationController pushViewController:objViewController animated:YES];
+//    }
+}
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    
     return 1;
-    
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (collectionView==_clvUpcommingAuction)
     {
-     return arrmBanner2.count;
+        return arrmBanner2.count;
     }
     else if(collectionView==_clvFeaturedAuction)
     {
-     return arrmBanner3.count;
+        return arrmBanner3.count;
     }
     else if (collectionView==_clsFullImage)
     {
-    return arrmBanner4.count;
+        return arrmBanner4.count;
     }
     else if (collectionView==_clvVideo)
     {
@@ -287,65 +356,45 @@
     }
     else
     {
-    return arrBottomMenu.count;
+        return arrBottomMenu.count;
     }
     
     
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-    
     static NSString *identifier = @"Cell";
     NSDictionary *dict;
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     if (collectionView==_clvUpcommingAuction)
     {
-        NSLog(@"%ld",(long)indexPath.row);
-    dict=[arrmBanner2 objectAtIndex:indexPath.row];
-         //[self.pgControlUpcommingAuction setCurrentPage:indexPath.row];
+        dict = [arrmBanner2 objectAtIndex:indexPath.row];
+        UILabel *lblTitle = (UILabel *)[cell viewWithTag:12];
+        lblTitle.text=[NSString stringWithFormat:@"%@",[dict valueForKey:@"homebannerTitle"]];
+        EGOImageView *imgServices = (EGOImageView *)[cell viewWithTag:11];
+        imgServices.imageURL=[NSURL URLWithString:[dict valueForKey:@"homebannerImg"]];
+
     }
     else if(collectionView==_clvFeaturedAuction)
     {
-    dict=[arrmBanner3 objectAtIndex:indexPath.row];
+        dict = [arrmBanner3 objectAtIndex:indexPath.row];
+        UILabel *lblTitle = (UILabel *)[cell viewWithTag:12];
+        lblTitle.text=[NSString stringWithFormat:@"%@",[dict valueForKey:@"homebannerTitle"]];
+        EGOImageView *imgServices = (EGOImageView *)[cell viewWithTag:11];
+        imgServices.imageURL=[NSURL URLWithString:[dict valueForKey:@"homebannerImg"]];
+
     }
     else if (collectionView==_clsFullImage)
     {
-    dict=[arrmBanner4 objectAtIndex:indexPath.row];
+        dict = [arrmBanner4 objectAtIndex:indexPath.row];
+        UILabel *lblTitle = (UILabel *)[cell viewWithTag:12];
+        lblTitle.text=[NSString stringWithFormat:@"%@",[dict valueForKey:@"homebannerTitle"]];
+        EGOImageView *imgServices = (EGOImageView *)[cell viewWithTag:11];
+        imgServices.imageURL=[NSURL URLWithString:[dict valueForKey:@"homebannerImg"]];
     }
     else if (collectionView==_clvVideo)
     {
-    dict=[arrmBanner5 objectAtIndex:indexPath.row];
-    // [self.pgVideo setCurrentPage:indexPath.row];
-    }
-    
-    if (collectionView== _clvBottomMenu)
-    {
-        UILabel *lblTitle = (UILabel *)[cell viewWithTag:20];
-        UILabel *lblSelectedline = (UILabel *)[cell viewWithTag:22];
-        NSLog(@"%@",[arrBottomMenu objectAtIndex:indexPath.row]);
-        lblTitle.text=[arrBottomMenu objectAtIndex:indexPath.row];
-        if (indexPath.row==0)
-        {
-          UILabel *lblline = (UILabel *)[cell viewWithTag:21];
-            lblTitle.textColor=[UIColor colorWithRed:167.0/255.0 green:142.0/255.0 blue:105.0/255.0 alpha:1];
-           
-            lblline.backgroundColor=[UIColor colorWithRed:167.0/255.0 green:142.0/255.0 blue:105.0/255.0 alpha:1];
-            lblSelectedline.hidden=NO;
-            
-        }
-        else
-        {
-        //UILabel *lblline = (UILabel *)[cell viewWithTag:21];
-            lblSelectedline.hidden=YES;
-        }
-        //[NSString stringWithFormat:@"%@",[arrBottomMenu objectAtIndex:indexPath.row]];
-    }
-    else
-    {
-    EGOImageView *imgServices = (EGOImageView *)[cell viewWithTag:11];
-   imgServices.imageURL=[NSURL URLWithString:[dict valueForKey:@"homebannerImg"]];
+        dict = [arrmBanner5 objectAtIndex:indexPath.row];
         _imgVideo.hidden=YES;
         
         YTPlayerView *YTPlayer = (YTPlayerView *)[cell viewWithTag:101];
@@ -358,184 +407,194 @@
                                      @"showinfo" : @0,
                                      @"modestbranding" : @0,
                                      @"autoplay" : @0,
+                                     @"loop" : @1,
                                      @"origin":@"http://www.youtube.com"
                                      };
         
         // NSLog(@"strlib_video_thumb %@",_objLib.strlib_video_thumb);
         [YTPlayer loadWithVideoId:strVideoId playerVars:playerVars];
         [YTPlayer playVideo];
-        
-       
-
-        
-    UILabel *lblTitle = (UILabel *)[cell viewWithTag:12];
-    lblTitle.text=[NSString stringWithFormat:@"%@",[dict valueForKey:@"homebannerTitle"]];
-    //lblPrice.text=[]
-    UIWebView *Web = (UIWebView *)[cell viewWithTag:13];
-    NSString *url = [dict valueForKey:@"homebannerImg"];
-    //NSURL *nsUrl = [NSURL URLWithString:url];
-    Web.scalesPageToFit=true;
-    [Web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
-    Web.scrollView.bounces = NO;
-    [Web setMediaPlaybackRequiresUserAction:NO];
-       
     }
-    
-    
-    
+    else if (collectionView== _clvBottomMenu)
+    {
+        UILabel *lblTitle = (UILabel *)[cell viewWithTag:20];
+        lblTitle.text=[arrBottomMenu objectAtIndex:indexPath.row];
+        
+        UILabel *lblSelectedline = (UILabel *)[cell viewWithTag:22];
+        lblSelectedline.hidden=YES;
+
+        UIButton *btnLive = (UIButton *)[cell viewWithTag:23];
+        btnLive.layer.cornerRadius = 4;
+        btnLive.hidden = YES;
+        
+        UILabel *lblline = (UILabel *)[cell viewWithTag:21];
+
+        if (indexPath.row == 1)
+        {
+           btnLive.hidden = NO;
+        }
+        
+        if (indexPath.row == 0)
+        {
+            lblTitle.textColor=[UIColor colorWithRed:167.0/255.0 green:142.0/255.0 blue:105.0/255.0 alpha:1];
+            lblline.backgroundColor=[UIColor colorWithRed:167.0/255.0 green:142.0/255.0 blue:105.0/255.0 alpha:1];
+            lblSelectedline.hidden = NO;
+        }
+        else
+        {
+            lblTitle.textColor=[UIColor blackColor];
+            lblline.backgroundColor=[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1];
+            lblSelectedline.hidden=YES;
+        }
+    }
+    else
+    {
+        //lblPrice.text=[]
+        UIWebView *Web = (UIWebView *)[cell viewWithTag:13];
+        NSString *url = [dict valueForKey:@"homebannerImg"];
+        //NSURL *nsUrl = [NSURL URLWithString:url];
+        Web.scalesPageToFit=true;
+        [Web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+        Web.scrollView.bounces = NO;
+        [Web setMediaPlaybackRequiresUserAction:NO];
+    }
     return cell;
     
 }
-- (CGSize)collectionView:(UICollectionView *)collectionView1 layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    // 2
+- (CGSize)collectionView:(UICollectionView *)collectionView1 layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     if (collectionView1==_clvUpcommingAuction)
     {
-    float width=(self.view.frame.size.width);
-    NSLog(@"%f",width);
-    
-    return CGSizeMake(width, collectionView1.frame.size.height);
-    
+        float width=(self.view.frame.size.width);
+        return CGSizeMake(width, collectionView1.frame.size.height);
     }
     else if(collectionView1==_clvFeaturedAuction)
     {
         float width=(self.view.frame.size.width/2)-7;
-        NSLog(@"%f",width);
-        
         return CGSizeMake(width, width);
     }
     else if(collectionView1==_clsFullImage)
     {
         float width=(self.view.frame.size.width);
-        NSLog(@"%f",width);
-        
         return CGSizeMake(width, collectionView1.frame.size.height);
-        
     }
     else if(collectionView1==_clvBottomMenu)
     {
         float width=(self.view.frame.size.width/4);
-        NSLog(@"%f",width);
-        
         return CGSizeMake(width, collectionView1.frame.size.height);
-        
     }
     else
     {
         float width=(self.view.frame.size.width);
-        NSLog(@"%f",width);
-        
         return CGSizeMake(width, width/2.15);
-        
     }
-    
-    
-    
-    
-    
 }
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if(collectionView==_clvBottomMenu)
     {
-    if (indexPath.row==1)
-    {
-       /* UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        CurrentOccutionViewController *objDetailVideoViewController = [storyboard instantiateViewControllerWithIdentifier:@"CurrentOccutionViewController"];
-        [self.navigationController pushViewController:objDetailVideoViewController animated:YES];*/
-        
-        
-        
-        UINavigationController *navcontroll = (UINavigationController *)[self.revealViewController frontViewController];
-        CurrentOccutionViewController *VCLikesControll = [self.storyboard instantiateViewControllerWithIdentifier:@"CurrentOccutionViewController"];
-        //[navcontroll pushViewController:VCLikesControll animated:YES];
-               
-        [navcontroll setViewControllers: @[VCLikesControll] animated: YES];
-        
-        [self.revealViewController setFrontViewController:navcontroll];
+        UINavigationController *nvc = (UINavigationController *)[self.revealViewController frontViewController];
+        if (indexPath.row==1)
+        {
+            CurrentOccutionViewController *VCLikesControll = [self.storyboard instantiateViewControllerWithIdentifier:@"CurrentOccutionViewController"];
+            [nvc setViewControllers: @[VCLikesControll] animated: YES];
+        }
+        else if (indexPath.row==2)
+        {
+            PastOccuctionViewController *objPastOccuctionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PastOccuctionViewController"];
+            objPastOccuctionViewController.IsUpcomming = 1;
+            [nvc setViewControllers: @[objPastOccuctionViewController] animated: YES];
+        }
+        else if (indexPath.row == 3)
+        {
+            PastOccuctionViewController *objPastOccuctionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PastOccuctionViewController"];
+            objPastOccuctionViewController.IsUpcomming = 0;
+            [nvc setViewControllers: @[objPastOccuctionViewController] animated: YES];
+        }
+        [self.revealViewController setFrontViewController:nvc];
         [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
-    }
-   else if (indexPath.row==2)
-    {
-        /* UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-         CurrentOccutionViewController *objDetailVideoViewController = [storyboard instantiateViewControllerWithIdentifier:@"CurrentOccutionViewController"];
-         [self.navigationController pushViewController:objDetailVideoViewController animated:YES];*/
-        
-        UINavigationController *navcontroll = (UINavigationController *)[self.revealViewController frontViewController];
-        PastOccuctionViewController *objPastOccuctionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PastOccuctionViewController"];
-        objPastOccuctionViewController.iIsUpcomming=1;
-        //[navcontroll pushViewController:objPastOccuctionViewController animated:YES];
-        [navcontroll setViewControllers: @[objPastOccuctionViewController] animated: YES];
-        
-        [self.revealViewController setFrontViewController:navcontroll];
-        [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
-        
-    }
-   else if (indexPath.row==3)
-    {
-        /* UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-         CurrentOccutionViewController *objDetailVideoViewController = [storyboard instantiateViewControllerWithIdentifier:@"CurrentOccutionViewController"];
-         [self.navigationController pushViewController:objDetailVideoViewController animated:YES];*/
-        
-        UINavigationController *navcontroll = (UINavigationController *)[self.revealViewController frontViewController];
-        PastOccuctionViewController *objPastOccuctionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PastOccuctionViewController"];
-        objPastOccuctionViewController.iIsUpcomming=2;
-        //[navcontroll pushViewController:objPastOccuctionViewController animated:YES];
-        [navcontroll setViewControllers: @[objPastOccuctionViewController] animated: YES];
-        
-        [self.revealViewController setFrontViewController:navcontroll];
-        [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
-        
-    }
     }
     else if (collectionView == _clsFullImage)
     {
         ItemOfPastAuctionViewController *objViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemOfPastAuctionViewController"];
-        objViewController.isWorkArt=YES;
+        objViewController.IsUpcomming = 0;
+        objViewController.IsPast = 0;
+        objViewController.isWorkArt = YES;
+        objViewController.isMyPurchase = NO;
+        objViewController.isSearch = NO;
         [self.navigationController pushViewController:objViewController animated:YES];
     }
     else if(collectionView==_clvUpcommingAuction)
     {
-        UINavigationController *navcontroll = (UINavigationController *)[self.revealViewController frontViewController];
-        PastOccuctionViewController *objPastOccuctionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PastOccuctionViewController"];
-        objPastOccuctionViewController.iIsUpcomming=1;
-        //[navcontroll pushViewController:objPastOccuctionViewController animated:YES];
-        [navcontroll setViewControllers: @[objPastOccuctionViewController] animated: YES];
         
-        [self.revealViewController setFrontViewController:navcontroll];
-        [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+        NSDictionary *dict = [ClsSetting RemoveNullOnly:[arrmBanner2 objectAtIndex:indexPath.row]];
+        clsPastAuctionData *objPastAuctionData = [[clsPastAuctionData alloc]init];
+        objPastAuctionData.strAuctionname = dict[@"Auctionname"];
+        objPastAuctionData.strAuctionId = dict[@"urlID"];
+        objPastAuctionData.strAuctiontitle = dict[@"Auctionname"];
+        if ([dict[@"auctionPageUrl"] isEqualToString:@"Current"])
+        {
+            UINavigationController *navcontroll = (UINavigationController *)[self.revealViewController frontViewController];
+            CurrentOccutionViewController *VCLikesControll = [self.storyboard instantiateViewControllerWithIdentifier:@"CurrentOccutionViewController"];
+            [navcontroll setViewControllers: @[VCLikesControll] animated: YES];
+            [self.revealViewController setFrontViewController:navcontroll];
+            [self.revealViewController setFrontViewPosition: FrontViewPositionLeft animated: YES];
+        }
+        else
+        {
+            ItemOfPastAuctionViewController *objViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemOfPastAuctionViewController"];
+            objViewController.objPast=objPastAuctionData;
+            objViewController.isWorkArt = NO;
+            objViewController.isMyPurchase = NO;
+            objViewController.isSearch = NO;
+            if ([dict[@"auctionPageUrl"] isEqualToString:@"Upcomming"])
+            {
+                objViewController.IsUpcomming = 1;
+                objViewController.IsPast = 0;
+                [self.navigationController pushViewController:objViewController animated:YES];
+            }
+            else if ([dict[@"auctionPageUrl"] isEqualToString:@"Past"])
+            {
+                objViewController.IsUpcomming = 0;
+                objViewController.IsPast = 1;
+                [self.navigationController pushViewController:objViewController animated:YES];
+            }
+        }
+//        else if ([dict[@"auctionPageUrl"] isEqualToString:@"Past"])
+//        {
+//            ItemOfPastAuctionViewController *objViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemOfPastAuctionViewController"];
+//            objViewController.objPast=objPastAuctionData;
+//            objViewController.IsUpcomming = 0;
+//            objViewController.IsPast = 1;
+//            objViewController.isWorkArt = 0;
+//            objViewController.isMyPurchase = 0;
+//            objViewController.isSearch = 0;
+//            [self.navigationController pushViewController:objViewController animated:YES];
+//        }
     }
     else if (collectionView==_clvVideo)
     {
-        _imgVideo.hidden=YES;
-        NSMutableDictionary  * dict=[arrmBanner5 objectAtIndex:indexPath.row];
-        NSString *strVideoId=[self extractYoutubeIdFromLink:[dict valueForKey:@"homebannerImg"]];
-        NSDictionary *playerVars = @{
-                                     @"controls" : @0,
-                                     @"playsinline" : @1,
-                                     @"autohide" : @1,
-                                     @"showinfo" : @0,
-                                     @"modestbranding" : @1,
-                                     @"autoplay" : @1,
-                                     @"origin":@"http://www.youtube.com"
-                                     };
-        
-       // NSLog(@"strlib_video_thumb %@",_objLib.strlib_video_thumb);
-        [_viwplayer loadWithVideoId:strVideoId playerVars:playerVars];
-        [_viwplayer playVideo];
-
-        _viwplayer.delegate=self;
-        // _Toutubevuew.autoplay = YES;
-        //[_Toutubevuew loadVideoByURL:_objLib.strlib_video_thumb startSeconds:0.0 suggestedQuality:2];
-        
-        /* LBYouTubePlayerViewController* controller = [[LBYouTubePlayerViewController alloc] initWithYouTubeURL:[NSURL URLWithString:@"https://www.youtube.com/watch?v=9oPoXE5IASA"] quality:LBYouTubeVideoQualityLarge];
-         controller.delegate = self;
-         controller.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
-         controller.view.center = self.view.center;
-         [self.view addSubview:controller.view];
-         */
+        if (arrmBanner5.count > 0)
+        {
+            NSMutableDictionary  *dict=[arrmBanner5 objectAtIndex:indexPath.row];
+            NSString *strVideoId=[self extractYoutubeIdFromLink:[dict valueForKey:@"homebannerImg"]];
+            NSDictionary *playerVars = @{
+                                         @"controls" : @0,
+                                         @"playsinline" : @1,
+                                         @"autohide" : @1,
+                                         @"showinfo" : @0,
+                                         @"modestbranding" : @1,
+                                         @"autoplay" : @1,
+                                         @"loop" : @1,
+                                         @"origin":@"http://www.youtube.com"
+                                         };
+            
+            [_viwplayer loadWithVideoId:strVideoId playerVars:playerVars];
+            [_viwplayer playVideo];
+            _viwplayer.delegate=self;
+        }
     }
-   
 }
 - (NSString *)extractYoutubeIdFromLink:(NSString *)link {
     
@@ -553,12 +612,11 @@
 }
 - (void)tapGesture: (UITapGestureRecognizer*)tapGesture
 {
-    
     _imgVideo.hidden=YES;
     NSMutableDictionary  * dict;
     if (arrmBanner5.count>0)
     {
-     dict=[arrmBanner5 objectAtIndex:0];
+        dict=[arrmBanner5 objectAtIndex:0];
     }
   
     NSString *strVideoId=[self extractYoutubeIdFromLink:[dict valueForKey:@"homebannerImg"]];
@@ -569,6 +627,7 @@
                                  @"showinfo" : @0,
                                  @"modestbranding" : @0,
                                  @"autoplay" : @0,
+                                 @"loop" : @1,
                                  @"origin":@"http://www.youtube.com"
                                  };
     
@@ -580,7 +639,8 @@
     
 }
 - (void)playerView:(YTPlayerView *)playerView didChangeToState:(YTPlayerState)state {
-    switch (state) {
+    switch (state)
+    {
         case kYTPlayerStatePlaying:
         {
            _imgVideo.hidden=YES;
@@ -588,6 +648,13 @@
             break;
         case kYTPlayerStatePaused:
             NSLog(@"Paused playback");
+            break;
+        case kYTPlayerStateQueued:
+            NSLog(@"Queued state");
+            break;
+        case kYTPlayerStateEnded:
+            NSLog(@"End state");
+            [_clvVideo reloadData];
             break;
         default:
             break;
@@ -623,4 +690,26 @@
         _pgControlUpcommingAuction.currentPage = currentPage;
     }
  }
+
+-(void)SendEmail
+{
+    NSDictionary *dictTo = @{
+                             @"name":[NSString stringWithFormat:@"%@",@"Parag"],
+                             @"email":@"paragpatil.rane@gmail.com",
+                             };
+    NSArray*arrTo=[[NSArray alloc]initWithObjects:dictTo, nil];
+    NSDictionary *dictMail = @{
+                               @"template":@"newsletter",
+                               @"to":arrTo,
+                               @"subject":@"Warm Greetings from AstaGuru  Online Auction House.",//@"Astaguru Email Validation OTP",
+                               @"body_text": @"Texst Astsa email",
+                               @"from_name":@"AstaGuru",
+                               @"from_email":@"info@infomanav.com",
+                               @"reply_to_name":@"AstaGuru",
+                               @"reply_to_email":@"info@infomanav.com",
+                               };
+    [ClsSetting sendEmailWithInfo:dictMail];
+}
+
+
 @end

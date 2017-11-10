@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIView *password_View;
 @property (weak, nonatomic) IBOutlet UIView *confirmPassword_View;
 
+@property (strong, nonatomic) IBOutlet UIButton *btnProceed;
 
 
 @end

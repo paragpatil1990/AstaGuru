@@ -17,6 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _ActivityIndicator.hidden=NO;
+    _ActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
+    [self.view bringSubviewToFront:_ActivityIndicator];
     [_webview loadRequest:[NSURLRequest requestWithURL:_url]];
     [_ActivityIndicator startAnimating];
 }
@@ -47,8 +50,8 @@
 }
 -(void)webViewDidStartLoad:(UIWebView *)webVie
 {
-    [_ActivityIndicator stopAnimating];
-    _ActivityIndicator.hidden=YES;
+//    [_ActivityIndicator stopAnimating];
+//    _ActivityIndicator.hidden=YES;
 }
 /*
 #pragma mark - Navigation

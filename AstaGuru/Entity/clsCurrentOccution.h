@@ -15,11 +15,10 @@
 @property(nonatomic,retain)NSString *strproductid;
 @property(nonatomic,retain)NSString *strtitle;
 @property(nonatomic,retain)NSString *strdescription;
-
 @property(nonatomic,retain)NSString *strartist_id;
 @property(nonatomic,retain)NSString *strartist_name;
-@property(nonatomic,retain)NSNumber *strpricers;
-@property(nonatomic,retain)NSNumber *strpriceus;
+@property(nonatomic,retain)NSString *strpricers;
+@property(nonatomic,retain)NSString *strpriceus;
 @property(nonatomic,retain)NSString *strstyle_id;
 @property(nonatomic,retain)NSString *strcategory_id;
 @property(nonatomic,retain)NSString *strmedium_id;
@@ -28,7 +27,6 @@
 @property(nonatomic,retain)NSString *strthumbnail;
 @property(nonatomic,retain)NSString *strhumanFigure;
 @property(nonatomic,retain)NSString *strStatus;
-
 @property(nonatomic,retain)NSString *strimage;
 @property(nonatomic,retain)NSString *strproductsize;
 @property(nonatomic,retain)NSString *strproductdate;
@@ -39,11 +37,13 @@
 @property(nonatomic,retain)NSString *strOnline;
 @property(nonatomic,retain)NSString *strReference;
 @property(nonatomic,retain)NSString *strCurrentDate;
-
 @property(nonatomic,retain)NSString *strArtistProfile;
 @property(nonatomic,retain)NSString *strArtistPicture;
 @property(nonatomic,retain)NSString *strDollarRate;
-
+@property(nonatomic,retain)NSString *strAuctionname;
+@property(nonatomic,retain)NSString *strPrdescription;
+@property(nonatomic,retain)NSString *strmyBidClosingTime;
+@property(nonatomic,retain)NSString *strtimeRemains;
 
 @property(nonatomic,retain)clsArtistInfo *objArtistInfo;
 @property(nonatomic,retain)clsMedia *objMediaInfo;
@@ -58,5 +58,5 @@
 @property(nonatomic,retain)NSString *strauctionBanner;
 
 @property(nonatomic,retain)NSString *isAnimate;
-
+@property(nonatomic,retain)NSString *strpricelow;
 @end

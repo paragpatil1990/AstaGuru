@@ -17,7 +17,8 @@
 
 @implementation ClsSetting
 {
-   }
+}
+
 +(CGFloat)CalculateHeightOfTextview:(UITextView *)TxtVw
 {
     NSString *strDescrption=TxtVw.text;
@@ -44,36 +45,6 @@
     
 }
 
-+(void)Downloadimage
-{
-    NSString *strimgpath;
-    NSString *strimg=[[NSUserDefaults standardUserDefaults] valueForKey:@"DefaultLogo"];
-    if([strimg class]!=[NSNull class])
-    {
-        
-        NSArray *arrmstr=[strimg componentsSeparatedByString:@"~"];
-        if (arrmstr.count>1)
-        {
-            strimgpath=[NSString stringWithFormat:@"http://staging/tagit/%@",[arrmstr objectAtIndex:1]];
-            
-        }
-        
-    }
-    
-    
-    
-    NSURL *url = [NSURL URLWithString:strimgpath];
-    NSLog(@"%@",url);
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    UIImage *image = [UIImage imageWithData:data];
-    NSData *pngData = UIImagePNGRepresentation(image);
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
-    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"DefaultLogo.png"]; //Add the file name
-    [pngData writeToFile:filePath atomically:YES];
-    //
-}
-
 +(BOOL) NSStringIsValidEmail:(NSString *)checkString
 {
     BOOL stricterFilter = NO; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
@@ -83,6 +54,7 @@
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:checkString];
 }
+
 +(NSString*)TrimWhiteSpaceAndNewLine:(NSString*)strString
 {
     NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
@@ -93,9 +65,6 @@
 
 +(void)underline:(UIView*)textField
 {
-    
-    
-    
     CALayer *border = [CALayer layer];
     CGFloat borderWidth = 1.6;
     border.borderColor = [UIColor colorWithRed:196.0/255.0 green:196.0/255.0 blue:196.0/255.0 alpha:1.0].CGColor;
@@ -104,27 +73,49 @@
     [textField.layer addSublayer:border];
     textField.layer.masksToBounds = YES;
     textField.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0);
-    
 }
--(NSString *)Url
+
+
++(NSString *)tableURL
 {
-//    restapi.infomanav.com/
-//    54.169.222.181
-return @"http://restapi.infomanav.com/api/v2/guru/_table/";
+    return @"http://restapi.infomanav.com/api/v2/guru/_table/";
+//    return @"http://restapi.infomanav.com/api/v2/asta/_table/";
 }
--(NSString *)UrlProcedure
+
++(NSString *)procedureURL
 {
     return @"http://restapi.infomanav.com/api/v2/guru/_proc";
+//    return @"http://restapi.infomanav.com/api/v2/asta/_proc";
 }
-+(NSString *)ImageURL
+
++(NSString *)apiKey
+{
+    return @"c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed";
+//    return @"c255e4bd10c8468f9e7e393b748750ee108d6308e2ef3407ac5d2b163a01fa37";
+}
+
++(NSString *)emailURL
+{
+    return @"http://restapi.infomanav.com/api/v2/awsses/?api_key=6dee0a21388b49db917cd64559c32bcbde93460f391a594ab7cc6666824d5c26";
+}
+
++(NSString *)imageURL
 {
     return @"http://arttrust.southeastasia.cloudapp.azure.com/";
 }
-+(void)SetBorder:(UIView *)viw cornerRadius:(CGFloat)CornerRadius borderWidth:(CGFloat)borderWidth 
+
++(NSString *)autionAnalysisURL
 {
-    UIColor *lightgray= [UIColor colorWithRed:200.0/255 green:200.0/255 blue:200.0/255 alpha:1.0];
+    return @"http://astaguru.com/auction-analysis-mobile.aspx?astaguruauction=";
+//    return @"http://astaguru.com:81/auction-analysis-mobile.aspx?astaguruauction=";
+}
+
++(void)SetBorder:(UIView *)viw cornerRadius:(CGFloat)CornerRadius borderWidth:(CGFloat)borderWidth color:(UIColor*)color
+{
+    
+//    UIColor *lightgray= [UIColor colorWithRed:200.0/255 green:200.0/255 blue:200.0/255 alpha:1.0];
     //[[viw layer] setBorderWidth:1.0f];
-    [[viw layer] setBorderColor:lightgray.CGColor];
+    [[viw layer] setBorderColor:color.CGColor];
     viw.layer.cornerRadius=CornerRadius;
     viw.layer.masksToBounds=YES;
     //viw.layer.borderColor=(__bridge CGColorRef _Nullable)(BorderColor);
@@ -222,11 +213,9 @@ return @"http://restapi.infomanav.com/api/v2/guru/_table/";
 {
     @try {
         
-        
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:Callingview animated:YES];
         HUD.labelText = @"loading";
 
-        
         NSMutableDictionary *Discparam=[[NSMutableDictionary alloc]init];
         Discparam=dict;
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -234,7 +223,7 @@ return @"http://restapi.infomanav.com/api/v2/guru/_table/";
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];  //AFHTTPResponseSerializer serializer
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
        
-        NSString  *strQuery=[NSString stringWithFormat:@"%@%@",[self Url],strURL];
+        NSString  *strQuery=[NSString stringWithFormat:@"%@%@",[ClsSetting tableURL],strURL];
         NSString *url = strQuery;
         NSLog(@"%@",url);
     
@@ -271,8 +260,6 @@ return @"http://restapi.infomanav.com/api/v2/guru/_table/";
 -(void)CallWebDelete:(NSMutableDictionary*)dict url:(NSString*)strURL view:(UIView*)Callingview Post:(BOOL)isPost
 {
     @try {
-        
-        
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:Callingview animated:YES];
         HUD.labelText = @"loading";
         
@@ -284,7 +271,7 @@ return @"http://restapi.infomanav.com/api/v2/guru/_table/";
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];  //AFHTTPResponseSerializer serializer
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
         
-        NSString  *strQuery=[NSString stringWithFormat:@"%@%@",[self Url],strURL];
+        NSString  *strQuery=[NSString stringWithFormat:@"%@%@",[ClsSetting tableURL],strURL];
         NSString *url = strQuery;
         NSLog(@"%@",url);
         NSString *encoded = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -302,7 +289,6 @@ return @"http://restapi.infomanav.com/api/v2/guru/_table/";
          }
              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  NSLog(@"Error: %@", error);
-                 
                  [MBProgressHUD hideHUDForView:Callingview animated:YES];
              }];
     }
@@ -346,10 +332,7 @@ return @"http://restapi.infomanav.com/api/v2/guru/_table/";
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         [MBProgressHUD hideHUDForView:Callingview animated:YES];
-        
     }];
-    
-    
 }
 -(void)calllPostWeb2:(NSDictionary*)dict url:(NSString*)strURL view:(UIView*)Callingview
 {
@@ -365,15 +348,11 @@ return @"http://restapi.infomanav.com/api/v2/guru/_table/";
     [serializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     manager.requestSerializer = serializer;
     
-    [manager POST:[NSString stringWithFormat:@"%@users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[self Url]] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSString *urlStr = [NSString stringWithFormat:@"%@users?api_key=%@",[ClsSetting tableURL],[ClsSetting apiKey]];
+    NSLog(@"url = %@",urlStr);
+    
+    [manager POST:urlStr parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
-//        NSError *error=nil;
-        //NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        
-        // NSError *error;
-        //  NSMutableDictionary *dict1 = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
-        // NSLog(@"%@",responseStr);
-        
         [_PassReseposeDatadelegate passReseposeData1:responseObject];
         [MBProgressHUD hideHUDForView:Callingview animated:YES];
         
@@ -385,45 +364,6 @@ return @"http://restapi.infomanav.com/api/v2/guru/_table/";
     
     
 }
-
-
-
-/*-(void)calllPostWeb:(NSDictionary*)dict url:(NSString*)strURL view:(UIView*)Callingview
-{
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:Callingview animated:YES];
-    HUD.labelText = @"loading";
-    
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    NSLog(@"Dict %@",dict);
-    
-    AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
-    [serializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [serializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    manager.requestSerializer = serializer;
-    
-    [manager POST:strURL parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-        NSError *error=nil;
-        //NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        
-        // NSError *error;
-        //  NSMutableDictionary *dict1 = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
-        // NSLog(@"%@",responseStr);
-        
-        [_PassReseposeDatadelegate passReseposeData1:responseObject];
-        [MBProgressHUD hideHUDForView:Callingview animated:YES];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        [MBProgressHUD hideHUDForView:Callingview animated:YES];
-        
-    }];
-    
-    
-}
-*/
 
 -(void)calllPutWeb:(NSDictionary*)dict url:(NSString*)strURL view:(UIView*)Callingview
 {
@@ -440,7 +380,7 @@ return @"http://restapi.infomanav.com/api/v2/guru/_table/";
     [serializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     manager.requestSerializer = serializer;
     
-    [manager PUT:[NSString stringWithFormat:@"%@users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[self Url]] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager PUT:[NSString stringWithFormat:@"%@users?api_key=%@",[ClsSetting tableURL],[ClsSetting apiKey]] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
 //        NSError *error=nil;
         //NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
@@ -528,22 +468,21 @@ return @"http://restapi.infomanav.com/api/v2/guru/_table/";
     {
         if (([dict valueForKey:[arrkeys objectAtIndex:i]]== nil)||([dict valueForKey:[arrkeys objectAtIndex:i]]== [NSNull null]))
         {
-           [dict setValue:@"" forKey:[arrkeys objectAtIndex:i]];
+           [dict setValue:@" " forKey:[arrkeys objectAtIndex:i]];
         }
         
-        NSString *str=[dict valueForKey:[arrkeys objectAtIndex:i]];
+        NSString *str=[NSString stringWithFormat:@"%@",[dict valueForKey:[arrkeys objectAtIndex:i]]];
+        
         NSLog(@"%@",[dict valueForKey:[arrkeys objectAtIndex:i]]);
-        if ([str intValue]==0)
+        if ([str intValue] == 0)
         {
-           str=[str stringByReplacingOccurrencesOfString: @"<br>" withString: @"\n"];
+           str = [str stringByReplacingOccurrencesOfString: @"<br>" withString: @"\n"];
              [dict setValue:str forKey:[arrkeys objectAtIndex:i]];
         }
-        
-        
-       
     }
     return dict;
 }
+
 +(NSMutableDictionary*)RemoveNullOnly:(NSMutableDictionary*)dict
 {
     NSArray*arrkeys=[dict allKeys];
@@ -552,17 +491,12 @@ return @"http://restapi.infomanav.com/api/v2/guru/_table/";
     {
         if (([dict valueForKey:[arrkeys objectAtIndex:i]]== nil)||([dict valueForKey:[arrkeys objectAtIndex:i]]== [NSNull null]))
         {
-            [dict setValue:@"" forKey:[arrkeys objectAtIndex:i]];
+            [dict setValue:@" " forKey:[arrkeys objectAtIndex:i]];
         }
-        
-       
-       
-        
-        
-        
     }
     return dict;
 }
+
 +(void)myAstaGuru:(UINavigationController*)NavigationController
 {
     if ([[[NSUserDefaults standardUserDefaults]valueForKey:USER_id] intValue]>0)
@@ -579,12 +513,14 @@ return @"http://restapi.infomanav.com/api/v2/guru/_table/";
         [NavigationController pushViewController:rootViewController animated:YES];
     }
 }
+
 +(void)Searchpage:(UINavigationController*)NavigationController
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     SearchViewController *VCLikesControll = [storyboard instantiateViewControllerWithIdentifier:@"SearchViewController"];
     [NavigationController pushViewController:VCLikesControll animated:YES];
 }
+
 +(NSString*)getAttributedStringFormHtmlString:(NSString*)str
 {
     NSRange r;
@@ -604,59 +540,57 @@ return @"http://restapi.infomanav.com/api/v2/guru/_table/";
     }
     return str;
 }
-+(CGFloat)heightOfTextForString:(NSString *)aString andFont:(UIFont *)aFont maxSize:(CGSize)aSize
+
+//+(CGFloat)heightOfTextForString:(NSString *)aString andFont:(UIFont *)aFont maxSize:(CGSize)aSize
+//{
+//    // iOS7
+//    
+//    CGSize sizeOfText = [aString boundingRectWithSize: aSize
+//                                              options: (NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
+//                                           attributes: [NSDictionary dictionaryWithObject:aFont
+//                                                                                   forKey:NSFontAttributeName]
+//                                              context: nil].size;
+//    
+//    return ceilf(sizeOfText.height);
+//    
+//    
+//}
+//
+
++(CGFloat)heightForNSString:(NSString *)text havingWidth:(CGFloat)widthValue andFont:(UIFont *)font
 {
-    // iOS7
-    
-    CGSize sizeOfText = [aString boundingRectWithSize: aSize
-                                              options: (NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
-                                           attributes: [NSDictionary dictionaryWithObject:aFont
-                                                                                   forKey:NSFontAttributeName]
-                                              context: nil].size;
-    
-    return ceilf(sizeOfText.height);
-    
-    
+    CGSize size = CGSizeZero;
+    if (text)
+    {
+        CGRect rect = [text boundingRectWithSize:CGSizeMake(widthValue, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName:font } context:nil];
+        size = CGSizeMake(rect.size.width, rect.size.height);
+    }
+    return size.height;
+}
+
++(CGFloat)heightForNSAttributedString:(NSAttributedString*)astr havingWidth:(CGFloat)width
+{
+    CGRect rect = [astr boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+    return rect.size.height;
 }
 
 
-+(void)Email:(NSDictionary*)dict view:(UIView*)Callingview
++(void)sendEmailWithInfo:(NSDictionary*)infoDic
 {
-    //MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:Callingview animated:YES];
-    //HUD.labelText = @"loading";
-    
-    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    NSLog(@"Dict %@",dict);
-    
     AFJSONRequestSerializer *serializer = [AFJSONRequestSerializer serializer];
     [serializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [serializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     manager.requestSerializer = serializer;
-    
-    [manager POST:[NSString stringWithFormat:@"http://52.66.4.131/api/v2/awsses/?api_key=6dee0a21388b49db917cd64559c32bcbde93460f391a594ab7cc6666824d5c26"] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject)
+    NSLog(@"Dict %@",infoDic);
+    [manager POST:[ClsSetting emailURL] parameters:infoDic success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         NSLog(@"JSON: %@", responseObject);
-        
-//        NSError *error=nil;
-        //NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        
-        // NSError *error;
-        //  NSMutableDictionary *dict1 = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
-        // NSLog(@"%@",responseStr);
-        
-//        [_PassReseposeDatadelegate passReseposeData1:responseObject];
-       // [MBProgressHUD hideHUDForView:Callingview animated:YES];
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-        [MBProgressHUD hideHUDForView:Callingview animated:YES];
-        
     }];
-    
-    
 }
+
 +(void)ISUSerLeading:(NSString*)strUserID Cell:(CurrentDefultGridCollectionViewCell*)cell
 {
     if (([[[NSUserDefaults standardUserDefaults] valueForKey:USER_id] intValue]>0))

@@ -9,13 +9,20 @@
 #import <UIKit/UIKit.h>
 
 @interface CurrentOccutionViewController : UIViewController
+
 @property (weak, nonatomic) IBOutlet UICollectionView *clvCurrentOccution;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
-@property (unsafe_unretained, nonatomic) IBOutlet UILabel *lblCurrency1;
-@property(nonatomic)BOOL isSearch;
-@property(nonatomic,retain)NSMutableArray *arrSearch;
-
+@property (strong, nonatomic) IBOutlet UIImageView *noAuction_ImageView;
 @property (weak, nonatomic) IBOutlet UICollectionView *clvBottomMenu;
+@property (strong, nonatomic) IBOutlet UILabel *lblNoRecords;
 
-@property(nonatomic)int iISFeatured;
+@property(nonatomic,retain)NSMutableArray *arrSearch;
+@property NSString *searchUrl;
+@property(nonatomic) BOOL isSearch;
+@property(nonatomic) BOOL isFilter;
+
+//@property(nonatomic,retain)NSTimer *currentTimer;
+//@property(nonatomic,retain)NSTimer *filterTimer;
+//@property(nonatomic,retain)NSTimer *searchResultTimer;
+
 @end

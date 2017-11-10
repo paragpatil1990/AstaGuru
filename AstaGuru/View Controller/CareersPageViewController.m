@@ -73,15 +73,14 @@
         [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     }
 }
+
 -(void)closePressed
 {
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     SWRevealViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"SWRevealViewController"];
     UIViewController *viewController =rootViewController;
     AppDelegate * objApp = (AppDelegate*)[[UIApplication sharedApplication]delegate];
     objApp.window.rootViewController = viewController;
-    
 }
 
 
@@ -97,8 +96,6 @@
 //        }
         NSArray *viewControllers = @[startingViewController];
         [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-
- 
     }
     else if (sender.selectedSegmentIndex==1)
     {
@@ -116,10 +113,10 @@
 //        [self.navigationController pushViewController:objHowToBuyViewController animated:YES];
         
     }
-    
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

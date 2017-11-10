@@ -14,7 +14,7 @@
 #import <MessageUI/MessageUI.h>
 @interface GetInTouchViewController ()<kDropDownListViewDelegate,PassResepose,MFMailComposeViewControllerDelegate>
 {
- DropDownListView * Dropobj;
+    DropDownListView * Dropobj;
     NSMutableArray *arrCategory;
 }
 @end
@@ -66,20 +66,17 @@
 
 -(void) setBroder
 {
-    [ClsSetting SetBorder:_name_view cornerRadius:2 borderWidth:1];
-    _name_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    UIColor *bColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1];
+
+    [ClsSetting SetBorder:_name_view cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_email_view cornerRadius:2 borderWidth:1];
-    _email_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_email_view cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_phone_view cornerRadius:2 borderWidth:1];
-    _phone_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_phone_view cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_category_view cornerRadius:2 borderWidth:1];
-    _category_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_category_view cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_message_view cornerRadius:2 borderWidth:1];
-    _message_view.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_message_view cornerRadius:2 borderWidth:1 color:bColor];
     
 }
 
@@ -88,7 +85,7 @@
      NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
     ClsSetting *objSetting=[[ClsSetting alloc]init];
     objSetting.PassReseposeDatadelegate=self;
-    [objSetting CallWeb:dict url:[NSString stringWithFormat:@"category?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed"] view:self.view Post:NO];
+    [objSetting CallWeb:dict url:[NSString stringWithFormat:@"category?api_key=%@",[ClsSetting apiKey]] view:self.view Post:NO];
     
 }
 -(void)passReseposeData:(id)arr
@@ -211,25 +208,52 @@
 {
     
 }
+
 - (IBAction)btnSubmit:(id)sender
 {
-
-    MFMailComposeViewController *composer=[[MFMailComposeViewController alloc]init];
-    [composer setMailComposeDelegate:self];
-    
-    if ([MFMailComposeViewController canSendMail])
+    if (_txtname.text.length == 0)
     {
-        [composer setToRecipients:[NSArray arrayWithObjects:@"b@infomanav.com", nil]];
-        [composer setSubject:[NSString stringWithFormat:@"Get in touch:"]];
-        
-        //    [composer.setSubject.placeholder = [NSLocalizedString(@"This is a placeholder",)];
-        NSString *message=[NSString stringWithFormat:@"Hello AstaGuru Team,\n Name: %@\n EmailID: %@\n Phone: %@\n Category: %@\n Message: %@ ",[ClsSetting TrimWhiteSpaceAndNewLine:_txtname.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtEmail.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtPhone.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtCategory.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtMessage.text ]];
-        
-        [composer setMessageBody:message isHTML:NO];
-        [composer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-        [self presentViewController:composer animated:YES completion:nil];
+        [ClsSetting ValidationPromt:@"Enter your name"];
     }
-    else {
+    else if (_txtEmail.text.length == 0)
+    {
+        [ClsSetting ValidationPromt:@"Enter your email"];
+    }
+    else if (![ClsSetting NSStringIsValidEmail:_txtEmail.text])
+    {
+        [ClsSetting ValidationPromt:@"Please enter valid email-id"];
+    }
+    else if (_txtPhone.text.length == 0)
+    {
+        [ClsSetting ValidationPromt:@"Enter your phone number"];
+    }
+    else if (_txtCategory.text.length == 0)
+    {
+        [ClsSetting ValidationPromt:@"Select category"];
+    }
+    else if (_txtMessage.text.length == 0)
+    {
+        [ClsSetting ValidationPromt:@"Enter your message"];
+    }
+    else
+    {
+        MFMailComposeViewController *composer=[[MFMailComposeViewController alloc]init];
+        [composer setMailComposeDelegate:self];
+        
+        if ([MFMailComposeViewController canSendMail])
+        {
+            [composer setToRecipients:[NSArray arrayWithObjects:@"contact@astaguru.com", nil]];
+            [composer setSubject:[NSString stringWithFormat:@"Get in touch:"]];
+            
+            //    [composer.setSubject.placeholder = [NSLocalizedString(@"This is a placeholder",)];
+            NSString *message=[NSString stringWithFormat:@"Hello AstaGuru Team,\n Name: %@\n EmailID: %@\n Phone: %@\n Category: %@\n Message: %@ ",[ClsSetting TrimWhiteSpaceAndNewLine:_txtname.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtEmail.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtPhone.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtCategory.text ],[ClsSetting TrimWhiteSpaceAndNewLine:_txtMessage.text ]];
+            
+            [composer setMessageBody:message isHTML:NO];
+            [composer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+            [self presentViewController:composer animated:YES completion:nil];
+        }
+        else {
+        }
     }
 }
 

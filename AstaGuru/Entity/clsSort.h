@@ -39,5 +39,8 @@
 @property(nonatomic,retain)NSString *strReference;
 @property(nonatomic,retain)NSString *strFirstName;
 @property(nonatomic,retain)NSString *strLastName;
+@property(nonatomic,retain)NSString *strPrdescription;
+
+
 @property(nonatomic) int IsSwapOn;
 @end

@@ -118,6 +118,9 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        UILabel *lblSignIN = (UILabel*)[cell viewWithTag:2];
+        
         UIButton *btnSignIn=(UIButton *)[cell viewWithTag:71];
         
         [btnSignIn addTarget:self action:@selector(btnSignInPressed) forControlEvents:UIControlEventTouchUpInside];
@@ -126,10 +129,12 @@
        
         if ([[[NSUserDefaults standardUserDefaults] valueForKey:USER_id] intValue]>0)
         {
+            lblSignIN.text = @"Sign out from My AstaGuru";
             [btnSignIn setTitle:@"Sign Out" forState:UIControlStateNormal];
         }
         else
         {
+            lblSignIN.text = @"Sign in to My AstaGuru";
             [btnSignIn setTitle:@"Sign In" forState:UIControlStateNormal];
         }
        
@@ -165,6 +170,7 @@
 -(void)btnSignInPressed
 {
     [[NSUserDefaults standardUserDefaults ]setObject:@"0" forKey:USER_id];
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SignIn" bundle:nil];
     LoginViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
     rootViewController.IsCommingFromSideMenu=1;

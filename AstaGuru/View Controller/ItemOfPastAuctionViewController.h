@@ -10,12 +10,16 @@
 #import "clsPastAuctionData.h"
 @interface ItemOfPastAuctionViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UICollectionView *ClvItemOfPastAuction;
+
+@property (strong, nonatomic) IBOutlet UILabel *noRecords_Lbl;
+
 @property(nonatomic,retain)clsPastAuctionData *objPast;
 @property(nonatomic)int IsUpcomming;
 @property(nonatomic)int IsPast;
 @property(nonatomic)BOOL isSearch;
 @property(nonatomic)BOOL isWorkArt;
+@property(nonatomic)BOOL isMyPurchase;
 
-@property(nonatomic,retain)NSMutableArray *arrSearch;
+@property NSArray *arrSearch;
 
 @end

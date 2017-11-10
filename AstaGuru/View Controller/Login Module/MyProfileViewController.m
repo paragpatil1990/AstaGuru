@@ -40,52 +40,36 @@
 
 -(void) setBroder
 {
-    [ClsSetting SetBorder:_fName_View cornerRadius:2 borderWidth:1];
-    _fName_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    UIColor *bColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1];
+    [ClsSetting SetBorder:_fName_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_lName_View cornerRadius:2 borderWidth:1];
-    _lName_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_lName_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_bname_View cornerRadius:2 borderWidth:1];
-    _bname_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_bname_View cornerRadius:2 borderWidth:1 color:bColor];
 
-    [ClsSetting SetBorder:_baddress_View cornerRadius:2 borderWidth:1];
-    _baddress_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_baddress_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_bcity_View cornerRadius:2 borderWidth:1];
-    _bcity_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_bcity_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_bcountry_View cornerRadius:2 borderWidth:1];
-    _bcountry_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_bcountry_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_bstate_View cornerRadius:2 borderWidth:1];
-    _bstate_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_bstate_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_bzip_View cornerRadius:2 borderWidth:1];
-    _bzip_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_bzip_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_mobile_View cornerRadius:2 borderWidth:1];
-    _mobile_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_mobile_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_telephone_View cornerRadius:2 borderWidth:1];
-    _telephone_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_telephone_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_btelephone_View cornerRadius:2 borderWidth:1];
-    _btelephone_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_btelephone_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_email_View cornerRadius:2 borderWidth:1];
-    _email_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_email_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_userName_View cornerRadius:2 borderWidth:1];
-    _userName_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_userName_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_password_View cornerRadius:2 borderWidth:1];
-    _password_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
+    [ClsSetting SetBorder:_password_View cornerRadius:2 borderWidth:1 color:bColor];
     
-    [ClsSetting SetBorder:_nikname_View cornerRadius:2 borderWidth:1];
-    _nikname_View.layer.borderColor = [UIColor colorWithRed:219.0f/255.0f green:219.0f/255.0f blue:219.0f/255.0f alpha:1].CGColor;
-    
-    
+    [ClsSetting SetBorder:_nikname_View cornerRadius:2 borderWidth:1 color:bColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,7 +81,7 @@
 {
     NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
     ClsSetting *objSetting=[[ClsSetting alloc]init];
-    [objSetting CallWeb:dict url:[NSString stringWithFormat:@"users/?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed&filter=userid=%@",[[NSUserDefaults standardUserDefaults] valueForKey:USER_id]] view:self.view Post:NO];
+    [objSetting CallWeb:dict url:[NSString stringWithFormat:@"users/?api_key=%@&filter=userid=%@",[ClsSetting apiKey],[[NSUserDefaults standardUserDefaults] valueForKey:USER_id]] view:self.view Post:NO];
     objSetting.PassReseposeDatadelegate=self;
 }
 
@@ -111,41 +95,31 @@
     {
         NSMutableDictionary *dict=[arr1 objectAtIndex:0];
         dict=[ClsSetting RemoveNullOnly:dict];
-        NSString *strname=[dict valueForKey:@"name"];
-        
-        //NSArray * arrname = [strname componentsSeparatedByString:@" "];
-       // if (arrname.count==2)
-        //{
-            _txtFirstName.text=[dict valueForKey:@"name"];
-            _txtLastName.text=[dict valueForKey:@"lastname"];
-       // }
-        //else if (arrname.count==1)
-        //{
-          //  _txtFirstName.text=[arrname objectAtIndex:0];
-        //}
-        _txtBillingName.text=[dict valueForKey:@"name"];
-        _txtBillingAddress.text=[dict valueForKey:@"address1"];
-        _txtCity.text=[dict valueForKey:@"city"];
-        _txtState.text=[dict valueForKey:@"state"];
-        _txtZip.text=[dict valueForKey:@"zip"];
+      
+        _txtFirstName.text=[dict valueForKey:@"name"];
+        _txtLastName.text=[dict valueForKey:@"lastname"];
         _txtMobileNumber.text=[dict valueForKey:@"Mobile"];
         _txtTelephoneNumber.text=[dict valueForKey:@"telephone"];
-        _txtBillingTelephoneNumber.text=[dict valueForKey:@"fax"];
-        _txtCity.text=[dict valueForKey:@"city"];
         _txtEmail.text=[dict valueForKey:@"email"];
+
+        _txtBillingName.text=[dict valueForKey:@"BillingName"];
+        _txtBillingAddress.text=[dict valueForKey:@"BillingAddress"];
+        _txtCity.text=[dict valueForKey:@"BillingCity"];
+        _txtCountry.text=[dict valueForKey:@"BillingCountry"];
+        _txtState.text=[dict valueForKey:@"BillingState"];
+        _txtZip.text=[dict valueForKey:@"BillingZip"];
+        _txtBillingTelephoneNumber.text=[dict valueForKey:@"BillingTelephone"];
+        
         _txtUserName.text=[dict valueForKey:@"username"];
         _txtPassword.text=[dict valueForKey:@"password"];
         _txtNickName.text=[dict valueForKey:@"nickname"];
-        _txtCountry.text=[dict valueForKey:@"country"];
-        //_txtBillingAddress.text=@"";
-        
     }
     else
     {
         [ClsSetting ValidationPromt:@"Some thing went wrong"];
     }
-    
 }
+
 -(void)setUpNavigationItem
 {
     UIButton *btnBack = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
@@ -201,7 +175,7 @@
         NSDictionary *pardsams = @{@"resource": arr};
         ClsSetting *objClssetting=[[ClsSetting alloc] init];
         objClssetting.PassReseposeDatadelegate=self;
-        [objClssetting calllPutWeb:pardsams url:[NSString stringWithFormat:@"%@/users?api_key=c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed",[objClssetting Url]] view:self.view];
+        [objClssetting calllPutWeb:pardsams url:[NSString stringWithFormat:@"%@/users?api_key=%@",[ClsSetting tableURL],[ClsSetting apiKey]] view:self.view];
     }
 }
 -(void)closePressed
@@ -215,6 +189,7 @@
     NSLog(@"%@",value);
     NSDictionary *dictUser=[value objectAtIndex:0];
     [[NSUserDefaults standardUserDefaults] setValue:[dictUser valueForKey:@"userid"] forKey:USER_id];
+    [ClsSetting ValidationPromt:@"Thank You!\nYour details will be updated soon. You might receive a verification call from our team."];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

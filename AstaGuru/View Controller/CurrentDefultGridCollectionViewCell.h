@@ -20,10 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnArtist;
 @property (weak, nonatomic) IBOutlet EGOImageView *imgProduct;
 @property (weak, nonatomic) IBOutlet UIButton *btnLot;
-
 @property (strong, nonatomic) IBOutlet UILabel *lblLot;
-
-
 @property (weak, nonatomic) IBOutlet UIButton *btnShortInfo;
 - (IBAction)btnShortInfoPressed:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *lblArtistName;
@@ -41,6 +38,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblEstimation;
 @property (nonatomic)  int iSelectedIndex;
 @property (weak, nonatomic) IBOutlet UIView *viwSwap;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *clvAction_Leading;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *clvAction_Tralling;
+
 @property (weak, nonatomic) IBOutlet UICollectionView *clvAction;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *htlblArtistName;
 @property (weak, nonatomic) IBOutlet UIButton *btnbidNow;
@@ -62,10 +62,14 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btnBidHistory;
 @property (weak, nonatomic) IBOutlet UIButton *btnMyGallery;
+
+@property (strong, nonatomic) IBOutlet UILabel *lbl_startPriceText;
+
 @property (weak, nonatomic) IBOutlet UILabel *pastStatictext;
 @property (weak, nonatomic) IBOutlet UIView *nextView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btnMyGallery_width;
 
 -(void)setuparray;
+-(void)setupGesture;
 
 @end

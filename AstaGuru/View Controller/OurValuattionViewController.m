@@ -370,18 +370,22 @@
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithPhoneNumber:(NSString *)phoneNumber
 {
-    //    NSString *numberString = self.product_Dic[@"contactNo"]; //@"7875512881";
+    NSString *numberString = [phoneNumber stringByReplacingOccurrencesOfString:@" " withString:@""]; //@"+91 7875512881";
     //        NSURL *phoneNumber = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", numberString]];
     
     //        // Whilst this version will return you to your app once the phone call is over.
-    NSURL *phoneNumber_Url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", phoneNumber]];
+//    NSURL *phoneNumber_Url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@", phoneNumber]];
+    
+    
+    NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",numberString]];
+
     
     // Now that we have our `phoneNumber` as a URL. We need to check that the device we are using can open the URL.
     // Whilst iPads, iPhone, iPod touchs can all open URLs in safari mobile they can't all
     // open URLs that are numbers this is why we have `tel://` or `telprompt://`
-    if([[UIApplication sharedApplication] canOpenURL:phoneNumber_Url]) {
+    if([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
         // So if we can open it we can now actually open it with
-        [[UIApplication sharedApplication] openURL:phoneNumber_Url];
+        [[UIApplication sharedApplication] openURL:phoneUrl];
     }
     
 }
