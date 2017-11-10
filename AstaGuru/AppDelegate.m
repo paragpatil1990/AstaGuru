@@ -85,6 +85,7 @@
 //    [updater showUpdateWithConfirmation];
 //    [[ATAppUpdater sharedUpdater] showUpdateWithConfirmation];
 
+    
     return YES;
 }
 
