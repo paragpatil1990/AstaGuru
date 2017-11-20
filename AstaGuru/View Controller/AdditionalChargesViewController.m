@@ -239,24 +239,41 @@
                 {
                     numberFormatter.currencyCode = @"USD";
                     
-                    int price =[_objCurrentOuction.strpriceus intValue];
-                    NSNumber *num = [NSNumber numberWithInt:price];
+                    NSInteger price =[_objCurrentOuction.strpriceus integerValue];
+                    NSInteger gst = 0; //[_objCurrentOuction.strprVat integerValue];
+                    
+                    NSNumber *num = [NSNumber numberWithInteger:price];
                     NSString *strCurrentBuild = [numberFormatter stringFromNumber:num];
                     CurrentSelectedGridCell.lblHammerPrice.text=[NSString stringWithFormat:@"%@",strCurrentBuild];
-                    int Primium=(price*15)/100;
-                    int vat =(price*12)/100;
-                    int taxOnPrimium=(Primium*18)/100;
-                    int FinalPrice=price+Primium+vat+taxOnPrimium;
                     
-                    NSString *strNextValidBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:Primium]];
-                    NSString *strvat= [numberFormatter stringFromNumber:[NSNumber numberWithInt:vat]];
-                    NSString *strtaxOnPrimium= [numberFormatter stringFromNumber:[NSNumber numberWithInt:taxOnPrimium]];
-                    NSString *strFinalPrice= [numberFormatter stringFromNumber:[NSNumber numberWithInt:FinalPrice]];
+                    NSInteger primium = (price*15)/100;
+                    
+                    NSInteger total = price + primium;
+                    
+                    NSInteger total_gst = (total*gst)/100;
+                    
+//                    NSInteger vat =(price*12)/100;
+//                    
+//                    NSInteger taxOnPrimium=(primium*18)/100;
+                    
+                    NSInteger finalPrice = price + primium + total_gst;//price + primium + vat + taxOnPrimium;
+                    
+                    NSString *strPrimium = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:primium]];
+                    NSString *strGST = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:total_gst]];
+
+//                    NSString *strvat = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:vat]];
+//                    NSString *strtaxOnPrimium= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:taxOnPrimium]];
+                    NSString *strFinalPrice= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:finalPrice]];
                     
                     
-                    CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strNextValidBuild];
-                    CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strvat];
-                    CurrentSelectedGridCell.lblServiceTaxOnPremium.text=[NSString stringWithFormat:@"%@",strtaxOnPrimium];
+                    CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strPrimium];
+                    
+                    //Vat on Hammer Price (12 %):
+                    //GST on Art Work (3 %) (including buyer's premium)
+                    CurrentSelectedGridCell.lbl_gstTxt.text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including buyer's premium)",(long)gst,"%"];
+                    CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strGST];
+                    //CurrentSelectedGridCell.lblServiceTaxOnPremium.text=[NSString stringWithFormat:@"%@",strtaxOnPrimium];
+                    CurrentSelectedGridCell.lblServiceTaxOnPremium.hidden = YES;
                     CurrentSelectedGridCell.lblGrandTotal.text=[NSString stringWithFormat:@"%@",strFinalPrice];
                     CurrentSelectedGridCell.lblEstimation.text=_objCurrentOuction.strestamiate;
                     
@@ -264,25 +281,37 @@
                 else
                 {
                     numberFormatter.currencyCode = @"INR";
-                    int price =[_objCurrentOuction.strpricers intValue];
-                    NSNumber *num = [NSNumber numberWithInt:price];
+                    NSInteger price =[_objCurrentOuction.strpricers integerValue];
+                    NSInteger gst = [_objCurrentOuction.strprVat integerValue];
+
+                    NSNumber *num = [NSNumber numberWithInteger:price];
                     NSString *strCurrentBuild = [numberFormatter stringFromNumber:num];
                     CurrentSelectedGridCell.lblHammerPrice.text=[NSString stringWithFormat:@"%@",strCurrentBuild];
                     
-                    int Primium=(price*15)/100;
-                    int vat =(price*13.5)/100;
-                    int taxOnPrimium=(Primium*15)/100;
-                    int FinalPrice=price+Primium+vat+taxOnPrimium;
+                    NSInteger primium = (price*15)/100;
                     
-                    NSString *strNextValidBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:Primium]];
-                    NSString *strvat= [numberFormatter stringFromNumber:[NSNumber numberWithInt:vat]];
-                    NSString *strtaxOnPrimium= [numberFormatter stringFromNumber:[NSNumber numberWithInt:taxOnPrimium]];
-                    NSString *strFinalPrice= [numberFormatter stringFromNumber:[NSNumber numberWithInt:FinalPrice]];
+                    NSInteger total = price + primium;
+
+                    NSInteger total_gst = (total*gst)/100;
+                    
+//                    NSInteger vat =(price*13.5)/100;
+//                    NSInteger taxOnPrimium=(Primium*15)/100;
+                    
+                    NSInteger finalPrice = price + primium + total_gst; //price+Primium+vat+taxOnPrimium;
+                    
+                    NSString *strPrimium = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:primium]];
+                    NSString *strGST = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:total_gst]];
+
+//                    NSString *strvat= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:vat]];
+//                    NSString *strtaxOnPrimium= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:taxOnPrimium]];
+                    NSString *strFinalPrice= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:finalPrice]];
                     
                     
-                    CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strNextValidBuild];
-                    CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strvat];
-                    CurrentSelectedGridCell.lblServiceTaxOnPremium.text=[NSString stringWithFormat:@"%@",strtaxOnPrimium];
+                    CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strPrimium];
+                    CurrentSelectedGridCell.lbl_gstTxt.text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including buyer's premium)",(long)gst,"%"];
+                    CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strGST];
+                    //CurrentSelectedGridCell.lblServiceTaxOnPremium.text=[NSString stringWithFormat:@"%@",strtaxOnPrimium];
+                    CurrentSelectedGridCell.lblServiceTaxOnPremium.hidden = YES;
                     CurrentSelectedGridCell.lblGrandTotal.text=[NSString stringWithFormat:@"%@",strFinalPrice];
                     
                     NSCharacterSet *nonNumbersSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789.,"] invertedSet];
@@ -363,23 +392,36 @@
                 {
                     numberFormatter.currencyCode = @"USD";
                     
-                    int price =[_objCurrentOuction.strpriceus intValue];
-                    NSNumber *num = [NSNumber numberWithInt:price];
+                    NSInteger price =[_objCurrentOuction.strpriceus integerValue];
+                    NSInteger gst = 0; //[_objCurrentOuction.strprVat integerValue];
+
+                    NSNumber *num = [NSNumber numberWithInteger:price];
                     NSString *strCurrentBuild = [numberFormatter stringFromNumber:num];
                     CurrentSelectedGridCell.lblHammerPrice.text=[NSString stringWithFormat:@"%@",strCurrentBuild];
                     
-                    int Primium=(price*15)/100;
-                    int vat =(price*13.5)/100;
-                    int taxOnPrimium=(Primium*15)/100;
-                    int FinalPrice=price+Primium+vat+taxOnPrimium;
+                    NSInteger primium = (price*15)/100;
                     
-                    NSString *strNextValidBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:Primium]];
-                    NSString *strvat= [numberFormatter stringFromNumber:[NSNumber numberWithInt:vat]];
-                    NSString *strtaxOnPrimium= [numberFormatter stringFromNumber:[NSNumber numberWithInt:taxOnPrimium]];
-                    NSString *strFinalPrice= [numberFormatter stringFromNumber:[NSNumber numberWithInt:FinalPrice]];
-                    CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strNextValidBuild];
-                    CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strvat];
-                    CurrentSelectedGridCell.lblServiceTaxOnPremium.text=[NSString stringWithFormat:@"%@",strtaxOnPrimium];
+                    NSInteger total = price + primium;
+                    
+                    NSInteger total_gst = (total*gst)/100;
+                    
+//                    NSInteger vat =(price*13.5)/100;
+//                    NSInteger taxOnPrimium=(Primium*15)/100;
+                    
+                    NSInteger finalPrice = price + primium + total_gst;//price+primium+vat+taxOnPrimium;
+                    
+                    NSString *strPrimium = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:primium]];
+                    NSString *strGST = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:total_gst]];
+
+                   // NSString *strvat= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:gst]];
+                    //NSString *strtaxOnPrimium= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:taxOnPrimium]];
+                    NSString *strFinalPrice= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:finalPrice]];
+                    
+                    CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strPrimium];
+                    CurrentSelectedGridCell.lbl_gstTxt.text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including buyer's premium)",(long)gst,"%"];
+                    CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strGST];
+                   // CurrentSelectedGridCell.lblServiceTaxOnPremium.text=[NSString stringWithFormat:@"%@",strtaxOnPrimium];
+                    CurrentSelectedGridCell.lblServiceTaxOnPremium.hidden = YES;
                     CurrentSelectedGridCell.lblGrandTotal.text=[NSString stringWithFormat:@"%@",strFinalPrice];
                     CurrentSelectedGridCell.lblEstimation.text=_objCurrentOuction.strestamiate;
                     
@@ -387,25 +429,37 @@
                 else
                 {
                     numberFormatter.currencyCode = @"INR";
-                    int price =[_objCurrentOuction.strpricers floatValue];
-                    NSNumber *num = [NSNumber numberWithInt:price];
+                    NSInteger price =[_objCurrentOuction.strpricers integerValue];
+                    NSInteger gst = [_objCurrentOuction.strprVat integerValue];
+
+                    NSNumber *num = [NSNumber numberWithInteger:price];
                     NSString *strCurrentBuild = [numberFormatter stringFromNumber:num];
                     CurrentSelectedGridCell.lblHammerPrice.text=[NSString stringWithFormat:@"%@",strCurrentBuild];
                     
-                    int Primium=(price*15)/100;
-                    int vat =(price*13.5)/100;
-                    int taxOnPrimium=(Primium*15)/100;
-                    int FinalPrice=price+Primium+vat+taxOnPrimium;
+                    NSInteger primium = (price*15)/100;
                     
-                    NSString *strNextValidBuild = [numberFormatter stringFromNumber:[NSNumber numberWithInt:Primium]];
-                    NSString *strvat= [numberFormatter stringFromNumber:[NSNumber numberWithInt:vat]];
-                    NSString *strtaxOnPrimium= [numberFormatter stringFromNumber:[NSNumber numberWithInt:taxOnPrimium]];
-                    NSString *strFinalPrice= [numberFormatter stringFromNumber:[NSNumber numberWithInt:FinalPrice]];
+                    NSInteger total = price + primium;
+                    
+                    NSInteger total_gst = (total*gst)/100;
+                    
+//                    NSInteger vat =(price*13.5)/100;
+//                    NSInteger taxOnPrimium = (primium*15)/100;.
+                    
+                    NSInteger finalPrice = price + primium + total_gst;//price+Primium+vat+taxOnPrimium;
+                    
+                    NSString *strPrimium = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:primium]];
+                    NSString *strGST = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:total_gst]];
+
+//                    NSString *strvat= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:vat]];
+//                    NSString *strtaxOnPrimium= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:taxOnPrimium]];
+                    NSString *strFinalPrice= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:finalPrice]];
                     
                     
-                    CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strNextValidBuild];
-                    CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strvat];
-                    CurrentSelectedGridCell.lblServiceTaxOnPremium.text=[NSString stringWithFormat:@"%@",strtaxOnPrimium];
+                    CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strPrimium];
+                    CurrentSelectedGridCell.lbl_gstTxt. text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including buyer's premium)",(long)gst,"%"];
+                    CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strGST];
+//                    CurrentSelectedGridCell.lblServiceTaxOnPremium.text=[NSString stringWithFormat:@"%@",strtaxOnPrimium];
+                    CurrentSelectedGridCell.lblServiceTaxOnPremium.hidden = YES;
                     CurrentSelectedGridCell.lblGrandTotal.text=[NSString stringWithFormat:@"%@",strFinalPrice];
                     
                     NSCharacterSet *nonNumbersSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789.,"] invertedSet];

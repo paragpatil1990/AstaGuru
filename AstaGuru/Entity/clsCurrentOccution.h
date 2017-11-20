@@ -59,4 +59,7 @@
 
 @property(nonatomic,retain)NSString *isAnimate;
 @property(nonatomic,retain)NSString *strpricelow;
+
+@property(nonatomic,retain)NSString *strprVat;
+
 @end

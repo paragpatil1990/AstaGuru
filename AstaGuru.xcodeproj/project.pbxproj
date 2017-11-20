@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -1260,7 +1260,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = "Aarya Tech";
+				ORGANIZATIONNAME = "4Fox Solutions";
 				TargetAttributes = {
 					78255E771D742A9800CECC5D = {
 						CreatedOnToolsVersion = 7.2;
@@ -1281,7 +1281,7 @@
 				};
 			};
 			buildConfigurationList = 78255E731D742A9800CECC5D /* Build configuration list for PBXProject "AstaGuru" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (

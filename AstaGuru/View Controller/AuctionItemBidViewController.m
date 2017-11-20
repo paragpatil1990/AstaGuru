@@ -55,7 +55,7 @@
     
     if (_IsUpcoming == 1)
     {
-        _lblbidtitle.text = @"Start Price";
+        _lblbidtitle.text = @"Opening Bid"; //@"Start Price";
     }
     
     [self setPrice];//:_objCurrentOuction];

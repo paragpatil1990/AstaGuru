@@ -396,7 +396,7 @@
             }
             else if (_IsUpcomming == 1)
             {
-                pcell.lbl_WinningBidText.text = @"Start Price";
+                pcell.lbl_WinningBidText.text = @"Opening Bid";//@"Start Price";
                 
                 strCurrentBidPrice = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:currentBidPrice]];
                 pcell.lbl_WinningBidPrice.text= strCurrentBidPrice;

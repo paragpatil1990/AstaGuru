@@ -263,6 +263,8 @@
         
         objCurrentOccution.strtimeRemains = [dictLib valueForKey:@"timeRemains"];
         
+        objCurrentOccution.strprVat = [dictLib valueForKey:@"PrVat"];
+        
         NSMutableDictionary *dictArtistInfo=[dictLib valueForKey:@"artist_by_artistid"];
         clsArtistInfo *objArtistInfo=[[clsArtistInfo alloc]init];
         objArtistInfo.strArtistid=[dictArtistInfo valueForKey:@"artistid"];

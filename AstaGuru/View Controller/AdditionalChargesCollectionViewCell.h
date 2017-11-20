@@ -29,4 +29,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btnLot;
 
+@property (weak, nonatomic) IBOutlet UILabel *lbl_hammerPriceTxt;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_buyersPremiumTxt;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_gstTxt;
+
 @end

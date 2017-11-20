@@ -666,7 +666,7 @@
 //                    CurrentDefultGridCell.isCommingFromPast = 0;
                     
                     CurrentDefultGridCell.lblNextValidBuild.text = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:currentBid]];
-                    CurrentDefultGridCell.lbl_startPriceText.text = @"Start price";
+                    CurrentDefultGridCell.lbl_startPriceText.text = @"Opening Bid"; //@"Start price";
                     CurrentDefultGridCell.pastStatictext.hidden=YES;
                 }
                 else
@@ -814,7 +814,7 @@
                     CurrentDefultGridCell.isCommingFromPast = 0;
                     
                     CurrentDefultGridCell.lblNextValidBuild.text = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:currentBid]];
-                    CurrentDefultGridCell.lbl_startPriceText.text = @"Start price";
+                    CurrentDefultGridCell.lbl_startPriceText.text = @"Opening Bid"; //@"Start price";
                     CurrentDefultGridCell.pastStatictext.hidden=YES;
                     
                     if (objCurrentOccution.IsSwapOn == 1)
