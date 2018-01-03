@@ -39,9 +39,10 @@
     arrItemCount=[[NSMutableArray alloc]init];
     arrMyAuctionGallery=[[NSMutableArray alloc]init];
 
-    [self getMyOccttionGallery];
     [self setUpNavigationItem];
     
+    [self getMyOccttionGallery];
+
     if (_isCurrent == 1)
     {
         self.lblCurrentLine.backgroundColor = [UIColor colorWithRed:167/255.0 green:142/255.0 blue:105/255.0 alpha:1];
@@ -78,6 +79,7 @@
     [timer invalidate];
     timer = nil;
 }
+
 -(void)getMyOccttionGallery
 {
     //USE LIMIT 10
@@ -328,7 +330,8 @@
                     currentSelectedGridCell.lblNextValidBuild.text = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:currentBid]];
                 }
 
-                if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                //if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                if ([objCurrentOccution.auctionType intValue] != 1)
                 {
                     UILabel *Lbl_1 = (UILabel *)[currentSelectedGridCell viewWithTag:1];
                     Lbl_1.text = @"Title: ";
@@ -486,7 +489,8 @@
                     currentDefultGridCell.lblNextValidBuild.text = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:currentBid]];
                 }
                 
-                if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                //if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                if ([objCurrentOccution.auctionType intValue] != 1)
                 {
                     currentDefultGridCell.btnArtist.hidden= YES;
                     currentDefultGridCell.lblArtistName.hidden= YES;

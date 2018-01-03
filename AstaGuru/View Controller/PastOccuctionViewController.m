@@ -464,6 +464,11 @@
     }
     else
     {
+        if (indexPath.section==0 || indexPath.section==1)
+        {
+            return;
+        }
+        
         ItemOfPastAuctionViewController *objViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemOfPastAuctionViewController"];
         clsPastAuctionData *objPastAuctionData=[arrOccution objectAtIndex:indexPath.row];
         if ([objPastAuctionData.strupcomingCountVal  intValue] > 0)

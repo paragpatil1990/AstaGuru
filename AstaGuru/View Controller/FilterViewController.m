@@ -28,7 +28,8 @@
 {
     [super viewDidLoad];
 
-    if ([self.auctionName isEqualToString:@"Collectibles Auction"])
+    //if ([self.auctionName isEqualToString:@"Collectibles Auction"])
+    if ([self.auctionType intValue] != 1)
     {
         [self spGetAuctionCategory];
     }

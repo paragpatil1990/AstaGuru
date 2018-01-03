@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4EB7EB021FE50B6200BCBD9A /* AuctionAnalyisisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7EB011FE50B6200BCBD9A /* AuctionAnalyisisViewController.m */; };
+		4EB7EB051FE5269200BCBD9A /* AuctionAnalysisTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7EB041FE5269200BCBD9A /* AuctionAnalysisTableViewCell.m */; };
 		581F5F4F1E0EC2CE00BFE986 /* img-lotno-bg2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 581F5F4E1E0EC2CE00BFE986 /* img-lotno-bg2@3x.png */; };
 		58222E581E13A6AF0079D70C /* CareersPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58222E571E13A6AF0079D70C /* CareersPageViewController.m */; };
 		5823EAEE1EA78BD9003E0080 /* no_auction_logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5823EAED1EA78BD9003E0080 /* no_auction_logo.jpg */; };
@@ -255,6 +257,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4EB7EB001FE50B6200BCBD9A /* AuctionAnalyisisViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuctionAnalyisisViewController.h; sourceTree = "<group>"; };
+		4EB7EB011FE50B6200BCBD9A /* AuctionAnalyisisViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuctionAnalyisisViewController.m; sourceTree = "<group>"; };
+		4EB7EB031FE5269200BCBD9A /* AuctionAnalysisTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuctionAnalysisTableViewCell.h; sourceTree = "<group>"; };
+		4EB7EB041FE5269200BCBD9A /* AuctionAnalysisTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuctionAnalysisTableViewCell.m; sourceTree = "<group>"; };
 		581F5F4E1E0EC2CE00BFE986 /* img-lotno-bg2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-lotno-bg2@3x.png"; sourceTree = "<group>"; };
 		58222E561E13A6AF0079D70C /* CareersPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CareersPageViewController.h; sourceTree = "<group>"; };
 		58222E571E13A6AF0079D70C /* CareersPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CareersPageViewController.m; sourceTree = "<group>"; };
@@ -1112,6 +1118,10 @@
 				783AB4C61E0A432A00BF173F /* UserInfoCollectionViewCell.m */,
 				782BACD51DB09092001F618B /* AdditionalChargesCollectionViewCell.h */,
 				782BACD61DB09092001F618B /* AdditionalChargesCollectionViewCell.m */,
+				4EB7EB001FE50B6200BCBD9A /* AuctionAnalyisisViewController.h */,
+				4EB7EB011FE50B6200BCBD9A /* AuctionAnalyisisViewController.m */,
+				4EB7EB031FE5269200BCBD9A /* AuctionAnalysisTableViewCell.h */,
+				4EB7EB041FE5269200BCBD9A /* AuctionAnalysisTableViewCell.m */,
 				7854201A1DB635DE0071C939 /* SearchViewController.h */,
 				7854201B1DB635DE0071C939 /* SearchViewController.m */,
 				95C979B61DB98926001F6C24 /* HowToBuyViewController.h */,
@@ -1438,6 +1448,7 @@
 				78416A6A1D75D1E400F4E1DD /* CareersViewController.m in Sources */,
 				78B189F31D79B7BB00BDEE41 /* parese.m in Sources */,
 				780DB4261D916ACD006807C2 /* CustomTableViewCell.m in Sources */,
+				4EB7EB021FE50B6200BCBD9A /* AuctionAnalyisisViewController.m in Sources */,
 				78F5B81F1DBB57A00006FED9 /* WebViewViewController.m in Sources */,
 				78416A421D755ABC00F4E1DD /* SectionHeaderReusableView.m in Sources */,
 				781454251DD59D6A00EABC96 /* clsSort.m in Sources */,
@@ -1527,6 +1538,7 @@
 				95C979BB1DB98998001F6C24 /* ClsHowToBuy.m in Sources */,
 				78416A651D75A89400F4E1DD /* ContactUsViewController.m in Sources */,
 				78255E801D742A9800CECC5D /* AppDelegate.m in Sources */,
+				4EB7EB051FE5269200BCBD9A /* AuctionAnalysisTableViewCell.m in Sources */,
 				780908AE1D803D8600A009EE /* CustomTextfied.m in Sources */,
 				782BACD41DAFC4A4001F618B /* AdditionalChargesViewController.m in Sources */,
 				95A0A0A31D75336F00FE0D3A /* AboutUsViewController.m in Sources */,

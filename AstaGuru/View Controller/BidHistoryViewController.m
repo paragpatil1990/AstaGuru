@@ -180,8 +180,8 @@
              NSNumber *strpricers = priceDic[@"pricers"];
              NSNumber *strpriceus = priceDic[@"priceus"];
              
-             _objCurrentOuction.strpricers=strpricers;
-             _objCurrentOuction.strpriceus=strpriceus;
+             _objCurrentOuction.strpricers = [NSString stringWithFormat:@"%@", strpricers];
+             _objCurrentOuction.strpriceus = [NSString stringWithFormat:@"%@", strpriceus];
              _objCurrentOuction.strBidclosingtime = priceDic[@"Bidclosingtime"];
              _objCurrentOuction.strCurrentDate = priceDic[@"currentDate"];
              _objCurrentOuction.strmyuserid = priceDic[@"MyUserID"];
@@ -228,10 +228,11 @@
     NSMutableArray *arrItemCount=[[NSMutableArray alloc]init];
     arrItemCount=[parese parseMyAuctionGallery:[dict1 valueForKey:@"resource"] fromBid:1];
     
-        [arrBidHistoryData addObjectsFromArray:arrItemCount];
+    [arrBidHistoryData addObjectsFromArray:arrItemCount];
     
     [_clsBidHistory reloadData];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -515,7 +516,8 @@
                 CurrentSelectedGridCell.lblEstimation.text=_objCurrentOuction.strcollectors;
             }
 
-            if ([_objCurrentOuction.strAuctionname isEqualToString:@"Collectibles Auction"])
+            //if ([_objCurrentOuction.strAuctionname isEqualToString:@"Collectibles Auction"])
+            if ([_objCurrentOuction.auctionType intValue] != 1)
             {
                 UIView *subvuew = (UIView*) [CurrentSelectedGridCell viewWithTag:10];
                 UILabel *Lbl_1 = (UILabel *)[subvuew viewWithTag:1];

@@ -25,5 +25,6 @@
 @property(nonatomic) int auctionID;
 @property(nonatomic) int selectedTab;
 @property(nonatomic,retain)NSString *strType;
-@property(nonatomic, retain) NSString *auctionName;
+//@property(nonatomic, retain) NSString *auctionName;
+@property(nonatomic, retain) NSString * auctionType;
 @end

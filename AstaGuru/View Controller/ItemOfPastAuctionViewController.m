@@ -22,6 +22,8 @@
 #import "SWRevealViewController.h"
 #import "MyAuctionGalleryViewController.h"
 #import "VerificationViewController.h"
+#import "AuctionAnalyisisViewController.h"
+
  BOOL isList;
 
 @interface ItemOfPastAuctionViewController ()<PassResepose,CurrentOccution,FilterDelegate>
@@ -79,6 +81,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
+   // self.navigationController.navigationBar.topItem.title = @"Back";
     self.navigationController.navigationBar.backItem.title = @"Back";
 }
 
@@ -107,12 +110,13 @@
         if (_IsUpcomming == 1)
         {
             _IsPast = 0;
-          
+            self.navigationItem.title =@"Upcoming Auctions";
             self.title=[NSString stringWithFormat:@"Upcoming Auctions"];
         }
         else
         {
             _IsPast = 1;
+            self.navigationItem.title =@"Past Auctions";
             self.title=[NSString stringWithFormat:@"Past Auctions"];
         }
     }
@@ -128,14 +132,14 @@
     }
     else
     {
-        self.title=[NSString stringWithFormat:@"%@",_objPast.strAuctiontitle];
+        self.navigationItem.title = [NSString stringWithFormat:@"%@",_objPast.strAuctiontitle];
+        self.title = [NSString stringWithFormat:@"%@",_objPast.strAuctiontitle];
     }
     
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    
     
     UIButton *btnBack = [[UIButton alloc]initWithFrame:CGRectMake(-20, 0, -20, 20)];
     [btnBack setImage:[UIImage imageNamed:@"icon-search"] forState:UIControlStateNormal];
@@ -222,8 +226,6 @@
     @finally
     {
     }
-    
-    
 }
 
 -(void)getMyPurchase
@@ -568,7 +570,8 @@
                     CurrentSelectedGridCell.btnproxy.hidden=YES;
                 }
                 
-                if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                //if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                if ([objCurrentOccution.auctionType intValue] != 1)
                 {
                     UILabel *Lbl_1 = (UILabel *)[CurrentSelectedGridCell viewWithTag:1];
                     Lbl_1.text = @"Title: ";
@@ -628,7 +631,8 @@
                 CurrentDefultGridCell.btnDetail.tag=indexPath.row;
                 CurrentDefultGridCell.btnMyGallery.tag = indexPath.row;
                 
-                if ([objCurrentOccutionForAuctionName.strAuctionname isEqualToString:@"Collectibles Auction"])
+                //if ([objCurrentOccutionForAuctionName.strAuctionname isEqualToString:@"Collectibles Auction"])
+                if ([objCurrentOccutionForAuctionName.auctionType intValue] != 1)
                 {
                     CurrentDefultGridCell.lblArtistName.text = @"";
                     CurrentDefultGridCell.btnArtist.enabled = NO;
@@ -714,7 +718,8 @@
                 CurrentSelectedGridCell.iSelectedIndex=(int)indexPath.row;
                 CurrentSelectedGridCell.btnGridSelectedDetail.tag = indexPath.row;
                 
-                if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                //if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                if ([objCurrentOccution.auctionType intValue] != 1)
                 {
                     UILabel *Lbl_1 = (UILabel *)[CurrentSelectedGridCell viewWithTag:11];
                     Lbl_1.text = @"Title: ";
@@ -778,7 +783,8 @@
                 CurrentDefultGridCell.btnArtist.tag=indexPath.row;
 
                 
-                if ([objCurrentOccutionForAuctionName.strAuctionname isEqualToString:@"Collectibles Auction"])
+                //if ([objCurrentOccutionForAuctionName.strAuctionname isEqualToString:@"Collectibles Auction"])
+                if ([objCurrentOccution.auctionType intValue] != 1)
                 {
                     CurrentDefultGridCell.lblArtistName.text = @"";
                     CurrentDefultGridCell.btnArtist.enabled = NO;
@@ -1048,7 +1054,8 @@
         objFilterViewController.strType=@"Past";
         objFilterViewController.selectedTab=3;
     }
-    objFilterViewController.auctionName = objCurrentOccutionForAuctionName.strAuctionname;
+    //objFilterViewController.auctionName = objCurrentOccutionForAuctionName.strAuctionname;
+    objFilterViewController.auctionType = objCurrentOccutionForAuctionName.auctionType;
     objFilterViewController.auctionID = [objCurrentOccutionForAuctionName.strOnline intValue];
     objFilterViewController.delegateFilter=self;
     [self.navigationController pushViewController:objFilterViewController animated:YES];
@@ -1175,12 +1182,16 @@
 
 - (IBAction)btnAuctionAnalistPressed:(UIButton*)sender
 {
-    WebViewViewController *objWebViewViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WebViewViewController"];
-    NSString *strUrl = [NSString stringWithFormat:@"%@%@",[ClsSetting autionAnalysisURL],objCurrentOccutionForAuctionName.strOnline];
-    NSURL *url = [NSURL URLWithString:[ClsSetting TrimWhiteSpaceAndNewLine:strUrl]];
-    NSLog(@"strUrl = %@  url = %@",strUrl, url);
-    objWebViewViewController.url=url;// _objPast.strAuctionId]];
-    [self.navigationController pushViewController:objWebViewViewController animated:YES];
+    AuctionAnalyisisViewController *auctionAnalysisVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AuctionAnalyisisViewController"];
+    auctionAnalysisVC.objCurrentOuction =  objCurrentOccutionForAuctionName;
+    [self.navigationController pushViewController:auctionAnalysisVC animated:YES];
+    
+//    WebViewViewController *objWebViewViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WebViewViewController"];
+//    NSString *strUrl = [NSString stringWithFormat:@"%@%@",[ClsSetting autionAnalysisURL],objCurrentOccutionForAuctionName.strOnline];
+//    NSURL *url = [NSURL URLWithString:[ClsSetting TrimWhiteSpaceAndNewLine:strUrl]];
+//    NSLog(@"strUrl = %@  url = %@",strUrl, url);
+//    objWebViewViewController.url=url;// _objPast.strAuctionId]];
+//    [self.navigationController pushViewController:objWebViewViewController animated:YES];
 }
 
 - (IBAction)btnArtistInfo:(UIButton*)sender
@@ -1321,7 +1332,8 @@
         
         NSString *strtype;
 //        _objPast.strAuctionname
-        if ([objCurrentOccutionForAuctionName.strAuctionname isEqualToString:@"Collectibles Auction"])
+        //if ([objCurrentOccutionForAuctionName.strAuctionname isEqualToString:@"Collectibles Auction"])
+        if ([objCurrentOccutionForAuctionName.auctionType intValue] != 1)
         {
             strtype = @"C";
         }

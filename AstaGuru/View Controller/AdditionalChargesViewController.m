@@ -68,7 +68,6 @@
 }
 -(void)passReseposeData:(id)arr
 {
-    //  NSMutableArray *arrOccution=[parese parseCurrentOccution:[arr valueForKey:@"resource"]];
     NSError *error;
     NSMutableDictionary *dict1 = [NSJSONSerialization JSONObjectWithData:arr options:0 error:&error];
     NSMutableArray *arr1=[dict1 valueForKey:@"resource"];
@@ -346,7 +345,8 @@
                     CurrentSelectedGridCell.lblEstimation.text=_objCurrentOuction.strcollectors;
                 }
                 
-                if ([_objCurrentOuction.strAuctionname isEqualToString:@"Collectibles Auction"])
+                //if ([_objCurrentOuction.strAuctionname isEqualToString:@"Collectibles Auction"])
+                if ([_objCurrentOuction.auctionType intValue] != 1)
                 {
                     UIView *subvuew = (UIView*) [CurrentSelectedGridCell viewWithTag:10];
                     UILabel *Lbl_1 = (UILabel *)[subvuew viewWithTag:1];
@@ -364,10 +364,12 @@
                 }
                 else
                 {
-
-                        CurrentSelectedGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",_objCurrentOuction.strFirstName,_objCurrentOuction.strLastName];
-                        CurrentSelectedGridCell.lblMedium.text=[NSString stringWithFormat:@"%@",_objCurrentOuction.strmedium];
+                    CurrentSelectedGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",_objCurrentOuction.strFirstName,_objCurrentOuction.strLastName];
+                    
+                    CurrentSelectedGridCell.lblMedium.text=[NSString stringWithFormat:@"%@",_objCurrentOuction.strmedium];
+                    
                     CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@ in",_objCurrentOuction.strproductsize];
+                    
                     CurrentSelectedGridCell.lblYear.text=[NSString stringWithFormat:@"%@",_objCurrentOuction.strproductdate];
                 }
                 CurrentSelectedGridCell.lblProductName.text= _objCurrentOuction.strtitle;
@@ -494,7 +496,8 @@
                     
                 }
                 
-                if ([_objCurrentOuction.strAuctionname isEqualToString:@"Collectibles Auction"])
+                //if ([_objCurrentOuction.strAuctionname isEqualToString:@"Collectibles Auction"])
+                if ([_objCurrentOuction.auctionType intValue] != 1)
                 {
                     UIView *subvuew = (UIView*) [CurrentSelectedGridCell viewWithTag:10];
 

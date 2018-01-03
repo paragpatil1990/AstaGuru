@@ -125,7 +125,6 @@
         NSString *strRefrance1=[ClsSetting TrimWhiteSpaceAndNewLine:[dictLib valueForKey:@"reference"]];
         objMyAuctionGallery.strReference=strRefrance1;
         
-        
         objMyAuctionGallery.strThumbnail=[dictLib valueForKey:@"Thumbnail"];
         objMyAuctionGallery.strUserId=[dictLib valueForKey:@"UserId"];
         objMyAuctionGallery.strUsername=[dictLib valueForKey:@"Username"];
@@ -134,35 +133,30 @@
         objMyAuctionGallery.strdaterec=[dictLib valueForKey:@"daterec"];
         objMyAuctionGallery.strearlyproxy=[dictLib valueForKey:@"earlyproxy"];
         
-        
         objMyAuctionGallery.strproductid=[dictLib valueForKey:@"productid"];
         objMyAuctionGallery.strproxy=[dictLib valueForKey:@"proxy"];
         objMyAuctionGallery.strrecentbid=[dictLib valueForKey:@"recentbid"];
         objMyAuctionGallery.strvalidbidpricers=[dictLib valueForKey:@"validbidpricers"];
         objMyAuctionGallery.strvalidbidpriceus=[dictLib valueForKey:@"validbidpriceus"];
         objMyAuctionGallery.strFromBid=[NSString stringWithFormat:@"%d",fromBid];
-
         
-        if (fromBid!=1)
+        if (fromBid!= 1)
         {
-            
-        
-        NSMutableArray *arrProduct=[[NSMutableArray alloc]init];
-        [arrProduct addObject:[dictLib valueForKey:@"acution_by_productid"]];
-        NSMutableArray *arrEntity=[self parseCurrentOccution:arrProduct];
-        if (arrEntity>0)
-        {
-            objMyAuctionGallery.objCurrentAuction=[arrEntity objectAtIndex:0];
-            
-        }
+            NSMutableArray *arrProduct=[[NSMutableArray alloc]init];
+            [arrProduct addObject:[dictLib valueForKey:@"acution_by_productid"]];
+            NSMutableArray *arrEntity=[self parseCurrentOccution:arrProduct];
+            if (arrEntity>0)
+            {
+                objMyAuctionGallery.objCurrentAuction = [arrEntity objectAtIndex:0];
+                
+            }
         }
         [arrLib addObject:objMyAuctionGallery];
         
     }
-    
-    
     return arrLib;
 }
+
 +(NSMutableArray*)parseCategory:(NSMutableArray*)json
 {
     NSMutableArray *arrLib=[[NSMutableArray alloc]init];
@@ -265,6 +259,8 @@
         
         objCurrentOccution.strprVat = [dictLib valueForKey:@"PrVat"];
         
+        objCurrentOccution.auctionType = [dictLib valueForKey:@"auctionType"];
+
         NSMutableDictionary *dictArtistInfo=[dictLib valueForKey:@"artist_by_artistid"];
         clsArtistInfo *objArtistInfo=[[clsArtistInfo alloc]init];
         objArtistInfo.strArtistid=[dictArtistInfo valueForKey:@"artistid"];

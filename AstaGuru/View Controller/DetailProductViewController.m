@@ -40,11 +40,9 @@
 
     [super viewDidLoad];
     
-    [ self setUpNavigationItem];
-    
     ISMore = 0;
 
-    self.productDetail_TableView.estimatedRowHeight = 100.0;
+    self.productDetail_TableView.estimatedRowHeight = 500.0;
     self.productDetail_TableView.rowHeight = UITableViewAutomaticDimension;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:UIContentSizeCategoryDidChangeNotification object:nil];
@@ -67,6 +65,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self setUpNavigationItem];
     
     self.navigationItem.title=[NSString stringWithFormat:@"Lot %@",_objCurrentOccution.strReference];
     
@@ -75,6 +74,7 @@
         countDownTimer =[NSTimer scheduledTimerWithTimeInterval:4.0f target:self selector:@selector(getBidPrice) userInfo:nil repeats:YES];
     }
     [self.productDetail_TableView reloadData];
+    //[self checkMore];
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -130,6 +130,7 @@
              _objCurrentOccution.strtimeRemains = priceDic[@"timeRemains"];
              
              [self.productDetail_TableView reloadData];
+            // [self checkMore];
          }
              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  NSLog(@"Error: %@", error);
@@ -206,6 +207,20 @@
 - (void)reload
 {
     [self.productDetail_TableView reloadData];
+    //[self checkMore];
+}
+
+- (void)checkMore
+{
+    if(ISMore)
+    {
+        NSInteger lastRowNumber = [self.productDetail_TableView numberOfRowsInSection:0] - 1;
+        NSIndexPath* ip = [NSIndexPath indexPathForRow:lastRowNumber inSection:0];
+        [self.productDetail_TableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
+    else
+    {
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -324,7 +339,8 @@
             
             pcell.lbl_ProductTitle.text=[NSString stringWithFormat:@"%@",_objCurrentOccution.strtitle];
             
-            if ([_objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+           // if ([_objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+            if ([_objCurrentOccution.auctionType intValue] != 1)
             {
                 pcell.lbl_ArtistTitle.text = @"";
             }
@@ -484,7 +500,8 @@
         else if (indexPath.row == 3)
         {
             //            lotDescriptionCell
-            if ([_objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+            //if ([_objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+            if ([_objCurrentOccution.auctionType intValue] != 1)
             {
                 pcell.lbl_ArtistText.text = @"";
                 pcell.lbl_ArtistName.text = @"";

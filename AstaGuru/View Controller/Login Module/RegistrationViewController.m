@@ -102,7 +102,6 @@
 
 -(void)passReseposeData:(id)arr
 {
-    //  NSMutableArray *arrOccution=[parese parseCurrentOccution:[arr valueForKey:@"resource"]];
     NSError *error;
     NSMutableDictionary *dict1 = [NSJSONSerialization JSONObjectWithData:arr options:0 error:&error];
     NSMutableArray *arr1=[dict1 valueForKey:@"resource"];

@@ -61,5 +61,5 @@
 @property(nonatomic,retain)NSString *strpricelow;
 
 @property(nonatomic,retain)NSString *strprVat;
-
+@property(nonatomic,retain)NSString *auctionType;
 @end

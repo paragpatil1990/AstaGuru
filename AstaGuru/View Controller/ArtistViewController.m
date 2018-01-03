@@ -467,7 +467,9 @@
                     
                     selectedGridCell.lblProductName.text= objCurrentOccution.strtitle;
                     
-                    if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                    //if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                       
+                    if ([objCurrentOccution.auctionType intValue] != 1)
                     {
                         UILabel *Lbl_1 = (UILabel *)[selectedGridCell viewWithTag:1];
                         Lbl_1.text = @"Title: ";
@@ -630,7 +632,8 @@
                     [self addTapGestureOnProductimage:defultGridCell.imgProduct indexpathrow:indexPath.row];
                     
                     defultGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",objCurrentOccution.strFirstName,objCurrentOccution.strLastName];
-                    if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                    //if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                    if ([objCurrentOccution.auctionType intValue] != 1)
                     {
                         defultGridCell.lblArtistName.text = @"";
                         defultGridCell.btnArtist.enabled = NO;

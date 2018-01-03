@@ -937,7 +937,8 @@
                     CurrentSelectedGridCell.lblProductName.text= objCurrentOccution.strtitle;
 
                     
-                    if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                    //if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                    if ([objCurrentOccution.auctionType intValue] != 1)
                     {
                         UILabel *Lbl_1 = (UILabel *)[CurrentSelectedGridCell viewWithTag:1];
                         Lbl_1.text = @"Title: ";
@@ -1140,7 +1141,8 @@
 //                        }
 //                    }
                     
-                    if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                    //if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                    if ([objCurrentOccution.auctionType intValue] != 1)
                     {
                         CurrentDefultGridCell.lblArtistName.text = @"";
                         CurrentDefultGridCell.btnArtist.enabled = NO;
@@ -1212,7 +1214,8 @@
                     
                     [self addTapGestureOnProductimage:CurrentSelectedGridCell.imgProduct indexpathrow:indexPath.row];
                     
-                    if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                    //if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                    if ([objCurrentOccution.auctionType intValue] != 1)
                     {
                         UILabel *Lbl_1 = (UILabel *)[CurrentSelectedGridCell viewWithTag:11];
                         Lbl_1.text = @"Title: ";
@@ -1410,7 +1413,8 @@
                     CurrentDefultGridCell.imgProduct.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[ClsSetting imageURL], objCurrentOccution.strthumbnail]];
                     [self addTapGestureOnProductimage:CurrentDefultGridCell.imgProduct indexpathrow:indexPath.row];
                     
-                    if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                    //if ([objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
+                    if ([objCurrentOccution.auctionType intValue] != 1)
                     {
                         CurrentDefultGridCell.btnArtist.hidden= YES;
                         CurrentDefultGridCell.lblArtistName.hidden= YES;
@@ -2122,7 +2126,8 @@
     objFilterViewController.arrselectArtist = arrSelectedArtistarray;
     objFilterViewController.delegateFilter = self;
     objFilterViewController.selectedTab=1;
-    objFilterViewController.auctionName = objCurrentOccutionForAuctionName.strAuctionname;
+    //objFilterViewController.auctionName = objCurrentOccutionForAuctionName.strAuctionname;
+    objFilterViewController.auctionType = objCurrentOccutionForAuctionName.auctionType;
     objFilterViewController.auctionID = [objCurrentOccutionForAuctionName.strOnline intValue];
     objFilterViewController.strType = @"Current";
     [self.navigationController pushViewController:objFilterViewController animated:YES];
@@ -2245,7 +2250,8 @@
         for (int i=0; i<arrSelectedArtist.count; i++)
         {
             clsArtistInfo *objArtistInfo=[arrSelectedArtist objectAtIndex:i];
-            if ([objCurrentOccutionForAuctionName.strAuctionname isEqualToString:@"Collectibles Auction"])
+            //if ([objCurrentOccutionForAuctionName.strAuctionname isEqualToString:@"Collectibles Auction"])
+            if ([objCurrentOccutionForAuctionName.auctionType intValue] != 1)
             {
                 str= [str stringByAppendingString:[NSString stringWithFormat:@"(categoryid=%@)",objArtistInfo.strArtistid]];
             }
@@ -2408,8 +2414,10 @@
         NSString *str = [[NSString alloc] init];
         for (int i=0; i<arrSelectedArtist.count; i++)
         {
+            
             clsArtistInfo *objArtistInfo=[arrSelectedArtist objectAtIndex:i];
-                if ([objCurrentOccutionForAuctionName.strAuctionname isEqualToString:@"Collectibles Auction"])
+                //if ([objCurrentOccutionForAuctionName.strAuctionname isEqualToString:@"Collectibles Auction"])
+                if ([objCurrentOccutionForAuctionName.auctionType intValue] != 1)
                 {
                     str= [str stringByAppendingString:[NSString stringWithFormat:@"(categoryid=%@)",objArtistInfo.strArtistid]];
                 }
