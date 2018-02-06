@@ -213,19 +213,19 @@
 {
     if (_txtname.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Enter your name"];
+        [ClsSetting ValidationPromt:@"Enter Name"];
     }
     else if (_txtEmail.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Enter your email"];
+        [ClsSetting ValidationPromt:@"Enter Email Id"];
     }
     else if (![ClsSetting NSStringIsValidEmail:_txtEmail.text])
     {
-        [ClsSetting ValidationPromt:@"Please enter valid email-id"];
+        [ClsSetting ValidationPromt:@"Enter Valid Emaild Id"];
     }
     else if (_txtPhone.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Enter your phone number"];
+        [ClsSetting ValidationPromt:@"Enter Number"];
     }
     else if (_txtCategory.text.length == 0)
     {
@@ -233,7 +233,7 @@
     }
     else if (_txtMessage.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Enter your message"];
+        [ClsSetting ValidationPromt:@"Enter Message"];
     }
     else
     {

@@ -418,13 +418,13 @@ NSString * const HarpyLanguageVietnamese            = @"vi";
     // Force localization if _forceLanguageLocalization is set
     if (_forceLanguageLocalization) {
         _updateAvailableMessage = [self forcedLocalizedStringForKey:@"Update Available"];
-        _theNewVersionMessage = [NSString stringWithFormat:[self forcedLocalizedStringForKey:@"A new version of %@ is available. Please update to version %@ now."], _appName, currentAppStoreVersion];
+        _theNewVersionMessage = [NSString stringWithFormat:[self forcedLocalizedStringForKey:@"Please update with the latest version of application for smooth functioning."], _appName, currentAppStoreVersion];
         _updateButtonText = [self forcedLocalizedStringForKey:@"Update"];
         _nextTimeButtonText = [self forcedLocalizedStringForKey:@"Next time"];
         _skipButtonText = [self forcedLocalizedStringForKey:@"Skip this version"];
     } else {
         _updateAvailableMessage = [self localizedStringForKey:@"Update Available"];
-        _theNewVersionMessage = [NSString stringWithFormat:[self localizedStringForKey:@"Please update the latest version of application for smooth functioning"], _appName, currentAppStoreVersion];
+        _theNewVersionMessage = [NSString stringWithFormat:[self localizedStringForKey:@"Please update with the latest version of application for smooth functioning."], _appName, currentAppStoreVersion];
         _updateButtonText = [self localizedStringForKey:@"Update"];
         _nextTimeButtonText = [self localizedStringForKey:@"Not Now"];
         _skipButtonText = [self localizedStringForKey:@"Skip this version"];

@@ -25,8 +25,33 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationController.navigationBar.backItem.title = @"Back";
+//self.navigationController.navigationBar.backItem.title = @"Back";
+    
+    [self setNavigationBarBackButton];
     [self setBroder];
+}
+
+-(void)setNavigationBarBackButton
+{
+    self.navigationItem.hidesBackButton = YES;
+    UIButton *_backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_backButton setFrame:CGRectMake(0, 0, 30, 22)];
+    [_backButton setImage:[UIImage imageNamed:@"icon-back.png"] forState:UIControlStateNormal];
+ //   [_backButton imageView].contentMode = UIViewContentModeScaleAspectFit;
+ //   [_backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
+  //  [_backButton setTitle:@"Back" forState:UIControlStateNormal];
+   // [[_backButton titleLabel] setFont:[UIFont fontWithName:@"WorkSans-Medium" size:18]];
+  //  [_backButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -34, 0, 0)];
+    [_backButton setTintColor:[UIColor whiteColor]];
+    [_backButton addTarget:self action:@selector(backPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *_backBarButton = [[UIBarButtonItem alloc] initWithCustomView:_backButton];
+    [self.navigationItem setLeftBarButtonItem:_backBarButton];
+}
+
+-(void)backPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -130,23 +155,23 @@
 {
     if (_txtName.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Please enter your name"];
+        [ClsSetting ValidationPromt:@"Enter Name"];
     }
     else if (_txtEmailId.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Please enter your email id"];
+        [ClsSetting ValidationPromt:@"Enter Email Id"];
     }
     else if (_txtSubject.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Please enter subject"];
+        [ClsSetting ValidationPromt:@"Enter subject"];
     }
     else if (_txtDescription.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Please enter description"];
+        [ClsSetting ValidationPromt:@"Enter description"];
     }
     else if (_txtContact.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Please enter contact"];
+        [ClsSetting ValidationPromt:@"Enter contact"];
     }
     else if (_txtSelectSource.text.length == 0)
     {

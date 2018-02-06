@@ -63,7 +63,7 @@
             _smsFour.hidden = YES;
             _btnMobileVerify.hidden = YES;
             _lblsmserror.hidden = YES;
-            _lblsmserror.text = @"Verified";
+            _lblsmserror.text = @"Mobile Number Verified";
             _lblsmserror.textColor = [UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0];
         }
         
@@ -86,11 +86,12 @@
             _EmailFour.hidden = YES;
             _btnEmailVerify.hidden = YES;
             _lblemailerror.hidden = YES;
-            _lblemailerror.text = @"Verified";
+            _lblemailerror.text = @"Email Id Verified";
             _lblemailerror.textColor = [UIColor colorWithRed:73.0/255.0 green:185.0/255.0 blue:126.0/255.0 alpha:1.0];
         }
     }
 }
+
 -(void)setUpNavigationItem
 {
     UIButton *btnBack = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
@@ -157,6 +158,7 @@
 {
     [self closePressed];
 }
+
 - (IBAction)btnProceedPressed:(id)sender
 {
     if (![_btnMobileVerification.titleLabel.text isEqualToString:@"Verified"])
@@ -247,7 +249,7 @@
     else
     {
         _lblsmserror.hidden = NO;
-        _lblsmserror.text = @"Invalid OTP Code";
+        _lblsmserror.text = @"Please Enter Valid Code";
         _lblsmserror.textColor = [UIColor redColor];
     }
 }
@@ -276,14 +278,14 @@
     else
     {
         _lblemailerror.hidden = NO;
-        _lblemailerror.text = @"Invalid OTP Code";
+        _lblemailerror.text = @"Please Enter Valid Code";
         _lblemailerror.textColor = [UIColor redColor];
     }
 }
 -(void)SendEmail
 {
     
-    [ClsSetting ValidationPromt:[NSString stringWithFormat:@"OTP sent to your email %@",_strEmail]];
+    [ClsSetting ValidationPromt:[NSString stringWithFormat:@"OTP Has Been Sent To Your Email Id %@",_strEmail]];
 
     NSDictionary *dictTo = @{
                              @"name":[NSString stringWithFormat:@"%@",_strname],
@@ -348,7 +350,7 @@
     }
     else
     {
-        [ClsSetting ValidationPromt:[NSString stringWithFormat:@"OTP sent to your number %@",_strMobile]];
+        [ClsSetting ValidationPromt:[NSString stringWithFormat:@"OTP Has Been Sent To Your Mobile Number  %@",_strMobile]];
     }
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

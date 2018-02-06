@@ -22,6 +22,9 @@
     [self.view bringSubviewToFront:_ActivityIndicator];
     [_webview loadRequest:[NSURLRequest requestWithURL:_url]];
     [_ActivityIndicator startAnimating];
+    
+    [self setNavigationBarBackButton];
+
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -30,8 +33,31 @@
      style:UIBarButtonItemStylePlain
      target:nil
      action:nil];*/
-    self.navigationController.navigationBar.backItem.title = @"Back";
+   // self.navigationController.navigationBar.backItem.title = @"Back";
+    
      self.title=[NSString stringWithFormat:@"AstaGuru"];
+}
+-(void)setNavigationBarBackButton
+{
+    self.navigationItem.hidesBackButton = YES;
+    UIButton *_backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_backButton setFrame:CGRectMake(0, 0, 30, 22)];
+    [_backButton setImage:[UIImage imageNamed:@"icon-back.png"] forState:UIControlStateNormal];
+  //  [_backButton imageView].contentMode = UIViewContentModeScaleAspectFit;
+//    [_backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
+ //   [_backButton setTitle:@"Back" forState:UIControlStateNormal];
+   // [[_backButton titleLabel] setFont:[UIFont fontWithName:@"WorkSans-Medium" size:18]];
+  //  [_backButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -34, 0, 0)];
+    [_backButton setTintColor:[UIColor whiteColor]];
+    [_backButton addTarget:self action:@selector(backPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *_backBarButton = [[UIBarButtonItem alloc] initWithCustomView:_backButton];
+    [self.navigationItem setLeftBarButtonItem:_backBarButton];
+}
+
+-(void)backPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

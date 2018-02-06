@@ -146,7 +146,7 @@
         }
         else
         {
-            [ClsSetting ValidationPromt:@"Please accept terms and condition"];
+            [ClsSetting ValidationPromt:@"Please Accept Terms and Conditions"];
         }
     }
 }
@@ -274,92 +274,92 @@
 {
     if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtFirstName.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Please enter first name"];
+        [ClsSetting ValidationPromt:@"Enter First Name"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtLastName.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Please enter last name"];
+        [ClsSetting ValidationPromt:@"Enter Last Name"];
     return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtAddress.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Please enter address"];
+        [ClsSetting ValidationPromt:@"Enter Address"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtCity.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Please enter city name"];
+        [ClsSetting ValidationPromt:@"Enter City"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtcountry.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Please enter country name"];
+        [ClsSetting ValidationPromt:@"Enter Country"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtState.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Please enter state name"];
+        [ClsSetting ValidationPromt:@"Enter State"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtZip.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Please enter zip code"];
+        [ClsSetting ValidationPromt:@"Enter Zip Code"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtCountryCode.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Please enter country code"];
+        [ClsSetting ValidationPromt:@"Enter Country Code"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtMobileNumber.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Please enter mobile number"];
+        [ClsSetting ValidationPromt:@"Enter Mobile Number"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtTelephoneNumber.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Please enter telephone number"];
+        [ClsSetting ValidationPromt:@"Enter Telephone Number"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtMobileNumber.text].length<10)
     {
-        [ClsSetting ValidationPromt:@"mobile number should be 10 digits long"];
+        [ClsSetting ValidationPromt:@"Mobile number should be 10 digits long"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtEmail.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Please enter email-id"];
+        [ClsSetting ValidationPromt:@"Enter Email Id"];
         return NO;
     }
     else if (![ClsSetting NSStringIsValidEmail:_txtEmail.text])
     {
-        [ClsSetting ValidationPromt:@"Please enter valid email-id"];
+        [ClsSetting ValidationPromt:@"Enter Valid Email Id"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtUserName.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Please enter user name"];
+        [ClsSetting ValidationPromt:@"Enter User Name"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtPassword.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Please enter password"];
+        [ClsSetting ValidationPromt:@"Enter Password"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtPassword.text].length<6)
     {
-        [ClsSetting ValidationPromt:@"password should have minimum six charter"];
+        [ClsSetting ValidationPromt:@"Password Not Less Than 6 Digits"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtConfarmPassword.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Please enter confirm password"];
+        [ClsSetting ValidationPromt:@"Re-enter Password"];
         return NO;
     }
     else if (![_txtPassword.text isEqualToString:_txtConfarmPassword.text])
     {
-        [ClsSetting ValidationPromt:@"Password & confirm Password should be same"];
+        [ClsSetting ValidationPromt:@"Password Not Match"];
         return NO;
     }
     return YES;

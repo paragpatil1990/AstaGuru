@@ -317,6 +317,7 @@
             objViewController.IsPast = 1;
             [self.navigationController pushViewController:objViewController animated:YES];
         }
+        self.navigationController.navigationItem.title = @"";
     }
 //    else if ([dict[@"auctionPageUrl"] isEqualToString:@"Past"])
 //    {

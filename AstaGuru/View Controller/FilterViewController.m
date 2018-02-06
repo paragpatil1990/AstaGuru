@@ -46,9 +46,12 @@
     arrArtist=[[NSMutableArray alloc]init];
     arrFinalFilter=[[NSMutableArray alloc]init];
     arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"AUCTION",@"UPCOMING",@"PAST", nil];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
     [self setUpNavigationItem];
 }
-
 
 -(void)setUpNavigationItem
 {

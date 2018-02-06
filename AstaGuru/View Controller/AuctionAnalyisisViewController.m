@@ -33,6 +33,9 @@
     self.table_AuctionAnalysis.backgroundColor  = [UIColor whiteColor];
     self.table_AuctionAnalysis.rowHeight = UITableViewAutomaticDimension;
     self.table_AuctionAnalysis.estimatedRowHeight = 300;
+    
+    [self setNavigationBarBackButton];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -44,7 +47,30 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
-    self.navigationController.navigationBar.backItem.title = @"Back";
+   // self.navigationController.navigationBar.backItem.title = @"Back";
+}
+
+-(void)setNavigationBarBackButton
+{
+    self.navigationItem.hidesBackButton = YES;
+    UIButton *_backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_backButton setFrame:CGRectMake(0, 0, 30, 22)];
+    [_backButton setImage:[UIImage imageNamed:@"icon-back.png"] forState:UIControlStateNormal];
+  //  [_backButton imageView].contentMode = UIViewContentModeScaleAspectFit;
+  //  [_backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
+  //  [_backButton setTitle:@"Back" forState:UIControlStateNormal];
+    //[[_backButton titleLabel] setFont:[UIFont fontWithName:@"WorkSans-Medium" size:18]];
+   // [_backButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -34, 0, 0)];
+    [_backButton setTintColor:[UIColor whiteColor]];
+    [_backButton addTarget:self action:@selector(backPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *_backBarButton = [[UIBarButtonItem alloc] initWithCustomView:_backButton];
+    [self.navigationItem setLeftBarButtonItem:_backBarButton];
+}
+
+-(void)backPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)setUpNavigationItem

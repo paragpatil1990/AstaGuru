@@ -39,7 +39,6 @@
     arrItemCount=[[NSMutableArray alloc]init];
     arrMyAuctionGallery=[[NSMutableArray alloc]init];
 
-    [self setUpNavigationItem];
     
     [self getMyOccttionGallery];
 
@@ -69,6 +68,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    
+    [self setUpNavigationItem];
+
+    
     timer=[NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(RefreshMyGallery) userInfo:nil repeats:YES];
 
     self.navigationItem.title=@"My Auction Gallery";
@@ -752,7 +755,7 @@
             }
             else
             {
-                UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"AstaGuru"  message:@"You don't have access to Bid. Please contact Astaguru"  preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"AstaGuru"  message:@"You don't have Bidding Access. Please contact Astaguru."  preferredStyle:UIAlertControllerStyleAlert];
                 [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }]];
@@ -828,7 +831,7 @@
             }
             else
             {
-                UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"AstaGuru"  message:@"You don't have access to Bid. Please contact Astaguru"  preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"AstaGuru"  message:@"You don't have Bidding Access. Please contact Astaguru."  preferredStyle:UIAlertControllerStyleAlert];
                 [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }]];
@@ -1030,11 +1033,18 @@
     
     objArtistViewController.objCurrentOccution1 = objCurrentOccution;
     [self.navigationController pushViewController:objArtistViewController animated:YES];
+    self.navigationController.navigationBar.backItem.title = @"";
+
 }
 
 
 - (IBAction)btnCurrentAuctionPressed:(UIButton *)sender
 {
+    if (timer == nil)
+    {
+        timer=[NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(RefreshMyGallery) userInfo:nil repeats:YES];
+    }
+    
     self.isCurrent = 1;
     
     

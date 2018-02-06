@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E1A33DD2009DCAB00BCD119 /* icon-back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E1A33DC2009DCAA00BCD119 /* icon-back@3x.png */; };
+		4E1A33E1200A1A2F00BCD119 /* clear-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E1A33E0200A1A2F00BCD119 /* clear-icon@3x.png */; };
 		4EB7EB021FE50B6200BCBD9A /* AuctionAnalyisisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7EB011FE50B6200BCBD9A /* AuctionAnalyisisViewController.m */; };
 		4EB7EB051FE5269200BCBD9A /* AuctionAnalysisTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7EB041FE5269200BCBD9A /* AuctionAnalysisTableViewCell.m */; };
 		581F5F4F1E0EC2CE00BFE986 /* img-lotno-bg2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 581F5F4E1E0EC2CE00BFE986 /* img-lotno-bg2@3x.png */; };
@@ -32,7 +34,7 @@
 		58265DE61EED711A00A0555A /* ProductDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58265DE51EED711A00A0555A /* ProductDetailCollectionViewCell.m */; };
 		5827746C1F174BED00925DEC /* Harpy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 582774691F174BED00925DEC /* Harpy.bundle */; };
 		5827746D1F174BED00925DEC /* Harpy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5827746B1F174BED00925DEC /* Harpy.m */; };
-		5829710D1F3DE17A009CD55A /* img-default-painting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5829710C1F3DE17A009CD55A /* img-default-painting@2x.png */; };
+		5829710D1F3DE17A009CD55A /* img-default-painting@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5829710C1F3DE17A009CD55A /* img-default-painting@3x.png */; };
 		582A54961EA6555E0016834D /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 582A54911EA6555E0016834D /* .gitkeep */; };
 		582A54971EA6555E0016834D /* MIBadgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 582A54931EA6555E0016834D /* MIBadgeButton.m */; };
 		582A54981EA6555E0016834D /* MIBadgeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 582A54951EA6555E0016834D /* MIBadgeLabel.m */; };
@@ -257,6 +259,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E1A33DC2009DCAA00BCD119 /* icon-back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-back@3x.png"; sourceTree = "<group>"; };
+		4E1A33E0200A1A2F00BCD119 /* clear-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clear-icon@3x.png"; sourceTree = "<group>"; };
 		4EB7EB001FE50B6200BCBD9A /* AuctionAnalyisisViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuctionAnalyisisViewController.h; sourceTree = "<group>"; };
 		4EB7EB011FE50B6200BCBD9A /* AuctionAnalyisisViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuctionAnalyisisViewController.m; sourceTree = "<group>"; };
 		4EB7EB031FE5269200BCBD9A /* AuctionAnalysisTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuctionAnalysisTableViewCell.h; sourceTree = "<group>"; };
@@ -287,7 +291,7 @@
 		582774691F174BED00925DEC /* Harpy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Harpy.bundle; sourceTree = "<group>"; };
 		5827746A1F174BED00925DEC /* Harpy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Harpy.h; sourceTree = "<group>"; };
 		5827746B1F174BED00925DEC /* Harpy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Harpy.m; sourceTree = "<group>"; };
-		5829710C1F3DE17A009CD55A /* img-default-painting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-default-painting@2x.png"; sourceTree = "<group>"; };
+		5829710C1F3DE17A009CD55A /* img-default-painting@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-default-painting@3x.png"; sourceTree = "<group>"; };
 		582A54911EA6555E0016834D /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		582A54921EA6555E0016834D /* MIBadgeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIBadgeButton.h; sourceTree = "<group>"; };
 		582A54931EA6555E0016834D /* MIBadgeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIBadgeButton.m; sourceTree = "<group>"; };
@@ -1157,8 +1161,10 @@
 		95A0A0A41D75348800FE0D3A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4E1A33E0200A1A2F00BCD119 /* clear-icon@3x.png */,
+				4E1A33DC2009DCAA00BCD119 /* icon-back@3x.png */,
 				5825ED1A1F41C23B00C4E01E /* TeamAboutUs */,
-				5829710C1F3DE17A009CD55A /* img-default-painting@2x.png */,
+				5829710C1F3DE17A009CD55A /* img-default-painting@3x.png */,
 				5823EAED1EA78BD9003E0080 /* no_auction_logo.jpg */,
 				582B72DD1EA4EA1D00EBF9E5 /* notification_icon.png */,
 				58A1C4851E3F2FA0007C7FC1 /* icon_contact.png */,
@@ -1353,15 +1359,17 @@
 				58A1C4821E3F2C85007C7FC1 /* icon_note.png in Resources */,
 				95C979C31DB99B0F001F6C24 /* icon-collapsed@3x.png in Resources */,
 				9595FF971D773DD800EA7CD2 /* icon-about-us@3x.png in Resources */,
+				4E1A33DD2009DCAB00BCD119 /* icon-back@3x.png in Resources */,
 				78416A471D75653C00F4E1DD /* icon-close@3x.png in Resources */,
 				5825ED2E1F41C23B00C4E01E /* img-razia-client_relation.png in Resources */,
 				9595FF9A1D773DD800EA7CD2 /* icon-contact-us@2x.png in Resources */,
 				786FE7111D9D0B7900C81222 /* icon-search@3x.png in Resources */,
-				5829710D1F3DE17A009CD55A /* img-default-painting@2x.png in Resources */,
+				5829710D1F3DE17A009CD55A /* img-default-painting@3x.png in Resources */,
 				9595FF9D1D773DD800EA7CD2 /* icon-privacy@3x.png in Resources */,
 				5825ED381F41C3A600C4E01E /* img-vickram-1.png in Resources */,
 				5825ED2B1F41C23B00C4E01E /* img-anthony-administrator.png in Resources */,
 				7838011A1DB9EEC800A8C298 /* VideoViewInHowToBuy.xib in Resources */,
+				4E1A33E1200A1A2F00BCD119 /* clear-icon@3x.png in Resources */,
 				9595FF981D773DD800EA7CD2 /* icon-careers@3x.png in Resources */,
 				78255E8B1D742A9800CECC5D /* LaunchScreen.storyboard in Resources */,
 				5825ED3B1F41C3CD00C4E01E /* img-digamber-3.png in Resources */,

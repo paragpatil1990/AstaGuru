@@ -75,7 +75,7 @@
 {
     if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtProxyBid.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Please enter proxy value"];
+        [ClsSetting ValidationPromt:@"Please Enter Proxy Bid Value"];
         return FALSE;
     }
     else
@@ -85,11 +85,11 @@
         {
             if ([_txtProxyBid.text intValue] >= 10000000)
             {
-                [ClsSetting ValidationPromt:@"Proxy Bid value must be greater by at least 5% of current price"];
+                [ClsSetting ValidationPromt:@"Proxy Bid value must be higher by at least 5% of current price"];
             }
             else
             {
-                [ClsSetting ValidationPromt:@"Proxy Bid value must be greater by at least 10% of current price"];
+                [ClsSetting ValidationPromt:@"Proxy Bid value must be higher by at least 10% of current price."];
                 
             }
         }
@@ -151,7 +151,7 @@
             if (proxyvalidation==0)
             {
                 proxyvalidation=1;
-                _lblAlert.text=@"Once submitted can not be changes online ";
+                _lblAlert.text=@"Once submitted can not be changed online. Confirm? ";
                 _viwBidNow.hidden=YES;
                 _viwProxyBid.hidden=YES;
                 _viwProxyBidConfarmation.hidden=NO;
@@ -339,7 +339,7 @@
              }
              else
              {
-                 _lblAlert.text=@"Sorry you are out off bid because already higher proxybid is their, do you want to bid again";
+                 _lblAlert.text=@"Sorry you have been out bid because of a higher value proxy bid. Would you like to place another bid.";
                  [_btnConfirm setTitle:@"Ok" forState:UIControlStateNormal];
                  _viwProxyBidConfarmation.hidden=NO;
                  _viwBidNow.hidden=YES;
@@ -367,11 +367,11 @@
     {
         if ([_txtProxyBid.text intValue] >= 10000000)
         {
-            [ClsSetting ValidationPromt:@"Proxy Bid value must be greater by at least 5% of current price"];
+            [ClsSetting ValidationPromt:@"Proxy Bid value must be higher by at least 5% of current price"];
         }
         else
         {
-            [ClsSetting ValidationPromt:@"Proxy Bid value must be greater by at least 10% of current price"];
+            [ClsSetting ValidationPromt:@"Proxy Bid value must be higher by at least 10% of current price."];
         }
     }
     else
@@ -464,7 +464,7 @@
                          }
                          else
                          {
-                             [ClsSetting ValidationPromt:@"Server error"];
+                             [ClsSetting ValidationPromt:@"This may be a server issue"];
                          }
                          [self.view removeFromSuperview];
                          [self removeFromParentViewController];
@@ -521,7 +521,7 @@
                          if ([[dictResult valueForKey:@"currentStatus"] isEqualToString:@"1"])
                          {
                              [MBProgressHUD hideHUDForView:self.view animated:YES];
-                             [ClsSetting ValidationPromt:@"Your Proxy bid submitted successfully,currently you are leading for this product"];
+                             [ClsSetting ValidationPromt:@"Your Proxy bid has been submitted successfully,you are currently leading. "];
                              
                              [self.delegate refreshBidPrice];
 
@@ -582,7 +582,7 @@
                      }
                      else
                      {
-                         [ClsSetting ValidationPromt:@"Something went rong"];
+                         [ClsSetting ValidationPromt:@"This may be a server issue"];
                      }
                  }
                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -628,7 +628,7 @@
 {
     if (_isBidNow==1)
     {
-        [ClsSetting ValidationPromt:@"Your bid submitted successfully"];
+        [ClsSetting ValidationPromt:@"Your bid has been submitted successfully,you are currently leading."];
     }
     else
     {

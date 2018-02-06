@@ -36,6 +36,9 @@
     
        arrBottomMenu=[[NSMutableArray alloc]initWithObjects:@"HOME",@"AUCTION",@"UPCOMING",@"PAST", nil];
     [self getOccttionData];
+    
+    [self setNavigationBarBackButton];
+
     // Do any additional setup after loading the view.
 }
 -(void)viewDidAppear:(BOOL)animated
@@ -45,11 +48,36 @@
      style:UIBarButtonItemStylePlain
      target:nil
      action:nil];*/
-    self.navigationController.navigationBar.backItem.title = @"Back";
+    //self.navigationController.navigationBar.backItem.title = @"Back";
+    
     
     countDownTimer =[NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
 
 }
+
+-(void)setNavigationBarBackButton
+{
+    self.navigationItem.hidesBackButton = YES;
+    UIButton *_backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_backButton setFrame:CGRectMake(0, 0, 30, 22)];
+    [_backButton setImage:[UIImage imageNamed:@"icon-back.png"] forState:UIControlStateNormal];
+  //  [_backButton imageView].contentMode = UIViewContentModeScaleAspectFit;
+  //  [_backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
+   // [_backButton setTitle:@"Back" forState:UIControlStateNormal];
+   // [[_backButton titleLabel] setFont:[UIFont fontWithName:@"WorkSans-Medium" size:18]];
+   // [_backButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -34, 0, 0)];
+    [_backButton setTintColor:[UIColor whiteColor]];
+    [_backButton addTarget:self action:@selector(backPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *_backBarButton = [[UIBarButtonItem alloc] initWithCustomView:_backButton];
+    [self.navigationItem setLeftBarButtonItem:_backBarButton];
+}
+
+-(void)backPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [self setUpNavigationItem];
@@ -779,7 +807,7 @@
             }
             else
             {
-                UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"AstaGuru"  message:@"You don't have access to Bid. Please contact Astaguru"  preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"AstaGuru"  message:@"You don't have Bidding Access. Please contact Astaguru."  preferredStyle:UIAlertControllerStyleAlert];
                 [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }]];
@@ -841,7 +869,7 @@
             }
             else
             {
-                UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"AstaGuru"  message:@"You don't have access to Bid. Please contact Astaguru"  preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"AstaGuru"  message:@"You don't have Bidding Access. Please contact Astaguru."  preferredStyle:UIAlertControllerStyleAlert];
                 [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }]];

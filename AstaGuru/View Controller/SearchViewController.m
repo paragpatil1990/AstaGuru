@@ -26,7 +26,7 @@
     [super viewDidLoad];
     
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
-    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setDefaultTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+   // [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setDefaultTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     SearchResultCounter = 1;
     arrSearchResult = [[NSMutableArray alloc]init];
@@ -34,6 +34,37 @@
     [self.searchBar setImage:[UIImage imageNamed:@"icon-search.png"]
             forSearchBarIcon:UISearchBarIconSearch
                        state:UIControlStateNormal];
+    //self.searchBar.backgroundColor = [UIColor grayColor];
+    
+    self.searchBar.placeholder = @"Search here";
+    self.searchBar.showsCancelButton = YES;
+    self.searchBar.delegate = self;
+    self.searchBar.tintColor = [UIColor colorWithRed:130.0f/255.0f green:103.0f/255.0f blue:67.0f/255.0f alpha:1];
+    
+    UITextField *searchField = [self.searchBar valueForKey:@"searchField"];
+    searchField.font = [UIFont fontWithName:@"WorkSans-Regular" size:16];
+    UIColor *color = [UIColor lightTextColor];
+    searchField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Search here" attributes:@{NSForegroundColorAttributeName: color}];
+    // To change background color
+    searchField.backgroundColor = [UIColor grayColor];
+    //[UIColor colorWithRed:65.0f/255.0f green:65.0f/255.0f blue:65.0f/255.0f alpha:1];
+    // To change text color
+    searchField.textColor = [UIColor whiteColor];
+    
+    UIButton *clearButton = [searchField valueForKey:@"_clearButton"];
+    clearButton.tintColor = [UIColor whiteColor];
+    
+    UIImage *imgClear = [UIImage imageNamed:@"clear-icon.png"];
+    [self.searchBar setImage:imgClear forSearchBarIcon:UISearchBarIconClear state:UIControlStateNormal];
+    
+    [_searchBar becomeFirstResponder];
+
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [[self navigationController] setNavigationBarHidden:NO animated:NO];
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 - (void)searchBarSearchButtonClicked1:(NSString *)strSearchType
@@ -138,14 +169,15 @@
 -(void)viewWillAppear:(BOOL)animated
 {
      [[self navigationController] setNavigationBarHidden:YES animated:YES];
-    for (UIView *subView in self.searchBar.subviews){
-        for (UIView *ndLeveSubView in subView.subviews){
-            if ([ndLeveSubView isKindOfClass:[UITextField class]])
-            {
-                break;
-            }
-        }
-    }
+//    for (UIView *subView in self.searchBar.subviews){
+//        for (UIView *ndLeveSubView in subView.subviews){
+//            if ([ndLeveSubView isKindOfClass:[UITextField class]])
+//            {
+//                //ndLeveSubView.backgroundColor = [UIColor whiteColor];
+//                break;
+//            }
+//        }
+//    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -21,13 +21,37 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBar.backItem.title = @"Back";
+    
+    [self setNavigationBarBackButton];
+    
+   // self.navigationController.navigationBar.backItem.title = @"Back";
     // Do any additional setup after loading the view.
     
     [_segmentedMenu addTarget:self action:@selector(segmentClicked:) forControlEvents:UIControlEventValueChanged];
     [self setBroder];
 }
+-(void)setNavigationBarBackButton
+{
+    self.navigationItem.hidesBackButton = YES;
+    UIButton *_backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_backButton setFrame:CGRectMake(0, 0, 30, 22)];
+    [_backButton setImage:[UIImage imageNamed:@"icon-back.png"] forState:UIControlStateNormal];
+    //[_backButton imageView].contentMode = UIViewContentModeScaleAspectFit;
+   // [_backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
+   // [_backButton setTitle:@"Back" forState:UIControlStateNormal];
+  //  [[_backButton titleLabel] setFont:[UIFont fontWithName:@"WorkSans-Medium" size:18]];
+  //  [_backButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -34, 0, 0)];
+    [_backButton setTintColor:[UIColor whiteColor]];
+    [_backButton addTarget:self action:@selector(backPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *_backBarButton = [[UIBarButtonItem alloc] initWithCustomView:_backButton];
+    [self.navigationItem setLeftBarButtonItem:_backBarButton];
+}
 
+-(void)backPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
@@ -154,19 +178,19 @@
     
     if (_txtName.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Please enter your name"];
+        [ClsSetting ValidationPromt:@"Enter Name"];
     }
     else if (_txtEmailId.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Please enter your email id"];
+        [ClsSetting ValidationPromt:@"Enter Email Id"];
     }
     else if (_txtJobTitle.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Please select job title"];
+        [ClsSetting ValidationPromt:@"Please Select Designation"];
     }
     else if (_txtMessage.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Please enter your message"];
+        [ClsSetting ValidationPromt:@"Enter Message"];
     }
     else if (_txtSelectSource.text.length == 0)
     {
@@ -179,7 +203,7 @@
         NSString *path = strPath;
         if (strPath == nil)
         {
-            [ClsSetting ValidationPromt:@"Please choose file"];
+            [ClsSetting ValidationPromt:@"Please Upload Resume"];
         }
         else
         {

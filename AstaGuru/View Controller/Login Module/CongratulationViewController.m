@@ -19,9 +19,15 @@
 @synthesize dict;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setUpNavigationItem];
     [self SendEmail];
     // Do any additional setup after loading the view.
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [self setUpNavigationItem];
+    _btnViewconnentAuctions .layer.cornerRadius=2;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,10 +68,6 @@
     objApp.window.rootViewController = viewController;
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    _btnViewconnentAuctions .layer.cornerRadius=2;
-}
 
 -(void)SendEmail
 {

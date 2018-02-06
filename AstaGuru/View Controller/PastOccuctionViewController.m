@@ -297,7 +297,7 @@
                 NSString *spaceUrl = [[NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"%@%@",[ClsSetting imageURL], objPastOccution.strImage]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                 
                 PastAuctionCell.imgPastAuction.imageURL =[NSURL URLWithString:spaceUrl];
-                PastAuctionCell.Title.text=objPastOccution.strAuctionname;
+                PastAuctionCell.Title.text=objPastOccution.strAuctiontitle;
                 PastAuctionCell.lblPastAuctionDate.text= objPastOccution.strDate;
                 
                 PastAuctionCell.layer.borderWidth=1;
@@ -464,7 +464,7 @@
     }
     else
     {
-        if (indexPath.section==0 || indexPath.section==1)
+        if (indexPath.section==0)
         {
             return;
         }
@@ -526,6 +526,8 @@
     
     objArtistViewController.objCurrentOccution1 =objCurrentOccution;
     [self.navigationController pushViewController:objArtistViewController animated:YES];
+    self.navigationController.navigationBar.backItem.title = @"";
+
 }
 
 

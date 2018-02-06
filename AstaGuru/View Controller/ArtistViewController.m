@@ -47,6 +47,9 @@
     
     isCurrent = 1;
     ISReadMore = 0;
+    
+    [self setNavigationBarBackButton];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -57,11 +60,34 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    self.navigationController.navigationBar.backItem.title = @"Back";
+    //self.navigationController.navigationBar.backItem.title = @"Back";
     if (countDownTimer == nil)
     {
         countDownTimer =[NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(spGetArtistDetailData) userInfo:nil repeats:YES];
     }
+}
+
+-(void)setNavigationBarBackButton
+{
+    self.navigationItem.hidesBackButton = YES;
+    UIButton *_backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_backButton setFrame:CGRectMake(0, 0, 30, 22)];
+    [_backButton setImage:[UIImage imageNamed:@"icon-back.png"] forState:UIControlStateNormal];
+//    [_backButton imageView].contentMode = UIViewContentModeScaleAspectFit;
+//    [_backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
+   // [_backButton setTitle:@"Back" forState:UIControlStateNormal];
+//    [[_backButton titleLabel] setFont:[UIFont fontWithName:@"WorkSans-Medium" size:18]];
+//    [_backButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -34, 0, 0)];
+    [_backButton setTintColor:[UIColor whiteColor]];
+    [_backButton addTarget:self action:@selector(backPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *_backBarButton = [[UIBarButtonItem alloc] initWithCustomView:_backButton];
+    [self.navigationItem setLeftBarButtonItem:_backBarButton];
+}
+
+-(void)backPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -595,7 +621,7 @@
                                 }
                                 else
                                 {
-                                    leading_Lbl.text = @"You are currently the highest bidder.";
+                                    leading_Lbl.text = @"Your Proxy bid has been submitted successfully,you are currently leading. ";
                                 }
                             }
                             else
@@ -1056,7 +1082,7 @@
             }
             else
             {
-                UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"AstaGuru"  message:@"You don't have access to Bid. Please contact Astaguru"  preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"AstaGuru"  message:@"You don't have Bidding Access. Please contact Astaguru."  preferredStyle:UIAlertControllerStyleAlert];
                 [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }]];
@@ -1119,7 +1145,7 @@
             }
             else
             {
-                UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"AstaGuru"  message:@"You don't have access to Bid. Please contact Astaguru"  preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController *alertController = [UIAlertController  alertControllerWithTitle:@"AstaGuru"  message:@"You don't have Bidding Access. Please contact Astaguru."  preferredStyle:UIAlertControllerStyleAlert];
                 [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }]];
@@ -1210,7 +1236,7 @@
 //             NSLog(@"%@",dict);
              
              [MBProgressHUD hideHUDForView:self.view animated:YES];
-             [ClsSetting ValidationPromt:@"Item added to your auction gallery"];;
+             [ClsSetting ValidationPromt:@"The Lot has been added to your auction gallery."];;
              [self myAuctionGallery];
              
          }

@@ -98,11 +98,11 @@
 {
     if (_txtUserName.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Please enter your username"];
+        [ClsSetting ValidationPromt:@"Enter Username"];
     }
     else if (_txtPassword.text.length == 0)
     {
-        [ClsSetting ValidationPromt:@"Please enter your password"];
+        [ClsSetting ValidationPromt:@"Enter Password"];
     }
     else
     {
@@ -212,12 +212,12 @@
         }
         else
         {
-            [ClsSetting ValidationPromt:@"Please Check Password"];
+            [ClsSetting ValidationPromt:@"Invalid Username or Password"];
         }
     }
     else
     {
-        [ClsSetting ValidationPromt:@"Please Check User Name"];
+        [ClsSetting ValidationPromt:@"Invalid Username or Password"];
     }
 }
 

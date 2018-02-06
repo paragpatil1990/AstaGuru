@@ -25,6 +25,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self setNavigationBarBackButton];
+
         // Do any additional setup after loading the view.
 }
 -(void)viewDidAppear:(BOOL)animated
@@ -43,8 +46,31 @@
 //    {
 //        [self GetProfile];
 //    }
-    self.navigationController.navigationBar.backItem.title = @"Back";
+    //self.navigationController.navigationBar.backItem.title = @"Back";
 }
+-(void)setNavigationBarBackButton
+{
+    self.navigationItem.hidesBackButton = YES;
+    UIButton *_backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_backButton setFrame:CGRectMake(0, 0, 30, 22)];
+    [_backButton setImage:[UIImage imageNamed:@"icon-back.png"] forState:UIControlStateNormal];
+  //  [_backButton imageView].contentMode = UIViewContentModeScaleAspectFit;
+  //  [_backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
+  //  [_backButton setTitle:@"Back" forState:UIControlStateNormal];
+   // [[_backButton titleLabel] setFont:[UIFont fontWithName:@"WorkSans-Medium" size:18]];
+  //  [_backButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -34, 0, 0)];
+    [_backButton setTintColor:[UIColor whiteColor]];
+    [_backButton addTarget:self action:@selector(backPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *_backBarButton = [[UIBarButtonItem alloc] initWithCustomView:_backButton];
+    [self.navigationItem setLeftBarButtonItem:_backBarButton];
+}
+
+-(void)backPressed
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [self setUpNavigationItem];
@@ -250,28 +276,20 @@
                     NSInteger total = price + primium;
                     
                     NSInteger total_gst = (total*gst)/100;
-                    
-//                    NSInteger vat =(price*12)/100;
-//                    
-//                    NSInteger taxOnPrimium=(primium*18)/100;
+                   
                     
                     NSInteger finalPrice = price + primium + total_gst;//price + primium + vat + taxOnPrimium;
                     
                     NSString *strPrimium = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:primium]];
                     NSString *strGST = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:total_gst]];
 
-//                    NSString *strvat = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:vat]];
-//                    NSString *strtaxOnPrimium= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:taxOnPrimium]];
                     NSString *strFinalPrice= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:finalPrice]];
                     
                     
                     CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strPrimium];
-                    
-                    //Vat on Hammer Price (12 %):
-                    //GST on Art Work (3 %) (including buyer's premium)
+                  
                     CurrentSelectedGridCell.lbl_gstTxt.text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including buyer's premium)",(long)gst,"%"];
                     CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strGST];
-                    //CurrentSelectedGridCell.lblServiceTaxOnPremium.text=[NSString stringWithFormat:@"%@",strtaxOnPrimium];
                     CurrentSelectedGridCell.lblServiceTaxOnPremium.hidden = YES;
                     CurrentSelectedGridCell.lblGrandTotal.text=[NSString stringWithFormat:@"%@",strFinalPrice];
                     CurrentSelectedGridCell.lblEstimation.text=_objCurrentOuction.strestamiate;
@@ -293,23 +311,17 @@
 
                     NSInteger total_gst = (total*gst)/100;
                     
-//                    NSInteger vat =(price*13.5)/100;
-//                    NSInteger taxOnPrimium=(Primium*15)/100;
-                    
                     NSInteger finalPrice = price + primium + total_gst; //price+Primium+vat+taxOnPrimium;
                     
                     NSString *strPrimium = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:primium]];
                     NSString *strGST = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:total_gst]];
 
-//                    NSString *strvat= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:vat]];
-//                    NSString *strtaxOnPrimium= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:taxOnPrimium]];
                     NSString *strFinalPrice= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:finalPrice]];
                     
                     
                     CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strPrimium];
                     CurrentSelectedGridCell.lbl_gstTxt.text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including buyer's premium)",(long)gst,"%"];
                     CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strGST];
-                    //CurrentSelectedGridCell.lblServiceTaxOnPremium.text=[NSString stringWithFormat:@"%@",strtaxOnPrimium];
                     CurrentSelectedGridCell.lblServiceTaxOnPremium.hidden = YES;
                     CurrentSelectedGridCell.lblGrandTotal.text=[NSString stringWithFormat:@"%@",strFinalPrice];
                     
@@ -317,8 +329,7 @@
                     NSArray *subStrings = [_objCurrentOuction.strestamiate componentsSeparatedByString:@"–"]; //or rather @" - "
                     if (subStrings.count>1)
                     {
-                        // strFromRangeString = [subStrings objectAtIndex:0];
-                        //  strToRangeString = [subStrings objectAtIndex:1];
+                  
                         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
                         formatter.numberStyle = NSNumberFormatterDecimalStyle;
                         NSString *strFromRangeString = [[subStrings objectAtIndex:0] stringByTrimmingCharactersInSet:nonNumbersSet];
@@ -352,15 +363,21 @@
                     UILabel *Lbl_1 = (UILabel *)[subvuew viewWithTag:1];
                     Lbl_1.text = @"Title: ";
                     UILabel *Lbl_2 = (UILabel *)[subvuew viewWithTag:2];
-                    Lbl_2.text = @"Description: ";
+                    Lbl_2.text = @"Category: ";
                     UILabel *Lbl_3 = (UILabel *)[subvuew viewWithTag:3];
-                    Lbl_3.text = @"";
+                    Lbl_3.text = @" ";
+                    UILabel *Lbl_4 = (UILabel *)[subvuew viewWithTag:4];
+                    Lbl_4.text = @" ";
+                    UILabel *Lbl_5 = (UILabel *)[subvuew viewWithTag:5];
+                    Lbl_5.text = @" ";
                     
                     CurrentSelectedGridCell.lblArtistName.text=_objCurrentOuction.strtitle;
-                    NSString *ht = [ClsSetting getAttributedStringFormHtmlString:_objCurrentOuction.strPrdescription];
-                    CurrentSelectedGridCell.lblMedium.text= ht;
-                    CurrentSelectedGridCell.lblYear.text = @"";
-                    CurrentSelectedGridCell.lblSize.text = [NSString stringWithFormat:@"%@ in",_objCurrentOuction.strproductsize];
+                   // NSString *ht = [ClsSetting getAttributedStringFormHtmlString:_objCurrentOuction.strPrdescription];
+                    CurrentSelectedGridCell.lblMedium.text= _objCurrentOuction.strcategory;//ht;
+                    CurrentSelectedGridCell.lblYear.text = @" ";
+                    CurrentSelectedGridCell.lblSize.text = @" ";////[NSString stringWithFormat:@"%@ in",_objCurrentOuction.strproductsize];
+                    
+                    CurrentSelectedGridCell.lblEstimation.text = @" ";
                 }
                 else
                 {
@@ -407,22 +424,16 @@
                     
                     NSInteger total_gst = (total*gst)/100;
                     
-//                    NSInteger vat =(price*13.5)/100;
-//                    NSInteger taxOnPrimium=(Primium*15)/100;
-                    
                     NSInteger finalPrice = price + primium + total_gst;//price+primium+vat+taxOnPrimium;
                     
                     NSString *strPrimium = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:primium]];
                     NSString *strGST = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:total_gst]];
 
-                   // NSString *strvat= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:gst]];
-                    //NSString *strtaxOnPrimium= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:taxOnPrimium]];
                     NSString *strFinalPrice= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:finalPrice]];
                     
                     CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strPrimium];
                     CurrentSelectedGridCell.lbl_gstTxt.text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including buyer's premium)",(long)gst,"%"];
                     CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strGST];
-                   // CurrentSelectedGridCell.lblServiceTaxOnPremium.text=[NSString stringWithFormat:@"%@",strtaxOnPrimium];
                     CurrentSelectedGridCell.lblServiceTaxOnPremium.hidden = YES;
                     CurrentSelectedGridCell.lblGrandTotal.text=[NSString stringWithFormat:@"%@",strFinalPrice];
                     CurrentSelectedGridCell.lblEstimation.text=_objCurrentOuction.strestamiate;
@@ -443,24 +454,19 @@
                     NSInteger total = price + primium;
                     
                     NSInteger total_gst = (total*gst)/100;
-                    
-//                    NSInteger vat =(price*13.5)/100;
-//                    NSInteger taxOnPrimium = (primium*15)/100;.
+                   
                     
                     NSInteger finalPrice = price + primium + total_gst;//price+Primium+vat+taxOnPrimium;
                     
                     NSString *strPrimium = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:primium]];
                     NSString *strGST = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:total_gst]];
 
-//                    NSString *strvat= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:vat]];
-//                    NSString *strtaxOnPrimium= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:taxOnPrimium]];
                     NSString *strFinalPrice= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:finalPrice]];
                     
                     
                     CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strPrimium];
                     CurrentSelectedGridCell.lbl_gstTxt. text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including buyer's premium)",(long)gst,"%"];
                     CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strGST];
-//                    CurrentSelectedGridCell.lblServiceTaxOnPremium.text=[NSString stringWithFormat:@"%@",strtaxOnPrimium];
                     CurrentSelectedGridCell.lblServiceTaxOnPremium.hidden = YES;
                     CurrentSelectedGridCell.lblGrandTotal.text=[NSString stringWithFormat:@"%@",strFinalPrice];
                     
@@ -504,15 +510,20 @@
                     UILabel *Lbl_1 = (UILabel *)[subvuew viewWithTag:1];
                     Lbl_1.text = @"Title: ";
                     UILabel *Lbl_2 = (UILabel *)[subvuew viewWithTag:2];
-                    Lbl_2.text = @"Description: ";
+                    Lbl_2.text = @"Category: ";
                     UILabel *Lbl_3 = (UILabel *)[subvuew viewWithTag:3];
-                    Lbl_3.text = @"";
+                    Lbl_3.text = @" ";
+                    UILabel *Lbl_4 = (UILabel *)[subvuew viewWithTag:4];
+                    Lbl_4.text = @" ";
+                    UILabel *Lbl_5 = (UILabel *)[subvuew viewWithTag:5];
+                    Lbl_5.text = @" ";
                     
                     CurrentSelectedGridCell.lblArtistName.text=_objCurrentOuction.strtitle;
-                    NSString *ht = [ClsSetting getAttributedStringFormHtmlString:_objCurrentOuction.strPrdescription];
-                    CurrentSelectedGridCell.lblMedium.text= ht;
-                    CurrentSelectedGridCell.lblYear.text = @"";
-                    CurrentSelectedGridCell.lblSize.text = [NSString stringWithFormat:@"%@ in",_objCurrentOuction.strproductsize];
+                    //NSString *ht = [ClsSetting getAttributedStringFormHtmlString:_objCurrentOuction.strPrdescription];
+                    CurrentSelectedGridCell.lblMedium.text= _objCurrentOuction.strcategory;//ht;
+                    CurrentSelectedGridCell.lblYear.text = @" ";
+                    CurrentSelectedGridCell.lblSize.text = @" ";//[NSString stringWithFormat:@"%@ in",_objCurrentOuction.strproductsize];
+                    CurrentSelectedGridCell.lblEstimation.text = @" ";
                 }
                 else
                 {
@@ -526,9 +537,7 @@
                 }
                 
                 CurrentSelectedGridCell.lblProductName.text= _objCurrentOuction.strtitle;
-                
-                CurrentSelectedGridCell.lblYear.text= _objCurrentOuction.strproductdate;
-                CurrentSelectedGridCell.lblSize.text= [NSString stringWithFormat:@"%@ in",_objCurrentOuction.strproductsize];
+             
                 CurrentSelectedGridCell.imgProduct.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[ClsSetting imageURL], _objCurrentOuction.strthumbnail]];
                 
                 [CurrentSelectedGridCell.btnLot setTitle:[NSString stringWithFormat:@"Lot:%@",[ClsSetting TrimWhiteSpaceAndNewLine:_objCurrentOuction.strReference]] forState:UIControlStateNormal];
@@ -606,10 +615,8 @@
         BforeLoginViewController *rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"BforeLoginViewController"];
         [self.navigationController pushViewController:rootViewController animated:YES];
     }
-   
-   
-   
 }
+
 -(void)checkBlackOrNot:(NSString*)str label:(UILabel*)lbl;
 {
     if (str.length==0)

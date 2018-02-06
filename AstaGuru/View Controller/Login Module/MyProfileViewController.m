@@ -115,7 +115,7 @@
     }
     else
     {
-        [ClsSetting ValidationPromt:@"Some thing went wrong"];
+        [ClsSetting ValidationPromt:@"Information Not Updated"];
     }
 }
 
@@ -196,52 +196,52 @@
 {
     if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtFirstName.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Enter First Name"];
+        [ClsSetting ValidationPromt:@"Enter First Name"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtLastName.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Enter Last Name"];
+        [ClsSetting ValidationPromt:@"Enter Last Name"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtCity.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Select City Name"];
+        [ClsSetting ValidationPromt:@"Enter City"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtCountry.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Select Country Name"];
+        [ClsSetting ValidationPromt:@"Enter Country"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtState.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae select State Name"];
+        [ClsSetting ValidationPromt:@"Enter State"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtMobileNumber.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Enter Mobile Number"];
+        [ClsSetting ValidationPromt:@"Enter Mobile Number"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtEmail.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Enter Email-id"];
+        [ClsSetting ValidationPromt:@"Enter Email Id"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtUserName.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Enter User Name"];
+        [ClsSetting ValidationPromt:@"Enter User Name"];
         return NO;
     }
     else if ([ClsSetting TrimWhiteSpaceAndNewLine:_txtPassword.text].length==0)
     {
-        [ClsSetting ValidationPromt:@"Pleae Enter Password"];
+        [ClsSetting ValidationPromt:@"Enter Password"];
         return NO;
     }
     else if (![_txtPassword.text isEqualToString:_txtPassword.text])
     {
-        [ClsSetting ValidationPromt:@"Password & Confarm Password should be same"];
+        [ClsSetting ValidationPromt:@"Password Not Match"];
         return NO;
     }
     return YES;

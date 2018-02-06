@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CzK-xU-4r7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CzK-xU-4r7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -491,7 +491,7 @@ sold by Astaguru till date. </string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bn9-KZ-mhL">
-                                                    <rect key="frame" x="30" y="4" width="35" height="14"/>
+                                                    <rect key="frame" x="28" y="4" width="37" height="14"/>
                                                     <color key="backgroundColor" red="0.99283617729999996" green="0.036778323350000003" blue="0.001283863676" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14" id="F97-iU-hPB"/>
@@ -639,13 +639,13 @@ sold by Astaguru till date. </string>
                                                     <rect key="frame" x="1" y="105" width="358" height="35"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QtQ-cu-8Ry">
-                                                            <rect key="frame" x="8" y="11" width="24.5" height="13"/>
+                                                            <rect key="frame" x="8" y="11" width="29" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-down-arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="hOD-AZ-cyy">
-                                                            <rect key="frame" x="37.5" y="11.5" width="12" height="12"/>
+                                                            <rect key="frame" x="42" y="11.5" width="12" height="12"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="12" id="4ST-KH-agB"/>
                                                                 <constraint firstAttribute="width" constant="12" id="7RR-N9-BJf"/>
@@ -671,7 +671,7 @@ sold by Astaguru till date. </string>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQB-5D-BUm">
-                                                            <rect key="frame" x="192" y="2.5" width="48" height="30"/>
+                                                            <rect key="frame" x="188" y="2.5" width="52" height="30"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -686,7 +686,7 @@ sold by Astaguru till date. </string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkY-8h-9lu">
-                                                            <rect key="frame" x="192" y="2.5" width="69" height="30"/>
+                                                            <rect key="frame" x="188" y="2.5" width="73" height="30"/>
                                                             <connections>
                                                                 <action selector="ChangeCurrencyPressed:" destination="9I9-Zf-goK" eventType="touchUpInside" id="We3-Fb-vjI"/>
                                                             </connections>
@@ -1012,7 +1012,7 @@ sold by Astaguru till date. </string>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1YR-1x-X71">
-                                                            <rect key="frame" x="69.5" y="155" width="85.5" height="13"/>
+                                                            <rect key="frame" x="75.5" y="155" width="79.5" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.90196078431372551" green="0.23529411764705882" blue="0.23921568627450979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -1025,7 +1025,7 @@ sold by Astaguru till date. </string>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hrk-k5-ezl">
-                                                            <rect key="frame" x="4" y="155" width="63.5" height="13"/>
+                                                            <rect key="frame" x="4" y="155" width="69.5" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.48627450980392156" green="0.48627450980392156" blue="0.48627450980392156" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -1179,7 +1179,7 @@ sold by Astaguru till date. </string>
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Medium: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKf-vf-6FT">
-                                                    <rect key="frame" x="5" y="50" width="46.5" height="13"/>
+                                                    <rect key="frame" x="5" y="50" width="50.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1245,7 +1245,7 @@ sold by Astaguru till date. </string>
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estimate:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4S-hj-uOm">
-                                                    <rect key="frame" x="5" y="116" width="46" height="13"/>
+                                                    <rect key="frame" x="5" y="116" width="51.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1274,7 +1274,7 @@ sold by Astaguru till date. </string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYu-oA-UBh">
-                                                            <rect key="frame" x="3" y="78" width="63.5" height="13"/>
+                                                            <rect key="frame" x="3" y="78" width="69.5" height="13"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="5dW-2j-asg"/>
                                                             </constraints>
@@ -1295,7 +1295,7 @@ sold by Astaguru till date. </string>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDF-Yw-0WR">
-                                                            <rect key="frame" x="68.5" y="78" width="87.5" height="13"/>
+                                                            <rect key="frame" x="74.5" y="78" width="81.5" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.90196078430000004" green="0.23529411759999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -1729,13 +1729,13 @@ sold by Astaguru till date. </string>
                                                                     </constraints>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mev-fC-hxS">
-                                                                    <rect key="frame" x="65.5" y="77" width="168.5" height="13"/>
+                                                                    <rect key="frame" x="71.5" y="77" width="162.5" height="13"/>
                                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                                     <color key="textColor" red="0.90196078430000004" green="0.23529411759999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpB-uQ-3Uf">
-                                                                    <rect key="frame" x="0.0" y="77" width="63.5" height="13"/>
+                                                                    <rect key="frame" x="0.0" y="77" width="69.5" height="13"/>
                                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -2125,7 +2125,7 @@ sold by Astaguru till date. </string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QbO-CM-X6d">
-                                                    <rect key="frame" x="30" y="4" width="35" height="14"/>
+                                                    <rect key="frame" x="28" y="4" width="37" height="14"/>
                                                     <color key="backgroundColor" red="0.99283617734909058" green="0.036778323352336884" blue="0.0012838636757805943" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14" id="fgo-98-XP0"/>
@@ -3455,31 +3455,31 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                     <rect key="frame" x="129" y="29" width="175" height="100"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Artist: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qo7-MF-491">
-                                                            <rect key="frame" x="0.0" y="0.0" width="38" height="16"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="43.5" height="16"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="13"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5UJ-1x-bQg">
-                                                            <rect key="frame" x="38" y="0.0" width="137" height="16"/>
+                                                            <rect key="frame" x="43.5" y="0.0" width="131.5" height="16"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="13"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bt9-Dp-HWN">
-                                                            <rect key="frame" x="54.5" y="21" width="120.5" height="16"/>
+                                                            <rect key="frame" x="59.5" y="21" width="115.5" height="16"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="13"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKK-Dt-ttw">
-                                                            <rect key="frame" x="32" y="63" width="143" height="16"/>
+                                                            <rect key="frame" x="34.5" y="63" width="140.5" height="16"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="13"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uco-pI-mxr">
-                                                            <rect key="frame" x="58" y="84" width="117" height="16"/>
+                                                            <rect key="frame" x="65" y="84" width="110" height="16"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="109" id="Gnb-dK-kOz"/>
                                                             </constraints>
@@ -3493,7 +3493,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                             </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0BQ-wf-3qu">
-                                                            <rect key="frame" x="32.5" y="42" width="142.5" height="16"/>
+                                                            <rect key="frame" x="35.5" y="42" width="139.5" height="16"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="109" id="PyK-E0-Adh"/>
                                                             </constraints>
@@ -3507,25 +3507,25 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                             </variation>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Estimate: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSY-kM-dLn">
-                                                            <rect key="frame" x="0.0" y="84" width="58" height="16"/>
+                                                            <rect key="frame" x="0.0" y="84" width="65" height="16"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="13"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="253" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="Medium: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGx-aE-0Pj">
-                                                            <rect key="frame" x="0.0" y="21" width="54.5" height="16"/>
+                                                            <rect key="frame" x="0.0" y="21" width="59.5" height="16"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="13"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Year: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XuH-gs-aR2">
-                                                            <rect key="frame" x="0.0" y="42" width="32.5" height="16"/>
+                                                            <rect key="frame" x="0.0" y="42" width="35.5" height="16"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="13"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4C-8Q-yN4">
-                                                            <rect key="frame" x="0.0" y="63" width="32" height="16"/>
+                                                            <rect key="frame" x="0.0" y="63" width="34.5" height="16"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="13"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -3829,7 +3829,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hns-Ov-GM7">
-                                                    <rect key="frame" x="30" y="4" width="35" height="14"/>
+                                                    <rect key="frame" x="28" y="4" width="37" height="14"/>
                                                     <color key="backgroundColor" red="0.99283617729999996" green="0.036778323350000003" blue="0.001283863676" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14" id="mV8-tu-2k0"/>
@@ -3927,85 +3927,85 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Billing Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXE-kl-m44">
-                                                    <rect key="frame" x="8" y="35" width="101.5" height="17"/>
+                                                    <rect key="frame" x="8" y="35" width="110.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="19" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Jamino Roy (1887-1972)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIJ-8G-MZe">
-                                                    <rect key="frame" x="109.5" y="35" width="195.5" height="17"/>
+                                                    <rect key="frame" x="118.5" y="35" width="186.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="14"/>
                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Billing Address: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xE-kW-FCd">
-                                                    <rect key="frame" x="8" y="60" width="101.5" height="17"/>
+                                                    <rect key="frame" x="8" y="60" width="110.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="City:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acA-Of-TMM">
-                                                    <rect key="frame" x="8" y="85" width="101.5" height="17"/>
+                                                    <rect key="frame" x="8" y="85" width="110.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="17" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Tempera On Linen" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jYc-uJ-V0Y">
-                                                    <rect key="frame" x="109.5" y="85" width="195.5" height="17"/>
+                                                    <rect key="frame" x="118.5" y="85" width="186.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="State:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xl3-mD-LYP">
-                                                    <rect key="frame" x="8" y="110" width="101.5" height="17"/>
+                                                    <rect key="frame" x="8" y="110" width="110.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="18" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Circa 1910" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ie-gp-ufE">
-                                                    <rect key="frame" x="109.5" y="110" width="195.5" height="17"/>
+                                                    <rect key="frame" x="118.5" y="110" width="186.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Country:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lh0-G3-HBN">
-                                                    <rect key="frame" x="8" y="135" width="101.5" height="17"/>
+                                                    <rect key="frame" x="8" y="135" width="110.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="14" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="India" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fw-6Y-cEh">
-                                                    <rect key="frame" x="109.5" y="135" width="195.5" height="17"/>
+                                                    <rect key="frame" x="118.5" y="135" width="186.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Zip:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ck-ut-A7u">
-                                                    <rect key="frame" x="8" y="160" width="101.5" height="17"/>
+                                                    <rect key="frame" x="8" y="160" width="110.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="15" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="422004" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ex-Oi-dxl">
-                                                    <rect key="frame" x="109.5" y="160" width="195.5" height="17"/>
+                                                    <rect key="frame" x="118.5" y="160" width="186.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUV-s5-TR7">
-                                                    <rect key="frame" x="8" y="185" width="101.5" height="17"/>
+                                                    <rect key="frame" x="8" y="185" width="110.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="15" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="abc@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fav-3m-bHF">
-                                                    <rect key="frame" x="109.5" y="185" width="195.5" height="17"/>
+                                                    <rect key="frame" x="118.5" y="185" width="186.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billing Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MaJ-QC-WpG">
-                                                    <rect key="frame" x="8" y="8" width="107" height="19"/>
+                                                    <rect key="frame" x="8" y="8" width="116" height="19"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -4021,19 +4021,19 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="16" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Modarn Indian Art" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baQ-mC-gSV">
-                                                    <rect key="frame" x="109.5" y="60" width="195.5" height="17"/>
+                                                    <rect key="frame" x="118.5" y="60" width="186.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Phone No:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayI-gW-lJy">
-                                                    <rect key="frame" x="8" y="210" width="101.5" height="17"/>
+                                                    <rect key="frame" x="8" y="210" width="110.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="15" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="022-45665225" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2LZ-Ck-1E9">
-                                                    <rect key="frame" x="109.5" y="210" width="195.5" height="17"/>
+                                                    <rect key="frame" x="118.5" y="210" width="186.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -4114,7 +4114,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchase Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0b-CD-zyJ">
-                                                    <rect key="frame" x="8" y="8" width="120.5" height="19"/>
+                                                    <rect key="frame" x="8" y="8" width="132" height="19"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -4165,31 +4165,31 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                     <rect key="frame" x="96" y="58" width="208" height="105"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Artist: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cpo-hL-H14">
-                                                            <rect key="frame" x="0.0" y="0.0" width="40.5" height="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="47" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSK-WC-qbT">
-                                                            <rect key="frame" x="40.5" y="0.0" width="167.5" height="17"/>
+                                                            <rect key="frame" x="47" y="0.0" width="161" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Medium: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3e-dQ-Tjs">
-                                                            <rect key="frame" x="0.0" y="22" width="59" height="17"/>
+                                                            <rect key="frame" x="0.0" y="22" width="64" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fr-Cm-kqZ">
-                                                            <rect key="frame" x="59" y="22" width="149" height="17"/>
+                                                            <rect key="frame" x="64" y="22" width="144" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Year: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muc-er-Q3i">
-                                                            <rect key="frame" x="0.0" y="44" width="35" height="17"/>
+                                                            <rect key="frame" x="0.0" y="44" width="38" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -4210,19 +4210,19 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awt-Dk-hi9">
-                                                            <rect key="frame" x="62.5" y="88" width="145.5" height="17"/>
+                                                            <rect key="frame" x="70" y="88" width="138" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2u-HJ-4Yh">
-                                                            <rect key="frame" x="35" y="44" width="173" height="17"/>
+                                                            <rect key="frame" x="38" y="44" width="170" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" text="Estimate: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7T-2L-wea">
-                                                            <rect key="frame" x="0.0" y="88" width="62.5" height="17"/>
+                                                            <rect key="frame" x="0.0" y="88" width="70" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -4270,61 +4270,61 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                     <rect key="frame" x="8" y="180" width="294" height="116.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="20000000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGb-pA-rZL">
-                                                            <rect key="frame" x="231.5" y="0.0" width="62.5" height="17"/>
+                                                            <rect key="frame" x="224" y="0.0" width="70" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Hammer Price: " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjr-Z0-5oa">
-                                                            <rect key="frame" x="0.0" y="0.0" width="231.5" height="17"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="224" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="15% Buyers Premium: " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJ6-2I-7wX">
-                                                            <rect key="frame" x="0.0" y="25" width="231.5" height="17"/>
+                                                            <rect key="frame" x="0.0" y="25" width="224" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="3000000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wj-eE-lMh">
-                                                            <rect key="frame" x="231.5" y="25" width="62.5" height="17"/>
+                                                            <rect key="frame" x="224" y="25" width="70" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="GST on Art Work (3 %) (including buyer's premium)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2pJ-dS-x9z">
-                                                            <rect key="frame" x="0.0" y="50" width="231.5" height="17"/>
+                                                            <rect key="frame" x="0.0" y="50" width="224" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="250000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CP0-HL-WRv">
-                                                            <rect key="frame" x="231.5" y="50" width="62.5" height="17"/>
+                                                            <rect key="frame" x="224" y="50" width="70" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="18% GST on Buyers Premium: " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmZ-81-vft">
-                                                            <rect key="frame" x="0.0" y="75" width="231.5" height="16.5"/>
+                                                            <rect key="frame" x="0.0" y="75" width="224" height="16.5"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="43500" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Agk-5W-Tk5">
-                                                            <rect key="frame" x="231.5" y="75" width="62.5" height="17"/>
+                                                            <rect key="frame" x="224" y="75" width="70" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Grand Total: " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDi-Vj-7qT">
-                                                            <rect key="frame" x="145.5" y="99.5" width="86" height="18"/>
+                                                            <rect key="frame" x="129" y="99.5" width="95" height="18"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="15"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="43500" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AXY-pZ-cxb">
-                                                            <rect key="frame" x="231.5" y="99.5" width="62.5" height="17"/>
+                                                            <rect key="frame" x="224" y="99.5" width="70" height="17"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -4364,7 +4364,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note: Crating and shipping charged separately depending on delivery location." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTd-gm-RGH">
-                                                    <rect key="frame" x="8" y="304.5" width="294" height="56"/>
+                                                    <rect key="frame" x="8" y="304.5" width="294" height="56.5"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="16"/>
                                                     <color key="textColor" red="0.50980392156862742" green="0.40392156862745099" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -4674,7 +4674,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q6K-eZ-GIF">
-                                                    <rect key="frame" x="30" y="4" width="35" height="14"/>
+                                                    <rect key="frame" x="28" y="4" width="37" height="14"/>
                                                     <color key="backgroundColor" red="0.99283617729999996" green="0.036778323350000003" blue="0.001283863676" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14" id="eW4-Xe-CtP"/>
@@ -4798,13 +4798,13 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                     <rect key="frame" x="0.0" y="105" width="359" height="35"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6l-Cs-ol1">
-                                                            <rect key="frame" x="8" y="11" width="24.5" height="13"/>
+                                                            <rect key="frame" x="8" y="11" width="29" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-down-arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="dae-zK-1k0">
-                                                            <rect key="frame" x="37.5" y="11.5" width="12" height="12"/>
+                                                            <rect key="frame" x="42" y="11.5" width="12" height="12"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="12" id="9PO-3h-wWf"/>
                                                                 <constraint firstAttribute="width" constant="12" id="ciV-sr-EOw"/>
@@ -4821,7 +4821,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HpA-oY-TMr">
-                                                            <rect key="frame" x="203" y="3" width="48" height="30"/>
+                                                            <rect key="frame" x="199" y="3" width="52" height="30"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -4836,7 +4836,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="095-eZ-Vhy">
-                                                            <rect key="frame" x="202.5" y="3" width="69.5" height="30"/>
+                                                            <rect key="frame" x="198.5" y="3" width="73.5" height="30"/>
                                                             <connections>
                                                                 <action selector="btnCurrencyChanged:" destination="DzQ-AV-BuZ" eventType="touchUpInside" id="Mnd-eS-bXf"/>
                                                             </connections>
@@ -4849,14 +4849,14 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                             </constraints>
                                                         </view>
                                                         <view tag="11" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZqK-nm-FgM">
-                                                            <rect key="frame" x="197" y="0.0" width="1" height="35"/>
+                                                            <rect key="frame" x="193" y="0.0" width="1" height="35"/>
                                                             <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="1" id="gdi-9v-bCb"/>
                                                             </constraints>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Kq-bt-vDt">
-                                                            <rect key="frame" x="97" y="2.5" width="95" height="30"/>
+                                                            <rect key="frame" x="93" y="2.5" width="95" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="95" id="opI-xb-Zf2"/>
                                                                 <constraint firstAttribute="height" constant="30" id="zqk-Eg-vC9"/>
@@ -5193,7 +5193,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medium:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKu-aa-9Ir">
-                                                    <rect key="frame" x="5" y="50" width="43.5" height="13"/>
+                                                    <rect key="frame" x="5" y="50" width="46.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -5251,7 +5251,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estimate:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTd-8I-dnx">
-                                                    <rect key="frame" x="5" y="117" width="46" height="13"/>
+                                                    <rect key="frame" x="5" y="117" width="51.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -5624,7 +5624,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medium:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="loV-aF-YMx">
-                                                    <rect key="frame" x="5" y="50" width="43.5" height="13"/>
+                                                    <rect key="frame" x="5" y="50" width="46.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -5682,7 +5682,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estimate:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bn0-O8-ZT7">
-                                                    <rect key="frame" x="5" y="117" width="46" height="13"/>
+                                                    <rect key="frame" x="5" y="117" width="51.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -7333,21 +7333,18 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gn9-bn-3gE">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gn9-bn-3gE">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" searchBarStyle="minimal" scopeBarBackgroundImage="black.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Zzu-ik-Z7n">
                                         <rect key="frame" x="0.0" y="0.0" width="319" height="44"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" red="0.25490196078431371" green="0.25490196078431371" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="barTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <textInputTraits key="textInputTraits" keyboardAppearance="light" returnKeyType="search"/>
                                         <scopeButtonTitles>
                                             <string></string>
                                         </scopeButtonTitles>
-                                        <connections>
-                                            <outlet property="delegate" destination="04M-1d-Qkr" id="A2r-Fr-w0T"/>
-                                        </connections>
                                     </searchBar>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JtI-Je-4Sq">
                                         <rect key="frame" x="319" y="5" width="48" height="34"/>
@@ -7371,8 +7368,13 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                     <constraint firstAttribute="bottom" secondItem="Zzu-ik-Z7n" secondAttribute="bottom" id="x4y-3d-xTR"/>
                                 </constraints>
                             </view>
+                            <searchBar contentMode="redraw" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZU-5y-ktB">
+                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZJu-9h-RES">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="76" width="375" height="591"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="tZJ-e2-4fC">
                                     <size key="itemSize" width="312" height="50"/>
@@ -7415,21 +7417,24 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                         <constraints>
                             <constraint firstItem="Gn9-bn-3gE" firstAttribute="leading" secondItem="SvD-aB-g0Z" secondAttribute="leading" id="8Xm-iJ-nKe"/>
                             <constraint firstItem="GTi-Fl-pze" firstAttribute="top" secondItem="ZJu-9h-RES" secondAttribute="bottom" id="A1V-9p-sHy"/>
-                            <constraint firstItem="ZJu-9h-RES" firstAttribute="top" secondItem="Gn9-bn-3gE" secondAttribute="bottom" id="JQp-oi-KvK"/>
+                            <constraint firstItem="cZU-5y-ktB" firstAttribute="leading" secondItem="SvD-aB-g0Z" secondAttribute="leading" id="IYQ-pV-HoH"/>
                             <constraint firstItem="ZJu-9h-RES" firstAttribute="leading" secondItem="SvD-aB-g0Z" secondAttribute="leading" id="SQM-TW-wle"/>
                             <constraint firstItem="Gn9-bn-3gE" firstAttribute="top" secondItem="hOn-Y9-P1a" secondAttribute="bottom" id="TdD-5x-Rv4"/>
+                            <constraint firstItem="cZU-5y-ktB" firstAttribute="top" secondItem="SvD-aB-g0Z" secondAttribute="top" constant="20" id="b5p-Mg-XYH"/>
                             <constraint firstAttribute="trailing" secondItem="ZJu-9h-RES" secondAttribute="trailing" id="cyL-tE-FZl"/>
+                            <constraint firstItem="ZJu-9h-RES" firstAttribute="top" secondItem="cZU-5y-ktB" secondAttribute="bottom" id="g34-Js-rru"/>
+                            <constraint firstAttribute="trailing" secondItem="cZU-5y-ktB" secondAttribute="trailing" id="jva-GI-8Yc"/>
                             <constraint firstAttribute="trailing" secondItem="Gn9-bn-3gE" secondAttribute="trailing" id="zsM-8R-3Pv"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="clvSearchBaR" destination="ZJu-9h-RES" id="DHo-O6-Hi4"/>
-                        <outlet property="searchBar" destination="Zzu-ik-Z7n" id="Euq-IK-fsD"/>
+                        <outlet property="searchBar" destination="cZU-5y-ktB" id="zJy-OM-CsV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGX-6B-NUG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1790" y="-73"/>
+            <point key="canvasLocation" x="1789.5999999999999" y="-73.313343328335833"/>
         </scene>
         <!--Privacy Police View Controller-->
         <scene sceneID="sAl-gB-WER">
@@ -7813,13 +7818,13 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want To Sell?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvz-Tr-JcY">
-                                                    <rect key="frame" x="139.5" y="8" width="97.5" height="19"/>
+                                                    <rect key="frame" x="134" y="8" width="107" height="19"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="6" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="748" text="If you have any item ready for auction, please let us know the details" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HfB-F6-Kqt">
-                                                    <rect key="frame" x="49" y="35" width="278" height="33.5"/>
+                                                    <rect key="frame" x="48" y="35" width="278" height="33.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="278" id="RI0-nU-xWb"/>
                                                     </constraints>
@@ -8023,16 +8028,16 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ce-Pu-rye">
-                                                    <rect key="frame" x="108" y="94" width="159" height="42.5"/>
+                                                    <rect key="frame" x="101.5" y="94" width="172" height="42.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="113" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="246" horizontalCompressionResistancePriority="746" verticalCompressionResistancePriority="746" text="Countdown :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJm-b3-VaA">
-                                                            <rect key="frame" x="0.0" y="0.0" width="81" height="42.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="88" height="42.5"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="13" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zc2-CD-6Gg">
-                                                            <rect key="frame" x="86" y="13.5" width="73" height="16.5"/>
+                                                            <rect key="frame" x="93" y="13.5" width="79" height="16.5"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.90196078430000004" green="0.23529411759999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -8212,19 +8217,19 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     <rect key="frame" x="8" y="53.5" width="359" height="65"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="109" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Winning Bid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2VV-Pf-MV1">
-                                                            <rect key="frame" x="142.5" y="0.0" width="75.5" height="16.5"/>
+                                                            <rect key="frame" x="139.5" y="0.0" width="81.5" height="16.5"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="110" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="₹20,0,00,000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSu-eS-Qcv">
-                                                            <rect key="frame" x="140" y="20.5" width="81.5" height="16"/>
+                                                            <rect key="frame" x="137.5" y="20.5" width="86.5" height="16"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="120" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" horizontalCompressionResistancePriority="748" verticalCompressionResistancePriority="748" text=" (Inclusive of 15% Buyer's Premium)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1V-sw-Ssj">
-                                                            <rect key="frame" x="68.5" y="41.5" width="226.5" height="23.5"/>
+                                                            <rect key="frame" x="59.5" y="41.5" width="243" height="23.5"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -8372,7 +8377,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lot Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RK1-8a-wur">
-                                                    <rect key="frame" x="8" y="8" width="109.5" height="52.5"/>
+                                                    <rect key="frame" x="8" y="8" width="121.5" height="52.5"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -8431,7 +8436,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="18" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Circa 1910" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvp-FS-Ieu">
-                                                    <rect key="frame" x="43" y="130" width="324" height="16.5"/>
+                                                    <rect key="frame" x="46" y="130" width="321" height="16.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="109" id="Zdg-MI-ikU"/>
                                                     </constraints>
@@ -8445,7 +8450,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="14" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sF4-bY-C4t">
-                                                    <rect key="frame" x="42.5" y="151.5" width="324" height="16.5"/>
+                                                    <rect key="frame" x="45.5" y="151.5" width="321" height="16.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="109" id="JYN-7z-pWR"/>
                                                     </constraints>
@@ -8459,19 +8464,19 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5rv-Oa-mLF">
-                                                    <rect key="frame" x="8" y="151.5" width="34.5" height="17"/>
+                                                    <rect key="frame" x="8" y="151.5" width="37.5" height="17"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="254" verticalHuggingPriority="251" horizontalCompressionResistancePriority="754" text="Estimate: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sii-Uq-Q5x">
-                                                    <rect key="frame" x="8" y="173" width="62.5" height="17"/>
+                                                    <rect key="frame" x="8" y="173" width="70" height="17"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="15" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQz-ni-LaN">
-                                                    <rect key="frame" x="70.5" y="173" width="296" height="16.5"/>
+                                                    <rect key="frame" x="78" y="173" width="288.5" height="16.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="109" id="9pd-hB-API"/>
                                                     </constraints>
@@ -8485,7 +8490,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="253" verticalHuggingPriority="251" text="Year: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHZ-xv-Sw4">
-                                                    <rect key="frame" x="8" y="130" width="35" height="17"/>
+                                                    <rect key="frame" x="8" y="130" width="38" height="17"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -8655,7 +8660,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XwG-3g-tfp">
-                                                    <rect key="frame" x="8" y="45.5" width="79" height="31"/>
+                                                    <rect key="frame" x="8" y="45.5" width="84" height="31"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="16"/>
                                                     <state key="normal" title="Read More">
                                                         <color key="titleColor" red="0.65571743250000003" green="0.55569469930000004" blue="0.413662523" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -8920,7 +8925,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                             <rect key="frame" x="0.0" y="0.0" width="359" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="111" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="No Records Found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7eI-JE-X7G">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="111" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="No records found" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7eI-JE-X7G">
                                                     <rect key="frame" x="5" y="10" width="349" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="109" id="441-Ec-j7b"/>
@@ -10402,7 +10407,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lm3-Ky-HHh">
-                                <rect key="frame" x="8" y="50" width="113" height="31"/>
+                                <rect key="frame" x="8" y="50" width="125" height="31"/>
                                 <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="16"/>
                                 <state key="normal" title="Current Auction">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -10412,7 +10417,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ljt-jq-MCu">
-                                <rect key="frame" x="8" y="81" width="113" height="2"/>
+                                <rect key="frame" x="8" y="81" width="125" height="2"/>
                                 <color key="backgroundColor" red="0.65490196079999996" green="0.5568627451" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="dJq-hd-dDV"/>
@@ -10422,7 +10427,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Je-z4-OKK">
-                                <rect key="frame" x="126" y="50" width="134" height="31"/>
+                                <rect key="frame" x="138" y="50" width="144" height="31"/>
                                 <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="16"/>
                                 <state key="normal" title="Upcoming Auction">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -10432,7 +10437,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVU-kd-5dv">
-                                <rect key="frame" x="126" y="81" width="134" height="2"/>
+                                <rect key="frame" x="138" y="81" width="144" height="2"/>
                                 <color key="backgroundColor" red="0.65490196079999996" green="0.5568627451" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="k92-eG-Qxs"/>
@@ -10624,7 +10629,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Axi-t2-Gse">
-                                                            <rect key="frame" x="69.5" y="155" width="85.5" height="13"/>
+                                                            <rect key="frame" x="75.5" y="155" width="79.5" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.90196078430000004" green="0.23529411759999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -10637,7 +10642,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yBI-15-OtA">
-                                                            <rect key="frame" x="4" y="155" width="63.5" height="13"/>
+                                                            <rect key="frame" x="4" y="155" width="69.5" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -10770,13 +10775,13 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="113" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3G-W0-517">
-                                                            <rect key="frame" x="3" y="76" width="63.5" height="13"/>
+                                                            <rect key="frame" x="3" y="76" width="69.5" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVJ-wb-rOs">
-                                                            <rect key="frame" x="68.5" y="76" width="87.5" height="13"/>
+                                                            <rect key="frame" x="74.5" y="76" width="81.5" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.90196078430000004" green="0.23529411759999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -10848,13 +10853,13 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Artist: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Osg-od-GXt">
-                                                    <rect key="frame" x="6" y="32" width="32" height="13"/>
+                                                    <rect key="frame" x="6" y="32" width="37" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zty-jz-fVo">
-                                                    <rect key="frame" x="38" y="32" width="116" height="13"/>
+                                                    <rect key="frame" x="43" y="32" width="111" height="13"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="109" id="Hyf-M1-QdG"/>
                                                         <constraint firstAttribute="height" priority="250" constant="12" id="Pw2-VZ-1wU"/>
@@ -10869,7 +10874,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Medium: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oay-Co-bcD">
-                                                    <rect key="frame" x="6" y="50" width="46.5" height="13"/>
+                                                    <rect key="frame" x="6" y="50" width="50.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -10881,31 +10886,31 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Year: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAI-8R-8oy">
-                                                    <rect key="frame" x="6" y="81" width="27.5" height="13"/>
+                                                    <rect key="frame" x="6" y="81" width="30" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Year" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4O-MQ-Jcw">
-                                                    <rect key="frame" x="33.5" y="81" width="120.5" height="13"/>
+                                                    <rect key="frame" x="36" y="81" width="118" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Size: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vY-Je-wqu">
-                                                    <rect key="frame" x="6" y="99" width="27" height="13"/>
+                                                    <rect key="frame" x="6" y="99" width="29.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Size" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Qu-g7-DQU">
-                                                    <rect key="frame" x="33" y="99" width="121" height="13"/>
+                                                    <rect key="frame" x="35.5" y="99" width="118.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Regular" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estimate:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e98-UO-i7R">
-                                                    <rect key="frame" x="6" y="117" width="46" height="13"/>
+                                                    <rect key="frame" x="6" y="117" width="51.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -11299,7 +11304,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medium:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZD-aa-1AH">
-                                                    <rect key="frame" x="5" y="50" width="43.5" height="13"/>
+                                                    <rect key="frame" x="5" y="50" width="46.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -11357,7 +11362,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estimate:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tfc-fA-ISV">
-                                                    <rect key="frame" x="5" y="117" width="46" height="13"/>
+                                                    <rect key="frame" x="5" y="117" width="51.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -11524,19 +11529,19 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                 <rect key="frame" x="0.0" y="20" width="375" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gWf-7W-DqQ">
-                                        <rect key="frame" x="292.5" y="0.0" width="52.5" height="30"/>
+                                        <rect key="frame" x="287" y="0.0" width="57" height="30"/>
                                         <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="12"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wcc-6U-mJS">
-                                        <rect key="frame" x="347" y="8.5" width="20" height="14"/>
+                                        <rect key="frame" x="346" y="8.5" width="21" height="14"/>
                                         <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="12"/>
                                         <color key="textColor" red="0.65490196079999996" green="0.5568627451" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nm1-GX-WtV">
-                                        <rect key="frame" x="292.5" y="0.0" width="74.5" height="30"/>
+                                        <rect key="frame" x="287" y="0.0" width="80" height="30"/>
                                         <connections>
                                             <action selector="btnCurrencyChanged:" destination="TCJ-RP-Wc7" eventType="touchUpInside" id="hER-rP-Sep"/>
                                             <action selector="btnCurrencyPressed:" destination="PNL-7N-fJw" eventType="touchUpInside" id="K1q-NZ-Xdp"/>
@@ -11734,7 +11739,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Valid Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIg-b3-lXb">
-                                                        <rect key="frame" x="8" y="41" width="75.5" height="14"/>
+                                                        <rect key="frame" x="8" y="41" width="82" height="14"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="12"/>
                                                         <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -11752,7 +11757,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                         </connections>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proxy Bid" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z4k-T7-JA1">
-                                                        <rect key="frame" x="133" y="41" width="52" height="14"/>
+                                                        <rect key="frame" x="133" y="41" width="55" height="14"/>
                                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="12"/>
                                                         <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -12974,7 +12979,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
         <image name="icon_note.png" width="24" height="34"/>
         <image name="icon_subject.png" width="29" height="29"/>
         <image name="icon_upload.png" width="30" height="30"/>
-        <image name="img-default-painting.png" width="298" height="298"/>
+        <image name="img-default-painting.png" width="198" height="198"/>
         <image name="img-lotno-bg1.png" width="86" height="30"/>
         <image name="img-radio-default.png" width="24" height="24"/>
         <image name="img-siddanth-business_strategy.png" width="106" height="114"/>
