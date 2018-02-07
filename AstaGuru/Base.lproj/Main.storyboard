@@ -7237,16 +7237,23 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                                     <constraint firstAttribute="bottom" secondItem="GO3-Dv-uDW" secondAttribute="bottom" constant="10" id="jSR-mp-rJI"/>
                                 </constraints>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maintenance.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="z1T-wW-BXl">
+                                <rect key="frame" x="0.0" y="81" width="375" height="586"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="f5m-PN-lDG" firstAttribute="top" secondItem="7kA-2m-SI6" secondAttribute="bottom" id="6YM-d9-yW6"/>
                             <constraint firstItem="f5m-PN-lDG" firstAttribute="leading" secondItem="KJR-8f-XAF" secondAttribute="leading" id="8d5-PZ-BAe"/>
+                            <constraint firstItem="GFm-z6-RTx" firstAttribute="top" secondItem="z1T-wW-BXl" secondAttribute="bottom" id="AAt-Zy-uH3"/>
                             <constraint firstItem="F21-EG-qGZ" firstAttribute="leading" secondItem="KJR-8f-XAF" secondAttribute="leading" id="HNV-iq-aCE"/>
                             <constraint firstAttribute="trailing" secondItem="F21-EG-qGZ" secondAttribute="trailing" id="JhQ-eZ-PLV"/>
                             <constraint firstItem="F21-EG-qGZ" firstAttribute="top" secondItem="f5m-PN-lDG" secondAttribute="bottom" id="ODV-qy-mQq"/>
                             <constraint firstAttribute="trailing" secondItem="f5m-PN-lDG" secondAttribute="trailing" id="ODp-lh-6xb"/>
                             <constraint firstItem="f5m-PN-lDG" firstAttribute="top" secondItem="7kA-2m-SI6" secondAttribute="bottom" constant="15" id="P0O-ZM-xg2"/>
+                            <constraint firstItem="z1T-wW-BXl" firstAttribute="leading" secondItem="KJR-8f-XAF" secondAttribute="leading" id="d58-RO-497"/>
+                            <constraint firstAttribute="trailing" secondItem="z1T-wW-BXl" secondAttribute="trailing" id="dsV-iq-Pw0"/>
+                            <constraint firstItem="z1T-wW-BXl" firstAttribute="top" secondItem="f5m-PN-lDG" secondAttribute="bottom" id="k48-de-oWI"/>
                             <constraint firstItem="GFm-z6-RTx" firstAttribute="top" secondItem="F21-EG-qGZ" secondAttribute="bottom" id="zWx-aM-Qvx"/>
                         </constraints>
                         <variation key="default">
@@ -7272,7 +7279,7 @@ AstaGuru is growing and we are keen on exchanging ideas and working with likemin
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WcV-eF-m3x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5617" y="-780"/>
+            <point key="canvasLocation" x="5616.8000000000002" y="-780.35982008995506"/>
         </scene>
         <!--Web View View Controller-->
         <scene sceneID="FEU-v2-nxG">
@@ -7849,16 +7856,24 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                     <outlet property="delegate" destination="6lc-ue-PmZ" id="eel-4B-BN3"/>
                                 </connections>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maintenance.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="bwX-kG-zL7">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="ZJs-tH-tax" firstAttribute="top" secondItem="bwX-kG-zL7" secondAttribute="bottom" id="0yz-OK-RHf"/>
                             <constraint firstItem="ZJs-tH-tax" firstAttribute="top" secondItem="Qfz-Yn-Lcx" secondAttribute="bottom" id="5aE-Fz-4Sf"/>
+                            <constraint firstAttribute="trailing" secondItem="bwX-kG-zL7" secondAttribute="trailing" id="C91-bD-Qfc"/>
                             <constraint firstItem="Qfz-Yn-Lcx" firstAttribute="top" secondItem="xNT-Bm-LQr" secondAttribute="bottom" id="Mug-FC-R3y"/>
                             <constraint firstItem="Qfz-Yn-Lcx" firstAttribute="leading" secondItem="XHT-yQ-d8V" secondAttribute="leading" id="PHj-kv-BVd"/>
+                            <constraint firstItem="bwX-kG-zL7" firstAttribute="top" secondItem="xNT-Bm-LQr" secondAttribute="bottom" id="V8j-5j-zbj"/>
                             <constraint firstAttribute="trailing" secondItem="Qfz-Yn-Lcx" secondAttribute="trailing" id="nvW-hH-6oK"/>
+                            <constraint firstItem="bwX-kG-zL7" firstAttribute="leading" secondItem="XHT-yQ-d8V" secondAttribute="leading" id="un9-or-2US"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="img_maintenance" destination="bwX-kG-zL7" id="HGK-II-FGW"/>
                         <outlet property="tblHowtoBuy" destination="Qfz-Yn-Lcx" id="aIX-Mj-DMg"/>
                     </connections>
                 </viewController>
@@ -8818,7 +8833,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" tag="81" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYu-gx-Aru">
-                                                    <rect key="frame" x="8" y="52" width="74" height="20"/>
+                                                    <rect key="frame" x="8" y="52" width="80" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="V00-mQ-BfF"/>
                                                     </constraints>
@@ -8831,7 +8846,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" tag="31" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jl0-0L-fH6">
-                                                    <rect key="frame" x="8" y="78" width="98" height="28"/>
+                                                    <rect key="frame" x="8" y="78" width="108" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="fNY-ne-CFq"/>
                                                     </constraints>
@@ -8846,7 +8861,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </variation>
                                                 </button>
                                                 <button opaque="NO" tag="32" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zn3-iC-hwa">
-                                                    <rect key="frame" x="121" y="80" width="81" height="28"/>
+                                                    <rect key="frame" x="131" y="80" width="88" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="6u9-vE-I9N"/>
                                                     </constraints>
@@ -8861,14 +8876,14 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </variation>
                                                 </button>
                                                 <view tag="34" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NsK-b7-4SM">
-                                                    <rect key="frame" x="8" y="106" width="98" height="2"/>
+                                                    <rect key="frame" x="8" y="106" width="108" height="2"/>
                                                     <color key="backgroundColor" red="0.65490196078431373" green="0.55686274509803924" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="2" id="Fk4-NK-uXy"/>
                                                     </constraints>
                                                 </view>
                                                 <view tag="33" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z0b-Fc-x4o">
-                                                    <rect key="frame" x="121" y="106" width="90" height="2"/>
+                                                    <rect key="frame" x="131" y="106" width="90" height="2"/>
                                                     <color key="backgroundColor" red="0.65490196079999996" green="0.5568627451" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="XIC-OJ-wog"/>
@@ -9119,7 +9134,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4df-9R-zEe">
-                                                            <rect key="frame" x="69.5" y="155" width="85.5" height="13"/>
+                                                            <rect key="frame" x="75.5" y="155" width="79.5" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.90196078430000004" green="0.23529411759999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -9132,7 +9147,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRz-ei-C9f">
-                                                            <rect key="frame" x="4" y="155" width="63.5" height="13"/>
+                                                            <rect key="frame" x="4" y="155" width="69.5" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.48627450979999998" green="0.48627450979999998" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -9286,7 +9301,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Medium: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F50-fH-5UU">
-                                                    <rect key="frame" x="5" y="50" width="46.5" height="13"/>
+                                                    <rect key="frame" x="5" y="50" width="50.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -9352,7 +9367,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estimate:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIU-Dk-Nmr">
-                                                    <rect key="frame" x="5" y="116" width="46" height="13"/>
+                                                    <rect key="frame" x="5" y="116" width="51.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -9381,7 +9396,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Countdown :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gpe-QN-BnP">
-                                                            <rect key="frame" x="3" y="78" width="63.5" height="13"/>
+                                                            <rect key="frame" x="3" y="78" width="69.5" height="13"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="KYo-fw-EVR"/>
                                                             </constraints>
@@ -9402,7 +9417,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Countdown" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMa-b2-uvp">
-                                                            <rect key="frame" x="68.5" y="78" width="87.5" height="13"/>
+                                                            <rect key="frame" x="74.5" y="78" width="81.5" height="13"/>
                                                             <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                             <color key="textColor" red="0.90196078430000004" green="0.23529411759999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -9828,7 +9843,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medium:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zMA-QS-vI8">
-                                                    <rect key="frame" x="5" y="50" width="43.5" height="13"/>
+                                                    <rect key="frame" x="5" y="50" width="46.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -9886,7 +9901,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estimate:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8b-by-nNe">
-                                                    <rect key="frame" x="5" y="117" width="46" height="13"/>
+                                                    <rect key="frame" x="5" y="117" width="51.5" height="13"/>
                                                     <fontDescription key="fontDescription" name="WorkSans-Medium" family="Work Sans" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -12799,12 +12814,19 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
                                     </mask>
                                 </variation>
                             </scrollView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maintenance.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="gY9-zG-zZi">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="yJx-va-joC" firstAttribute="leading" secondItem="tJU-md-s3Z" secondAttribute="leading" id="FHt-9H-DM2"/>
+                            <constraint firstItem="gY9-zG-zZi" firstAttribute="top" secondItem="No6-dc-xht" secondAttribute="bottom" id="GgU-Hj-RS0"/>
                             <constraint firstItem="hpu-UX-F4D" firstAttribute="top" secondItem="yJx-va-joC" secondAttribute="bottom" id="I5J-Yx-kB3"/>
                             <constraint firstItem="yJx-va-joC" firstAttribute="top" secondItem="No6-dc-xht" secondAttribute="bottom" id="fze-EC-5ie"/>
+                            <constraint firstItem="gY9-zG-zZi" firstAttribute="leading" secondItem="tJU-md-s3Z" secondAttribute="leading" id="h2E-cb-BVL"/>
+                            <constraint firstAttribute="trailing" secondItem="gY9-zG-zZi" secondAttribute="trailing" id="kES-Rv-k6Z"/>
+                            <constraint firstItem="hpu-UX-F4D" firstAttribute="top" secondItem="gY9-zG-zZi" secondAttribute="bottom" id="o9G-rx-iJA"/>
                             <constraint firstAttribute="trailing" secondItem="yJx-va-joC" secondAttribute="trailing" id="rsQ-q4-aBh"/>
                         </constraints>
                     </view>
@@ -12984,6 +13006,7 @@ We are committed to protecting and safeguarding your privacy on-line. Please con
         <image name="img-radio-default.png" width="24" height="24"/>
         <image name="img-siddanth-business_strategy.png" width="106" height="114"/>
         <image name="img-video.png" width="750" height="348"/>
+        <image name="maintenance.jpg" width="750" height="1204"/>
         <image name="nextbid.png" width="29" height="29"/>
     </resources>
 </document>

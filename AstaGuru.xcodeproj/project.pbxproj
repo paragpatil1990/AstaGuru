@@ -11,6 +11,7 @@
 		4E1A33E1200A1A2F00BCD119 /* clear-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E1A33E0200A1A2F00BCD119 /* clear-icon@3x.png */; };
 		4EB7EB021FE50B6200BCBD9A /* AuctionAnalyisisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7EB011FE50B6200BCBD9A /* AuctionAnalyisisViewController.m */; };
 		4EB7EB051FE5269200BCBD9A /* AuctionAnalysisTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7EB041FE5269200BCBD9A /* AuctionAnalysisTableViewCell.m */; };
+		4EED391020298B9A00CAA81B /* maintenance.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EED390F20298B9400CAA81B /* maintenance.jpg */; };
 		581F5F4F1E0EC2CE00BFE986 /* img-lotno-bg2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 581F5F4E1E0EC2CE00BFE986 /* img-lotno-bg2@3x.png */; };
 		58222E581E13A6AF0079D70C /* CareersPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58222E571E13A6AF0079D70C /* CareersPageViewController.m */; };
 		5823EAEE1EA78BD9003E0080 /* no_auction_logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5823EAED1EA78BD9003E0080 /* no_auction_logo.jpg */; };
@@ -265,6 +266,7 @@
 		4EB7EB011FE50B6200BCBD9A /* AuctionAnalyisisViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuctionAnalyisisViewController.m; sourceTree = "<group>"; };
 		4EB7EB031FE5269200BCBD9A /* AuctionAnalysisTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuctionAnalysisTableViewCell.h; sourceTree = "<group>"; };
 		4EB7EB041FE5269200BCBD9A /* AuctionAnalysisTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuctionAnalysisTableViewCell.m; sourceTree = "<group>"; };
+		4EED390F20298B9400CAA81B /* maintenance.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = maintenance.jpg; path = ../../../../Downloads/maintenance.jpg; sourceTree = "<group>"; };
 		581F5F4E1E0EC2CE00BFE986 /* img-lotno-bg2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-lotno-bg2@3x.png"; sourceTree = "<group>"; };
 		58222E561E13A6AF0079D70C /* CareersPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CareersPageViewController.h; sourceTree = "<group>"; };
 		58222E571E13A6AF0079D70C /* CareersPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CareersPageViewController.m; sourceTree = "<group>"; };
@@ -1161,6 +1163,7 @@
 		95A0A0A41D75348800FE0D3A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4EED390F20298B9400CAA81B /* maintenance.jpg */,
 				4E1A33E0200A1A2F00BCD119 /* clear-icon@3x.png */,
 				4E1A33DC2009DCAA00BCD119 /* icon-back@3x.png */,
 				5825ED1A1F41C23B00C4E01E /* TeamAboutUs */,
@@ -1280,8 +1283,7 @@
 				TargetAttributes = {
 					78255E771D742A9800CECC5D = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = ZHAD59YW8G;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1290,7 +1292,7 @@
 								enabled = 1;
 							};
 							com.apple.iCloud = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -1356,6 +1358,7 @@
 				783398271DB2194B0079528C /* img-radio-default@3x.png in Resources */,
 				78416A621D75A2C700F4E1DD /* icon-youtube@3x.png in Resources */,
 				58A1C4831E3F2C85007C7FC1 /* icon_subject.png in Resources */,
+				4EED391020298B9A00CAA81B /* maintenance.jpg in Resources */,
 				58A1C4821E3F2C85007C7FC1 /* icon_note.png in Resources */,
 				95C979C31DB99B0F001F6C24 /* icon-collapsed@3x.png in Resources */,
 				9595FF971D773DD800EA7CD2 /* icon-about-us@3x.png in Resources */,
@@ -1697,14 +1700,15 @@
 				CODE_SIGN_ENTITLEMENTS = AstaGuru/AstaGuru.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Imran Rizvi (9R4T9DMPBA)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = ZHAD59YW8G;
 				INFOPLIST_FILE = AstaGuru/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.infomanav.AstaGuru;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "a63265a2-c9c8-4e79-abf9-b35582435824";
+				PROVISIONING_PROFILE_SPECIFIER = AstaGuru_Development;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1715,15 +1719,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AstaGuru/AstaGuru.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Imran Rizvi (9R4T9DMPBA)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = ZHAD59YW8G;
 				INFOPLIST_FILE = AstaGuru/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.infomanav.AstaGuru;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "cf14535d-3e7e-493f-8cb0-010445abad81";
+				PROVISIONING_PROFILE_SPECIFIER = AstaGuru;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

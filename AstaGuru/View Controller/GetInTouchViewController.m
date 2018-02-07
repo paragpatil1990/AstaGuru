@@ -59,7 +59,7 @@
     _segmentedmenu.layer.cornerRadius=3.0;
     _segmentedmenu.layer.borderColor = [UIColor colorWithRed:150/255.0 green:122/255.0 blue:85/255.0 alpha:1.0].CGColor;
    
-    [self getCategoryData];
+    //[self getCategoryData];
     [self setBroder];
     // Do any additional setup after loading the view.
 }

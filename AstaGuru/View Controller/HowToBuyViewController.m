@@ -23,6 +23,7 @@
     NSMutableArray *arrHeaderview;
     NSMutableArray *arrVAcncyTitleOnly;
 
+    IBOutlet UIImageView *img_maintenance;
 }
 @end
 
@@ -35,6 +36,8 @@
     self.tblHowtoBuy.estimatedRowHeight = 100.0;
     self.tblHowtoBuy.rowHeight = UITableViewAutomaticDimension;
     arrHeaderview=[[NSMutableArray alloc]init];
+    
+    img_maintenance.hidden = YES;
     if (_isHowTobuy==1)
     {
         [self Setup];
@@ -49,7 +52,8 @@
     }
     else if (_isHowTobuy==5)
     {
-        [self vacancy];
+        img_maintenance.hidden = NO;
+        //[self vacancy];
     }
     else
     {

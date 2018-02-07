@@ -79,7 +79,7 @@
 +(NSString *)tableURL
 {
     //Live
-    //return @"http://restapi.infomanav.com/api/v2/guru/_table/";
+//    return @"http://restapi.infomanav.com/api/v2/guru/_table/";
     
     //Demo
     return @"http://restapi.infomanav.com/api/v2/asta/_table/";
@@ -88,10 +88,10 @@
 +(NSString *)procedureURL
 {
     //Live
-//    return @"http://restapi.infomanav.com/api/v2/guru/_proc";
+    return @"http://restapi.infomanav.com/api/v2/guru/_proc";
     
     //Demo
-    return @"http://restapi.infomanav.com/api/v2/asta/_proc";
+//    return @"http://restapi.infomanav.com/api/v2/asta/_proc";
 }
 
 +(NSString *)apiKey

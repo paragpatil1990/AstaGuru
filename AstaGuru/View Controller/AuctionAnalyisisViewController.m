@@ -121,7 +121,9 @@
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
         
-        NSString  *strQuery=[NSString stringWithFormat:@"%@/spGetAuctionAnalysis(34)?api_key=%@",[ClsSetting procedureURL],[ClsSetting apiKey]];
+        NSString *auctionId = [ClsSetting TrimWhiteSpaceAndNewLine:_objCurrentOuction.strOnline];
+        
+        NSString  *strQuery=[NSString stringWithFormat:@"%@/spGetAuctionAnalysis(%@)?api_key=%@",[ClsSetting procedureURL], auctionId, [ClsSetting apiKey]];
         
         NSString *url = strQuery;
         NSLog(@"%@",url);
@@ -244,54 +246,12 @@
         AuctionAnalysisTableViewCell *cell = (AuctionAnalysisTableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        NSDictionary *dic = _array1[indexPath.row];
-        
+        NSMutableDictionary *dic = [ClsSetting RemoveNullOnly:_array1[indexPath.row]]; //_array1[indexPath.row];
+                
         cell.lbl_astristName.text = dic[@"auctionTitle"];
         cell.lbl_us.text = dic[@"numberOfLots"];
         cell.lbl_rs.text = [NSString stringWithFormat:@"%@%s", dic[@"lotPercentage"],"%"];
         
-//        [cell.contentView layoutSubviews];
-//        [cell.contentView layoutIfNeeded];
-//        [cell layoutSubviews];
-//        [cell layoutIfNeeded];
-//
-//        // Left border
-//        CALayer *leftBorder = [CALayer layer];
-//        leftBorder.frame = CGRectMake(0.0f, 0.0f, 1.0f, cell.frame.size.height);
-//        leftBorder.backgroundColor = [UIColor blackColor].CGColor;
-//        [cell.contentView.layer addSublayer:leftBorder];
-//
-//        // Right border
-//        CALayer *rightBorder = [CALayer layer];
-//        rightBorder.frame = CGRectMake(cell.frame.size.width-1, 0.0f, 1.0f, cell.frame.size.height);
-//        rightBorder.backgroundColor = [UIColor blackColor].CGColor;
-//        [cell.contentView.layer addSublayer:rightBorder];
-////
-////        cell.contentView.layer.borderWidth = 1.0f;
-////        cell.contentView.layer.borderColor = [UIColor grayColor].CGColor;
-//
-//        if (indexPath.row == (_array1.count-1))
-//        {
-//            [self roundBottomCornersRadius:8 view:cell.contentView color:[UIColor grayColor]];
-//
-//            //[self setMaskTo:cell byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight];
-//
-//            // Bottom border
-////            CALayer *bottomBorder = [CALayer layer];
-////            bottomBorder.frame = CGRectMake(0.0f, cell.frame.size.height - 1, cell.frame.size.width, 1.0f);
-////            bottomBorder.backgroundColor = [UIColor blackColor].CGColor;
-////            [cell.contentView.layer addSublayer:bottomBorder];
-//        }
-//        else
-//        {
-//            [self roundBottomCornersRadius:0 view:cell.contentView color:[UIColor clearColor]];
-//
-//            // Bottom border
-////            CALayer *bottomBorder = [CALayer layer];
-////            bottomBorder.frame = CGRectMake(0.0f, cell.frame.size.height - 1, cell.frame.size.width, 1.0f);
-////            bottomBorder.backgroundColor = [UIColor clearColor].CGColor;
-////            [cell.contentView.layer addSublayer:bottomBorder];
-//        }
         return cell;
     }
     else if (indexPath.section == 1)
@@ -300,56 +260,12 @@
         AuctionAnalysisTableViewCell *cell = (AuctionAnalysisTableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        NSDictionary *dic = _array2[indexPath.row];
+        NSMutableDictionary *dic = [ClsSetting RemoveNullOnly: _array2[indexPath.row]];
 
         cell.lbl_astristName.text = dic[@"auctionTitle"];
         cell.lbl_us.text = dic[@"winingValueUs"];
         cell.lbl_rs.text = dic[@"winningValueRs"];
-        
-//        cell.contentView.layer.borderWidth = 1.0f;
-//        cell.contentView.layer.borderColor = [UIColor grayColor].CGColor;
-        
-//        [cell.contentView layoutSubviews];
-//        [cell.contentView layoutIfNeeded];
-//        [cell layoutSubviews];
-//        [cell layoutIfNeeded];
-//
-//        // Left border
-//        CALayer *leftBorder = [CALayer layer];
-//        leftBorder.frame = CGRectMake(0.0f, 0.0f, 1.0f, cell.frame.size.height);
-//        leftBorder.backgroundColor = [UIColor blackColor].CGColor;
-//        [cell.contentView.layer addSublayer:leftBorder];
-//
-//        // Right border
-//        CALayer *rightBorder = [CALayer layer];
-//        rightBorder.frame = CGRectMake(cell.frame.size.width-1, 0.0f, 1.0f, cell.frame.size.height);
-//        rightBorder.backgroundColor = [UIColor blackColor].CGColor;
-//        [cell.contentView.layer addSublayer:rightBorder];
-//
-//        if (indexPath.row == (_array2.count-1))
-//        {
-////            [self roundBottomCornersRadius:8 view:cell.contentView color:[UIColor grayColor]];
-////
-//            [self setMaskTo:cell byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight radious:4];
-//
-////            // Bottom border
-////            CALayer *bottomBorder = [CALayer layer];
-////            bottomBorder.frame = CGRectMake(0.0f, cell.frame.size.height - 1, cell.frame.size.width, 1.0f);
-////            bottomBorder.backgroundColor = [UIColor blackColor].CGColor;
-////            [cell.contentView.layer addSublayer:bottomBorder];
-//        }
-//        else
-//        {
-//            [self setMaskTo:cell byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight radious:0];
-
-//            [self roundBottomCornersRadius:0 view:cell.contentView color:[UIColor clearColor]];
-//
-            // Bottom border
-//            CALayer *bottomBorder = [CALayer layer];
-//            bottomBorder.frame = CGRectMake(0.0f, cell.frame.size.height - 1, cell.frame.size.width, 1.0f);
-//            bottomBorder.backgroundColor = [UIColor clearColor].CGColor;
-//            [cell.contentView.layer addSublayer:bottomBorder];
-//        }
+       
         return cell;
     }
     else
@@ -358,55 +274,14 @@
         AuctionAnalysisTableViewCell* cell = (AuctionAnalysisTableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        NSDictionary *dic = _array3[indexPath.row];
+        NSMutableDictionary *dic = [ClsSetting RemoveNullOnly: _array3[indexPath.row]];
         
         cell.lbl_lotno.text = dic[@"productid"];
         cell.lbl_astristName.text = [NSString stringWithFormat:@"%@ %@", dic[@"FirstName"], dic[@"LastName"]];
         cell.lbl_title.text = dic[@"title"];
         cell.lbl_us.text = dic[@"priceus"];
         cell.lbl_rs.text = dic[@"pricers"];
-        
-//        [cell.contentView layoutSubviews];
-//        [cell.contentView layoutIfNeeded];
-//        [cell layoutSubviews];
-//        [cell layoutIfNeeded];
-//
-//        // Left border
-//        CALayer *leftBorder = [CALayer layer];
-//        leftBorder.frame = CGRectMake(0.0f, 0.0f, 1.0f, cell.frame.size.height);
-//        leftBorder.backgroundColor = [UIColor blackColor].CGColor;
-//        [cell.contentView.layer addSublayer:leftBorder];
-//
-//        // Right border
-//        CALayer *rightBorder = [CALayer layer];
-//        rightBorder.frame = CGRectMake(cell.frame.size.width-1, 0.0f, 1.0f, cell.frame.size.height);
-//        rightBorder.backgroundColor = [UIColor blackColor].CGColor;
-//        [cell.contentView.layer addSublayer:rightBorder];
-//
-//        if (indexPath.row == (_array3.count-1))
-//        {
-////            [self roundBottomCornersRadius:8 view:cell.contentView color:[UIColor grayColor]];
-//            [self setMaskTo:cell byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight radious:4];
-//
-////            // Bottom border
-////            CALayer *bottomBorder = [CALayer layer];
-////            bottomBorder.frame = CGRectMake(0.0f, cell.frame.size.height - 1, cell.frame.size.width, 1.0f);
-////            bottomBorder.backgroundColor = [UIColor blackColor].CGColor;
-////            [cell.contentView.layer addSublayer:bottomBorder];
-//        }
-//        else
-//        {
-//            [self setMaskTo:cell byRoundingCorners:UIRectCornerBottomLeft | UIRectCornerBottomRight radious:0];
-
-//            [self roundBottomCornersRadius:0 view:cell.contentView color:[UIColor clearColor]];
-//
-            // Bottom border
-//            CALayer *bottomBorder = [CALayer layer];
-//            bottomBorder.frame = CGRectMake(0.0f, cell.frame.size.height - 1, cell.frame.size.width, 1.0f);
-//            bottomBorder.backgroundColor = [UIColor clearColor].CGColor;
-//            [cell.contentView.layer addSublayer:bottomBorder];
-//        }
-        
+       
         return cell;
     }
     
