@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E015D29202B195E00F19EE0 /* maintenance.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E015D28202B195E00F19EE0 /* maintenance.jpg */; };
 		581F5F4F1E0EC2CE00BFE986 /* img-lotno-bg2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 581F5F4E1E0EC2CE00BFE986 /* img-lotno-bg2@3x.png */; };
 		58222E581E13A6AF0079D70C /* CareersPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58222E571E13A6AF0079D70C /* CareersPageViewController.m */; };
 		5823EAEE1EA78BD9003E0080 /* no_auction_logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5823EAED1EA78BD9003E0080 /* no_auction_logo.jpg */; };
@@ -255,6 +256,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E015D28202B195E00F19EE0 /* maintenance.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = maintenance.jpg; sourceTree = "<group>"; };
 		581F5F4E1E0EC2CE00BFE986 /* img-lotno-bg2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-lotno-bg2@3x.png"; sourceTree = "<group>"; };
 		58222E561E13A6AF0079D70C /* CareersPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CareersPageViewController.h; sourceTree = "<group>"; };
 		58222E571E13A6AF0079D70C /* CareersPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CareersPageViewController.m; sourceTree = "<group>"; };
@@ -1147,6 +1149,7 @@
 		95A0A0A41D75348800FE0D3A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4E015D28202B195E00F19EE0 /* maintenance.jpg */,
 				5825ED1A1F41C23B00C4E01E /* TeamAboutUs */,
 				5829710C1F3DE17A009CD55A /* img-default-painting@2x.png */,
 				5823EAED1EA78BD9003E0080 /* no_auction_logo.jpg */,
@@ -1274,7 +1277,7 @@
 								enabled = 1;
 							};
 							com.apple.iCloud = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -1319,6 +1322,7 @@
 				780908B41D80482800A009EE /* icon-password@3x.png in Resources */,
 				5825ED291F41C23B00C4E01E /* img-abhay-online_marketing.png in Resources */,
 				78416A541D75970800F4E1DD /* icon-phone@3x.png in Resources */,
+				4E015D29202B195E00F19EE0 /* maintenance.jpg in Resources */,
 				95EE7EC21D79196400C05741 /* icon-down-arrow@3x.png in Resources */,
 				5825ED2F1F41C23B00C4E01E /* img-rupesh-market_analysts.png in Resources */,
 				581F5F4F1E0EC2CE00BFE986 /* img-lotno-bg2@3x.png in Resources */,
