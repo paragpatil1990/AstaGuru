@@ -79,10 +79,10 @@
 +(NSString *)tableURL
 {
     //Live
-//    return @"http://restapi.infomanav.com/api/v2/guru/_table/";
+    return @"http://restapi.infomanav.com/api/v2/guru/_table/";
     
     //Demo
-    return @"http://restapi.infomanav.com/api/v2/asta/_table/";
+//    return @"http://restapi.infomanav.com/api/v2/asta/_table/";
 }
 
 +(NSString *)procedureURL
@@ -97,10 +97,10 @@
 +(NSString *)apiKey
 {
     //Live
-//    return @"c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed";
+    return @"c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed";
     
     //Demo
-    return @"c255e4bd10c8468f9e7e393b748750ee108d6308e2ef3407ac5d2b163a01fa37";
+//    return @"c255e4bd10c8468f9e7e393b748750ee108d6308e2ef3407ac5d2b163a01fa37";
 }
 
 +(NSString *)emailURL
@@ -116,10 +116,10 @@
 +(NSString *)autionAnalysisURL
 {
     //live
-//    return @"http://astaguru.com/auction-analysis-mobile.aspx?astaguruauction=";
+    return @"http://astaguru.com/auction-analysis-mobile.aspx?astaguruauction=";
     
     //Demo
-    return @"http://astaguru.com:81/auction-analysis-mobile.aspx?astaguruauction=";
+//    return @"http://astaguru.com:81/auction-analysis-mobile.aspx?astaguruauction=";
 }
 
 +(void)SetBorder:(UIView *)viw cornerRadius:(CGFloat)CornerRadius borderWidth:(CGFloat)borderWidth color:(UIColor*)color

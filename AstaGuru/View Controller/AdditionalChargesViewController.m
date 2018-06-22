@@ -288,7 +288,7 @@
                     
                     CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strPrimium];
                   
-                    CurrentSelectedGridCell.lbl_gstTxt.text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including buyer's premium)",(long)gst,"%"];
+                    CurrentSelectedGridCell.lbl_gstTxt.text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including margin)",(long)gst,"%"];
                     CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strGST];
                     CurrentSelectedGridCell.lblServiceTaxOnPremium.hidden = YES;
                     CurrentSelectedGridCell.lblGrandTotal.text=[NSString stringWithFormat:@"%@",strFinalPrice];
@@ -320,7 +320,7 @@
                     
                     
                     CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strPrimium];
-                    CurrentSelectedGridCell.lbl_gstTxt.text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including buyer's premium)",(long)gst,"%"];
+                    CurrentSelectedGridCell.lbl_gstTxt.text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including margin)",(long)gst,"%"];
                     CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strGST];
                     CurrentSelectedGridCell.lblServiceTaxOnPremium.hidden = YES;
                     CurrentSelectedGridCell.lblGrandTotal.text=[NSString stringWithFormat:@"%@",strFinalPrice];
@@ -432,7 +432,7 @@
                     NSString *strFinalPrice= [numberFormatter stringFromNumber:[NSNumber numberWithInteger:finalPrice]];
                     
                     CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strPrimium];
-                    CurrentSelectedGridCell.lbl_gstTxt.text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including buyer's premium)",(long)gst,"%"];
+                    CurrentSelectedGridCell.lbl_gstTxt.text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including margin)",(long)gst,"%"];
                     CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strGST];
                     CurrentSelectedGridCell.lblServiceTaxOnPremium.hidden = YES;
                     CurrentSelectedGridCell.lblGrandTotal.text=[NSString stringWithFormat:@"%@",strFinalPrice];
@@ -465,7 +465,7 @@
                     
                     
                     CurrentSelectedGridCell.lblByyerPremium.text=[NSString stringWithFormat:@"%@",strPrimium];
-                    CurrentSelectedGridCell.lbl_gstTxt. text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including buyer's premium)",(long)gst,"%"];
+                    CurrentSelectedGridCell.lbl_gstTxt. text = [NSString stringWithFormat:@"GST on Art Work (%ld %s) (including margin)",(long)gst,"%"];
                     CurrentSelectedGridCell.lblVatOnHammerPrice.text=[NSString stringWithFormat:@"%@",strGST];
                     CurrentSelectedGridCell.lblServiceTaxOnPremium.hidden = YES;
                     CurrentSelectedGridCell.lblGrandTotal.text=[NSString stringWithFormat:@"%@",strFinalPrice];

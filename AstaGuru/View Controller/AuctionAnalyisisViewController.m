@@ -34,6 +34,8 @@
     self.table_AuctionAnalysis.rowHeight = UITableViewAutomaticDimension;
     self.table_AuctionAnalysis.estimatedRowHeight = 300;
     
+    self.table_AuctionAnalysis.hidden = YES;
+    
     [self setNavigationBarBackButton];
 
 }
@@ -152,7 +154,7 @@
              for (int i = 0; i<analysisArray1.count; i++)
              {
                  NSDictionary *dic = analysisArray1[i];
-                 if ([dic[@"auctionAnalysisID"] intValue] == 4)
+                 if ([dic[@"typeFlg"] intValue] == 2)
                  {
                      [self.array2 addObject:dic];
                  }
@@ -169,7 +171,8 @@
 //                 NSDictionary *dic
 //                 [self.array3 addObject:analysisArray2];
 //             }
-             
+             self.table_AuctionAnalysis.hidden = NO;
+
              [self.table_AuctionAnalysis reloadData];
              
 //             NSMutableArray *arrItemCount=[[NSMutableArray alloc]init];
@@ -263,8 +266,19 @@
         NSMutableDictionary *dic = [ClsSetting RemoveNullOnly: _array2[indexPath.row]];
 
         cell.lbl_astristName.text = dic[@"auctionTitle"];
-        cell.lbl_us.text = dic[@"winingValueUs"];
-        cell.lbl_rs.text = dic[@"winningValueRs"];
+        
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init] ;
+        [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+        [numberFormatter setMaximumFractionDigits:0];
+        [numberFormatter setCurrencySymbol:@""];
+        [numberFormatter setCurrencyCode:@"USD"];
+        cell.lbl_us.text = [numberFormatter stringFromNumber:[NSNumber numberWithInteger :[dic[@"winingValueUs"] integerValue]]];
+        
+        [numberFormatter setCurrencyCode:@"INR"];
+        cell.lbl_rs.text = [numberFormatter stringFromNumber:[NSNumber numberWithInteger:[dic[@"winningValueRs"] integerValue]]];
+        
+//        cell.lbl_us.text = dic[@"winingValueUs"];
+//        cell.lbl_rs.text = dic[@"winningValueRs"];
        
         return cell;
     }
@@ -279,8 +293,30 @@
         cell.lbl_lotno.text = dic[@"productid"];
         cell.lbl_astristName.text = [NSString stringWithFormat:@"%@ %@", dic[@"FirstName"], dic[@"LastName"]];
         cell.lbl_title.text = dic[@"title"];
-        cell.lbl_us.text = dic[@"priceus"];
-        cell.lbl_rs.text = dic[@"pricers"];
+        
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+        [numberFormatter setCurrencySymbol:@""];
+        [numberFormatter setMaximumFractionDigits:0];
+
+        double rsValue = [dic[@"pricers"] doubleValue];
+        double usValue = [dic[@"priceus"] doubleValue];
+        
+        double incresedRateRs = (rsValue*15)/100;
+        double incresedRateUs = (usValue*15)/100;
+
+        double incresedPriceRs = round(rsValue + incresedRateRs);
+        double incresedPriceUs = round(usValue + incresedRateUs);
+
+        [numberFormatter setCurrencyCode:@"USD"];
+        cell.lbl_us.text = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:incresedPriceUs]];
+        
+        [numberFormatter setCurrencyCode:@"INR"];
+        cell.lbl_rs.text = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:incresedPriceRs]];
+
+        
+       // cell.lbl_us.text = [ //dic[@"priceus"];
+       // cell.lbl_rs.text = dic[@"pricers"];
        
         return cell;
     }

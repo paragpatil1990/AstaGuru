@@ -59,7 +59,7 @@
     }
     else
     {
-        [objSetting CallWeb:dict url:[NSString stringWithFormat:@"getAuctionList?api_key=%@&filter=status=Past",[ClsSetting apiKey]] view:self.view Post:NO];
+        [objSetting CallWeb:dict url:[NSString stringWithFormat:@"getPastAuctionList?api_key=%@&filter=status=Past",[ClsSetting apiKey]] view:self.view Post:NO];
     }
 }
 

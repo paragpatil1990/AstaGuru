@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		4E1A33DD2009DCAB00BCD119 /* icon-back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E1A33DC2009DCAA00BCD119 /* icon-back@3x.png */; };
 		4E1A33E1200A1A2F00BCD119 /* clear-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E1A33E0200A1A2F00BCD119 /* clear-icon@3x.png */; };
+		4E863984207DEAD6002462DB /* maintenance.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E863983207DEAD6002462DB /* maintenance.jpg */; };
 		4EB7EB021FE50B6200BCBD9A /* AuctionAnalyisisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7EB011FE50B6200BCBD9A /* AuctionAnalyisisViewController.m */; };
 		4EB7EB051FE5269200BCBD9A /* AuctionAnalysisTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7EB041FE5269200BCBD9A /* AuctionAnalysisTableViewCell.m */; };
-		4EED391020298B9A00CAA81B /* maintenance.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4EED390F20298B9400CAA81B /* maintenance.jpg */; };
 		581F5F4F1E0EC2CE00BFE986 /* img-lotno-bg2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 581F5F4E1E0EC2CE00BFE986 /* img-lotno-bg2@3x.png */; };
 		58222E581E13A6AF0079D70C /* CareersPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58222E571E13A6AF0079D70C /* CareersPageViewController.m */; };
 		5823EAEE1EA78BD9003E0080 /* no_auction_logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5823EAED1EA78BD9003E0080 /* no_auction_logo.jpg */; };
@@ -262,11 +262,11 @@
 /* Begin PBXFileReference section */
 		4E1A33DC2009DCAA00BCD119 /* icon-back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-back@3x.png"; sourceTree = "<group>"; };
 		4E1A33E0200A1A2F00BCD119 /* clear-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clear-icon@3x.png"; sourceTree = "<group>"; };
+		4E863983207DEAD6002462DB /* maintenance.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = maintenance.jpg; sourceTree = "<group>"; };
 		4EB7EB001FE50B6200BCBD9A /* AuctionAnalyisisViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuctionAnalyisisViewController.h; sourceTree = "<group>"; };
 		4EB7EB011FE50B6200BCBD9A /* AuctionAnalyisisViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuctionAnalyisisViewController.m; sourceTree = "<group>"; };
 		4EB7EB031FE5269200BCBD9A /* AuctionAnalysisTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuctionAnalysisTableViewCell.h; sourceTree = "<group>"; };
 		4EB7EB041FE5269200BCBD9A /* AuctionAnalysisTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuctionAnalysisTableViewCell.m; sourceTree = "<group>"; };
-		4EED390F20298B9400CAA81B /* maintenance.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = maintenance.jpg; path = ../../../../Downloads/maintenance.jpg; sourceTree = "<group>"; };
 		581F5F4E1E0EC2CE00BFE986 /* img-lotno-bg2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-lotno-bg2@3x.png"; sourceTree = "<group>"; };
 		58222E561E13A6AF0079D70C /* CareersPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CareersPageViewController.h; sourceTree = "<group>"; };
 		58222E571E13A6AF0079D70C /* CareersPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CareersPageViewController.m; sourceTree = "<group>"; };
@@ -1163,7 +1163,7 @@
 		95A0A0A41D75348800FE0D3A /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				4EED390F20298B9400CAA81B /* maintenance.jpg */,
+				4E863983207DEAD6002462DB /* maintenance.jpg */,
 				4E1A33E0200A1A2F00BCD119 /* clear-icon@3x.png */,
 				4E1A33DC2009DCAA00BCD119 /* icon-back@3x.png */,
 				5825ED1A1F41C23B00C4E01E /* TeamAboutUs */,
@@ -1354,11 +1354,11 @@
 				78B189DD1D7956EB00BDEE41 /* img-lotno-bg1@3x.png in Resources */,
 				95C979BF1DB99258001F6C24 /* HeaderView.xib in Resources */,
 				5825ED301F41C23B00C4E01E /* img-siddanth-business_strategy.png in Resources */,
+				4E863984207DEAD6002462DB /* maintenance.jpg in Resources */,
 				95CF680C1D8AA0FE0058F3B2 /* icon-auction-gallery@3x.png in Resources */,
 				783398271DB2194B0079528C /* img-radio-default@3x.png in Resources */,
 				78416A621D75A2C700F4E1DD /* icon-youtube@3x.png in Resources */,
 				58A1C4831E3F2C85007C7FC1 /* icon_subject.png in Resources */,
-				4EED391020298B9A00CAA81B /* maintenance.jpg in Resources */,
 				58A1C4821E3F2C85007C7FC1 /* icon_note.png in Resources */,
 				95C979C31DB99B0F001F6C24 /* icon-collapsed@3x.png in Resources */,
 				9595FF971D773DD800EA7CD2 /* icon-about-us@3x.png in Resources */,

@@ -159,20 +159,20 @@
 
 +(NSMutableArray*)parseCategory:(NSMutableArray*)json
 {
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"category" ascending:YES];
+    NSArray *sortedArray=[json sortedArrayUsingDescriptors:@[sort]];
     NSMutableArray *arrLib=[[NSMutableArray alloc]init];
-    for (int j=0; j<json.count; j++)
+    for (int j=0; j<sortedArray.count; j++)
     {
         clsCategory *objCategory=[[clsCategory alloc]init];
-        NSMutableDictionary *dictLib=[json objectAtIndex:j];
+        NSMutableDictionary *dictLib=[sortedArray objectAtIndex:j];
         
         dictLib=[ClsSetting RemoveNullOnly:dictLib];
         objCategory.strCategoryid=[dictLib valueForKey:@"categoryid"];
         objCategory.strCategoryName=[dictLib valueForKey:@"category"];
         objCategory.strPrVat=[dictLib valueForKey:@"PrVat"];
        [arrLib addObject:objCategory];
-        
     }
-    
     
     return arrLib;
 }

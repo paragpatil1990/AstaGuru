@@ -70,7 +70,7 @@
     }
     [[Harpy sharedInstance] setPresentingViewController:_window.rootViewController];
 //    [[Harpy sharedInstance] setDelegate:self];
-    [[Harpy sharedInstance] setAlertType:HarpyAlertTypeOption];
+    [[Harpy sharedInstance] setAlertType:HarpyAlertTypeForce];
     [[Harpy sharedInstance] setDebugEnabled:true];
     [[Harpy sharedInstance] checkVersion];
     

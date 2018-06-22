@@ -226,13 +226,13 @@
     objclsAboutus3.strType=@"1";
     [objhowtoBuy.arrSubarray addObject:objclsAboutus3];
     clsAboutUs *objclsAboutus4=[[clsAboutUs alloc]init];
-    objclsAboutus4.strName=@"AstaGuru can grant record and reject any bids.";
+    objclsAboutus4.strName=@"AstaGuru can grant record and reject any bids and/or proxy bids.";
     objclsAboutus4.strType=@"1";
     [objhowtoBuy.arrSubarray addObject:objclsAboutus4];
     
     
     clsAboutUs *objclsAboutus5=[[clsAboutUs alloc]init];
-    objclsAboutus5.strName=@"Bidding access shall be given on AstaGuru's discretion . AstaGuru may ask for a deposit on lots prior to giving bidding access.";
+    objclsAboutus5.strName=@"Bidding access shall be given on AstaGuru's discretion. AstaGuru may ask for a deposit on lots prior to giving bidding access.";
     objclsAboutus5.strType=@"1";
     [objhowtoBuy.arrSubarray addObject:objclsAboutus5];
     
@@ -247,18 +247,18 @@
     [objhowtoBuy.arrSubarray addObject:objclsAboutus7];
     
     clsAboutUs *objclsAboutus8=[[clsAboutUs alloc]init];
-    objclsAboutus8.strName=@"All proprieties shall be sold only if the reserve price in met. Reserve price is on each Property is confidential and shall not be disclosed . AstaGuru shall raise all invoices including buyers premium and related taxes.";
+    objclsAboutus8.strName=@"All proprieties shall be sold only if the reserve price in met. Reserve price is on each Property is confidential and shall not be disclosed. AstaGuru shall raise all invoices including its margin and related taxes.";
     objclsAboutus8.strType=@"1";
     [objhowtoBuy.arrSubarray addObject:objclsAboutus8];
     
     
     clsAboutUs *objclsAboutus9=[[clsAboutUs alloc]init];
-    objclsAboutus9.strName=@"The Buyers Premium shall be calculated at 15% of the hammer price.";
+    objclsAboutus9.strName=@"The Margin shall be calculated at 15% of the hammer price, excluding related tax.";
     objclsAboutus9.strType=@"1";
     [objhowtoBuy.arrSubarray addObject:objclsAboutus9];
     
     clsAboutUs *objclsAboutus10=[[clsAboutUs alloc]init];
-    objclsAboutus10.strName=@"All foreign currency exchange rates during the Auction are made on a constant of 1:60 (USD:INR) . All invoicing details shall be provided by the buyer prior to the auction.";
+    objclsAboutus10.strName=@"All foreign currency exchange rates during the Auction are made on a constant. However they are subject to change for each auction. All invoicing details shall be provided by the buyer prior to the auction.";
     objclsAboutus10.strType=@"1";
     [objhowtoBuy.arrSubarray addObject:objclsAboutus10];
     
@@ -269,17 +269,17 @@
     [objhowtoBuy.arrSubarray addObject:objclsAboutus11];
     
     clsAboutUs *objclsAboutus12=[[clsAboutUs alloc]init];
-    objclsAboutus12.strName=@"In case payment is not made within the stated time period, it shall be treated as a breach of contract and the Seller may authorise AstaGuru to take any steps (including the institution of legal proceedings).";
+    objclsAboutus12.strName=@"In case payment is not made within the stated time period, it shall be treated as a breach of contract and AstaGuru to take any steps (including the institution of legal proceedings).";
     objclsAboutus12.strType=@"1";
     [objhowtoBuy.arrSubarray addObject:objclsAboutus12];
     
     clsAboutUs *objclsAboutus13=[[clsAboutUs alloc]init];
-    objclsAboutus13.strName=@"AstaGuru may charge a 2% late payment fine per month. . If the buyer wishes to collect the property from AstaGuru, it must be collected within 30 Days from the date of the auction. The buyer shall be charged a 2% storage fee if the property is not collected.";
+    objclsAboutus13.strName=@"AstaGuru may charge a 2% late payment fine per month. If the buyer wishes to collect the property from AstaGuru, it must be collected within 30 Days from the date of the auction. The buyer shall be charged a 2% storage fee if the property is not collected.";
     objclsAboutus13.strType=@"1";
     [objhowtoBuy.arrSubarray addObject:objclsAboutus13];
     
     clsAboutUs *objclsAboutus14=[[clsAboutUs alloc]init];
-    objclsAboutus14.strName=@"AstaGuru reserves the right not to award the Winning Bid to the Bidder with the highest Bid at Closing Date if it deems it necessary to do so. . In an unlikely event of any technical failure and the website is inaccessible. The lot closing time shall be extended.";
+    objclsAboutus14.strName=@"AstaGuru reserves the right not to award the Winning Bid to the Bidder with the highest Bid at Closing Date if it deems it necessary to do so. In an unlikely event of any technical failure and the website is inaccessible. The lot closing time shall be extended.";
     objclsAboutus14.strType=@"1";
     [objhowtoBuy.arrSubarray addObject:objclsAboutus14];
     
@@ -297,12 +297,12 @@
     objhowtoBuy1.arrSubarray=[[NSMutableArray alloc] init];
     
     clsAboutUs *objclsAboutus16=[[clsAboutUs alloc]init];
-    objclsAboutus16.strName=@"AstaGuru assures on behalf of the seller that all properties on the website are genuine work of the artist listed.";
+    objclsAboutus16.strName=@"AstaGuru assures that all properties listed on the website are genuine.";
     objclsAboutus16.strType=@"1";
     [objhowtoBuy1.arrSubarray addObject:objclsAboutus16];
     
     clsAboutUs *objclsAboutus17=[[clsAboutUs alloc]init];
-    objclsAboutus17.strName=@"How ever in an unlikely event if the property is proved to be inauthentic to AstaGuru's satisfaction within a period of 6 months from the collection date. The seller shall be liable to pay back the full amount to the buyer. These claims will be handled on a case-by-case basis, and will require that examinable proof which clearly demonstrates that the Property is inauthentic is provided by an established and acknowledged authority. Only the actual Buyer (as registered with AstaGuru) makes the claim.";
+    objclsAboutus17.strName=@"How ever in an unlikely event if the property is proved to be inauthentic to AstaGuru's satisfaction within a period of 6 months from the collection date. AstaGuru shall pay back the full amount to the buyer. These claims will be handled on a case-by-case basis, and will require that examinable proof which clearly demonstrates that the Property is inauthentic is provided by an established and acknowledged authority. Only the actual Buyer (as registered with AstaGuru) makes the claim.";
     objclsAboutus17.strType=@"1";
     [objhowtoBuy1.arrSubarray addObject:objclsAboutus17];
     
@@ -316,17 +316,21 @@
     objclsAboutus19.strType=@"1";
     [objhowtoBuy1.arrSubarray addObject:objclsAboutus19];
     
-    clsAboutUs *objclsAboutus20=[[clsAboutUs alloc]init];
-    objclsAboutus20.strName=@"AstaGuru shall charge the buyer in case any steps are to be taken for special expenses shall take place in order to prove the authenticity of the property.";
-    objclsAboutus20.strType=@"1";
-    [objhowtoBuy1.arrSubarray addObject:objclsAboutus20];
+//    clsAboutUs *objclsAboutus20=[[clsAboutUs alloc]init];
+//    objclsAboutus20.strName=@"AstaGuru shall charge the buyer in case any steps are to be taken for special expenses shall take place in order to prove the authenticity of the property.";
+//    objclsAboutus20.strType=@"1";
+//    [objhowtoBuy1.arrSubarray addObject:objclsAboutus20];
     
     clsAboutUs *objclsAboutus21=[[clsAboutUs alloc]init];
-    objclsAboutus21.strName=@"In case the seller fails to refund the funds. Astaguru shall be authorized by the buyer to take legal action on behalf of the buyer to recover the money at the expense of the buyer.";
+    objclsAboutus21.strName=@"In case the Buyer request for a certificate of authentication for a particular artwork, Astaguru will levy the expenditure of the same onto the Buyer.";
     objclsAboutus21.strType=@"1";
     [objhowtoBuy1.arrSubarray addObject:objclsAboutus21];
-    [arrdata addObject:objhowtoBuy1];
     
+    clsAboutUs *objclsAboutus22=[[clsAboutUs alloc]init];
+    objclsAboutus22.strName=@"AstaGuru shall charge the buyer in case any steps are to be taken for special expenses shall take place in order to prove the authenticity of the property.";
+    objclsAboutus22.strType=@"1";
+    [objhowtoBuy1.arrSubarray addObject:objclsAboutus22];
+    [arrdata addObject:objhowtoBuy1];
     
     
     
@@ -334,42 +338,45 @@
     objhowtoBuy2.arrSubarray=[[NSMutableArray alloc] init];
     objhowtoBuy2.Titlel=@"Extent of AstaGuru's Liability";
     
-    clsAboutUs *objclsAboutus22=[[clsAboutUs alloc]init];
-    objclsAboutus22.strName=@"AstaGuru will obtain the money from the seller and thereafter refund to the buyer the amount of purchase in case the work is not authentic.";
-    objclsAboutus22.strType=@"1";
-    [objhowtoBuy2.arrSubarray addObject:objclsAboutus22];
-    
     clsAboutUs *objclsAboutus23=[[clsAboutUs alloc]init];
-    objclsAboutus23.strName=@"All damages and loss during transit are covered by the insurance policy, AstaGuru is not liable.";
+    objclsAboutus23.strName=@"AstaGuru will refund to the buyer the amount of purchase in case the work is not authentic.";
     objclsAboutus23.strType=@"1";
     [objhowtoBuy2.arrSubarray addObject:objclsAboutus23];
+    
     clsAboutUs *objclsAboutus24=[[clsAboutUs alloc]init];
-    objclsAboutus24.strName=@"AstaGuru or any member of its team is not liable for any mistakes made in the catalogue.";
+    objclsAboutus24.strName=@"All damages and loss during transit are covered by the insurance policy, AstaGuru is not liable.";
     objclsAboutus24.strType=@"1";
     [objhowtoBuy2.arrSubarray addObject:objclsAboutus24];
+    
     clsAboutUs *objclsAboutus25=[[clsAboutUs alloc]init];
-    objclsAboutus25.strName=@"AstaGuru is not liable for any claims in insurance.";
+    objclsAboutus25.strName=@"AstaGuru or any member of its team is not liable for any mistakes made in the catalogue.";
     objclsAboutus25.strType=@"1";
     [objhowtoBuy2.arrSubarray addObject:objclsAboutus25];
     
     clsAboutUs *objclsAboutus26=[[clsAboutUs alloc]init];
-    objclsAboutus26.strName=@"AstaGuru is not liable in case the website has any technical problems.";
+    objclsAboutus26.strName=@"AstaGuru is not liable for any claims in insurance.";
     objclsAboutus26.strType=@"1";
     [objhowtoBuy2.arrSubarray addObject:objclsAboutus26];
+    
     clsAboutUs *objclsAboutus27=[[clsAboutUs alloc]init];
-    objclsAboutus27.strName=@"If any part of the Conditions for Sale between the Buyer and AstaGuru is found by any court to be invalid, illegal or unenforceable, that part may be discounted and the rest of the conditions shall be enforceable to the fullest extent permissible by law.";
+    objclsAboutus27.strName=@"AstaGuru is not liable in case the website has any technical problems.";
     objclsAboutus27.strType=@"1";
     [objhowtoBuy2.arrSubarray addObject:objclsAboutus27];
+    
+    clsAboutUs *objclsAboutus28 = [[clsAboutUs alloc]init];
+    objclsAboutus28.strName=@"If any part of the Conditions for Sale between the Buyer and AstaGuru is found by any court to be invalid, illegal or unenforceable, that part may be discounted and the rest of the conditions shall be enforceable to the fullest extent permissible by law.";
+    objclsAboutus28.strType=@"1";
+    [objhowtoBuy2.arrSubarray addObject:objclsAboutus28];
     [arrdata addObject:objhowtoBuy2];
     
     ClsHowToBuy *objhowtoBuy3=[[ClsHowToBuy alloc]init];
     objhowtoBuy3.arrSubarray=[[NSMutableArray alloc] init];
     objhowtoBuy3.Titlel=@"Law and Jurisdiction";
     
-    clsAboutUs *objclsAboutus28=[[clsAboutUs alloc]init];
-    objclsAboutus28.strName=@"The terms and conditions of this Auction are subject to the laws of India, which will apply to the construction and to the effect of the clauses. All parties are subject to the exclusive jurisdiction of the courts at Mumbai, Maharashtra, India.";
-    objclsAboutus28.strType=@"3";
-    [objhowtoBuy3.arrSubarray addObject:objclsAboutus28];
+    clsAboutUs *objclsAboutus29=[[clsAboutUs alloc]init];
+    objclsAboutus29.strName=@"The terms and conditions of this Auction are subject to the laws of India, which will apply to the construction and to the effect of the clauses. All parties are subject to the exclusive jurisdiction of the courts at Mumbai, Maharashtra, India.";
+    objclsAboutus29.strType=@"3";
+    [objhowtoBuy3.arrSubarray addObject:objclsAboutus29];
     [arrdata addObject:objhowtoBuy3];
     
     
@@ -576,7 +583,7 @@
     objAboutUS3.strType=@"1";
     [objhowtoBuy.arrSubarray addObject:objAboutUS3];
     
-    NSString *str4=@"Estimates do not include Buyers Premium.";
+    NSString *str4=@"Estimates do not include margin.";
     clsAboutUs *objAboutUS4=[[clsAboutUs alloc]init];
     objAboutUS4.strName=str4;
     objAboutUS4.strType=@"1";
@@ -611,20 +618,20 @@
     
     ClsHowToBuy *objhowtoBuy2=[[ClsHowToBuy alloc]init];
      objhowtoBuy2.arrSubarray=[[NSMutableArray alloc] init];
-    objhowtoBuy2.Titlel=@"Buyers Premium";
+    objhowtoBuy2.Titlel = @"Margin"; //@"Buyers Premium";
     
-    NSString *str21=@"In addition to the hammer price, the buyer agrees to pay Astaguru the buyer's premium calculated at 15% of the winning bid value on each lot.";
+    NSString *str21=@"In addition to the hammer price, the buyer agrees to pay Astaguru a margin calculated at 15% of the winning bid value on each lot.";
     clsAboutUs *objAboutUS21=[[clsAboutUs alloc]init];
     objAboutUS21.strName=[NSString stringWithFormat:@"%@",str21];
     objAboutUS21.strType=@"1";
     [objhowtoBuy2.arrSubarray addObject:objAboutUS21];
     
-    NSString *str22=@"Service tax on the buyer's premium shall be applicable for paintings purchased within India.";
-    clsAboutUs *objAboutUS22=[[clsAboutUs alloc]init];
-    objAboutUS22.strName=[NSString stringWithFormat:@"%@",str22];//@"Service tax on the buyer's premium shall be applicable for paintings purchased within India.";
-    objAboutUS22.strType=@"1";
-    [objhowtoBuy2.arrSubarray addObject:objAboutUS22];
-    
+//    NSString *str22=@"Service tax on the buyer's premium shall be applicable for paintings purchased within India.";
+//    clsAboutUs *objAboutUS22=[[clsAboutUs alloc]init];
+//    objAboutUS22.strName=[NSString stringWithFormat:@"%@",str22];//@"Service tax on the buyer's premium shall be applicable for paintings purchased within India.";
+//    objAboutUS22.strType=@"1";
+//    [objhowtoBuy2.arrSubarray addObject:objAboutUS22];
+//
     [arrdata addObject:objhowtoBuy2];
     
     
@@ -643,7 +650,7 @@
     ClsHowToBuy *objhowtoBuy4=[[ClsHowToBuy alloc]init];
     objhowtoBuy4.arrSubarray=[[NSMutableArray alloc] init];
     objhowtoBuy4.Titlel=@"Delivery / collection of purchase";
-    NSString *str41=@"IWorks will be shipped within 7 days of the payment being cleared. Buyers may choose to collect their purchase from AstaGuru in Mumbai within 7 days from the date of the sale.";
+    NSString *str41=@"Works will be shipped within 7 days of the payment being cleared. Buyers may choose to collect their purchase from AstaGuru in Mumbai within 7 days from the date of the sale.";
     clsAboutUs *objAboutUS41=[[clsAboutUs alloc]init];
     objAboutUS41.strName=str41;
     objAboutUS41.strType=@"1";
@@ -812,7 +819,7 @@
     [objhowtoBuy6.arrSubarray addObject:objAboutUS626];
     
     clsAboutUs *objAboutUS627=[[clsAboutUs alloc]init];
-    objAboutUS627.strName=@"The next valid bid will be a 10% increment in value of the last valid bid.";
+    objAboutUS627.strName=@"All bids will have an increment of 10% of the current valid bid, once the bid value exceeds the Rupees one crore (equivalent value USD $151,500) mark the increment will be that of 5%.";
     objAboutUS627.strType=@"1";
     [objhowtoBuy6.arrSubarray addObject:objAboutUS627];
     
@@ -827,7 +834,7 @@
     [objhowtoBuy6.arrSubarray addObject:objAboutUS629];
     
     clsAboutUs *objAboutUS630=[[clsAboutUs alloc]init];
-    objAboutUS630.strName=@"All bids will have an increment of 10% of the current valid bid";
+    objAboutUS630.strName=@"All bids will have an increment of 10% of the current valid bid, once the bid value exceeds the Rupees one crore (equivalent value USD $151,500) mark the increment will be that of 5%.";
     objAboutUS630.strType=@"1";
     [objhowtoBuy6.arrSubarray addObject:objAboutUS630];
     
@@ -912,19 +919,19 @@
     [objhowtoBuy6.arrSubarray addObject:objAboutUS646];
     
     clsAboutUs *objAboutUS647=[[clsAboutUs alloc]init];
-    objAboutUS647.strName=@"Buyers Premium";
+    objAboutUS647.strName=@"Margin";
     objAboutUS647.strType=@"2";
     [objhowtoBuy6.arrSubarray addObject:objAboutUS647];
     
     clsAboutUs *objAboutUS648=[[clsAboutUs alloc]init];
-    objAboutUS648.strName=@"In addition to the hammer price, the buyer agrees to pay to us the buyers premium calculated at 15% of the winning bid value on each lot.";
+    objAboutUS648.strName=@"In addition to the hammer price, a margin calculated at 15% of the winning bid value is added on each lot and is payable by the buyer.";
     objAboutUS648.strType=@"1";
     [objhowtoBuy6.arrSubarray addObject:objAboutUS648];
     
-    clsAboutUs *objAboutUS649=[[clsAboutUs alloc]init];
-    objAboutUS649.strName=@"Service tax on the buyers premium shall be applicable for paintings purchased within India.";
-    objAboutUS649.strType=@"1";
-    [objhowtoBuy6.arrSubarray addObject:objAboutUS649];
+//    clsAboutUs *objAboutUS649=[[clsAboutUs alloc]init];
+//    objAboutUS649.strName=@"Service tax on the buyers premium shall be applicable for paintings purchased within India.";
+//    objAboutUS649.strType=@"1";
+//    [objhowtoBuy6.arrSubarray addObject:objAboutUS649];
     
     [arrdata addObject:objhowtoBuy6];
 
@@ -980,6 +987,11 @@
     objAboutUS79.strType=@"1";
     [objhowtoBuy7.arrSubarray addObject:objAboutUS79];
     
+    clsAboutUs *objAboutUS80=[[clsAboutUs alloc]init];
+    objAboutUS80.strName=@"All lots part of the auctions are dispatched framed, however if the buyer prefers an alternate the same would be implemented. Astaguru will invoice the buyer for the framing job under this circumstance.";
+    objAboutUS80.strType=@"1";
+    [objhowtoBuy7.arrSubarray addObject:objAboutUS80];
+    
     clsAboutUs *objAboutUS710=[[clsAboutUs alloc]init];
     objAboutUS710.strName=@"Shipping will be charged on courier rates and are determined by the size, weight and destination of the package.";
     objAboutUS710.strType=@"1";
@@ -1001,12 +1013,12 @@
     [objhowtoBuy7.arrSubarray addObject:objAboutUS713];
     
     clsAboutUs *objAboutUS714=[[clsAboutUs alloc]init];
-    objAboutUS714.strName=@"All sales in India shall attract 13.5% VAT on the winning bid and 14% service tax and 0.5% swachh bharat cess and 0.5% krishi kalyan cess on the buyer's premium International sales.";
+    objAboutUS714.strName=@"All sales in India shall attract 12% GST on the winning bid including buyer's premium.";
     objAboutUS714.strType=@"1";
     [objhowtoBuy7.arrSubarray addObject:objAboutUS714];
     
     clsAboutUs *objAboutUS715=[[clsAboutUs alloc]init];
-    objAboutUS715.strName=@"There shall be no VAT and Service tax in International sales.";
+    objAboutUS715.strName=@"There shall be no GST in International sales.";
       objAboutUS715.strType=@"1";
     [objhowtoBuy7.arrSubarray addObject:objAboutUS715];
     [arrdata addObject:objhowtoBuy7];

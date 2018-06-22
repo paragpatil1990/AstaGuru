@@ -790,7 +790,7 @@
                             }
                             strWinBidPrice = [numberFormatter stringFromNumber:[NSNumber numberWithInt:winBidPrice]];
                             defultGridCell.lblNextValidBuild.text = strWinBidPrice;
-                            defultGridCell.pastStatictext.text = @"Inclusive of 15% Buyers Premium";
+                            defultGridCell.pastStatictext.text = @"Inclusive of 15% Margin";
                         }
                     }
                     cell1 = defultGridCell;

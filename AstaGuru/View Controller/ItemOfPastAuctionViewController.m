@@ -717,7 +717,7 @@
                     {
 //                        CurrentDefultGridCell.hidden = NO;
                         CurrentDefultGridCell.pastStatictext.hidden = NO;
-                        CurrentDefultGridCell.pastStatictext.text = @"(Inclusive of 15% Buyers Premium)";
+                        CurrentDefultGridCell.pastStatictext.text = @"(Inclusive of 15% Margin)";
                     }
 
                 }
@@ -876,7 +876,7 @@
                     else
                     {
                         CurrentDefultGridCell.pastStatictext.hidden = NO;
-                        CurrentDefultGridCell.pastStatictext.text = @"(Inclusive of 15% Buyers Premium)";
+                        CurrentDefultGridCell.pastStatictext.text = @"(Inclusive of 15% Margin)";
                     }
                     if (objCurrentOccution.IsSwapOn==1)
                     {

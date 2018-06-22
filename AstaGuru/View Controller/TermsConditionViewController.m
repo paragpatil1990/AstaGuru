@@ -71,17 +71,17 @@
     [arrFirst addObject:objclsAboutus2];
     
     clsAboutUs *objclsAboutus3=[[clsAboutUs alloc]init];
-    objclsAboutus3.strName=@"AstaGuru is authorized by the seller to display at AstaGuru's discretion images and description of all lots in the catalogue and on the website.";
+    objclsAboutus3.strName=@"AstaGuru is authorized to display at AstaGuru's discretion images and description of all lots in the catalogue and on the website.";
     objclsAboutus3.strType=@"2";
     [arrFirst addObject:objclsAboutus3];
     
     clsAboutUs *objclsAboutus4=[[clsAboutUs alloc]init];
-    objclsAboutus4.strName=@"AstaGuru can grant record and reject any bids.";
+    objclsAboutus4.strName=@"AstaGuru can grant record and reject any bids and/or proxy bids.";
     objclsAboutus4.strType=@"2";
     [arrFirst addObject:objclsAboutus4];
     
     clsAboutUs *objclsAboutus5=[[clsAboutUs alloc]init];
-    objclsAboutus5.strName=@"Bidding access shall be given on AstaGuru's discretion . AstaGuru may ask for a deposit on lots prior to giving bidding access.";
+    objclsAboutus5.strName=@"Bidding access shall be given on AstaGuru's discretion. AstaGuru may ask for a deposit on lots prior to giving bidding access.";
     objclsAboutus5.strType=@"2";
     [arrFirst addObject:objclsAboutus5];
     
@@ -96,18 +96,18 @@
     [arrFirst addObject:objclsAboutus7];
     
     clsAboutUs *objclsAboutus8=[[clsAboutUs alloc]init];
-    objclsAboutus8.strName=@"All proprieties shall be sold only if the reserve price in met. Reserve price is on each Property is confidential and shall not be disclosed . AstaGuru shall raise all invoices including buyers premium and related taxes.";
+    objclsAboutus8.strName=@"All proprieties shall be sold only if the reserve price in met. Reserve price is on each Property is confidential and shall not be disclosed . AstaGuru shall raise all invoices including its margin and related taxes.";
     objclsAboutus8.strType=@"2";
     [arrFirst addObject:objclsAboutus8];
     
     
     clsAboutUs *objclsAboutus9=[[clsAboutUs alloc]init];
-    objclsAboutus9.strName=@"The Buyers Premium shall be calculated at 15% of the hammer price.";
+    objclsAboutus9.strName=@"The Margin shall be calculated at 15% of the hammer price, excluding related tax.";
     objclsAboutus9.strType=@"2";
     [arrFirst addObject:objclsAboutus9];
     
     clsAboutUs *objclsAboutus10=[[clsAboutUs alloc]init];
-    objclsAboutus10.strName=@"All foreign currency exchange rates during the Auction are made on a constant of 1:60 (USD:INR) . All invoicing details shall be provided by the buyer prior to the auction.";
+    objclsAboutus10.strName=@"All foreign currency exchange rates during the Auction are made on a constant of 1:64 (USD:INR). All invoicing details shall be provided by the buyer prior to the auction.";
     objclsAboutus10.strType=@"2";
     [arrFirst addObject:objclsAboutus10];
     
@@ -118,17 +118,17 @@
     [arrFirst addObject:objclsAboutus11];
     
     clsAboutUs *objclsAboutus12=[[clsAboutUs alloc]init];
-    objclsAboutus12.strName=@"In case payment is not made within the stated time period, it shall be treated as a breach of contract and the Seller may authorise AstaGuru to take any steps (including the institution of legal proceedings).";
+    objclsAboutus12.strName=@"In case payment is not made within the stated time period, it shall be treated as a breach of contract and AstaGuru to take any steps (including the institution of legal proceedings).";
     objclsAboutus12.strType=@"2";
     [arrFirst addObject:objclsAboutus12];
     
     clsAboutUs *objclsAboutus13=[[clsAboutUs alloc]init];
-    objclsAboutus13.strName=@"AstaGuru may charge a 2% late payment fine per month. . If the buyer wishes to collect the property from AstaGuru, it must be collected within 30 Days from the date of the auction. The buyer shall be charged a 2% storage fee if the property is not collected.";
+    objclsAboutus13.strName=@"AstaGuru may charge a 2% late payment fine per month. If the buyer wishes to collect the property from AstaGuru, it must be collected within 30 Days from the date of the auction. The buyer shall be charged a 2% storage fee if the property is not collected.";
     objclsAboutus13.strType=@"2";
     [arrFirst addObject:objclsAboutus13];
     
     clsAboutUs *objclsAboutus14=[[clsAboutUs alloc]init];
-    objclsAboutus14.strName=@"AstaGuru reserves the right not to award the Winning Bid to the Bidder with the highest Bid at Closing Date if it deems it necessary to do so. . In an unlikely event of any technical failure and the website is inaccessible. The lot closing time shall be extended.";
+    objclsAboutus14.strName=@"AstaGuru reserves the right not to award the Winning Bid to the Bidder with the highest Bid at Closing Date if it deems it necessary to do so. In an unlikely event of any technical failure and the website is inaccessible. The lot closing time shall be extended.";
     objclsAboutus14.strType=@"2";
     [arrFirst addObject:objclsAboutus14];
     
@@ -143,12 +143,12 @@
     
     
     clsAboutUs *objclsAboutus16=[[clsAboutUs alloc]init];
-    objclsAboutus16.strName=@"AstaGuru assures on behalf of the seller that all properties on the website are genuine work of the artist listed.";
+    objclsAboutus16.strName=@"AstaGuru assures that all properties on the website are genuine work of the artist listed.";
     objclsAboutus16.strType=@"2";
     [arrSecond addObject:objclsAboutus16];
     
     clsAboutUs *objclsAboutus17=[[clsAboutUs alloc]init];
-    objclsAboutus17.strName=@"How ever in an unlikely event if the property is proved to be inauthentic to AstaGuru's satisfaction within a period of 6 months from the collection date. The seller shall be liable to pay back the full amount to the buyer. These claims will be handled on a case-by-case basis, and will require that examinable proof which clearly demonstrates that the Property is inauthentic is provided by an established and acknowledged authority. Only the actual Buyer (as registered with AstaGuru) makes the claim.";
+    objclsAboutus17.strName=@"How ever in an unlikely event if the property is proved to be inauthentic to AstaGuru's satisfaction within a period of 6 months from the collection date. AstaGuru shall pay back the full amount to the buyer. These claims will be handled on a case-by-case basis, and will require that examinable proof which clearly demonstrates that the Property is inauthentic is provided by an established and acknowledged authority. Only the actual Buyer (as registered with AstaGuru) makes the claim.";
     objclsAboutus17.strType=@"2";
     [arrSecond addObject:objclsAboutus17];
     
@@ -167,14 +167,14 @@
     objclsAboutus20.strType=@"2";
     [arrSecond addObject:objclsAboutus20];
     
-    clsAboutUs *objclsAboutus21=[[clsAboutUs alloc]init];
-    objclsAboutus21.strName=@"In case the seller fails to refund the funds. Astaguru shall be authorized by the buyer to take legal action on behalf of the buyer to recover the money at the expense of the buyer.";
-    objclsAboutus21.strType=@"2";
-    [arrSecond addObject:objclsAboutus21];
+//    clsAboutUs *objclsAboutus21=[[clsAboutUs alloc]init];
+//    objclsAboutus21.strName=@"In case the seller fails to refund the funds. Astaguru shall be authorized by the buyer to take legal action on behalf of the buyer to recover the money at the expense of the buyer.";
+//    objclsAboutus21.strType=@"2";
+//    [arrSecond addObject:objclsAboutus21];
     
     
     clsAboutUs *objclsAboutus22=[[clsAboutUs alloc]init];
-    objclsAboutus22.strName=@"AstaGuru will obtain the money from the seller and thereafter refund to the buyer the amount of purchase in case the work is not authentic.";
+    objclsAboutus22.strName=@"AstaGuru will refund to the buyer the amount of purchase in case the work is not authentic.";
     objclsAboutus22.strType=@"2";
     [arrThired addObject:objclsAboutus22];
     

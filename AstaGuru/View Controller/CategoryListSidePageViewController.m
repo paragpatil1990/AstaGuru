@@ -84,14 +84,13 @@
     _clvCategoryList.hidden=NO;
     [_clvCategoryList reloadData];
 }
-#pragma mark- CollectionView Delegate
 
+#pragma mark- CollectionView Delegate
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    
     return 3;
-    
 }
+
 - (CGSize)collectionView:(UICollectionView *)collectionView1 layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section==0||indexPath.section==2)
@@ -100,11 +99,10 @@
     }
     else
     {
-        
         return   CGSizeMake((collectionView1.frame.size.width/2)-7,83);
     }
-    
 }
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (section==0 ||section==2)
