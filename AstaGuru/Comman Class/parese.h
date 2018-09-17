@@ -23,5 +23,5 @@
 +(NSMutableArray*)parseSortCurrentAuction:(NSMutableArray*)json;
 +(NSMutableArray*)parsevacancy:(NSMutableArray*)json;
 +(NSMutableArray*)parsevacancyTitle:(NSMutableArray*)json;
-
++(clsCurrentOccution*)parseCurrentAuctionObj:(NSMutableDictionary*)dictLib;
 @end

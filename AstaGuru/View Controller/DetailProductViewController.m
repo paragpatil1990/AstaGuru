@@ -255,20 +255,48 @@
 //        NSString *timeStr = [self timercount:_objCurrentOccution.strBidclosingtime fromDate:_objCurrentOccution.strCurrentDate];
         if ([_objCurrentOccution.strtimeRemains intValue] < 0)
         {
-            return 7;
+            if ([_objCurrentOccution.auctionType intValue] != 1)
+            {
+                return 5;
+            }
+            else
+            {
+                return 7;
+            }
         }
         else
         {
-            return 8;
+            if ([_objCurrentOccution.auctionType intValue] != 1)
+            {
+                return 6;
+            }
+            else
+            {
+                return 8;
+            }
         }
     }
     else if (_IsUpcomming == 1)
     {
-        return 7;
+        if ([_objCurrentOccution.auctionType intValue] != 1)
+        {
+            return 5;
+        }
+        else
+        {
+            return 7;
+        }
     }
     else if (_IsPast == 1 || _IsArtwork == 1)
     {
-        return 7;
+        if ([_objCurrentOccution.auctionType intValue] != 1)
+        {
+            return 5;
+        }
+        else
+        {
+            return 7;
+        }
     }
     else
     {
@@ -321,7 +349,14 @@
     }
     else if (indexPath.row == 5)
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"artWorkSizeCell" forIndexPath:indexPath];
+        if ([_objCurrentOccution.auctionType intValue] != 1)
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"bidHistoryBtnCell" forIndexPath:indexPath];
+        }
+        else
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"artWorkSizeCell" forIndexPath:indexPath];
+        }
     }
     else if (indexPath.row == 6)
     {
@@ -528,6 +563,7 @@
             //if ([_objCurrentOccution.strAuctionname isEqualToString:@"Collectibles Auction"])
             if ([_objCurrentOccution.auctionType intValue] != 1)
             {
+                pcell.lbl_LotDescriptionText.text = @"";
                 pcell.lbl_ArtistText.text = @"";
                 pcell.lbl_ArtistName.text = @"";
                 
@@ -540,7 +576,8 @@
                 pcell.lbl_YearText.text = @"";
                 pcell.lbl_Year.text = @"";
                 
-                pcell.lbl_Size.text = [NSString stringWithFormat:@"%@ in",_objCurrentOccution.strproductsize];
+                pcell.lbl_SizeText.text = @"";
+                pcell.lbl_Size.text = [NSString stringWithFormat:@"%@",_objCurrentOccution.strproductsize];
             }
             else
             {
@@ -599,9 +636,16 @@
         }
         else if (indexPath.row == 5)
         {
-            // artWorkSizeCell
-            pcell.artWorkImage.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[ClsSetting imageURL], _objCurrentOccution.strhumanFigure]];
-            pcell.lbl_artWorkSize.text = _objCurrentOccution.strproductsize;
+            if ([_objCurrentOccution.auctionType intValue] != 1)
+            {
+                [ClsSetting SetBorder:pcell.btn_BidHistory cornerRadius:2 borderWidth:1 color:[UIColor colorWithRed:224.0/255.0 green:224.0/255.0 blue:224.0/255.0 alpha:1]];
+            }
+            else
+            {
+                // artWorkSizeCell
+                pcell.artWorkImage.imageURL=[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[ClsSetting imageURL], _objCurrentOccution.strhumanFigure]];
+                pcell.lbl_artWorkSize.text = _objCurrentOccution.strproductsize;
+            }
         }
         else if (indexPath.row == 6)
         {

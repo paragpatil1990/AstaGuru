@@ -62,4 +62,7 @@
 
 @property(nonatomic,retain)NSString *strprVat;
 @property(nonatomic,retain)NSString *auctionType;
+
+@property(nonatomic)NSString *isMargin;
+
 @end

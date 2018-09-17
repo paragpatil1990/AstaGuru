@@ -30,8 +30,13 @@
 @property (nonatomic,retain)clsMyAuctionGallery *objMyAuctionGallery;
 @property (readwrite) id<CurrentOccution> CurrentOccutiondelegate;
 @property (weak, nonatomic) IBOutlet UILabel *lblCategoryName;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_mediumText;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lbl_mediumText_width;
 @property (weak, nonatomic) IBOutlet UILabel *lblMedium;
 @property (weak, nonatomic) IBOutlet UILabel *lblYear;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_sizeText;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lbl_sizeText_width;
+
 - (IBAction)btnClosePressed:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *lblSize;
 @property (weak, nonatomic) IBOutlet UIButton *btnDetail;

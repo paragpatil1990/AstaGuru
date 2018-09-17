@@ -20,17 +20,20 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblYear;
 @property (weak, nonatomic) IBOutlet UILabel *lblSize;
 @property (weak, nonatomic) IBOutlet UILabel *lblEstimation;
-@property (weak, nonatomic) IBOutlet UILabel *lblByyerPremium;
-@property (weak, nonatomic) IBOutlet UILabel *lblServiceTaxOnPremium;
-@property (weak, nonatomic) IBOutlet UILabel *lblVatOnHammerPrice;
-
-@property (weak, nonatomic) IBOutlet UILabel *lblHammerPrice;
-@property (weak, nonatomic) IBOutlet UILabel *lblGrandTotal;
-
+//@property (weak, nonatomic) IBOutlet UILabel *lblByyerPremium;
+//@property (weak, nonatomic) IBOutlet UILabel *lblServiceTaxOnPremium;
+//@property (weak, nonatomic) IBOutlet UILabel *lblVatOnHammerPrice;
 @property (weak, nonatomic) IBOutlet UIButton *btnLot;
 
 @property (weak, nonatomic) IBOutlet UILabel *lbl_hammerPriceTxt;
-@property (weak, nonatomic) IBOutlet UILabel *lbl_buyersPremiumTxt;
-@property (weak, nonatomic) IBOutlet UILabel *lbl_gstTxt;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_hammerPrice;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_marginTxt;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_margin;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_gstOnArtworkTxt;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_gstOnArtwork;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_gstOnBuyersPremiumTxt;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_gstOnBuyersPremium;
+
+@property (weak, nonatomic) IBOutlet UILabel *lbl_GrandTotal;
 
 @end

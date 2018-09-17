@@ -192,10 +192,7 @@
         objArtistInfo.strArtistid=[dictLib valueForKey:@"artistid"];
         objArtistInfo.strProfile=[dictLib valueForKey:@"Profile"];
         [arrLib addObject:objArtistInfo];
-        
     }
-    
-    
     return arrLib;
 }
 
@@ -205,73 +202,81 @@
     NSMutableArray *arrLib=[[NSMutableArray alloc]init];
     for (int j=0; j<json.count; j++)
     {
-        clsCurrentOccution *objCurrentOccution=[[clsCurrentOccution alloc]init];
         NSMutableDictionary *dictLib=[json objectAtIndex:j];
-        dictLib=[ClsSetting RemoveNullOnly:dictLib];
-        objCurrentOccution.strmyuserid=[dictLib valueForKey:@"MyUserID"];
-        objCurrentOccution.strproductid=[dictLib valueForKey:@"productid"];
-        objCurrentOccution.strtitle=[dictLib valueForKey:@"title"];
-        objCurrentOccution.strdescription=[dictLib valueForKey:@"description"];
-        objCurrentOccution.strartist_id=[dictLib valueForKey:@"artistid"];
-        objCurrentOccution.strpricers=[dictLib valueForKey:@"Bidpricers"];
-        objCurrentOccution.strpriceus=[dictLib valueForKey:@"Bidpriceus"];
-        objCurrentOccution.strcategory_id=[dictLib valueForKey:@"categoryid"];
-        objCurrentOccution.strcategory=[dictLib valueForKey:@"category"];
-        objCurrentOccution.strstyle_id=[dictLib valueForKey:@"styleid"];
-        objCurrentOccution.strmedium_id=[dictLib valueForKey:@"mediumid"];
-        objCurrentOccution.strmedium=[dictLib valueForKey:@"medium"];
-        objCurrentOccution.strcollectors=[dictLib valueForKey:@"collectors"];
-        objCurrentOccution.strthumbnail=[dictLib valueForKey:@"thumbnail"];
-        objCurrentOccution.strimage=[dictLib valueForKey:@"image"];
-        objCurrentOccution.strproductsize=[dictLib valueForKey:@"productsize"];
-        objCurrentOccution.strproductdate=[dictLib valueForKey:@"productdate"];
-        objCurrentOccution.strestamiate=[dictLib valueForKey:@"estamiate"];
-        objCurrentOccution.strsmallimage=[dictLib valueForKey:@"smallimage"];
-        NSString *strRefrance1=[ClsSetting TrimWhiteSpaceAndNewLine:[dictLib valueForKey:@"reference"]];
-        objCurrentOccution.strReference=strRefrance1;
-        objCurrentOccution.strBidclosingtime=[dictLib valueForKey:@"Bidclosingtime"];
-        objCurrentOccution.strOnline=[dictLib valueForKey:@"Online"];
-        objCurrentOccution.strFirstName=[dictLib valueForKey:@"FirstName"];
-        objCurrentOccution.strLastName=[dictLib valueForKey:@"LastName"];
-        objCurrentOccution.strArtistPicture=[dictLib valueForKey:@"Picture"];
-        objCurrentOccution.strArtistProfile=[dictLib valueForKey:@"Profile"];
-         objCurrentOccution.strDollarRate=[dictLib valueForKey:@"DollarRate"];
-        objCurrentOccution.strbidartistuserid=[dictLib valueForKey:@"bidartistuserid"];
-        objCurrentOccution.strTypeOfCell=@"0";
-        objCurrentOccution.strCurrentDate = [dictLib valueForKey:@"currentDate"];
-        objCurrentOccution.strhumanFigure = [dictLib valueForKey:@"HumanFigure"];
-        objCurrentOccution.strStatus = [dictLib valueForKey:@"status"];
-        objCurrentOccution.strauctionBanner = [dictLib valueForKey:@"auctionBanner"];
-        objCurrentOccution.strpricelow = [dictLib valueForKey:@"pricelow"];
-        objCurrentOccution.strAuctionname = [dictLib valueForKey:@"Auctionname"];
-        objCurrentOccution.strPrdescription = [dictLib valueForKey:@"Prdescription"];
-        
-        NSString *closeingTime = [dictLib valueForKey:@"myBidClosingTime"];
-        NSArray *timeArray = [closeingTime componentsSeparatedByString:@" "];
-        NSString *dateString = [timeArray lastObject];//@"13:17:34.674194";
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = @"HH:mm:ss:SS";
-        NSDate *yourDate = [dateFormatter dateFromString:dateString];
-        dateFormatter.dateFormat = @"HH:mm:ss";
-        objCurrentOccution.strmyBidClosingTime = [NSString stringWithFormat:@"%@ %@", [timeArray objectAtIndex:0],[dateFormatter stringFromDate:yourDate]];
-        
-        objCurrentOccution.strtimeRemains = [dictLib valueForKey:@"timeRemains"];
-        
-        objCurrentOccution.strprVat = [dictLib valueForKey:@"PrVat"];
-        
-        objCurrentOccution.auctionType = [dictLib valueForKey:@"auctionType"];
-
-        NSMutableDictionary *dictArtistInfo=[dictLib valueForKey:@"artist_by_artistid"];
-        clsArtistInfo *objArtistInfo=[[clsArtistInfo alloc]init];
-        objArtistInfo.strArtistid=[dictArtistInfo valueForKey:@"artistid"];
-        objArtistInfo.strFirstName=[dictArtistInfo valueForKey:@"FirstName"];
-        objArtistInfo.strLastName=[dictArtistInfo valueForKey:@"LastName"];
-        objArtistInfo.strProfile=[dictArtistInfo valueForKey:@"Profile"];
-        objArtistInfo.strPicture=[dictArtistInfo valueForKey:@"Picture"];
+        clsCurrentOccution *objCurrentOccution = [parese parseCurrentAuctionObj:dictLib];
         [arrLib addObject:objCurrentOccution];
-        
     }
     return arrLib;
+}
+
++(clsCurrentOccution*)parseCurrentAuctionObj:(NSMutableDictionary*)dictLib
+{
+    dictLib = [ClsSetting RemoveNullOnly:dictLib];
+    clsCurrentOccution *objCurrentOccution=[[clsCurrentOccution alloc]init];
+    objCurrentOccution.strmyuserid=[dictLib valueForKey:@"MyUserID"];
+    objCurrentOccution.strproductid=[dictLib valueForKey:@"productid"];
+    objCurrentOccution.strtitle=[dictLib valueForKey:@"title"];
+    objCurrentOccution.strdescription=[dictLib valueForKey:@"description"];
+    objCurrentOccution.strartist_id=[dictLib valueForKey:@"artistid"];
+    objCurrentOccution.strpricers=[dictLib valueForKey:@"Bidpricers"];
+    objCurrentOccution.strpriceus=[dictLib valueForKey:@"Bidpriceus"];
+    objCurrentOccution.strcategory_id=[dictLib valueForKey:@"categoryid"];
+    objCurrentOccution.strcategory=[dictLib valueForKey:@"category"];
+    objCurrentOccution.strstyle_id=[dictLib valueForKey:@"styleid"];
+    objCurrentOccution.strmedium_id=[dictLib valueForKey:@"mediumid"];
+    objCurrentOccution.strmedium=[dictLib valueForKey:@"medium"];
+    objCurrentOccution.strcollectors=[dictLib valueForKey:@"collectors"];
+    objCurrentOccution.strthumbnail=[dictLib valueForKey:@"thumbnail"];
+    objCurrentOccution.strimage=[dictLib valueForKey:@"image"];
+    objCurrentOccution.strproductsize=[dictLib valueForKey:@"productsize"];
+    objCurrentOccution.strproductdate=[dictLib valueForKey:@"productdate"];
+    objCurrentOccution.strestamiate=[dictLib valueForKey:@"estamiate"];
+    objCurrentOccution.strsmallimage=[dictLib valueForKey:@"smallimage"];
+    NSString *strRefrance1=[ClsSetting TrimWhiteSpaceAndNewLine:[dictLib valueForKey:@"reference"]];
+    objCurrentOccution.strReference=strRefrance1;
+    objCurrentOccution.strBidclosingtime=[dictLib valueForKey:@"Bidclosingtime"];
+    objCurrentOccution.strOnline=[dictLib valueForKey:@"Online"];
+    objCurrentOccution.strFirstName=[dictLib valueForKey:@"FirstName"];
+    objCurrentOccution.strLastName=[dictLib valueForKey:@"LastName"];
+    objCurrentOccution.strArtistPicture=[dictLib valueForKey:@"Picture"];
+    objCurrentOccution.strArtistProfile=[dictLib valueForKey:@"Profile"];
+    objCurrentOccution.strDollarRate=[dictLib valueForKey:@"DollarRate"];
+    objCurrentOccution.strbidartistuserid=[dictLib valueForKey:@"bidartistuserid"];
+    objCurrentOccution.strTypeOfCell=@"0";
+    objCurrentOccution.strCurrentDate = [dictLib valueForKey:@"currentDate"];
+    objCurrentOccution.strhumanFigure = [dictLib valueForKey:@"HumanFigure"];
+    objCurrentOccution.strStatus = [dictLib valueForKey:@"status"];
+    objCurrentOccution.strauctionBanner = [dictLib valueForKey:@"auctionBanner"];
+    objCurrentOccution.strpricelow = [dictLib valueForKey:@"pricelow"];
+    objCurrentOccution.strAuctionname = [dictLib valueForKey:@"Auctionname"];
+    objCurrentOccution.strPrdescription = [dictLib valueForKey:@"Prdescription"];
+    
+    NSString *closeingTime = [dictLib valueForKey:@"myBidClosingTime"];
+    NSArray *timeArray = [closeingTime componentsSeparatedByString:@" "];
+    NSString *dateString = [timeArray lastObject];//@"13:17:34.674194";
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"HH:mm:ss:SS";
+    NSDate *yourDate = [dateFormatter dateFromString:dateString];
+    dateFormatter.dateFormat = @"HH:mm:ss";
+    objCurrentOccution.strmyBidClosingTime = [NSString stringWithFormat:@"%@ %@", [timeArray objectAtIndex:0],[dateFormatter stringFromDate:yourDate]];
+    
+    objCurrentOccution.strtimeRemains = [dictLib valueForKey:@"timeRemains"];
+    
+    objCurrentOccution.strprVat = [dictLib valueForKey:@"PrVat"];
+    
+    objCurrentOccution.auctionType = [dictLib valueForKey:@"auctionType"];
+    
+    //objCurrentOccution.isMargin = [dictLib valueForKey:@"isMargin"];
+    
+    NSMutableDictionary *dictArtistInfo=[dictLib valueForKey:@"artist_by_artistid"];
+    clsArtistInfo *objArtistInfo=[[clsArtistInfo alloc]init];
+    objArtistInfo.strArtistid=[dictArtistInfo valueForKey:@"artistid"];
+    objArtistInfo.strFirstName=[dictArtistInfo valueForKey:@"FirstName"];
+    objArtistInfo.strLastName=[dictArtistInfo valueForKey:@"LastName"];
+    objArtistInfo.strProfile=[dictArtistInfo valueForKey:@"Profile"];
+    objArtistInfo.strPicture=[dictArtistInfo valueForKey:@"Picture"];
+    
+    return objCurrentOccution;
 }
 
 +(NSMutableArray*)parsevacancy:(NSMutableArray*)json

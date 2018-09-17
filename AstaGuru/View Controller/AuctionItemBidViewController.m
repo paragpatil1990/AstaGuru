@@ -11,7 +11,14 @@
 #import "ClsSetting.h"
 #import "MBProgressHUD.h"
 #import "AFNetworking.h"
-@interface AuctionItemBidViewController ()<PassResepose>
+#import <sys/utsname.h>
+#include <ifaddrs.h>
+#include <arpa/inet.h>
+#import <CoreLocation/CoreLocation.h>
+#import "ALNetwork.h"
+#define SYSTEM_VERSION_LESS_THAN(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
+@interface AuctionItemBidViewController ()<PassResepose, CLLocationManagerDelegate>
 {
     NSString *strProxyPriceus;
     NSString *strProxyPricers;
@@ -26,6 +33,17 @@
     
 //    int webservicecount;
     int proxyvalidation;
+    
+    CLLocationManager *locationManager;
+    CLLocation *currentLocation;
+
+    NSString *cityName;
+    NSString *thoroughfare;
+    NSString *address;
+    NSString *lat;
+    NSString *lang;
+    
+    MBProgressHUD *HUDL;
 }
 @end
 
@@ -59,6 +77,150 @@
     }
     
     [self setPrice];//:_objCurrentOuction];
+    
+    cityName = @"";
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:true];
+    [self CurrentLocationIdentifier];
+}
+
+//------------ Current Location Address-----
+-(void)CurrentLocationIdentifier
+{
+    //---- For getting current gps location
+    locationManager = [CLLocationManager new];
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.delegate = self;
+    [locationManager requestAlwaysAuthorization];
+    [locationManager startUpdatingLocation];
+    //------
+}
+
+- (void)locationManager:(CLLocationManager*)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined: {
+            [locationManager requestAlwaysAuthorization];
+            [locationManager startUpdatingLocation];
+        } break;
+        case kCLAuthorizationStatusDenied:
+        case kCLAuthorizationStatusRestricted:
+        {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Location Services Disabled" message:@"Please enable location services in settings" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+            if (status == kCLAuthorizationStatusDenied)
+            {
+                UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:@"Settings" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                                 {
+                                                     
+                                                     if ([CLLocationManager locationServicesEnabled])
+                                                     {
+                                                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                                                         
+                                                     }
+                                                     else
+                                                     {
+                                                         NSString* url = SYSTEM_VERSION_LESS_THAN(@"10.0") ? @"prefs:root=LOCATION_SERVICES" : @"App-Prefs:root=Privacy&path=LOCATION";
+                                                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString: url]];
+                                                     }
+                                                 }];
+                [alertController addAction:settingsAction];
+            }
+            else
+            {
+                UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:@"Settings" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                }];
+                [alertController addAction:settingsAction];
+                
+            }
+            
+            
+            [alertController addAction:cancelAction];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
+        }break;
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+        case kCLAuthorizationStatusAuthorizedAlways: {
+            HUDL = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            HUDL.labelText = @"wait";
+            [locationManager startUpdatingLocation]; 
+        } break;
+        default:
+            break;
+    }
+}
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    currentLocation = [locations objectAtIndex:0];
+    //[locationManager stopUpdatingLocation];
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
+    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error)
+     {
+         if (!(error))
+         {
+             NSLog(@"placemarks == %@",placemarks);
+             CLPlacemark *placemark = [placemarks objectAtIndex:0];
+//
+//             NSLog(@"pm.thoroughfare = %@",placemark.thoroughfare);
+//
+//             NSLog(@"\nCurrent Location Detected\n");
+//             NSLog(@"placemark %@",placemark);
+             NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+             NSString *Address = [[NSString alloc]initWithString:locatedAt];
+//             NSString *Area = [[NSString alloc]initWithString:placemark.locality];
+//             NSString *Country = [[NSString alloc]initWithString:placemark.country];
+//             NSString *CountryArea = [NSString stringWithFormat:@"%@, %@", Area,Country];
+//             NSLog(@"Address = %@ , CountryArea =  %@",Address, CountryArea);
+             
+             cityName = placemark.locality;
+             thoroughfare = placemark.thoroughfare;
+             address = Address;
+             lat = [NSString stringWithFormat:@"%f", currentLocation.coordinate.latitude];
+             lang = [NSString stringWithFormat:@"%f", currentLocation.coordinate.longitude];
+         }
+         else
+         {
+             NSLog(@"Geocode failed with error %@", error);
+             NSLog(@"\nCurrent Location Not Detected\n");
+             //return;
+             //CountryArea = NULL;
+         }
+         
+         if (HUDL != nil)
+         {
+             [HUDL hide:YES];
+         }
+         
+         
+         /*---- For more results
+          placemark.region);
+          placemark.country);
+          placemark.locality);
+          placemark.name);
+          placemark.ocean);
+          placemark.postalCode);
+          placemark.subLocality);
+          placemark.location);
+          ------*/
+     }];
+    
+
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    if (HUDL != nil)
+    {
+        [HUDL hide:YES];
+    }
+    [ClsSetting ValidationPromt:@"Location not found! Please try again."];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -121,6 +283,68 @@
 
 - (IBAction)btnConfirmPressed:(id)sender
 {
+    
+//    if ([CLLocationManager locationServicesEnabled])
+//    {
+        CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+        
+        // 3
+        if ((status == kCLAuthorizationStatusDenied)  || (status == kCLAuthorizationStatusRestricted))
+        {
+            [self CurrentLocationIdentifier];
+
+//            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Location Services Disabled" message:@"Please enable location services in settings" preferredStyle:UIAlertControllerStyleAlert];
+//
+//            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+//            if (status == kCLAuthorizationStatusDenied)
+//            {
+//                UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:@"Settings" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+//                {
+//
+//                    if ([CLLocationManager locationServicesEnabled])
+//                    {
+//                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+//
+//                    }
+//                    else
+//                    {
+//                         NSString* url = SYSTEM_VERSION_LESS_THAN(@"10.0") ? @"prefs:root=LOCATION_SERVICES" : @"App-Prefs:root=Privacy&path=LOCATION";
+//                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: url]];
+//                    }
+//                    //                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:
+//                    //                                                            UIApplicationOpenSettingsURLString]];
+//                }];
+//                [alertController addAction:settingsAction];
+//            }
+//            else
+//            {
+//                UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:@"Settings" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//
+//                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+//                }];
+//                [alertController addAction:settingsAction];
+//
+//            }
+//
+//
+//            [alertController addAction:cancelAction];
+//
+//            [self presentViewController:alertController animated:YES completion:nil];
+            return;
+        }
+//        else
+//        {
+//            [self CurrentLocationIdentifier];
+//        }
+//    }
+    
+    if(currentLocation == nil || [cityName isEqualToString:@""])
+    {
+        [self CurrentLocationIdentifier];
+        [ClsSetting ValidationPromt:@"Location not found! Please try again."];
+        return;
+    }
+    
     if (_isBidNow==1)
     {
         if (proxyvalidation==1)
@@ -278,9 +502,40 @@
         manager.responseSerializer = [AFHTTPResponseSerializer serializer];  //AFHTTPResponseSerializer serializer
         manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
         
+        
         NSArray *imgNameArr = [_objCurrentOuction.strthumbnail componentsSeparatedByString:@"/"];
         NSString *imgName = [imgNameArr objectAtIndex:1];
-        NSString  *strQuery=[NSString stringWithFormat:@"%@/spBid(%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@)?api_key=%@",[ClsSetting procedureURL],strNextVAlidPricers_send,_objCurrentOuction.strproductid,strUserid,_objCurrentOuction.strDollarRate,strNextVAlidPriceus_send, imgName, _objCurrentOuction.strReference,_objCurrentOuction.strpricers, _objCurrentOuction.strpriceus,[ClsSetting TrimWhiteSpaceAndNewLine:_objCurrentOuction.strOnline], _objCurrentOuction.strBidclosingtime, _objCurrentOuction.strFirstName, _objCurrentOuction.strLastName,[ClsSetting apiKey]];
+        
+//        bidByVal int,
+//        @deviceTocken VARCHAR(255),
+//        @OSversion VARCHAR(255),
+//        @modelName VARCHAR(100),
+//        @ipAddress VARCHAR(50),
+//        @userLocation
+        NSString *bidByVal = @"2";
+//        NSString *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+//        if (deviceToken == nil)
+//        {
+//            deviceToken = @"";
+//        }
+        NSString *Identifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString]; // IOS 6+
+        float ver = [[[UIDevice currentDevice] systemVersion] floatValue];
+        NSString *OSversion = [NSString stringWithFormat:@"%.1f",ver];
+        NSString *modelName = [self deviceName];
+        NSString *ipAddress = [ALNetwork currentIPAddress]; //[self getIPAddress];
+        
+        NSCharacterSet *doNotWant = [NSCharacterSet characterSetWithCharactersInString:@",/\`'"];
+
+        //NSString *Address = [address stringByReplacingOccurrencesOfString:@"," withString:@" "];
+        
+        NSString *Address = [[address componentsSeparatedByCharactersInSet: doNotWant] componentsJoinedByString: @" "];
+        //[Address stringByReplacingOccurrencesOfString:@"/" withString:@" "];
+        
+        NSString *Area = [[thoroughfare componentsSeparatedByCharactersInSet: doNotWant] componentsJoinedByString: @" "];
+        
+        //NSString *Area = [thoroughfare stringByReplacingOccurrencesOfString:@"," withString:@" "];
+        NSString  *strQuery=[NSString stringWithFormat:@"%@/spBid(%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@)?api_key=%@",[ClsSetting procedureURL],strNextVAlidPricers_send,_objCurrentOuction.strproductid,strUserid,_objCurrentOuction.strDollarRate,strNextVAlidPriceus_send, imgName, _objCurrentOuction.strReference,_objCurrentOuction.strpricers, _objCurrentOuction.strpriceus,[ClsSetting TrimWhiteSpaceAndNewLine:_objCurrentOuction.strOnline], _objCurrentOuction.strBidclosingtime, _objCurrentOuction.strFirstName, _objCurrentOuction.strLastName, bidByVal, Identifier, OSversion, modelName, ipAddress, cityName, Address, Area, lat, lang, [ClsSetting apiKey]];
+        
         NSString *url = strQuery;
         NSLog(@"%@",url);
         
@@ -424,7 +679,24 @@
                 manager.responseSerializer = [AFHTTPResponseSerializer serializer];
                 manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
                 
-                NSString *strQuery=[NSString stringWithFormat:@"%@/spUpcomingProxyBid(%@,%@,%@,%@,%@,%@)?api_key=%@",[ClsSetting procedureURL], strUserid, _objCurrentOuction.strproductid, strProxyPricers, strProxyPriceus, createdBy,[ClsSetting TrimWhiteSpaceAndNewLine:_objCurrentOuction.strOnline],[ClsSetting apiKey]];
+                NSString *bidByVal = @"2";
+                
+//                NSString *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+//                if (deviceToken == nil)
+//                {
+//                    deviceToken = @"";
+//                }
+                
+                NSString *Identifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString]; // IOS 6+
+                float ver = [[[UIDevice currentDevice] systemVersion] floatValue];
+                
+                NSString *OSversion = [NSString stringWithFormat:@"%.1f",ver];
+                NSString *modelName = [self deviceName];
+                NSString *ipAddress = [ALNetwork currentIPAddress];//[self getIPAddress];
+                NSString *Address = [address stringByReplacingOccurrencesOfString:@"," withString:@" "];
+                Address = [Address stringByReplacingOccurrencesOfString:@"/" withString:@" "];
+                NSString *Area = [thoroughfare stringByReplacingOccurrencesOfString:@"," withString:@" "];
+                NSString *strQuery=[NSString stringWithFormat:@"%@/spUpcomingProxyBid(%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@)?api_key=%@",[ClsSetting procedureURL], strUserid, _objCurrentOuction.strproductid, strProxyPricers, strProxyPriceus, createdBy,[ClsSetting TrimWhiteSpaceAndNewLine:_objCurrentOuction.strOnline], bidByVal, Identifier, OSversion, modelName, ipAddress, cityName, Address, Area, lat, lang,[ClsSetting apiKey]];
                 
                 NSString *url = strQuery;
                 NSLog(@"%@",url);
@@ -498,7 +770,25 @@
                 NSArray *imgNameArr = [_objCurrentOuction.strthumbnail componentsSeparatedByString:@"/"];
                 NSString *imgName = [imgNameArr objectAtIndex:1];
                 
-                NSString *strQuery=[NSString stringWithFormat:@"%@/spCurrentProxyBid(%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@)?api_key=%@",[ClsSetting procedureURL],strProxyPricers,_objCurrentOuction.strproductid,strUserid,_objCurrentOuction.strDollarRate,strProxyPriceus,imgName,_objCurrentOuction.strReference,_objCurrentOuction.strpricers,_objCurrentOuction.strpriceus,[ClsSetting TrimWhiteSpaceAndNewLine:_objCurrentOuction.strOnline],_objCurrentOuction.strBidclosingtime,_objCurrentOuction.strFirstName,_objCurrentOuction.strLastName,[ClsSetting apiKey]];
+                NSString *bidByVal = @"2";
+                
+//                NSString *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+//                if (deviceToken == nil)
+//                {
+//                    deviceToken = @"";
+//                }
+                
+                NSString *Identifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString]; // IOS 6+
+                
+                float ver = [[[UIDevice currentDevice] systemVersion] floatValue];
+                
+                NSString *OSversion = [NSString stringWithFormat:@"%.1f",ver];
+                NSString *modelName = [self deviceName];
+                NSString *ipAddress = [ALNetwork currentIPAddress];// [self getIPAddress];
+                NSString *Address = [address stringByReplacingOccurrencesOfString:@"," withString:@" "];
+                Address = [Address stringByReplacingOccurrencesOfString:@"/" withString:@" "];
+                NSString *Area = [thoroughfare stringByReplacingOccurrencesOfString:@"," withString:@" "];
+                NSString *strQuery=[NSString stringWithFormat:@"%@/spCurrentProxyBid(%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@)?api_key=%@",[ClsSetting procedureURL],strProxyPricers,_objCurrentOuction.strproductid,strUserid,_objCurrentOuction.strDollarRate,strProxyPriceus,imgName,_objCurrentOuction.strReference,_objCurrentOuction.strpricers,_objCurrentOuction.strpriceus,[ClsSetting TrimWhiteSpaceAndNewLine:_objCurrentOuction.strOnline],_objCurrentOuction.strBidclosingtime,_objCurrentOuction.strFirstName,_objCurrentOuction.strLastName, bidByVal, Identifier, OSversion, modelName, ipAddress, cityName, Address, Area, lat, lang, [ClsSetting apiKey]];
                 
                 NSString *url = strQuery;
                 NSLog(@"%@",url);
@@ -877,4 +1167,122 @@
     {
     }
 }
+
+- (NSString*) deviceName
+{
+    struct utsname systemInfo;
+    
+    uname(&systemInfo);
+    
+    NSString* code = [NSString stringWithCString:systemInfo.machine
+                                        encoding:NSUTF8StringEncoding];
+    
+    static NSDictionary* deviceNamesByCode = nil;
+    
+    if (!deviceNamesByCode) {
+        
+        deviceNamesByCode = @{@"i386"      : @"Simulator",
+                              @"x86_64"    : @"Simulator",
+                              @"iPod1,1"   : @"iPod Touch",        // (Original)
+                              @"iPod2,1"   : @"iPod Touch",        // (Second Generation)
+                              @"iPod3,1"   : @"iPod Touch",        // (Third Generation)
+                              @"iPod4,1"   : @"iPod Touch",        // (Fourth Generation)
+                              @"iPod7,1"   : @"iPod Touch",        // (6th Generation)
+                              @"iPhone1,1" : @"iPhone",            // (Original)
+                              @"iPhone1,2" : @"iPhone",            // (3G)
+                              @"iPhone2,1" : @"iPhone",            // (3GS)
+                              @"iPad1,1"   : @"iPad",              // (Original)
+                              @"iPad2,1"   : @"iPad 2",            //
+                              @"iPad3,1"   : @"iPad",              // (3rd Generation)
+                              @"iPhone3,1" : @"iPhone 4",          // (GSM)
+                              @"iPhone3,3" : @"iPhone 4",          // (CDMA/Verizon/Sprint)
+                              @"iPhone4,1" : @"iPhone 4S",         //
+                              @"iPhone5,1" : @"iPhone 5",          // (model A1428, AT&T/Canada)
+                              @"iPhone5,2" : @"iPhone 5",          // (model A1429, everything else)
+                              @"iPad3,4"   : @"iPad",              // (4th Generation)
+                              @"iPad2,5"   : @"iPad Mini",         // (Original)
+                              @"iPhone5,3" : @"iPhone 5c",         // (model A1456, A1532 | GSM)
+                              @"iPhone5,4" : @"iPhone 5c",         // (model A1507, A1516, A1526 (China), A1529 | Global)
+                              @"iPhone6,1" : @"iPhone 5s",         // (model A1433, A1533 | GSM)
+                              @"iPhone6,2" : @"iPhone 5s",         // (model A1457, A1518, A1528 (China), A1530 | Global)
+                              @"iPhone7,1" : @"iPhone 6 Plus",     //
+                              @"iPhone7,2" : @"iPhone 6",          //
+                              @"iPhone8,1" : @"iPhone 6S",         //
+                              @"iPhone8,2" : @"iPhone 6S Plus",    //
+                              @"iPhone8,4" : @"iPhone SE",         //
+                              @"iPhone9,1" : @"iPhone 7",          //
+                              @"iPhone9,3" : @"iPhone 7",          //
+                              @"iPhone9,2" : @"iPhone 7 Plus",     //
+                              @"iPhone9,4" : @"iPhone 7 Plus",     //
+                              @"iPhone10,1": @"iPhone 8",          // CDMA
+                              @"iPhone10,4": @"iPhone 8",          // GSM
+                              @"iPhone10,2": @"iPhone 8 Plus",     // CDMA
+                              @"iPhone10,5": @"iPhone 8 Plus",     // GSM
+                              @"iPhone10,3": @"iPhone X",          // CDMA
+                              @"iPhone10,6": @"iPhone X",          // GSM
+                              
+                              @"iPad4,1"   : @"iPad Air",          // 5th Generation iPad (iPad Air) - Wifi
+                              @"iPad4,2"   : @"iPad Air",          // 5th Generation iPad (iPad Air) - Cellular
+                              @"iPad4,4"   : @"iPad Mini",         // (2nd Generation iPad Mini - Wifi)
+                              @"iPad4,5"   : @"iPad Mini",         // (2nd Generation iPad Mini - Cellular)
+                              @"iPad4,7"   : @"iPad Mini",         // (3rd Generation iPad Mini - Wifi (model A1599))
+                              @"iPad6,7"   : @"iPad Pro (12.9\")", // iPad Pro 12.9 inches - (model A1584)
+                              @"iPad6,8"   : @"iPad Pro (12.9\")", // iPad Pro 12.9 inches - (model A1652)
+                              @"iPad6,3"   : @"iPad Pro (9.7\")",  // iPad Pro 9.7 inches - (model A1673)
+                              @"iPad6,4"   : @"iPad Pro (9.7\")"   // iPad Pro 9.7 inches - (models A1674 and A1675)
+                              };
+    }
+    
+    NSString* deviceName = [deviceNamesByCode objectForKey:code];
+    
+    if (!deviceName) {
+        // Not found on database. At least guess main device type from string contents:
+        
+        if ([code rangeOfString:@"iPod"].location != NSNotFound) {
+            deviceName = @"iPod Touch";
+        }
+        else if([code rangeOfString:@"iPad"].location != NSNotFound) {
+            deviceName = @"iPad";
+        }
+        else if([code rangeOfString:@"iPhone"].location != NSNotFound){
+            deviceName = @"iPhone";
+        }
+        else {
+            deviceName = @"Unknown";
+        }
+    }
+    
+    return deviceName;
+}
+
+- (NSString *)getIPAddress {
+    
+    NSString *address = @"error";
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr = NULL;
+    int success = 0;
+    // retrieve the current interfaces - returns 0 on success
+    success = getifaddrs(&interfaces);
+    if (success == 0) {
+        // Loop through linked list of interfaces
+        temp_addr = interfaces;
+        while(temp_addr != NULL) {
+            if(temp_addr->ifa_addr->sa_family == AF_INET) {
+                // Check if interface is en0 which is the wifi connection on the iPhone
+                if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+                    // Get NSString from C String
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+                    
+                }
+                
+            }
+            
+            temp_addr = temp_addr->ifa_next;
+        }
+    }
+    // Free memory
+    freeifaddrs(interfaces);
+    return address;
+}
+
 @end

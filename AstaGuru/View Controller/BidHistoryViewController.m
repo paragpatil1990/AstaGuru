@@ -559,7 +559,7 @@
                 NSString *ht = [ClsSetting getAttributedStringFormHtmlString:_objCurrentOuction.strPrdescription];
                 CurrentSelectedGridCell.lblMedium.text= ht;
                 CurrentSelectedGridCell.lblYear.text = @"";
-                CurrentSelectedGridCell.lblSize.text = [NSString stringWithFormat:@"%@ in",_objCurrentOuction.strproductsize];
+                CurrentSelectedGridCell.lblSize.text = [NSString stringWithFormat:@"%@",_objCurrentOuction.strproductsize];
             }
             else
             {

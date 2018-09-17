@@ -21,7 +21,10 @@
 #import "ItemOfPastAuctionViewController.h"
 #import "NotificationViewController.h"
 #import "MIBadgeButton.h"
-@interface ViewController ()<YTPlayerViewDelegate,UISearchBarDelegate, iCarouselDelegate, iCarouselDataSource>
+
+#define SYSTEM_VERSION_LESS_THAN(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
+@interface ViewController ()<YTPlayerViewDelegate,UISearchBarDelegate, iCarouselDelegate, iCarouselDataSource, CLLocationManagerDelegate>
 {
     NSMutableArray *arrmBanner;
     NSMutableArray *arrmBanner2;
@@ -30,6 +33,9 @@
     NSMutableArray *arrmBanner5;
     NSMutableArray *arrBottomMenu;
     UIButton *btnBack;
+    
+    CLLocationManager *locationManager;
+
 }
 @property (nonatomic, strong) UISearchBar *searchBar;
 @end
@@ -39,7 +45,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self CurrentLocationIdentifier];
     arrmBanner=[[NSMutableArray alloc]init];
     arrmBanner2=[[NSMutableArray alloc]init];
     arrmBanner3=[[NSMutableArray alloc]init];
@@ -102,6 +108,65 @@
 
     // Do any additional setup after loading the view, typically from a nib.
 }
+
+//------------ Current Location Address-----
+-(void)CurrentLocationIdentifier
+{
+    //---- For getting current gps location
+    locationManager = [CLLocationManager new];
+    locationManager.delegate = self;
+
+//    locationManager.distanceFilter = kCLDistanceFilterNone;
+//    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    //[locationManager requestWhenInUseAuthorization];
+    //[locationManager requestAlwaysAuthorization];
+//    [locationManager startUpdatingLocation];
+    //------
+}
+
+- (void)locationManager:(CLLocationManager*)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined: {
+            [locationManager requestAlwaysAuthorization];
+        } break;
+        case kCLAuthorizationStatusDenied: {
+            [locationManager requestAlwaysAuthorization];
+        } break;
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+        case kCLAuthorizationStatusAuthorizedAlways: {
+        } break;
+        default:
+            break;
+    }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    NSLog(@"update");
+    [locationManager stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    
+    if ([error domain] == kCLErrorDomain) {
+        
+        // We handle CoreLocation-related errors here
+        switch ([error code]) {
+                // "Don't Allow" on two successive app launches is the same as saying "never allow". The user
+                // can reset this for all apps by going to Settings > General > Reset > Reset Location Warnings.
+            case kCLErrorDenied:
+                
+            case kCLErrorLocationUnknown:
+                
+            default:
+                break;
+        }
+        
+    } else {
+        // We handle all non-CoreLocation errors here
+    }
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];

@@ -826,16 +826,23 @@
                         NSString *ht = [ClsSetting getAttributedStringFormHtmlString:objCurrentOccution.strPrdescription];
                         CurrentSelectedGridCell.lblMedium.text= ht;
                         CurrentSelectedGridCell.lblYear.text= @"";
-                        CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@ in",objCurrentOccution.strproductsize];
+                        
+                        CurrentSelectedGridCell.lbl_sizeText.text = @"";
+                        CurrentSelectedGridCell.lbl_sizeText_width.constant = 0;
+                        CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@",objCurrentOccution.strproductsize];
 
                     }
                     else
                     {
-                            CurrentSelectedGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",objCurrentOccution.strFirstName,objCurrentOccution.strLastName];
-                            CurrentSelectedGridCell.lblMedium.text= objCurrentOccution.strmedium;
-                            CurrentSelectedGridCell.lblCategoryName.text=objCurrentOccution.strcategory;
+                        
+                        CurrentSelectedGridCell.lblArtistName.text=[NSString stringWithFormat:@"%@ %@",objCurrentOccution.strFirstName,objCurrentOccution.strLastName];
+                        
+                        CurrentSelectedGridCell.lblMedium.text= objCurrentOccution.strmedium;
+                        
+                        CurrentSelectedGridCell.lblCategoryName.text=objCurrentOccution.strcategory;
                         CurrentSelectedGridCell.lblYear.text= objCurrentOccution.strproductdate;
                         CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@ in",objCurrentOccution.strproductsize];
+                        //CurrentSelectedGridCell.lbl_sizeText.text = @"Size:";
                     }
 //                    NSString *timeStr =[self timercount:objCurrentOccution.strBidclosingtime fromDate:objCurrentOccution.strCurrentDate];
                     if ([objCurrentOccution.strtimeRemains intValue] < 0)
@@ -1000,7 +1007,9 @@
                         UILabel *Lbl_1 = (UILabel *)[CurrentSelectedGridCell viewWithTag:11];
                         Lbl_1.text = @"Title: ";
                         UILabel *Lbl_2 = (UILabel *)[CurrentSelectedGridCell viewWithTag:12];
-                        Lbl_2.text = @"Description: ";
+                        Lbl_2.text = @"Description:";
+                        CurrentSelectedGridCell.lbl_mediumText_width.constant = 66;
+
                         UILabel *Lbl_3 = (UILabel *)[CurrentSelectedGridCell viewWithTag:13];
                         Lbl_3.text = @"";
                         
@@ -1008,7 +1017,9 @@
                         NSString *ht = [ClsSetting getAttributedStringFormHtmlString:objCurrentOccution.strPrdescription];
                         CurrentSelectedGridCell.lblMedium.text= ht;
                         CurrentSelectedGridCell.lblYear.text= @"";
-                        CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@ in",objCurrentOccution.strproductsize];
+                        CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@",objCurrentOccution.strproductsize];
+                        CurrentSelectedGridCell.lbl_sizeText.text = @"";
+                        CurrentSelectedGridCell.lbl_sizeText_width.constant = 0;
                         
                     }
                     else

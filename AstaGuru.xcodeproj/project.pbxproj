@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E077A7D211D66DC00802E9E /* ALNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E077A7C211D66DC00802E9E /* ALNetwork.m */; };
 		4E1A33DD2009DCAB00BCD119 /* icon-back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E1A33DC2009DCAA00BCD119 /* icon-back@3x.png */; };
 		4E1A33E1200A1A2F00BCD119 /* clear-icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4E1A33E0200A1A2F00BCD119 /* clear-icon@3x.png */; };
 		4E863984207DEAD6002462DB /* maintenance.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4E863983207DEAD6002462DB /* maintenance.jpg */; };
@@ -260,6 +261,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E077A7B211D66DC00802E9E /* ALNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALNetwork.h; sourceTree = "<group>"; };
+		4E077A7C211D66DC00802E9E /* ALNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALNetwork.m; sourceTree = "<group>"; };
 		4E1A33DC2009DCAA00BCD119 /* icon-back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-back@3x.png"; sourceTree = "<group>"; };
 		4E1A33E0200A1A2F00BCD119 /* clear-icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clear-icon@3x.png"; sourceTree = "<group>"; };
 		4E863983207DEAD6002462DB /* maintenance.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = maintenance.jpg; sourceTree = "<group>"; };
@@ -668,6 +671,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E077A7A211D66DC00802E9E /* ALNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				4E077A7B211D66DC00802E9E /* ALNetwork.h */,
+				4E077A7C211D66DC00802E9E /* ALNetwork.m */,
+			);
+			path = ALNetwork;
+			sourceTree = "<group>";
+		};
 		5825ED1A1F41C23B00C4E01E /* TeamAboutUs */ = {
 			isa = PBXGroup;
 			children = (
@@ -815,6 +827,7 @@
 		78255E7A1D742A9800CECC5D /* AstaGuru */ = {
 			isa = PBXGroup;
 			children = (
+				4E077A7A211D66DC00802E9E /* ALNetwork */,
 				582774681F174BED00925DEC /* Harpy */,
 				5830620C1EE28E6E007FB789 /* ATAppUpdater */,
 				583EC6531E17F2C60094663A /* AstaGuru.entitlements */,
@@ -1470,6 +1483,7 @@
 				78F60F4C1D9BCF9700F9FC3A /* FullImageViewController.m in Sources */,
 				95A0A0791D74F1A000FE0D3A /* AFHTTPRequestOperation.m in Sources */,
 				786FE7081D9D0A1300C81222 /* MBProgressHUD.m in Sources */,
+				4E077A7D211D66DC00802E9E /* ALNetwork.m in Sources */,
 				7857388C1DA51612008F2B74 /* TermsConditionViewController.m in Sources */,
 				780DB41A1D9169E3006807C2 /* NSMutableArray+SWUtilityButtons.m in Sources */,
 				58313C5E1E58476600CA2BE9 /* NotificationTableViewCell.m in Sources */,

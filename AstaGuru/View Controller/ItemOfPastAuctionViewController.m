@@ -609,7 +609,10 @@
                     NSString *ht = [ClsSetting getAttributedStringFormHtmlString:objCurrentOccution.strPrdescription];
                     CurrentSelectedGridCell.lblMedium.text= ht;
                     CurrentSelectedGridCell.lblYear.text= @"";
-                    CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@ in",objCurrentOccution.strproductsize];
+                    CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@",objCurrentOccution.strproductsize];
+                    
+                    CurrentSelectedGridCell.lbl_sizeText.text = @"";
+                    CurrentSelectedGridCell.lbl_sizeText_width.constant = 0;
                     
                 }
                 else
@@ -750,6 +753,8 @@
                     Lbl_1.text = @"Title: ";
                     UILabel *Lbl_2 = (UILabel *)[CurrentSelectedGridCell viewWithTag:12];
                     Lbl_2.text = @"Description: ";
+                    CurrentSelectedGridCell.lbl_mediumText_width.constant = 66;
+                    
                     UILabel *Lbl_3 = (UILabel *)[CurrentSelectedGridCell viewWithTag:13];
                     Lbl_3.text = @"";
                     
@@ -757,7 +762,10 @@
                     NSString *ht = [ClsSetting getAttributedStringFormHtmlString:objCurrentOccution.strPrdescription];
                     CurrentSelectedGridCell.lblMedium.text= ht;
                     CurrentSelectedGridCell.lblYear.text= @"";
-                    CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@ in",objCurrentOccution.strproductsize];
+                    CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@",objCurrentOccution.strproductsize];
+                    
+                    CurrentSelectedGridCell.lbl_sizeText.text = @"";
+                    CurrentSelectedGridCell.lbl_sizeText_width.constant = 0;
                 }
                 else
                 {
