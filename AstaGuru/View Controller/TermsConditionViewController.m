@@ -107,7 +107,9 @@
     [arrFirst addObject:objclsAboutus9];
     
     clsAboutUs *objclsAboutus10=[[clsAboutUs alloc]init];
-    objclsAboutus10.strName=@"All foreign currency exchange rates during the Auction are made on a constant of 1:64 (USD:INR). All invoicing details shall be provided by the buyer prior to the auction.";
+    objclsAboutus10.strName=@"All foreign currency exchange rates during the Auction are made on a constant. However they are subject to change for each auction. All invoicing details shall be provided by the buyer prior to the auction.";
+    
+    //@"All foreign currency exchange rates during the Auction are made on a constant of 1:64 (USD:INR). All invoicing details shall be provided by the buyer prior to the auction.";
     objclsAboutus10.strType=@"2";
     [arrFirst addObject:objclsAboutus10];
     

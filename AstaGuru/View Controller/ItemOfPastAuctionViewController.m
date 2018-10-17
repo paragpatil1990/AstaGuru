@@ -606,7 +606,7 @@
                     Lbl_3.text = @"";
                     
                     CurrentSelectedGridCell.lblArtistName.text=objCurrentOccution.strtitle;
-                    NSString *ht = [ClsSetting getAttributedStringFormHtmlString:objCurrentOccution.strPrdescription];
+                    NSString *ht = [ClsSetting getStringFormHtmlString:objCurrentOccution.strPrdescription];
                     CurrentSelectedGridCell.lblMedium.text= ht;
                     CurrentSelectedGridCell.lblYear.text= @"";
                     CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@",objCurrentOccution.strproductsize];
@@ -759,7 +759,7 @@
                     Lbl_3.text = @"";
                     
                     CurrentSelectedGridCell.lblArtistName.text=objCurrentOccution.strtitle;
-                    NSString *ht = [ClsSetting getAttributedStringFormHtmlString:objCurrentOccution.strPrdescription];
+                    NSString *ht = [ClsSetting getStringFormHtmlString:objCurrentOccution.strPrdescription];
                     CurrentSelectedGridCell.lblMedium.text= ht;
                     CurrentSelectedGridCell.lblYear.text= @"";
                     CurrentSelectedGridCell.lblSize.text=[NSString stringWithFormat:@"%@",objCurrentOccution.strproductsize];

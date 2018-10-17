@@ -31,7 +31,7 @@
     NSMutableDictionary *dict=[[NSMutableDictionary alloc]init];
     ClsSetting *objSetting=[[ClsSetting alloc]init];
     objSetting.PassReseposeDatadelegate=self;
-    [objSetting CallWeb:dict url:[NSString stringWithFormat:@"category?api_key=%@",[ClsSetting apiKey]] view:self.view Post:NO];
+    [objSetting CallWeb:dict url:[NSString stringWithFormat:@"webcategory?api_key=%@",[ClsSetting apiKey]] view:self.view Post:NO];
 }
 
 -(void)passReseposeData1:(id)str

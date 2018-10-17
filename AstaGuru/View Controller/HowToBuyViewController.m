@@ -984,21 +984,25 @@
     
     clsAboutUs *objAboutUS79=[[clsAboutUs alloc]init];
     objAboutUS79.strName=@"Price estimates do not include any packing, insurance, shipping or handling charges, all of which will be borne by the buyer.";
+//    @"Price estimates do not include any packing, insurance, shipping or handling charges, all of which will be borne by the buyer.";
     objAboutUS79.strType=@"1";
     [objhowtoBuy7.arrSubarray addObject:objAboutUS79];
     
     clsAboutUs *objAboutUS80=[[clsAboutUs alloc]init];
     objAboutUS80.strName=@"All lots part of the auctions are dispatched framed, however if the buyer prefers an alternate the same would be implemented. Astaguru will invoice the buyer for the framing job under this circumstance.";
+//    @"All lots part of the auctions are dispatched framed, however if the buyer prefers an alternate the same would be implemented. Astaguru will invoice the buyer for the framing job under this circumstance.";
     objAboutUS80.strType=@"1";
     [objhowtoBuy7.arrSubarray addObject:objAboutUS80];
     
     clsAboutUs *objAboutUS710=[[clsAboutUs alloc]init];
     objAboutUS710.strName=@"Shipping will be charged on courier rates and are determined by the size, weight and destination of the package.";
+//    @"Shipping will be charged on courier rates and are determined by the size, weight and destination of the package.";
     objAboutUS710.strType=@"1";
     [objhowtoBuy7.arrSubarray addObject:objAboutUS710];
     
     clsAboutUs *objAboutUS711=[[clsAboutUs alloc]init];
     objAboutUS711.strName=@"Please also note for international shipments from India the additional charges calculated are only till the destination port. Import-related duties, taxes delivery and any other charges, wherever applicable, will be directly paid by the buyer.";
+//    @"Please also note for international shipments from India the additional charges calculated are only till the destination port. Import-related duties, taxes delivery and any other charges, wherever applicable, will be directly paid by the buyer.";
     objAboutUS711.strType=@"1";
     [objhowtoBuy7.arrSubarray addObject:objAboutUS711];
     
@@ -1009,16 +1013,19 @@
     
     clsAboutUs *objAboutUS713=[[clsAboutUs alloc]init];
     objAboutUS713.strName=@"All duties and taxes shall be borne by the buyer.";
+//    @"All duties and taxes shall be borne by the buyer.";
     objAboutUS713.strType=@"1";
     [objhowtoBuy7.arrSubarray addObject:objAboutUS713];
     
     clsAboutUs *objAboutUS714=[[clsAboutUs alloc]init];
-    objAboutUS714.strName=@"All sales in India shall attract 12% GST on the winning bid including buyer's premium.";
+    objAboutUS714.strName=@"All sales in India shall attract 18% GST on the winning bid including buyer's premium.";
+//    @"All sales in India shall attract 12% GST on the winning bid including buyer's premium.";
     objAboutUS714.strType=@"1";
     [objhowtoBuy7.arrSubarray addObject:objAboutUS714];
     
     clsAboutUs *objAboutUS715=[[clsAboutUs alloc]init];
     objAboutUS715.strName=@"There shall be no GST in International sales.";
+//    @"There shall be no GST in International sales.";
       objAboutUS715.strType=@"1";
     [objhowtoBuy7.arrSubarray addObject:objAboutUS715];
     [arrdata addObject:objhowtoBuy7];

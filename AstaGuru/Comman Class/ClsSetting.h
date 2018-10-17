@@ -57,7 +57,8 @@
 //-(void)calllPutWeb2:(NSDictionary*)dict url:(NSString*)strURL view:(UIView*)Callingview;
 -(void)calllPostWeb2:(NSDictionary*)dict url:(NSString*)strURL view:(UIView*)Callingview;
 +(void)myAstaGuru:(UINavigationController*)NavigationController;
-+(NSString*)getAttributedStringFormHtmlString:(NSString*)htmlString;
++(NSMutableAttributedString*)getAttributedStringFormHtmlString:(NSString*)htmlString;
++(NSString*)getStringFormHtmlString:(NSString*)htmlString;
 +(void)Searchpage:(UINavigationController*)NavigationController;
 
 +(NSString *)tableURL;

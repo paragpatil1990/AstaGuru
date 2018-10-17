@@ -505,7 +505,7 @@
                         Lbl_3.text = @"";
                         
                         selectedGridCell.lblArtistName.text=objCurrentOccution.strtitle;
-                        NSString *htmlstr = [ClsSetting getAttributedStringFormHtmlString:objCurrentOccution.strPrdescription];
+                        NSString *htmlstr = [ClsSetting getStringFormHtmlString:objCurrentOccution.strPrdescription];
                         selectedGridCell.lblMedium.text = htmlstr;
                         selectedGridCell.lblYear.text = @"";
                         selectedGridCell.lblSize.text = [NSString stringWithFormat:@"%@",objCurrentOccution.strproductsize];

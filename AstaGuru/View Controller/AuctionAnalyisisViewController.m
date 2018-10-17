@@ -144,7 +144,7 @@
              NSMutableArray *titleArray = auctiuonAnalysis[0];
              NSDictionary *titleDic = titleArray[0];
              
-             NSString *ht = [ClsSetting getAttributedStringFormHtmlString:titleDic[@"Auctionname"]];
+             NSString *ht = [ClsSetting getStringFormHtmlString:titleDic[@"Auctionname"]];
 
              
              self.lbl_title.text = ht; //titleDic[@"Auctionname"];

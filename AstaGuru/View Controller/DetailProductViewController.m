@@ -567,8 +567,25 @@
                 pcell.lbl_ArtistText.text = @"";
                 pcell.lbl_ArtistName.text = @"";
                 
-                NSString *strDesc = [ClsSetting getAttributedStringFormHtmlString:_objCurrentOccution.strPrdescription];
-                pcell.lbl_Description.text = strDesc;
+                NSMutableAttributedString *strDesc = [ClsSetting getAttributedStringFormHtmlString:_objCurrentOccution.strPrdescription];
+                
+                [strDesc beginEditing];
+                [strDesc enumerateAttribute:NSFontAttributeName inRange:NSMakeRange(0, strDesc.length) options:0 usingBlock:^(id value, NSRange range, BOOL *stop)
+                 {
+                     if (value)
+                     {
+                         /*----- Remove old font attribute -----*/
+                         [strDesc removeAttribute:NSFontAttributeName range:range];
+                         //replace your font with new.
+                         /*----- Add new font attribute -----*/
+                         [strDesc addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"WorkSans-Regular" size:14] range:range];
+                         [strDesc addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:124.0f/255.0f green:124.0f/255.0f blue:124.0f/255.0f alpha:1] range:range];
+                     }
+                 }];
+                [strDesc endEditing];
+                
+                //[ClsSetting getStringFormHtmlString:_objCurrentOccution.strPrdescription];
+                pcell.lbl_Description.attributedText = strDesc;
                 
                 pcell.lbl_MediumText.text = @"";
                 pcell.lbl_Medium.text = @"";
@@ -615,7 +632,6 @@
             NSDictionary *dictAttribute = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,  NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)};
             NSMutableParagraphStyle *paragraphStyle = NSMutableParagraphStyle.new;
             paragraphStyle.alignment                = NSTextAlignmentJustified;
-            
             NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithData:[strAdditionalInfo dataUsingEncoding:NSUTF8StringEncoding] options:dictAttribute documentAttributes:nil error:nil];
             [attributedStr beginEditing];
             [attributedStr enumerateAttribute:NSFontAttributeName inRange:NSMakeRange(0, attributedStr.length) options:0 usingBlock:^(id value, NSRange range, BOOL *stop)

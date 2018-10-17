@@ -79,10 +79,10 @@
 +(NSString *)tableURL
 {
     //Live
-    //return @"http://restapi.infomanav.com/api/v2/guru/_table/";
+    return @"http://restapi.infomanav.com/api/v2/guru/_table/";
     
     //Demo
-    return @"http://restapi.infomanav.com/api/v2/asta/_table/";
+   // return @"http://restapi.infomanav.com/api/v2/asta/_table/";
     
 
     //Infomanav
@@ -93,10 +93,10 @@
 +(NSString *)procedureURL
 {
     //Live
-//    return @"http://restapi.infomanav.com/api/v2/guru/_proc";
+    return @"http://restapi.infomanav.com/api/v2/guru/_proc";
     
     //Demo
-    return @"http://restapi.infomanav.com/api/v2/asta/_proc";
+//    return @"http://restapi.infomanav.com/api/v2/asta/_proc";
     
     //Infomanv
 //    return @"http://restapi.infomanav.com/api/v2/astauat/_proc";
@@ -105,10 +105,10 @@
 +(NSString *)apiKey
 {
     //Live
-//    return @"c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed";
+    return @"c6935db431c0609280823dc52e092388a9a35c5f8793412ff89519e967fd27ed";
     
     //Demo
-    return @"c255e4bd10c8468f9e7e393b748750ee108d6308e2ef3407ac5d2b163a01fa37";
+//    return @"c255e4bd10c8468f9e7e393b748750ee108d6308e2ef3407ac5d2b163a01fa37";
     
     //Infomanv
 //    return @"b044ea92e3e2a8df97dfcf47c8d7bf950e3078571859786903bb803b05e70901";
@@ -127,10 +127,10 @@
 +(NSString *)autionAnalysisURL
 {
     //live
-//    return @"http://astaguru.com/auction-analysis-mobile.aspx?astaguruauction=";
+    return @"http://astaguru.com/auction-analysis-mobile.aspx?astaguruauction=";
     
     //Demo
-    return @"http://astaguru.com:81/auction-analysis-mobile.aspx?astaguruauction=";
+//    return @"http://astaguru.com:81/auction-analysis-mobile.aspx?astaguruauction=";
     
     //Infomanv
 //    return @"http://infomanav.com/auction-analysis-mobile.aspx?astaguruauction=";
@@ -548,41 +548,20 @@
     [NavigationController pushViewController:VCLikesControll animated:YES];
 }
 
-+(NSString*)getAttributedStringFormHtmlString:(NSString*)str
++(NSMutableAttributedString*)getAttributedStringFormHtmlString:(NSString*)htmlString
 {
-    NSRange r;
-    while ((r = [str rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location     != NSNotFound)
-    {
-        str = [str stringByReplacingCharactersInRange:r withString:@""];
-    }
-    return str;
+    return  [[NSMutableAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUTF8StringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)} documentAttributes:nil error:nil];
 }
 
--(NSString *)stringByStrippingHTML:(NSString*)str
++(NSString*)getStringFormHtmlString:(NSString*)htmlString
 {
     NSRange r;
-    while ((r = [str rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location     != NSNotFound)
+    while ((r = [htmlString rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location     != NSNotFound)
     {
-        str = [str stringByReplacingCharactersInRange:r withString:@""];
+        htmlString = [htmlString stringByReplacingCharactersInRange:r withString:@""];
     }
-    return str;
+    return htmlString;
 }
-
-//+(CGFloat)heightOfTextForString:(NSString *)aString andFont:(UIFont *)aFont maxSize:(CGSize)aSize
-//{
-//    // iOS7
-//    
-//    CGSize sizeOfText = [aString boundingRectWithSize: aSize
-//                                              options: (NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading)
-//                                           attributes: [NSDictionary dictionaryWithObject:aFont
-//                                                                                   forKey:NSFontAttributeName]
-//                                              context: nil].size;
-//    
-//    return ceilf(sizeOfText.height);
-//    
-//    
-//}
-//
 
 +(CGFloat)heightForNSString:(NSString *)text havingWidth:(CGFloat)widthValue andFont:(UIFont *)font
 {

@@ -118,16 +118,16 @@
                 UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:@"Settings" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
                                                  {
                                                      
-                                                     if ([CLLocationManager locationServicesEnabled])
-                                                     {
+//                                                     if ([CLLocationManager locationServicesEnabled])
+//                                                     {
                                                          [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
                                                          
-                                                     }
-                                                     else
-                                                     {
-                                                         NSString* url = SYSTEM_VERSION_LESS_THAN(@"10.0") ? @"prefs:root=LOCATION_SERVICES" : @"App-Prefs:root=Privacy&path=LOCATION";
-                                                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString: url]];
-                                                     }
+//                                                     }
+//                                                     else
+//                                                     {
+//                                                         NSString* url = SYSTEM_VERSION_LESS_THAN(@"10.0") ? @"prefs:root=LOCATION_SERVICES" : @"App-Prefs:root=Privacy&path=LOCATION";
+//                                                         [[UIApplication sharedApplication] openURL:[NSURL URLWithString: url]];
+//                                                     }
                                                  }];
                 [alertController addAction:settingsAction];
             }
@@ -284,59 +284,16 @@
 - (IBAction)btnConfirmPressed:(id)sender
 {
     
-//    if ([CLLocationManager locationServicesEnabled])
-//    {
+
         CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
         
         // 3
         if ((status == kCLAuthorizationStatusDenied)  || (status == kCLAuthorizationStatusRestricted))
         {
             [self CurrentLocationIdentifier];
-
-//            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Location Services Disabled" message:@"Please enable location services in settings" preferredStyle:UIAlertControllerStyleAlert];
-//
-//            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-//            if (status == kCLAuthorizationStatusDenied)
-//            {
-//                UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:@"Settings" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
-//                {
-//
-//                    if ([CLLocationManager locationServicesEnabled])
-//                    {
-//                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-//
-//                    }
-//                    else
-//                    {
-//                         NSString* url = SYSTEM_VERSION_LESS_THAN(@"10.0") ? @"prefs:root=LOCATION_SERVICES" : @"App-Prefs:root=Privacy&path=LOCATION";
-//                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: url]];
-//                    }
-//                    //                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:
-//                    //                                                            UIApplicationOpenSettingsURLString]];
-//                }];
-//                [alertController addAction:settingsAction];
-//            }
-//            else
-//            {
-//                UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:@"Settings" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//
-//                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-//                }];
-//                [alertController addAction:settingsAction];
-//
-//            }
-//
-//
-//            [alertController addAction:cancelAction];
-//
-//            [self presentViewController:alertController animated:YES completion:nil];
             return;
         }
-//        else
-//        {
-//            [self CurrentLocationIdentifier];
-//        }
-//    }
+
     
     if(currentLocation == nil || [cityName isEqualToString:@""])
     {
@@ -726,7 +683,7 @@
                              NSString *strname = [NSString stringWithFormat:@"%@ %@",dictUser[@"name"], dictUser[@"lastname"]];
                              
                              
-                             NSString *strmsg =  [NSString stringWithFormat:@"Dear %@,\nThank you for placing a Proxy Bid amount of Rs.%@($%@) for Lot No %@ part of our '%@' Auction dated %@.\n\nWe would like to acknowledge having received your Proxy Bid, our operations team will review it and revert with confirmation of the approval.\n\nIn case you are unaware of this transaction please notify us at the earliest about the misrepresentation.\n\nIn case you would like to edit the Proxy Bid value please contact us for the same at contact@astaguru.com or call us on 91-22 2204 8138/39. We will be glad to assist you.",strname, strProxyPricers, strProxyPriceus, _objCurrentOuction.strReference, [ClsSetting getAttributedStringFormHtmlString:_objCurrentOuction.strAuctionname], [dictResult valueForKey:@"auctionDate"]];
+                             NSString *strmsg =  [NSString stringWithFormat:@"Dear %@,\nThank you for placing a Proxy Bid amount of Rs.%@($%@) for Lot No %@ part of our '%@' Auction dated %@.\n\nWe would like to acknowledge having received your Proxy Bid, our operations team will review it and revert with confirmation of the approval.\n\nIn case you are unaware of this transaction please notify us at the earliest about the misrepresentation.\n\nIn case you would like to edit the Proxy Bid value please contact us for the same at contact@astaguru.com or call us on 91-22 2204 8138/39. We will be glad to assist you.",strname, strProxyPricers, strProxyPriceus, _objCurrentOuction.strReference, [ClsSetting getStringFormHtmlString:_objCurrentOuction.strAuctionname], [dictResult valueForKey:@"auctionDate"]];
                              
                              [self SendEmailWithSubject:subStr message:strmsg email:[ClsSetting TrimWhiteSpaceAndNewLine:dictUser[@"email"]] name:strname];
                          }
